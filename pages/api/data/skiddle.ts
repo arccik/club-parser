@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import formatAndSort from "../../../lib/formatAndSort";
-import skiddleDataFormatter from "../../../lib/Skiddle/skiddleDataFormatter";
+import skiddleDataFormatter from "../../../lib/Skiddle/formatData";
 import URL from "../../../lib/Skiddle/link";
 
 const fileName = "../../JSONDATA/skiddle.json";

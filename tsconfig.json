@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "lib/skiddleDataParser.js"
+    "lib/skiddleDataParser.js",
+    "services/db/models/club.js"
   ],
   "exclude": ["node_modules"]
 }
