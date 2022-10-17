@@ -7,12 +7,11 @@ import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import IEvent from "../interfaces/event";
+import IEvent from "../src/interfaces/event";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 
 import WestIcon from "@mui/icons-material/West";
-
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import {

@@ -1,0 +1,56 @@
+import { IVenue } from "./vanue";
+import { IArtist } from "./artists";
+
+export default interface IEvent {
+  clubId: string;
+  listingid: string;
+  uniquelistingidentifier: string;
+  hascollapsedresults: boolean;
+  countcollapsedresults: number;
+  EventCode: string;
+  eventname: string;
+  cancelled: string | number;
+  cancellationDate: string;
+  cancellationType: string;
+  cancellationReason: string;
+  rescheduledDate: string;
+  venue: IVenue;
+  imageurl: string;
+  largeimageurl: string;
+  xlargeimageurl: string;
+  xlargeimageurlWebP: string;
+  link: string;
+  date: string;
+  startdate: string;
+  enddate: string;
+  description: string;
+  openingtimes: { doorsopen: string; doorsclose: string; lastentry: string };
+  minage: string;
+  imgoing: null | string | number;
+  goingtos: number;
+  goingtocount: string;
+  tickets: boolean;
+  entryprice: string;
+  eventvisibility: string;
+  ticketUrl: string;
+
+  rep: { enabled: boolean };
+  headerHex: string;
+  promotorid: string;
+  ticketStatus: string;
+  nofees: number;
+  currency: string;
+  gateway: string;
+  FeatureDays: string;
+  Feature: string;
+  specialFeatured: string;
+  rescheduleDate: string;
+  hotSeller: boolean;
+  ticketStatusText: string;
+  inapppurchase: boolean;
+  features: { coolOffEnabled: boolean };
+  applepay: boolean;
+  androidpay: boolean;
+  artists: IArtist[];
+  healthAndSafety: string[];
+}
