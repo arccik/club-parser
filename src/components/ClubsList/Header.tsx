@@ -8,6 +8,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 
 import React from "react";
+import { Button } from "@mui/material";
 export default function Header() {
   return (
     <Box
@@ -25,16 +26,13 @@ export default function Header() {
             letterSpacing: 2,
             textShadow: `2px 7px 5px rgba(0,0,0,0.3), 
     0px -4px 10px rgba(255,255,255,0.3)`,
-            backgroundImage: "linear-gradient(45deg, red, blue)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
           }}
           variant="h2"
           gutterBottom
           component="div"
           align="center"
         >
-          The Best UK Clubs In One Place
+          All In One Place
         </Typography>
 
         <Typography
@@ -43,8 +41,8 @@ export default function Header() {
           color="text.secondary"
           paragraph
         >
-          Experience thousand of the capitals' most famous clubbing. You'll find
-          sets from world-class DJs, a state-of-the-art sound system of the top
+          Visit thousand of the capitals' most famous clubs. You'll find sets
+          from world-class DJs, a state-of-the-art sound system of the top
           nightclubs.
         </Typography>
         <Stack
@@ -58,6 +56,11 @@ export default function Header() {
           <FacebookIcon fontSize="large" />
           <YouTubeIcon fontSize="large" />
           <InstagramIcon fontSize="large" />
+          <Button
+            onClick={() => fetch("http://localhost:3000/api/data/dataParser")}
+          >
+            Fetch Data
+          </Button>
         </Stack>
       </Container>
     </Box>

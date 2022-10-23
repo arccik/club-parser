@@ -1,39 +1,19 @@
-import { createContext } from "react";
-
 import MainContent from "../src/components/layouts/Main/MainContent";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { QueryClientProvider, QueryClient } from "react-query";
 
-import axios from "axios";
-import IEvent from "../src/interfaces/event";
-import formatDistance from "date-fns/formatDistance";
-
-export async function getStaticProps() {
-  const { data } = await axios.get("http://localhost:3000/api/data");
-  data.map((club: IEvent, i: number) => {
-    return (club.date = formatDistance(new Date(club.date), new Date(), {
-      addSuffix: true,
-    }));
-  });
-  return {
-    props: {
-      data,
-    },
-  };
-}
-
-export const AppContext = createContext<IEvent[]>([]);
+const queryClient = new QueryClient();
 
 const theme = createTheme();
 
-export default function Index({ data }: { data: IEvent[] }) {
+export default function Index() {
   return (
-    <AppContext.Provider value={data}>
+    <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <MainContent />
       </ThemeProvider>
-    </AppContext.Provider>
+    </QueryClientProvider>
   );
 }

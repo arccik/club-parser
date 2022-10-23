@@ -1,12 +1,12 @@
-import IEvent from "../../interfaces/event";
 import { motion, AnimatePresence } from "framer-motion";
 
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import { ListItem, Paper } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../modal/ModalView";
+import formatDistance from "date-fns/formatDistance";
 
 import ClubCard from "./ClubCard";
 
@@ -28,8 +28,8 @@ export default function ClubItem({ club }: { club: any }) {
             border: 0,
             borderRadius: 10,
             width: "100%",
-            background: modalOpen ? "#ff80ab" : "white",
-            color: modalOpen ? "white" : "black",
+            transition: "scale 2s",
+            background: "white",
           }}
           onClick={() => (modalOpen ? close() : open())}
         >
@@ -42,7 +42,7 @@ export default function ClubItem({ club }: { club: any }) {
               primary={club.eventname}
               secondary={!modalOpen && club.description.slice(0, 30) + "..."}
             />
-            <p>{club.date}</p>
+            <p>{formatDistance(new Date(club.date), new Date())}</p>
           </ListItem>
         </motion.button>
       </a>
@@ -51,7 +51,7 @@ export default function ClubItem({ club }: { club: any }) {
         <AnimatePresence>
           <Modal handleClose={close}>
             <Paper variant="outlined">
-              <ClubCard club={club} />
+              <ClubCard club={club} handleClose={close} />
             </Paper>
           </Modal>
         </AnimatePresence>
