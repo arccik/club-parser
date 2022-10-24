@@ -8,7 +8,7 @@ import { Pagination, Stack } from "@mui/material";
 import { useState } from "react";
 
 export default function ClubList() {
-  const [page, setPage] = useState(6);
+  const [page, setPage] = useState(1);
   const { isLoading, error, data } = useQuery(
     ["clubs", page],
     () => getClubs(5, 5 * page - 5),
