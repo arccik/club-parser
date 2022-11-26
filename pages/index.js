@@ -28,12 +28,13 @@ export default function Home() {
         <Carousel />
         <Divider />
         <PlacesBox />
+        <Divider />
+
         <Carousel />
       </main>
-
-      <footer>
-        <FooterSocial />
-      </footer>
+      {/* <footer> */}
+      <FooterSocial />
+      {/* </footer> */}
     </>
   );
 }

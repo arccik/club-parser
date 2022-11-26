@@ -11,7 +11,7 @@ const useStyles = createStyles((theme) => {
       alignItems: "flex-start",
       backgroundSize: "cover",
       backgroundPosition: "center",
-      [`@media (min-width: ${theme.breakpoints.lg}px)`]: {
+      [`@media (min-width: ${theme.breakpoints.xs}px)`]: {
         width: 250,
         height: 300,
       },

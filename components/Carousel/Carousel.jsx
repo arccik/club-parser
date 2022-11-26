@@ -53,12 +53,10 @@ export default function CardsCarousel() {
 
   return (
     <>
-      <Container size="md" px="xl" pt="xl" pb="lg">
-        <Text fz="xl" mb="sm">
-          Upcoming events
-        </Text>
+      <Container size="md" pb="sm">
+        <Text fz="xl">Upcoming events</Text>
         <Carousel
-          slideSize="30%"
+          slideSize="25%"
           breakpoints={[
             {
               maxWidth: "100px",
