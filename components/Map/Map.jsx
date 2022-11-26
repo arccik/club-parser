@@ -27,41 +27,40 @@ const Map = () => {
 
   const houses = useMemo(() => generateHouses(center), [center]);
   return (
-    <div className={styles.container}>
-      <div className={styles.map}>
-        <GoogleMap
-          zoom={10}
-          center={center}
-          options={options}
-          onLoad={onLoad}
-          mapContainerClassName={styles.mapContainer}
-        >
-          <MarkerClusterer>
-            {(clusterer) =>
-              houses.map((house) => (
-                <>
-                  <Marker
-                    clusterer={clusterer}
-                    key={house.lat}
-                    position={house}
-                    icon={{
-                      path: "M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
-                      fillColor: "yellow",
-                      fillOpacity: 0.9,
-                      scale: 2,
-                      strokeColor: "gold",
-                      strokeWeight: 2,
-                    }}
-                    onClick={() => {
-                      handleMarkerClick(house);
-                    }}
-                  />
-                </>
-              ))
-            }
-          </MarkerClusterer>
-        </GoogleMap>
-      </div>
+    <div className={styles.map}>
+      <GoogleMap
+        zoom={10}
+        center={center}
+        options={options}
+        onLoad={onLoad}
+        style={{ zIndex: 0, position: "absolute" }}
+        mapContainerClassName={styles.mapContainer}
+      >
+        <MarkerClusterer>
+          {(clusterer) =>
+            houses.map((house) => (
+              <>
+                <Marker
+                  clusterer={clusterer}
+                  key={house.lat}
+                  position={house}
+                  icon={{
+                    path: "M8 12l-4.7023 2.4721.898-5.236L.3916 5.5279l5.2574-.764L8 0l2.3511 4.764 5.2574.7639-3.8043 3.7082.898 5.236z",
+                    fillColor: "yellow",
+                    fillOpacity: 0.9,
+                    scale: 2,
+                    strokeColor: "gold",
+                    strokeWeight: 2,
+                  }}
+                  onClick={() => {
+                    handleMarkerClick(house);
+                  }}
+                />
+              </>
+            ))
+          }
+        </MarkerClusterer>
+      </GoogleMap>
     </div>
   );
 };

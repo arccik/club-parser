@@ -4,8 +4,8 @@ import PlacesBox from "../components/CardsGrid/CardsGrid";
 import { FooterSocial } from "../components/Footer/Footer";
 import { Divider } from "@mantine/core";
 import Carousel from "../components/Carousel/Carousel";
-import Header from "../components/Header/Header";
 import Filter from "../components/Filter/Filter";
+import Sort from "../components/Sort/Sort";
 
 export default function Home() {
   return (
@@ -20,21 +20,18 @@ export default function Home() {
       </Head>
 
       <main>
-        <Header />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Filter />
-        </div>
-
+        <Filter />
+        {/* <Sort /> */}
         <Carousel />
         <Divider />
+
         <PlacesBox />
         <Divider />
 
         <Carousel />
+        <Divider />
       </main>
-      {/* <footer> */}
       <FooterSocial />
-      {/* </footer> */}
     </>
   );
 }

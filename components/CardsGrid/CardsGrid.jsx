@@ -62,6 +62,7 @@ const mockdata = [
 
 const useStyles = createStyles((theme) => ({
   card: {
+    marginTop: -10,
     transition: "transform 150ms ease, box-shadow 150ms ease",
     "&:hover": {
       transform: "scale(1.01)",
@@ -73,8 +74,10 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 600,
   },
-  headerTitle: {
-    marginBottom: -10,
+  placesNearBy: {
+    zIndex: 10,
+    marginBottom: 10,
+    fontWeight: 800,
   },
 }));
 
@@ -93,7 +96,7 @@ export default function ArticlesCardsGrid() {
       <AspectRatio ratio={1920 / 1080}>
         <Image src={article.image} alt="article image" />
       </AspectRatio>
-      <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="md">
+      <Text color="dimmed" size="xs" transform="uppercase" weight={700} mt="xs">
         {article.date}
       </Text>
       <Text className={classes.title} mt={5}>
@@ -103,8 +106,8 @@ export default function ArticlesCardsGrid() {
   ));
 
   return (
-    <Container pt="sm">
-      <Text fz="lg">Places near by</Text>
+    <Container>
+      <Text className={classes.placesNearBy}>Places near by</Text>
       <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
         {cards}
       </SimpleGrid>

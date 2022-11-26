@@ -56,6 +56,7 @@ export default function CardsCarousel() {
       <Container size="md" pb="sm">
         <Text fz="xl">Upcoming events</Text>
         <Carousel
+          loop
           slideSize="25%"
           breakpoints={[
             {
