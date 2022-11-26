@@ -2,18 +2,16 @@ import { createStyles } from "@mantine/core";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
+    height: 200,
     position: "relative",
-    paddingTop: 280,
-    paddingBottom: 280,
+    textAlign: "center",
+    marginTop: 60,
+    padding: 10,
     backgroundImage:
       "url(https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)",
     backgroundSize: "cover",
     backgroundPosition: "center",
-
-    "@media (max-width: 520px)": {
-      paddingTop: 80,
-      paddingBottom: 50,
-    },
+    "@media (max-width: 520px)": {},
   },
 
   inner: {
@@ -23,7 +21,7 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     fontWeight: 800,
-    fontSize: 40,
+    fontSize: "4rem",
     letterSpacing: -1,
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
@@ -33,8 +31,9 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
 
     "@media (max-width: 520px)": {
-      fontSize: 28,
+      fontSize: "2rem",
       textAlign: "left",
+      marginTop: 30,
     },
   },
 

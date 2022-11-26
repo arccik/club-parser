@@ -21,6 +21,9 @@ export default function Home() {
 
       <main>
         <Header />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Filter />
+        </div>
 
         <Carousel />
         <Divider />

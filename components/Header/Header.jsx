@@ -11,19 +11,13 @@ const Header = () => {
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Strip Radar
           <Text component="span" p="lg" inherit className={classes.highlight}>
-            Nights Entertainment
+            Strip Radar
           </Text>
+          - Find your night entertainment
         </Title>
 
-        <Container size={640} pt="lg">
-          <Input p="lg" placeholder="Serach.." />
-        </Container>
-
-        <div className={classes.controls}>
-          <Filter />
-        </div>
+        <div className={classes.controls}></div>
       </div>
     </div>
   );

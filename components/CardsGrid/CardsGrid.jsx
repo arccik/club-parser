@@ -6,6 +6,7 @@ import {
   Text,
   Container,
   AspectRatio,
+  Title,
 } from "@mantine/core";
 
 const mockdata = [
@@ -77,6 +78,9 @@ export default function ArticlesCardsGrid() {
 
   return (
     <Container py="xl">
+      <Text fz="xl" m="sm" mb="xs">
+        Places Near By
+      </Text>
       <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
         {cards}
       </SimpleGrid>

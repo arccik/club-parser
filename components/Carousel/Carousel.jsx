@@ -1,69 +1,7 @@
 import { Carousel } from "@mantine/carousel";
 import { useMediaQuery } from "@mantine/hooks";
-import {
-  createStyles,
-  Paper,
-  Text,
-  Title,
-  Button,
-  useMantineTheme,
-  Container,
-} from "@mantine/core";
-
-const useStyles = createStyles((theme) => ({
-  card: {
-    height: 440,
-    width: 220,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-
-  title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 900,
-    color: theme.white,
-    lineHeight: 1.2,
-    fontSize: 32,
-    marginTop: theme.spacing.xs,
-  },
-
-  category: {
-    color: theme.white,
-    opacity: 0.7,
-    fontWeight: 700,
-    textTransform: "uppercase",
-  },
-}));
-
-function Card({ image, title, category }) {
-  const { classes } = useStyles();
-
-  return (
-    <Paper
-      shadow="md"
-      p="xl"
-      radius="md"
-      sx={{ backgroundImage: `url(${image})` }}
-      className={classes.card}
-    >
-      <div>
-        <Text className={classes.category} size="xs">
-          {category}
-        </Text>
-        <Title order={3} className={classes.title}>
-          {title}
-        </Title>
-      </div>
-      <Button variant="white" color="dark">
-        Read article
-      </Button>
-    </Paper>
-  );
-}
+import { useMantineTheme, Container, Text } from "@mantine/core";
+import Card from "./Card/Card";
 
 const data = [
   {
@@ -114,16 +52,26 @@ export default function CardsCarousel() {
   ));
 
   return (
-    <Container size="md" px="xl" pt="xl" pb="lg">
-      <Carousel
-        slideSize="30%"
-        breakpoints={[{ maxWidth: "sm", slideSize: "100%", slideGap: 1 }]}
-        slideGap="xs"
-        align="start"
-        slidesToScroll={mobile ? 1 : 2}
-      >
-        {slides}
-      </Carousel>
-    </Container>
+    <>
+      <Container size="md" px="xl" pt="xl" pb="lg">
+        <Text fz="xl" mb="sm">
+          Upcoming events
+        </Text>
+        <Carousel
+          slideSize="30%"
+          breakpoints={[
+            {
+              maxWidth: "100px",
+              slideSize: "100%",
+            },
+          ]}
+          slideGap="xs"
+          align="start"
+          slidesToScroll={mobile ? 1 : 2}
+        >
+          {slides}
+        </Carousel>
+      </Container>
+    </>
   );
 }
