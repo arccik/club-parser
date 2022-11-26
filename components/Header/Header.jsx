@@ -10,12 +10,13 @@ const Header = () => {
       <Overlay color="#000" opacity={0.65} zIndex={1} />
 
       <div className={classes.inner}>
-        <Title className={classes.title}>
+        {/* TODO: NICE HEADER */}
+        {/* <Title className={classes.title}>
           <Text component="span" p="lg" inherit className={classes.highlight}>
             Strip Radar
           </Text>
-          - Find your night entertainment
-        </Title>
+          -
+        </Title> */}
 
         <div className={classes.controls}></div>
       </div>

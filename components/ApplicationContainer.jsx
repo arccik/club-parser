@@ -1,7 +1,18 @@
-import { AppShell, Footer, Group, Header, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  AppShell,
+  Footer,
+  Group,
+  Header,
+  Text,
+} from "@mantine/core";
+import { useRouter } from "next/router";
 import Navigation from "./Navigation/Navigation";
 
+import { IconMap } from "@tabler/icons";
+
 export const ApplicationContainer = ({ children }) => {
+  const router = useRouter();
   return (
     <AppShell
       styles={{
@@ -35,9 +46,19 @@ export const ApplicationContainer = ({ children }) => {
               justifyContent: "space-between",
             }}
           >
-            <Text size="lg" weight="boldest">
+            <Text size="lg" weight="boldest" onClick={() => router.push("/")}>
               Next StripRadar
             </Text>
+            <ActionIcon
+              style={{ position: "absolute", right: 60 }}
+              variant="subtle"
+              color="dark"
+              size="xl"
+              radius="lg"
+              onClick={() => router.push("/map")}
+            >
+              <IconMap />
+            </ActionIcon>
             <Navigation />
           </div>
         </Header>

@@ -1,7 +1,6 @@
 import { createStyles } from "@mantine/core";
 
 const useStyles = createStyles((theme) => {
-  console.log("Create Styles: ", theme);
   return {
     card: {
       height: 250,

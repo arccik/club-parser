@@ -34,6 +34,30 @@ const mockdata = [
       "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
     date: "September 12, 2022",
   },
+  {
+    title: "Mountains at night: 12 best locations to enjoy the view",
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
+    date: "September 12, 2022",
+  },
+  {
+    title: "Mountains at night: 12 best locations to enjoy the view",
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
+    date: "September 12, 2022",
+  },
+  {
+    title: "Mountains at night: 12 best locations to enjoy the view",
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
+    date: "September 12, 2022",
+  },
+  {
+    title: "Mountains at night: 12 best locations to enjoy the view",
+    image:
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80",
+    date: "September 12, 2022",
+  },
 ];
 
 const useStyles = createStyles((theme) => ({

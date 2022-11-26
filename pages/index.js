@@ -28,6 +28,7 @@ export default function Home() {
         <Carousel />
         <Divider />
         <PlacesBox />
+        <Carousel />
       </main>
 
       <footer>
