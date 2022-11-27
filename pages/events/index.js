@@ -1,12 +1,14 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../../components/Map/Map";
+import Details from "../../components/ProfilePage/Details";
+import { useQuery } from "react-query";
 const mapPlugins = ["places"];
 
 export const getStaticProps = async () => {
   return { props: { msg: "hello" } };
 };
 
-const OnlyMapPage = () => {
+const MapPage = (props) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: mapPlugins,
@@ -15,8 +17,9 @@ const OnlyMapPage = () => {
   return (
     <>
       <Map />
+      <Details />
     </>
   );
 };
 
-export default OnlyMapPage;
+export default MapPage;

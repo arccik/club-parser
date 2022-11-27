@@ -11,9 +11,8 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.white,
     width: "100%",
     borderRadius: "10px",
-    margin: 1,
-    top: 700,
     zIndex: 1,
+    marginTop: 700,
   },
   //   footer: {
   //     borderTop: `1px solid ${

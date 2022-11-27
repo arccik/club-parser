@@ -6,19 +6,18 @@ import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import { useEffect } from "react";
 import CardsCarousel from "../Carousel/Carousel";
 
-const ProfileDetails = () => {
+const Details = (props) => {
   const { classes } = useStyles();
-  const { scrollIntoView, targetRef } = useScrollIntoView({ offset: 60 });
+  const { scrollIntoView, targetRef } = useScrollIntoView({ offset: 70 });
   useEffect(() => {
-    scrollIntoView({ alignment: "center" });
+    setTimeout(() => {
+      scrollIntoView({ alignment: "start" });
+    }, 1000);
   });
   return (
     <Container className={classes.grid}>
       <Card>
         <Card.Section>
-          {/* <Button onClick={() => scrollIntoView({ alignment: "bottom" })}>
-            Open
-          </Button> */}
           <Image
             ref={targetRef}
             src="https://images.unsplash.com/photo-1606874854197-570136ca68ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80"
@@ -49,4 +48,4 @@ const ProfileDetails = () => {
   );
 };
 
-export default ProfileDetails;
+export default Details;

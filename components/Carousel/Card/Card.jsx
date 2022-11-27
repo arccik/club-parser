@@ -1,7 +1,9 @@
 import { Paper, Text, Button, Title } from "@mantine/core";
 import useStyles from "./styles";
+import { useRouter } from "next/router";
 export default function Card({ image, title, category }) {
   const { classes } = useStyles();
+  const router = useRouter();
 
   return (
     <Paper
@@ -19,7 +21,11 @@ export default function Card({ image, title, category }) {
           {title}
         </Title>
       </div>
-      <Button variant="white" color="dark">
+      <Button
+        variant="white"
+        color="dark"
+        onClick={() => router.push(`/details/${title}`)}
+      >
         Read
       </Button>
     </Paper>

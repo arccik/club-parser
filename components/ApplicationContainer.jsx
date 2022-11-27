@@ -5,13 +5,16 @@ import {
   Group,
   Header,
   Text,
+  Input,
 } from "@mantine/core";
 import { useRouter } from "next/router";
-import Navigation from "./Navigation/Navigation";
+import Navigation from "./BurgerMenu/Menu";
+import { useState } from "react";
 
-import { IconMap, IconSearch } from "@tabler/icons";
+import { IconArrowLeft, IconMap, IconSearch } from "@tabler/icons";
 
 export const ApplicationContainer = ({ children }) => {
+  const [searchInputBarShow, setSearchInputBarShow] = useState();
   const router = useRouter();
   return (
     <AppShell
@@ -24,18 +27,6 @@ export const ApplicationContainer = ({ children }) => {
         },
       }}
       fixed
-      //   footer={
-      //     <Footer height={60} p="md">
-      //       <Group position="apart" spacing="xl">
-      //         <Text size="sm">
-      //           <span style={{ fontWeight: "bolder" }}>Left Side</span> Some Time
-      //         </Text>
-      //         <Text size="sm">
-      //           <span style={{ fontWeight: "bolder" }}>Right Side</span> Some Time
-      //         </Text>
-      //       </Group>
-      //     </Footer>
-      //   }
       header={
         <Header height={60} p="md">
           <div
@@ -49,25 +40,56 @@ export const ApplicationContainer = ({ children }) => {
             <Text size="lg" weight="boldest" onClick={() => router.push("/")}>
               Next StripRadar
             </Text>
-            <ActionIcon
-              style={{ position: "absolute", right: 100 }}
-              variant="subtle"
-              color="dark"
-              size="xl"
-              radius="lg"
-            >
-              <IconSearch style={{ margin: 10 }} />
-            </ActionIcon>
-            <ActionIcon
-              style={{ position: "absolute", right: 60 }}
-              variant="subtle"
-              color="dark"
-              size="xl"
-              radius="lg"
-              onClick={() => router.push("/map")}
-            >
-              <IconMap />
-            </ActionIcon>
+            {searchInputBarShow && (
+              <Input
+                autoFocus
+                style={{
+                  position: "absolute",
+                  width: "60%",
+                  animation: "2s",
+                  zIndex: 1,
+                }}
+                placeholder="Search..."
+              />
+            )}
+
+            <Group>
+              {router.pathname !== "/" && (
+                <ActionIcon
+                  variant="subtle"
+                  color="dark"
+                  size="xl"
+                  onClick={() => router.push("/")}
+                  style={{ marginRight: 30 }}
+                >
+                  <IconArrowLeft />
+                </ActionIcon>
+              )}
+              <ActionIcon
+                style={{
+                  position: "absolute",
+                  right: searchInputBarShow ? 60 : 100,
+                }}
+                variant="subtle"
+                color="dark"
+                size="xl"
+                onClick={() => setSearchInputBarShow((prev) => !prev)}
+              >
+                <IconSearch />
+              </ActionIcon>
+              {!searchInputBarShow && (
+                <ActionIcon
+                  style={{ position: "absolute", right: 60 }}
+                  variant="subtle"
+                  color="dark"
+                  size="xl"
+                  onClick={() => router.push("/map")}
+                >
+                  <IconMap />
+                </ActionIcon>
+              )}
+            </Group>
+
             <Navigation />
           </div>
         </Header>
