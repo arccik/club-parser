@@ -27,11 +27,7 @@ export async function getStaticProps({ params }) {
 }
 
 const MapPage = ({ data }) => {
-  return (
-    <>
-      <ProfileDetails data={data} />
-    </>
-  );
+  return <ProfileDetails data={data} />;
 };
 
 export default MapPage;
