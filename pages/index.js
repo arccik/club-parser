@@ -19,7 +19,7 @@ export default function Home({ events, venues }) {
     <>
       <Head>
         <title className={styles.title}>
-          Strip Radar - Find night adventure{" "}
+          Strip Radar - Find night adventure
         </title>
         <meta name="description" content="Strip Radar - Find night adventure" />
         <link rel="icon" href="/favicon.ico" />

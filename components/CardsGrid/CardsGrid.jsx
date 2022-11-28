@@ -5,8 +5,6 @@ import {
   Text,
   Container,
   AspectRatio,
-  Badge,
-  Title,
   Group,
   Rating,
 } from "@mantine/core";

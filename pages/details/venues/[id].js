@@ -4,8 +4,9 @@ import ProfileDetails from "../../../components/DetailsPage/Details";
 const mapPlugins = ["places"];
 
 export async function getStaticPaths() {
-  const data = await fetcher(`http://localhost:3000/api/venues`);
-  const paths = data.map((item) => {
+  const vanuePaths = await fetcher(`http://localhost:3000/api/venues`);
+  const eventPaths = await fetcher(`http://localhost:3000/api/venues`);
+  const paths = [...eventPaths, ...vanuePaths].map((item) => {
     return {
       params: {
         id: item._id,
