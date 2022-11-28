@@ -1,6 +1,6 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../../components/Map/Map";
-import Details from "../../components/ProfilePage/Details";
+import Details from "../../components/DetailsPage";
 import { useQuery } from "react-query";
 const mapPlugins = ["places"];
 
