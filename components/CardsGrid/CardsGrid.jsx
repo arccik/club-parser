@@ -5,48 +5,51 @@ import {
   Text,
   Container,
   AspectRatio,
+  Badge,
+  Title,
+  Group,
+  Rating,
 } from "@mantine/core";
 import Link from "next/link";
-import { useQuery } from "react-query";
-import fetcher from "../../utils/fetcher";
 import useStyles from "./styles";
 
-export default function ArticlesCardsGrid() {
-  const { isLoading, error, data } = useQuery("places", () =>
-    fetcher("/api/events")
-  );
+export default function ArticlesCardsGrid({ venues }) {
   const { classes } = useStyles();
 
-  const cards = data?.map((article, i) => (
-    <Link href={`/details/${article.title}`} key={article.image + i}>
-      <Card
-        radius="md"
-        component="a"
-        href="#"
-        className={classes.card}
-        shadow="lg"
+  const cards = venues.map((article, i) => (
+    <Card
+      key={article._id}
+      className={classes.card}
+      shadow="sm"
+      p="lg"
+      radius="md"
+      withBorder
+    >
+      <Link
+        href={`/details/venues/${article._id}`}
+        style={{ textDecoration: "none", color: "black" }}
       >
         <AspectRatio ratio={1920 / 1080}>
           <Image src={article.image} alt="article image" />
         </AspectRatio>
-        <Text
-          color="dimmed"
-          size="xs"
-          transform="uppercase"
-          weight={700}
-          mt="xs"
-        >
-          {article.formatted_address}
+
+        <Group position="apart" mt="md" mb="xs">
+          <Text size="md" weight={700} style={{ width: 140 }}>
+            {article.name}
+          </Text>
+          <Rating defaultValue={article.rating} />
+        </Group>
+
+        <Text size="xs" mt="xs" color="dimmed">
+          {`Starting at ${article.date || article.startDate} Doors Open ${
+            article.open
+          }`}
         </Text>
-        <Text className={classes.title} mt={5}>
-          {article.name}
-        </Text>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   ));
-  if (error) return <h1>Error: {JSON.stringify(error)}</h1>;
   return (
-    <Container>
+    <Container size="md">
       <Text className={classes.placesNearBy}>Places near by</Text>
       <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
         {cards}

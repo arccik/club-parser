@@ -15,11 +15,17 @@ const EventSchema = new Schema({
   rating: { type: Number },
   image: { type: String },
   distance: { type: Number },
-  categories: { type: String },
+  category: { type: String },
   views: { type: String },
   open: { type: String },
   close: { type: String },
-  venues: [{ type: String, ref: "venue" }],
+  venue: { type: Schema.Types.ObjectId, ref: "Venue" },
+  startdate: { type: Date },
+  enddate: { type: Date },
+  minage: { type: Number },
+  price: { type: String },
+  description: { type: String },
+  views: { type: String },
 });
 
 EventSchema.index({ location: "2dsphere" });

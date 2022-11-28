@@ -1,29 +1,18 @@
-import {
-  ActionIcon,
-  AppShell,
-  Footer,
-  Group,
-  Header,
-  Text,
-  Input,
-} from "@mantine/core";
+import { ActionIcon, AppShell, Group, Header } from "@mantine/core";
 import { useRouter } from "next/router";
 import Navigation from "./BurgerMenu/Menu";
-import { useState } from "react";
 
-import { IconArrowLeft, IconMap, IconSearch } from "@tabler/icons";
+import { IconArrowLeft, IconMapPin } from "@tabler/icons";
+import Image from "next/image";
 
 export const ApplicationContainer = ({ children }) => {
-  const [searchInputBarShow, setSearchInputBarShow] = useState();
   const router = useRouter();
   return (
     <AppShell
       styles={{
         main: {
-          background: "white",
           width: "100vw",
           height: "100vh",
-          paddingLeft: "0px",
         },
       }}
       fixed
@@ -37,21 +26,14 @@ export const ApplicationContainer = ({ children }) => {
               justifyContent: "space-between",
             }}
           >
-            <Text size="lg" weight="boldest" onClick={() => router.push("/")}>
-              Next StripRadar
-            </Text>
-            {searchInputBarShow && (
-              <Input
-                autoFocus
-                style={{
-                  position: "absolute",
-                  width: "60%",
-                  animation: "2s",
-                  zIndex: 1,
-                }}
-                placeholder="Search..."
-              />
-            )}
+            <Image
+              onClick={() => router.push("/")}
+              src="/assets/logo.png"
+              alt="StripRadar logo"
+              width={120}
+              height={60}
+              style={{ cursor: "pointer", padding: "5px 5px 5px 0px" }}
+            />
 
             <Group>
               {router.pathname !== "/" && (
@@ -60,34 +42,21 @@ export const ApplicationContainer = ({ children }) => {
                   color="dark"
                   size="xl"
                   onClick={() => router.push("/")}
-                  style={{ marginRight: 30 }}
+                  style={{ position: "absolute", right: 130 }}
                 >
                   <IconArrowLeft />
                 </ActionIcon>
               )}
+
               <ActionIcon
-                style={{
-                  position: "absolute",
-                  right: searchInputBarShow ? 60 : 100,
-                }}
+                style={{ position: "absolute", right: 45 }}
                 variant="subtle"
                 color="dark"
                 size="xl"
-                onClick={() => setSearchInputBarShow((prev) => !prev)}
+                onClick={() => router.push("/map")}
               >
-                <IconSearch />
+                <IconMapPin />
               </ActionIcon>
-              {!searchInputBarShow && (
-                <ActionIcon
-                  style={{ position: "absolute", right: 60 }}
-                  variant="subtle"
-                  color="dark"
-                  size="xl"
-                  onClick={() => router.push("/map")}
-                >
-                  <IconMap />
-                </ActionIcon>
-              )}
             </Group>
 
             <Navigation />

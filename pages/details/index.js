@@ -1,6 +1,6 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../../components/Map/Map";
-import ProfileDetails from "../../components/ProfilePage/Details";
+
 const mapPlugins = ["places"];
 
 const MapPage = () => {
@@ -9,12 +9,7 @@ const MapPage = () => {
     libraries: mapPlugins,
   });
   if (!isLoaded) return <div>Loading...</div>;
-  return (
-    <>
-      <Map />
-      <ProfileDetails />
-    </>
-  );
+  return <Map />;
 };
 
 export default MapPage;

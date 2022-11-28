@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const VenueSchema = new Schema({
+export const VenueSchema = new Schema({
   venueId: { type: String },
   name: { type: String },
   link: { type: String },

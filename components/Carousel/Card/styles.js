@@ -24,6 +24,7 @@ const useStyles = createStyles((theme) => {
       lineHeight: 1.2,
       fontSize: "1.2rem",
       marginTop: theme.spacing.xs,
+      textStroke: "1px solid black",
     },
 
     category: {

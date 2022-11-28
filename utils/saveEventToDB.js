@@ -1,34 +1,41 @@
 import Event from "../models/event-model";
+import Venue from "../models/venue-model";
 
 export default async function saveEventToDB(data) {
   try {
-    const result = await Event.findOne({ eventId: data.id })
-      .select("venueId")
+    const result = await Event.findOne({ eventId: data?.id })
+      .select("eventId")
       .lean();
     if (!result) {
+      const venue = await Venue.find({ venueID: data.venueId });
       await Event.create({
-        eventId: data.id,
-        name: data.name,
-        address: data.address,
-        link: "stripradar.com",
-        formatted_address: data.address,
-        town: data.towm,
-        postcode: data.postcode,
-        country: data.country,
+        eventId: data?.id,
+        name: data?.eventname,
+        description: data?.description,
+        address: data?.venue.address,
+        link: data?.link,
+        formatted_address: data?.venue.address,
+        town: data?.venue.towm,
+        postcode: data?.venue.postcode,
+        country: data?.venue.country,
         location: {
           type: "Point",
-          coordinates: [data.latitude, data.longitude],
+          coordinates: [data?.venue.latitude, data?.venue.longitude],
         },
-        type: data.type,
-        phone: data.phone,
-        rating: data.rating,
-        image:
-          "https://images.unsplash.com/photo-1578736641330-3155e606cd40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+        type: "Event",
+        phone: data?.venue.phone,
+        rating: data?.venue.rating,
+        image: data?.xlargeimageurl,
         distance: 10,
-        categories: data.type,
+        category: data?.type,
         views: 1,
-        open: "22:00",
-        close: "06:00",
+        startdate: data?.startdate,
+        enddate: data?.enddate,
+        open: data?.openingtimes.doorsopen,
+        close: data?.openingtimes.doorsclose,
+        minage: data?.minage,
+        price: data?.entryprice,
+        venue: venue[0],
       });
     }
   } catch (error) {

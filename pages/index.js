@@ -6,29 +6,34 @@ import { Divider } from "@mantine/core";
 import Carousel from "../components/Carousel/Carousel";
 import Filter from "../components/Filter/Filter";
 import Sort from "../components/Sort/Sort";
+import fetcher from "../utils/fetcher";
 
-export default function Home() {
+export async function getStaticProps() {
+  const events = await fetcher("http://localhost:3000/api/events");
+  const venues = await fetcher("http://localhost:3000/api/venues");
+  return { props: { events, venues } };
+}
+
+export default function Home({ events, venues }) {
   return (
     <>
       <Head>
-        <title className={styles.title}>Next StripRadar</title>
-        <meta
-          name="description"
-          content="Strip Radar - Find your The adventure night "
-        />
+        <title className={styles.title}>
+          Strip Radar - Find night adventure{" "}
+        </title>
+        <meta name="description" content="Strip Radar - Find night adventure" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <Filter />
         {/* <Sort /> */}
-        <Carousel />
+        <Carousel events={events} />
         <Divider />
 
-        <PlacesBox />
-        <Divider />
+        <PlacesBox venues={venues} />
 
-        <Carousel />
+        <Carousel events={events} />
         <Divider />
       </main>
       <FooterSocial />
