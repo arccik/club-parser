@@ -1,12 +1,10 @@
-import { useLoadScript } from "@react-google-maps/api";
 import fetcher from "../../../utils/fetcher";
 import ProfileDetails from "../../../components/DetailsPage/Details";
-const mapPlugins = ["places"];
 
 export async function getStaticPaths() {
-  const vanuePaths = await fetcher(`http://localhost:3000/api/venues`);
-  const eventPaths = await fetcher(`http://localhost:3000/api/venues`);
-  const paths = [...eventPaths, ...vanuePaths].map((item) => {
+  const venuePaths = await fetcher(`${process.env.API}/venues/`);
+  console.log("PathSS >>> ", venuePaths);
+  const paths = venuePaths.map((item) => {
     return {
       params: {
         id: item._id,
@@ -18,7 +16,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const id = params.id;
-  const data = await fetcher(`http://localhost:3000/api/venues/${id}`);
+  const data = await fetcher(`${process.env.API}/venues/${id}`);
   return {
     props: {
       data,

@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import PlacesBox from "../components/CardsGrid/CardsGrid";
 import { FooterSocial } from "../components/Footer/Footer";
-import { Divider } from "@mantine/core";
+import { Divider, DatePicker } from "@mantine/core";
 import Carousel from "../components/Carousel/Carousel";
 import Filter from "../components/Filter/Filter";
 import Sort from "../components/Sort/Sort";
@@ -26,8 +26,9 @@ export default function Home({ events, venues }) {
       </Head>
 
       <main>
-        <Filter />
-        {/* <Sort /> */}
+        <Sort />
+        {/* <Filter /> */}
+
         <Carousel events={events} />
         <Divider />
 
