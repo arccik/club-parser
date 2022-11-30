@@ -14,7 +14,7 @@ const useStyles = createStyles((theme) => ({
   },
   placesNearBy: {
     zIndex: 10,
-    marginBottom: 20,
+    marginBottom: 8,
     marginTop: 20,
     fontWeight: 800,
   },

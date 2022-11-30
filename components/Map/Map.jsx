@@ -33,7 +33,6 @@ const Map = () => {
         center={center}
         options={options}
         onLoad={onLoad}
-        style={{ zIndex: 0, position: "absolute" }}
         mapContainerClassName={styles.mapContainer}
       >
         <MarkerClusterer>

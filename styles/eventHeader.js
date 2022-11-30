@@ -4,6 +4,7 @@ const useStyles = createStyles((theme) => ({
   wrapper: {
     display: "flex",
     alignItems: "center",
+
     padding: theme.spacing.xl * 2,
     borderRadius: theme.radius.md,
     backgroundColor:

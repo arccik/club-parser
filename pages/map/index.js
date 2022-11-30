@@ -2,9 +2,6 @@ import { useLoadScript } from "@react-google-maps/api";
 import Map from "../../components/Map/Map";
 const mapPlugins = ["places"];
 
-export const getStaticProps = async () => {
-  return { props: { msg: "hello" } };
-};
 
 const OnlyMapPage = () => {
   const { isLoaded } = useLoadScript({

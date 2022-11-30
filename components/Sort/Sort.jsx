@@ -14,6 +14,7 @@ export default function ContainedInputs() {
         icon={<IconSearch size={18} stroke={1.5} />}
         radius="xl"
         size="md"
+        p="lg"
         rightSection={
           <ActionIcon
             size={32}
@@ -28,7 +29,7 @@ export default function ContainedInputs() {
             )}
           </ActionIcon>
         }
-        placeholder="Search questions"
+        placeholder="Artist, Event or place name"
         rightSectionWidth={42}
       />
 

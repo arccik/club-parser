@@ -2,20 +2,15 @@ import { ActionIcon, AppShell, Group, Header } from "@mantine/core";
 import { useRouter } from "next/router";
 import Navigation from "./BurgerMenu/Menu";
 
-import { IconArrowLeft, IconMapPin } from "@tabler/icons";
+import { IconMapPin } from "@tabler/icons";
 import Image from "next/image";
 
 export const ApplicationContainer = ({ children }) => {
   const router = useRouter();
   return (
     <AppShell
-      styles={{
-        main: {
-          width: "100vw",
-          height: "100vh",
-        },
-      }}
       fixed
+      padding={0}
       header={
         <Header height={60} p="md">
           <div
@@ -36,18 +31,6 @@ export const ApplicationContainer = ({ children }) => {
             />
 
             <Group>
-              {router.pathname !== "/" && (
-                <ActionIcon
-                  variant="subtle"
-                  color="dark"
-                  size="xl"
-                  onClick={() => router.push("/")}
-                  style={{ position: "absolute", right: 130 }}
-                >
-                  <IconArrowLeft />
-                </ActionIcon>
-              )}
-
               <ActionIcon
                 style={{ position: "absolute", right: 45 }}
                 variant="subtle"

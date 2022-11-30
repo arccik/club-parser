@@ -1,41 +1,45 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import PlacesBox from "../components/CardsGrid/CardsGrid";
+import PlacesCardsGrid from "../components/CardsGrid/CardsGrid";
 import { FooterSocial } from "../components/Footer/Footer";
-import { Divider, DatePicker } from "@mantine/core";
+import { Divider } from "@mantine/core";
 import Carousel from "../components/Carousel/Carousel";
-import Filter from "../components/Filter/Filter";
 import Sort from "../components/Sort/Sort";
-import fetcher from "../utils/fetcher";
+import Venue from "../models/venue-model";
+import Event from "../models/event-model";
+import connectMongo from "../utils/mongodbConnect";
 
 export async function getStaticProps() {
-  const events = await fetcher("http://localhost:3000/api/events");
-  const venues = await fetcher("http://localhost:3000/api/venues");
-  return { props: { events, venues } };
+  await connectMongo();
+  const events = await Event.find().limit(30);
+  const venues = await Venue.find().limit(30);
+
+  return {
+    props: { events: JSON.stringify(events), venues: JSON.stringify(venues) },
+  };
 }
 
-export default function Home({ events, venues }) {
+export default function Home(props) {
+  const venues = JSON.parse(props.venues);
+  const events = JSON.parse(props.events);
   return (
     <>
       <Head>
-        <title className={styles.title}>
-          Strip Radar - Find night adventure
-        </title>
+        <title>Strip Radar - Find night adventure</title>
         <meta name="description" content="Strip Radar - Find night adventure" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <Sort />
-        {/* <Filter /> */}
 
-        <Carousel events={events} />
+        <Carousel events={events.splice(0, 10)} />
         <Divider />
 
-        <PlacesBox venues={venues} />
+        <PlacesCardsGrid venues={venues.splice(0, 4)} />
 
-        <Carousel events={events} />
-        <Divider />
+        <Carousel events={events.splice(10, 20)} />
+
+        <PlacesCardsGrid venues={venues.splice(4, 10)} />
       </main>
       <FooterSocial />
     </>
