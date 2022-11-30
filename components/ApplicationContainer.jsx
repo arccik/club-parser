@@ -4,6 +4,7 @@ import Navigation from "./BurgerMenu/Menu";
 
 import { IconMapPin } from "@tabler/icons";
 import Image from "next/image";
+import Link from "next/link";
 
 export const ApplicationContainer = ({ children }) => {
   const router = useRouter();
@@ -22,7 +23,7 @@ export const ApplicationContainer = ({ children }) => {
             }}
           >
             <Image
-              onClick={() => router.push("/")}
+              onClick={() => router.back()}
               src="/assets/logo.png"
               alt="StripRadar logo"
               width={120}

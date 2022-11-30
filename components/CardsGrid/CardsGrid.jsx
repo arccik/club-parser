@@ -12,6 +12,7 @@ import Link from "next/link";
 import useStyles from "./styles";
 
 export default function PlacesCardsGrid({ venues }) {
+  console.log("Venue: ", venues);
   const { classes } = useStyles();
 
   const cards = venues.map((article, i) => (
@@ -19,7 +20,6 @@ export default function PlacesCardsGrid({ venues }) {
       key={article._id}
       className={classes.card}
       shadow="sm"
-      p="lg"
       radius="md"
       withBorder
     >
@@ -37,12 +37,14 @@ export default function PlacesCardsGrid({ venues }) {
           </Text>
           <Rating defaultValue={article.rating} />
         </Group>
-
-        <Text size="xs" mt="xs" color="dimmed">
-          {`Starting at ${article.date || article.startDate} Doors Open ${
-            article.open
-          }`}
-        </Text>
+        <Group position="apart" mt="md" mb="xs">
+          <Text size="xs" mt="xs" color="dimmed">
+            {`Doors Open ${article.open}`}
+          </Text>
+          <Text size="xs" mt="xs" color="dimmed">
+            Distance: {article.distance} km
+          </Text>
+        </Group>
       </Link>
     </Card>
   ));
