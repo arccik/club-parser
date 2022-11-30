@@ -10,9 +10,12 @@ import {
   RingProgress,
 } from "@mantine/core";
 import useStyles from "../../../styles/eventHeader";
+import connectMongo from "../../../utils/mongodbConnect";
 
 export async function getServerSideProps({ params }) {
   const id = params.id;
+  await connectMongo();
+
   const event = await Event.findById(id);
   return {
     props: {
