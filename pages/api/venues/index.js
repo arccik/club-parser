@@ -1,9 +1,9 @@
-import connectMongo from "../../../utils/mongodbConnect";
+import dbConnect from "../../../utils/dbConnect";
 import Venue from "../../../models/venue-model";
 export default async function handler(req, res) {
   try {
     if (req.method === "GET") {
-      await connectMongo();
+      await dbConnect();
       const response = await Venue.find().limit(10);
       return res.status(200).json(response);
     }

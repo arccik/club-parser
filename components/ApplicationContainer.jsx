@@ -4,7 +4,6 @@ import Navigation from "./BurgerMenu/Menu";
 
 import { IconMapPin } from "@tabler/icons";
 import Image from "next/image";
-import Link from "next/link";
 
 export const ApplicationContainer = ({ children }) => {
   const router = useRouter();

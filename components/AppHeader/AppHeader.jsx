@@ -2,7 +2,6 @@ import Navigation from "../BurgerMenu/Menu";
 import { IconMapPin, ActionIcon } from "@tabler/icons";
 import Image from "next/image";
 import { Header, Group } from "@mantine/core";
-import { useRouter } from "next/router";
 
 export default function AppHeader() {
   return (

@@ -6,11 +6,11 @@ import Carousel from "../components/Carousel/Carousel";
 import Search from "../components/Search/Search";
 import Venue from "../models/venue-model";
 import Event from "../models/event-model";
-import connectMongo from "../utils/mongodbConnect";
+import dbConnect from "../utils/dbConnect";
 import { useState } from "react";
 
 export async function getStaticProps() {
-  await connectMongo();
+  await dbConnect();
   const events = await Event.find().limit(30);
   const venues = await Venue.find().limit(30);
 
@@ -18,6 +18,7 @@ export async function getStaticProps() {
     props: { events: JSON.stringify(events), venues: JSON.stringify(venues) },
   };
 }
+
 
 export default function Home(props) {
   const [searchQuery, setSearchQuery] = useState("");

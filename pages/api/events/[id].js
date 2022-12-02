@@ -1,9 +1,9 @@
-import connectMongo from "../../../utils/mongodbConnect";
+import dbConnect from "../../../utils/dbConnect";
 import Event from "../../../models/event-model";
 export default async function handler(req, res) {
   try {
     if (req.method === "GET") {
-      await connectMongo();
+      await dbConnect();
       const { id } = req.query;
       //   check if valid objectID
       if (id.match(/^[0-9a-fA-F]{24}$/)) {

@@ -1,21 +1,33 @@
 import ProfileDetails from "../../../components/DetailsPage/Details";
 import Venue from "../../../models/venue-model";
-import connectMongo from "../../../utils/mongodbConnect";
+import { useRouter } from "next/router";
+import dbConnect from "../../../utils/dbConnect";
 
-export async function getServerSideProps({ params }) {
-  await connectMongo();
-  const id = params.id;
-  const venue = await Venue.findById(id);
-  return {
-    props: {
-      venue: JSON.stringify(venue),
-    },
-  };
-}
+const VenuePage = ({ venue }) => {
+  const router = useRouter();
+  if (router.isFallback) <div>Loading...</div>;
 
-const MapPage = (props) => {
-  const venue = JSON.parse(props.venue);
   return <ProfileDetails data={venue} />;
 };
 
-export default MapPage;
+export async function getStaticProps({ params }) {
+  try {
+    await dbConnect();
+    const venue = await Venue.findById(params.id).lean();
+    venue._id = venue._id.toString();
+    return { props: { venue } };
+  } catch (error) {
+    console.error("Static Generation Error", error);
+  }
+}
+
+export async function getStaticPaths() {
+  await dbConnect();
+  const venues = await Venue.find();
+  const paths = venues.map((venue) => ({
+    params: { id: venue._id.toString() },
+  }));
+  return { paths, fallback: false };
+}
+
+export default VenuePage;

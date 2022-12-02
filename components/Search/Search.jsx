@@ -54,14 +54,15 @@ export default function Search({ eventsData, venuesData }) {
   return (
     <Container size="lg">
       <Grid>
-        <Grid.Col span={10}>
+        <Grid.Col span={11}>
           <Autocomplete
             icon={<IconSearch size={18} stroke={1.5} />}
             radius="xl"
             size="md"
+            mt="sm"
+            mb="sm"
             onChange={setInputValue}
             label="Search events, artist or places"
-            style={{ color: "grey" }}
             placeholder="Search..."
             rightSectionWidth={42}
             itemComponent={AutoCompleteItem}
@@ -92,8 +93,9 @@ export default function Search({ eventsData, venuesData }) {
             color={theme.secondaryColor}
             style={{
               color: theme.secondaryColor,
-              marginTop: 35,
+              marginTop: 45,
               cursor: "pointer",
+              marginRight: 20,
             }}
           />
         </Grid.Col>

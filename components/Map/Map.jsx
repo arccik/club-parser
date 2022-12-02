@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useCallback } from "react";
 import { GoogleMap, Marker, MarkerClusterer } from "@react-google-maps/api";
 
 import styles from "./Map.module.css";
+import MapNavBar from "../MapNavBar/MapNavBar";
 
 const Map = () => {
   const [mylocation, setMylocation] = useState(null);
@@ -60,6 +61,7 @@ const Map = () => {
           }
         </MarkerClusterer>
       </GoogleMap>
+      <MapNavBar />
     </div>
   );
 };

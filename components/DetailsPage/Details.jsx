@@ -11,7 +11,6 @@ import {
 import useStyles from "./styles";
 
 export default function DetailsPage({ data }) {
-  console.log("Details: ", data);
   const { classes } = useStyles();
   return (
     <Card withBorder className={classes.card}>
