@@ -15,7 +15,7 @@ export default function AppHeader() {
         }}
       >
         <Image
-          onClick={() => router.push("/")}
+          onClick={() => router.replace("/")}
           src="/assets/logo.png"
           alt="StripRadar logo"
           width={120}

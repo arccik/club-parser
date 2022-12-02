@@ -66,14 +66,6 @@ export default function Search({ eventsData, venuesData }) {
             rightSectionWidth={42}
             itemComponent={AutoCompleteItem}
             data={data}
-            // filter={(inputValue, item) =>
-            //   item.value
-            //     .toLowerCase()
-            //     .includes(inputValue.toLowerCase().trim()) ||
-            //   item.description
-            //     .toLowerCase()
-            //     .includes(inputValue.toLowerCase().trim())
-            // }
             rightSection={
               <ActionIcon
                 size={30}
@@ -86,15 +78,14 @@ export default function Search({ eventsData, venuesData }) {
             }
           />
         </Grid.Col>
-        <Grid.Col span={1}>
+        <Grid.Col span={1} p={0}>
           <IconCalendarEvent
             onClick={() => setShowCalendar((prev) => !prev)}
             color={theme.secondaryColor}
             style={{
               color: theme.secondaryColor,
-              marginTop: 45,
+              marginTop: 55,
               cursor: "pointer",
-              marginRight: 20,
             }}
           />
         </Grid.Col>
