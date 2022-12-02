@@ -13,7 +13,7 @@ const Map = () => {
   );
   const options = useMemo(
     () => ({
-      mapId: "216185b90ab09587",
+      // mapId: "216185b90ab09587",
       disableDefaultUI: true,
       clickableIcons: false,
       gestureHandling: "greedy",
@@ -71,11 +71,11 @@ export default Map;
 
 const generateHouses = (position) => {
   const _houses = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 300; i++) {
     const direction = Math.random() < 0.9 ? -2 : 2 + Math.random();
     _houses.push({
-      lat: position.lat + Math.random() / direction,
-      lng: position.lng + Math.random() / direction,
+      lat: position.lat + Math.random() / direction + Math.random(),
+      lng: position.lng + Math.random() / direction + Math.random(),
     });
   }
   return _houses;
