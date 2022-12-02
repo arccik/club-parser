@@ -11,7 +11,6 @@ import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { IconSearch, IconArrowRight, IconCalendarEvent } from "@tabler/icons";
 import { forwardRef, useState } from "react";
 import { useRouter } from "next/router";
-import { router } from "websocket";
 
 export default function Search({ eventsData, venuesData }) {
   const [showCalendar, setShowCalendar] = useState(false);
