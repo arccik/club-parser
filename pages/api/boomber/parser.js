@@ -1,4 +1,4 @@
-import saveEventToDB from "../../../utils/saveEventToDB";
+import saveEventToDB from "../../../src/utils/saveEventToDB";
 
 export default async function handler(req, res) {
   const url_skiddle =

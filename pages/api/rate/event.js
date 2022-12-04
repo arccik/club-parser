@@ -1,4 +1,4 @@
-import dbConnect from "../../../utils/dbConnect";
+import dbConnect from "../../../src/utils/dbConnect";
 import Event from "../../../src/models/event-model";
 import Venue from "../../../src/models/venue-model";
 

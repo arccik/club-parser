@@ -14,7 +14,7 @@ export default function Admin() {
   const headers =
     data && Object.keys(data[0]).map((value) => <th key={value}>{value}</th>);
 
-  const rows = data.map((element) => (
+  const rows = elements.map((element) => (
     <tr key={element.name}>
       <td>{element.address}</td>
       <td>{element.placeType}</td>
