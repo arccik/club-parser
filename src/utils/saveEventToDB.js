@@ -1,5 +1,5 @@
-import Event from "../models/event-model";
-import Venue from "../models/venue-model";
+import Event from "../src/models/event-model";
+import Venue from "../src/models/venue-model";
 
 export default async function saveEventToDB(data) {
   try {

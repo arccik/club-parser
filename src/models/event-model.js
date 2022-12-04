@@ -26,6 +26,7 @@ const EventSchema = new Schema({
   price: { type: String },
   description: { type: String },
   views: { type: String },
+  placeType: { type: String, default: "event" },
 });
 
 EventSchema.index({ location: "2dsphere" });

@@ -1,5 +1,5 @@
-import dbConnect from "../../../utils/dbConnect";
-import Event from "../../../models/event-model";
+import dbConnect from "../../../src/utils/dbConnect";
+import Event from "../../../src/models/event-model";
 export default async function handler(req, res) {
   try {
     if (req.method === "GET") {

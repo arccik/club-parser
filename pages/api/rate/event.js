@@ -1,4 +1,5 @@
-import dbConnect from "../../../src/utils/dbConnect";
+import dbConnect from "../../../utils/dbConnect";
+import Event from "../../../src/models/event-model";
 import Venue from "../../../src/models/venue-model";
 
 export default async function handler(req, res) {
@@ -7,11 +8,11 @@ export default async function handler(req, res) {
     const id = req.query.id;
     switch (req.method) {
       case "GET":
-        const event = Venue.findById(id);
+        const event = Event.findById(id);
         res.status(200).json(event);
         break;
       case "PUT":
-        const updatedEvent = await Venue.findOneAndUpdate(id, {
+        const updatedEvent = await Event.findOneAndUpdate(id, {
           $inc: {
             rating: 1,
           },

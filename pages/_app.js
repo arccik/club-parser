@@ -1,23 +1,28 @@
-import "../styles/globals.css";
+import "../src/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
-import { ApplicationContainer } from "../components/ApplicationContainer";
+import { ApplicationContainer } from "../src/components/ApplicationContainer";
 import { QueryClient, QueryClientProvider } from "react-query";
+
+import { store } from "../src/store/store";
+import { Provider } from "react-redux";
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{ colorSchema: "light" }}
-      >
-        <ApplicationContainer>
-          <Component {...pageProps} />
-        </ApplicationContainer>
-      </MantineProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{ colorSchema: "light" }}
+        >
+          <ApplicationContainer>
+            <Component {...pageProps} />
+          </ApplicationContainer>
+        </MantineProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 

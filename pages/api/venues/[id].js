@@ -1,5 +1,5 @@
-import dbConnect from "../../../utils/dbConnect";
-import Venue from "../../../models/venue-model";
+import dbConnect from "../../../src/utils/dbConnect";
+import Venue from "../../../src/models/venue-model";
 export default async function handler(req, res) {
   try {
     if (req.method === "GET") {

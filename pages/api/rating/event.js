@@ -1,6 +1,6 @@
-import dbConnect from "../../../utils/dbConnect";
-import Event from "../../../models/event-model";
-import Venue from "../../../models/venue-model";
+import dbConnect from "../../../src/utils/dbConnect";
+import Event from "../../../src/models/event-model";
+import Venue from "../../../src/models/venue-model";
 
 export default async function handler(req, res) {
   try {
@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     const id = req.query.id;
     switch (req.method) {
       case "GET":
-        const event = Event.findById(id);
-        res.status(200).json(event);
-        break;
+        const event = await Event.findById(id);
+
+        return res.status(200).json({ rating: event.rating });
       case "PUT":
         const updatedEvent = await Event.findOneAndUpdate(id, {
           $inc: {
@@ -24,6 +24,6 @@ export default async function handler(req, res) {
         break;
     }
   } catch (error) {
-    return res.status(503).json({ message: "Issue with server" });
+    return res.status(503).json({ message: "Issue with server", error });
   }
 }

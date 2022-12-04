@@ -20,6 +20,7 @@ const Map = () => {
       disableDefaultUI: true,
       clickableIcons: false,
       gestureHandling: "greedy",
+      panControl: true,
     }),
     []
   );

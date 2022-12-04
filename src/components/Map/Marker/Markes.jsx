@@ -4,22 +4,22 @@ import { useMemo, useEffect, useState } from "react";
 import formatLocations from "../../../utils/formatLocations";
 import { Image } from "@mantine/core";
 import MapPopUp from "./MapPopUp";
+import { useGetMarkersQuery } from "../../../services/events";
 
 const Markes = ({ center, mapRef, active, setActive }) => {
   const [markers, setMarkers] = useState();
-
+  const { data, error, isLoading } = useGetMarkersQuery();
   const fetchData = async () => {
     const response = await fetch(`http://localhost:3000/api/markers`).then(
       (res) => res.json()
     );
     const locations = formatLocations(response);
     setMarkers(locations);
-    console.log("Markers >..>>>. ", locations);
   };
 
   useEffect(() => {
     fetchData();
-  }, [center]);
+  }, []);
   //   const houses = useMemo(() => generateHouses(center), [center]);
 
   const handleMarkerClick = (marker) => {
@@ -29,13 +29,18 @@ const Markes = ({ center, mapRef, active, setActive }) => {
   };
 
   const handleActiveMarker = (marker) => {
-    console.log("handleActiveMarker", marker);
     if (marker === active) {
       return;
     }
     setActive(marker);
   };
 
+  const getPosition = (coordinates) => {
+    return {
+      lat: coordinates[0],
+      lng: coordinates[1],
+    };
+  };
   return (
     <MarkerClusterer>
       {(clusterer) =>

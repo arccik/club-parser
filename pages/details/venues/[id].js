@@ -1,7 +1,7 @@
-import ProfileDetails from "../../../components/DetailsPage/Details";
-import Venue from "../../../models/venue-model";
+import ProfileDetails from "../../../src/components/DetailsPage/Details";
+import Venue from "../../../src/models/venue-model";
 import { useRouter } from "next/router";
-import dbConnect from "../../../utils/dbConnect";
+import dbConnect from "../../../src/utils/dbConnect";
 
 const VenuePage = ({ venue }) => {
   const router = useRouter();

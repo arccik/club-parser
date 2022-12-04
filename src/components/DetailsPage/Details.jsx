@@ -12,7 +12,6 @@ import Stars from "../Stars/Stars";
 import useStyles from "./styles";
 
 export default function DetailsPage({ data }) {
-  console.log("DetailsPage", data);
   const { classes } = useStyles();
   return (
     <Card withBorder className={classes.card}>
@@ -25,7 +24,8 @@ export default function DetailsPage({ data }) {
           {data.name}
         </Text>
         <Group spacing={5}>
-          <Stars rating={data.rating} />
+          <Stars rating={data.rating} id={data._id} />
+          {/* <RingProgress size={18} sections={[{ value: 80, color: "blue" }]} /> */}
         </Group>
       </Group>
 

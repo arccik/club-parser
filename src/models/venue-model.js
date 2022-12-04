@@ -19,6 +19,7 @@ export const VenueSchema = new Schema({
   views: { type: String },
   open: { type: String },
   close: { type: String },
+  placeType: { type: String, default: "venue" },
 });
 
 VenueSchema.index({ location: "2dsphere" });

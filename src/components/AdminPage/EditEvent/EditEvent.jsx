@@ -1,10 +1,14 @@
 import { Container, Grid, Title, TextInput, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import useStyles from "./styles";
+import {
+  useGetEventByIdQuery,
+  useGetAllEventsQuery,
+} from "../../../services/events";
 
 const EditEvent = ({ eventData }) => {
   const { classes } = useStyles();
-
+  const { data, error, isLoading } = useGetAllEventsQuery();
   return (
     <Container size="sm">
       <Title order={4} ta="center">

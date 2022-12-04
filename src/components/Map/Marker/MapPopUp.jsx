@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { Card, Image, Text, Group, Badge, Button } from "@mantine/core";
 
 const MapPopUp = (props) => {
-  const { image, name, description, _id, open, close } = props.data;
+  const { image, name, description, _id, open, close, placeType } = props.data;
   const router = useRouter();
 
   const isOpen = (from, to) => {
@@ -29,7 +29,7 @@ const MapPopUp = (props) => {
           {description}
         </Text>
         <Button
-          onClick={() => router.push(`/details/events/${_id}`)}
+          onClick={() => router.push(`/details/${placeType}s/${_id}`)}
           variant="light"
           color="blue"
           fullWidth

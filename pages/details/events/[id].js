@@ -1,6 +1,6 @@
-import Event from "../../../models/event-model";
-import ProfileDetails from "../../../components/DetailsPage/Details";
-import dbConnect from "../../../utils/dbConnect";
+import Event from "../../../src/models/event-model";
+import ProfileDetails from "../../../src/components/DetailsPage/Details";
+import dbConnect from "../../../src/utils/dbConnect";
 
 const EventById = ({ event }) => {
   return <ProfileDetails data={event} />;

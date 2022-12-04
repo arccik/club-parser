@@ -1,12 +1,12 @@
 import Head from "next/head";
-import PlacesCardsGrid from "../components/CardsGrid/CardsGrid";
-import { FooterSocial } from "../components/Footer/Footer";
+import PlacesCardsGrid from "../src/components/CardsGrid/CardsGrid";
+import { FooterSocial } from "../src/components/Footer/Footer";
 import { Divider } from "@mantine/core";
-import Carousel from "../components/Carousel/Carousel";
-import Search from "../components/Search/Search";
-import Venue from "../models/venue-model";
-import Event from "../models/event-model";
-import dbConnect from "../utils/dbConnect";
+import Carousel from "../src/components/Carousel/Carousel";
+import Search from "../src/components/Search/Search";
+import Venue from "../src/models/venue-model";
+import Event from "../src/models/event-model";
+import dbConnect from "../src/utils/dbConnect";
 import { useState } from "react";
 
 export async function getStaticProps() {
