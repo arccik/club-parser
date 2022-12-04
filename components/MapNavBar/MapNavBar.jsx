@@ -1,5 +1,4 @@
 import { SegmentedControl } from "@mantine/core";
-
 import useStyles from "./styles";
 
 export default function MapNavBar() {

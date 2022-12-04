@@ -1,5 +1,4 @@
-const baseUrl = process.env.API;
-
 export default function fetcher(url) {
+  const baseUrl = process.env.API;
   return fetch(baseUrl + url).then((res) => res.json());
 }

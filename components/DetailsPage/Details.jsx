@@ -8,9 +8,11 @@ import {
   Button,
   Container,
 } from "@mantine/core";
+import Stars from "../Stars/Stars";
 import useStyles from "./styles";
 
 export default function DetailsPage({ data }) {
+  console.log("DetailsPage", data);
   const { classes } = useStyles();
   return (
     <Card withBorder className={classes.card}>
@@ -23,19 +25,20 @@ export default function DetailsPage({ data }) {
           {data.name}
         </Text>
         <Group spacing={5}>
-          <span>
-            <Rating defaultValue={data.rating} />
-          </span>
-          <RingProgress size={18} sections={[{ value: 80, color: "blue" }]} />
+          <Stars rating={data.rating} />
         </Group>
       </Group>
 
       <Text mt="sm" mb="md" color="dimmed" size="xs">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor libero,
-        perspiciatis minima blanditiis labore quam quisquam odit voluptates,
-        error quos omnis nihil quaerat ab voluptate dicta? At cum minus,
-        nesciunt ut quis debitis? Hic recusandae tenetur ex nostrum fugiat
-        aliquid.
+        {data.description || (
+          <>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+            libero, perspiciatis minima blanditiis labore quam quisquam odit
+            voluptates, error quos omnis nihil quaerat ab voluptate dicta? At
+            cum minus, nesciunt ut quis debitis? Hic recusandae tenetur ex
+            nostrum fugiat aliquid.
+          </>
+        )}
       </Text>
       <Text mt="sm" mb="md" size="sm">
         Venue
