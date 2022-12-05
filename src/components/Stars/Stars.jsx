@@ -9,7 +9,6 @@ const Stars = ({ rating, id }) => {
     key: `Rate for : ${id}`,
     defaultValue: rating,
   });
-  console.log("Rating value: ", value);
 
   const { data, error } = useSWR(`/api/rating/event?id=${id}`, fetcher);
 

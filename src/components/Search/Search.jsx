@@ -5,25 +5,31 @@ import {
   Avatar,
   Text,
   Grid,
+  Skeleton,
 } from "@mantine/core";
 import { Calendar } from "@mantine/dates";
 import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { IconSearch, IconArrowRight, IconCalendarEvent } from "@tabler/icons";
 import { forwardRef, useState } from "react";
 import { useRouter } from "next/router";
+import { useGetMarkersQuery } from "../../features/api/apiSlice";
+import SearchBarSkeleton from "./SearchBarSkeleton";
 
-export default function Search({ eventsData, venuesData }) {
+export default function Search() {
+  // const { data: eventData, error, isLoading } = useGetMarkersQuery();
   const [showCalendar, setShowCalendar] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [calendarValue, setCalendarValue] = useState("");
   const theme = useMantineTheme();
   const router = useRouter();
-
-  const data = [...venuesData, ...eventsData].map((item) => ({
+  // if (isLoading) return null;
+  // if (error) return <p>Error check console {console.error({ error })}</p>;
+  return null;
+  const data = eventData.map((item) => ({
     key: item._id,
     image: item.image,
     label: item.name,
-    description: item.address || eventsData.date,
+    description: item.description,
     value: item.name,
     id: item._id,
   }));

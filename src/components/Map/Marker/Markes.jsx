@@ -1,31 +1,21 @@
 import { Marker, MarkerClusterer, InfoWindow } from "@react-google-maps/api";
-import { IconHandRock } from "@tabler/icons";
-import { useMemo, useEffect, useState } from "react";
-import formatLocations from "../../../utils/formatLocations";
-import { Image } from "@mantine/core";
 import MapPopUp from "./MapPopUp";
-import { useGetMarkersQuery } from "../../../services/events";
+import { useGetMarkersQuery } from "../../../features/marker/markerSlice";
+import { useState } from "react";
+import MapNavBar from "../../MapNavBar/MapNavBar";
 
 const Markes = ({ center, mapRef, active, setActive }) => {
-  const [markers, setMarkers] = useState();
-  const { data, error, isLoading } = useGetMarkersQuery();
-  const fetchData = async () => {
-    const response = await fetch(`http://localhost:3000/api/markers`).then(
-      (res) => res.json()
-    );
-    const locations = formatLocations(response);
-    setMarkers(locations);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  //   const houses = useMemo(() => generateHouses(center), [center]);
+  const [state, setState] = useState("venues");
+  const { data: markers, error, isLoading } = useGetMarkersQuery(state);
+  if (isLoading) return <h2>Loading...</h2>;
+  if (error) return <p>Error check console {console.error({ error })}</p>;
+  console.log("Marker quantity", markers.length);
 
   const handleMarkerClick = (marker) => {
-    mapRef.current.panTo(marker);
+    const coords = { lat: marker.coordinates[0], lng: marker.coordinates[1] };
+    mapRef.current.panTo(coords);
     mapRef.current.setZoom(18);
-    handleActiveMarker(marker);
+    handleActiveMarker(coords);
   };
 
   const handleActiveMarker = (marker) => {
@@ -42,37 +32,41 @@ const Markes = ({ center, mapRef, active, setActive }) => {
     };
   };
   return (
-    <MarkerClusterer>
-      {(clusterer) =>
-        markers &&
-        markers.map((house) => (
-          <Marker
-            clusterer={clusterer}
-            key={house._id}
-            position={house.position}
-            icon={{
-              path: "M8.384 1.226a.463.463 0 0 0-.768 0l-4.56 6.468a.537.537 0 0 0 0 .612l4.56 6.469a.463.463 0 0 0 .768 0l4.56-6.469a.537.537 0 0 0 0-.612l-4.56-6.468zM6.848.613a1.39 1.39 0 0 1 2.304 0l4.56 6.468a1.61 1.61 0 0 1 0 1.838l-4.56 6.468a1.39 1.39 0 0 1-2.304 0L2.288 8.92a1.61 1.61 0 0 1 0-1.838L6.848.613z",
-              fillColor: "grey",
-              fillOpacity: 0.9,
-              scale: 2,
-              strokeColor: "red",
-              strokeWeight: 1,
-            }}
-            onClick={(marker) => {
-              handleMarkerClick(house.position);
-            }}
-          >
-            {active === house.position ? (
-              <InfoWindow onCloseClick={() => setActive(null)}>
-                <>
-                  <MapPopUp data={house} />
-                </>
-              </InfoWindow>
-            ) : null}
-          </Marker>
-        ))
-      }
-    </MarkerClusterer>
+    <>
+      <MapNavBar handleClick={setState} />
+
+      <MarkerClusterer>
+        {(clusterer) =>
+          markers &&
+          markers.map((house) => (
+            <Marker
+              clusterer={clusterer}
+              key={house._id}
+              position={getPosition(house.location.coordinates)}
+              icon={{
+                path: "M8.384 1.226a.463.463 0 0 0-.768 0l-4.56 6.468a.537.537 0 0 0 0 .612l4.56 6.469a.463.463 0 0 0 .768 0l4.56-6.469a.537.537 0 0 0 0-.612l-4.56-6.468zM6.848.613a1.39 1.39 0 0 1 2.304 0l4.56 6.468a1.61 1.61 0 0 1 0 1.838l-4.56 6.468a1.39 1.39 0 0 1-2.304 0L2.288 8.92a1.61 1.61 0 0 1 0-1.838L6.848.613z",
+                fillColor: "grey",
+                fillOpacity: 0.9,
+                scale: 2,
+                strokeColor: "red",
+                strokeWeight: 1,
+              }}
+              onClick={(marker) => {
+                handleMarkerClick(house.location);
+              }}
+            >
+              {active?.lat === house.location.coordinates[0] ? (
+                <InfoWindow onCloseClick={() => setActive(null)}>
+                  <>
+                    <MapPopUp data={house} />
+                  </>
+                </InfoWindow>
+              ) : null}
+            </Marker>
+          ))
+        }
+      </MarkerClusterer>
+    </>
   );
 };
 

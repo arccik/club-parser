@@ -46,7 +46,7 @@ const Map = () => {
           setActive={setActiveMarker}
         />
       </GoogleMap>
-      <MapNavBar />
+      {/* <MapNavBar /> */}
     </div>
   );
 };

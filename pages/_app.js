@@ -1,27 +1,30 @@
 import "../src/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
 import { ApplicationContainer } from "../src/components/ApplicationContainer";
-import { QueryClient, QueryClientProvider } from "react-query";
 
-import { store } from "../src/store/store";
+import { store } from "../store";
 import { Provider } from "react-redux";
 
-const queryClient = new QueryClient();
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { apiSlice } from "../src/features/api/apiSlice";
+import { extendedApiSlice } from "../src/features/event/eventSlice";
+
+store.dispatch(extendedApiSlice.endpoints.getEvents.initiate());
 
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{ colorSchema: "light" }}
-        >
-          <ApplicationContainer>
-            <Component {...pageProps} />
-          </ApplicationContainer>
-        </MantineProvider>
-      </QueryClientProvider>
+      {/* <ApiProvider api={apiSlice}> */}
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{ colorSchema: "light" }}
+      >
+        <ApplicationContainer>
+          <Component {...pageProps} />
+        </ApplicationContainer>
+      </MantineProvider>
+      {/* </ApiProvider> */}
     </Provider>
   );
 }

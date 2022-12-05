@@ -3,7 +3,7 @@ import { createStyles } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   root: {
     position: "absolute",
-    top: 62,
+    // top: 62,
     left: "50%",
     transform: "translate(-50%)",
     backgroundColor:

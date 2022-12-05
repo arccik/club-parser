@@ -1,0 +1,75 @@
+import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
+import { apiSlice } from "../api/apiSlice";
+
+const markerAdapter = createEntityAdapter({
+  // sortComparer: (a, b) => b.date.localeCompare(a.date), // sort list
+  selectId: (e) => e._id,
+});
+
+const initialState = markerAdapter.getInitialState();
+
+export const extendedApiSlice = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+    getMarkers: builder.query({
+      query: (type) => `/markers?type=${type}`,
+      transformFromResponse: (responseData) => {
+        const loadedEvents = responseData.map((post) => {
+          if (!post.position) {
+            post.position = {
+              lat: post.location.coordinates[0],
+              lng: post.location.coordinates[1],
+            };
+          }
+          return post;
+        });
+        return markerAdapter.setAll(initialState, loadedEvents);
+      },
+      providesTags: (result, error, arg) => {
+        return [...result.map(({ _id }) => ({ type: "Markers", _id }))];
+      },
+    }),
+    getEventMarkers: builder.query({
+      query: () => "/markers?type=event",
+      transformFromResponse: (responseData) => {
+        const loadedEvents = responseData.map((post) => {
+          if (!post.position) {
+            post.position = {
+              lat: post.location.coordinates[0],
+              lng: post.location.coordinates[1],
+            };
+          }
+          return post;
+        });
+        return markerAdapter.setAll(initialState, loadedEvents);
+      },
+      providesTags: (result, error, arg) => [
+        ...result.map(({ _id }) => ({ type: "EventMarkers", _id })),
+      ],
+    }),
+    getVenueMarkers: builder.query({
+      query: () => "/markers?type=venue",
+      transformFromResponse: (responseData) => {
+        const loadedVenues = responseData.map((post) => {
+          if (!post.position) {
+            post.position = {
+              lat: post.location.coordinates[0],
+              lng: post.location.coordinates[1],
+            };
+          }
+          return post;
+        });
+        return markerAdapter.setAll(initialState, loadedVenues);
+      },
+      providesTags: (result, error, arg) => [
+        { type: "VenueMarkers", id: "LIST" },
+        ...result.map(({ _id }) => ({ type: "VenueMarkers", _id })),
+      ],
+    }),
+  }),
+});
+
+export const {
+  useGetMarkersQuery,
+  useGetVenueMarkersQuery,
+  useGetEventMarkersQuery,
+} = extendedApiSlice;

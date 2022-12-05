@@ -2,63 +2,77 @@ import { Container, Grid, Title, TextInput, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import useStyles from "./styles";
 import {
-  useGetEventByIdQuery,
-  useGetAllEventsQuery,
-} from "../../../services/events";
+  useGetPostByIdQuery,
+  useGetPostsQuery,
+} from "../../../../src/features/event/eventSlice";
+import { useRouter } from "next/router";
 
-const EditEvent = ({ eventData }) => {
+const EditEvent = () => {
   const { classes } = useStyles();
-  const { data, error, isLoading } = useGetAllEventsQuery();
+  const router = useRouter();
+  const { id } = router.query;
+  // if (!id) return <p>Post Not Found!</p>;
+
+  const {
+    data: eventData,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetPostByIdQuery(id);
+  console.log({ eventData });
+  if (isError) return <p>Error check console : {console.log({ error })}</p>;
+  if (isLoading) return <p>Loading...</p>;
   return (
     <Container size="sm">
       <Title order={4} ta="center">
-        {eventData.name}
+        {eventData?.name}
       </Title>
       <div>
         <TextInput
           mt="md"
           label="Name"
-          placeholder={eventData.name}
-          defaultValue={eventData.name}
+          placeholder={eventData?.name}
+          defaultValue={eventData?.name}
           classNames={classes}
         />
         <TextInput
           mt="md"
           label="Description"
-          placeholder={eventData.description}
-          defaultValue={eventData.description}
+          placeholder={eventData?.description}
+          defaultValue={eventData?.description}
           classNames={classes}
         />
         <DatePicker
           style={{ marginTop: 20 }}
           label="Event Date"
-          placeholder={eventData.startdate}
-          value={eventData.startdate}
+          placeholder={eventData?.startdate}
+          value={eventData?.startdate}
           classNames={classes}
           clearable={false}
         />
         <TextInput
           mt="md"
           label="Open"
-          placeholder={eventData.open}
+          placeholder={eventData?.open}
           classNames={classes}
         />
         <TextInput
           mt="md"
           label="Close"
-          placeholder={eventData.close}
+          placeholder={eventData?.close}
           classNames={classes}
         />
         <TextInput
           mt="md"
           label="Image URL"
-          placeholder={eventData.image}
+          placeholder={eventData?.image}
           classNames={classes}
         />
         <TextInput
           mt="md"
           label="Tickt link"
-          placeholder={eventData.link}
+          placeholder={eventData?.link}
           classNames={classes}
         />
 
