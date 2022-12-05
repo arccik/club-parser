@@ -1,7 +1,5 @@
-import PostsList from "../../../src/features/posts/PostsList";
-
 const EditEventPage = () => {
-  return <PostsList />;
+  return <p>Edit Event Page</p>;
 };
 
 export default EditEventPage;

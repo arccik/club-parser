@@ -1,10 +1,5 @@
-import { Autocomplete, Grid, Container, Calendar } from "@mantine/core";
-import {
-  IconSearch,
-  ActionIcon,
-  IconArrowRight,
-  IconCalendarEvent,
-} from "@tabler/icons";
+import { Autocomplete, Grid, Container, ActionIcon } from "@mantine/core";
+import { IconSearch, IconArrowRight, IconCalendarEvent } from "@tabler/icons";
 const SearchBarSkeleton = () => {
   return (
     <Container size="lg">

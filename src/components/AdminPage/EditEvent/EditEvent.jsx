@@ -1,11 +1,8 @@
 import { Container, Grid, Title, TextInput, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import useStyles from "./styles";
-import {
-  useGetPostByIdQuery,
-  useGetPostsQuery,
-} from "../../../../src/features/event/eventSlice";
 import { useRouter } from "next/router";
+import { useGetEventsQuery } from "../../../features/event/eventSlice";
 
 const EditEvent = () => {
   const { classes } = useStyles();
@@ -19,7 +16,7 @@ const EditEvent = () => {
     isSuccess,
     isError,
     error,
-  } = useGetPostByIdQuery(id);
+  } = useGetEventsQuery(id);
   console.log({ eventData });
   if (isError) return <p>Error check console : {console.log({ error })}</p>;
   if (isLoading) return <p>Loading...</p>;
