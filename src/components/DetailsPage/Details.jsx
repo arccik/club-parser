@@ -19,7 +19,7 @@ export default function DetailsPage({ data }) {
         <Image src={data.image} alt={data.name} height={400} />
       </Card.Section>
 
-      <Group position="apart" mt="xl">
+      <Group position="apart" mt="sm">
         <Text size="sm" weight={700} className={classes.title}>
           {data.name}
         </Text>

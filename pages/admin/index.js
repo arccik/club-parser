@@ -1,34 +1,27 @@
-import { Container, Table } from "@mantine/core";
+import AppContainer from "../../src/components/AdminPage/AppContainer/AppContainer";
+import { Button, Center, Paper, Container, Title } from "@mantine/core";
+import StatsRing from "../../src/components/AdminPage/StatsRing/StatsRing";
+import { useState } from "react";
+import AddEvent from "../../src/components/AdminPage/AddEvent/AddEvent";
+import AddVenue from "../../src/components/AdminPage/AddVenue/AddVenue";
 
-export default function Admin() {
-  const elements = [
-    { position: 6, mass: 12.011, symbol: "C", name: "Carbon" },
-    { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-    { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-    { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-    { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
-  ];
-
-  const headers = Object.keys(elements[0]).map((value) => (
-    <th key={value}>{value}</th>
-  ));
-
-  const rows = elements.map((element) => (
-    <tr key={element.name}>
-      <td>{element.address}</td>
-      <td>{element.placeType}</td>
-      <td>{element.open}</td>
-    </tr>
-  ));
-
+const AdminPage = () => {
+  const [place, setPlace] = useState(null);
   return (
-    <Container size="lg" mt="lg">
-      <Table>
-        <thead>
-          <tr>{headers}</tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table>
-    </Container>
+    <AppContainer>
+      <Button variant="light" ml="sm">
+        ADD EVENT
+      </Button>
+      <Button variant="light" ml="sm">
+        ADD VENUE
+      </Button>
+      <Button variant="light" ml="sm">
+        ADD PUB
+      </Button>
+      {/* <AddEvent /> */}
+      <AddVenue />
+    </AppContainer>
   );
-}
+};
+
+export default AdminPage;

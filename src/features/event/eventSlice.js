@@ -21,8 +21,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return eventAdapter.setAll(initialState, loadedEvents);
       },
       providesTags: (result, error, arg) => [
-        { type: "Post", id: "LIST" },
-        ...result.map(({ _id }) => ({ type: "Post", _id })),
+        { type: "Events", id: "LIST" },
+        ...result.map(({ _id }) => ({ type: "Events", _id })),
       ],
     }),
     getEventById: builder.query({
@@ -35,12 +35,16 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         });
         return eventAdapter.setAll(initialState, loadedEvent);
       },
-      providesTags: (result, error, arg) => {
-        return [{ type: "Post", _id: result?._id }];
+
+      providesTags: (result, error, _id) => {
+        return [{ type: "Events", _id }];
       },
-      invalidatesTags: (result, error, arg) => {
-        return [{ type: "Post", _id: arg }];
+      invalidatesTags: (result, error, _id) => {
+        return [{ type: "Events", _id }];
       },
+    }),
+    getFieldsNames: builder.query({
+      query: (type) => `/getfields?type=${type}`,
     }),
     addNewEvent: builder.mutation({
       query: (initialPost) => ({
@@ -50,7 +54,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
           ...initialPost,
         },
       }),
-      invalidatesTags: [{ type: "Post", id: "LIST" }],
+      invalidatesTags: [{ type: "Events", _id: "LIST" }],
     }),
     updateEvent: builder.mutation({
       query: (initialPost) => ({
@@ -61,15 +65,16 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
           date: new Date().toISOString(),
         },
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: "Events", id: arg._id },
+      ],
     }),
     deleteEvent: builder.mutation({
-      query: ({ _id }) => ({
+      query: (_id) => ({
         url: `/events/${_id}`,
         method: "DELETE",
-        body: { _id },
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg }],
+      invalidatesTags: (result, error, _id) => [{ type: "Events", _id }],
     }),
   }),
 });
@@ -77,6 +82,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetEventsQuery,
   useGetEventByIdQuery,
+  useGetFieldsNamesQuery,
   useAddNewEventMutation,
   useDeleteEventMutation,
   useUpdateEventMutation,

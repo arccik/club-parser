@@ -3,7 +3,14 @@ const URL = process.env.NEXT_PUBLIC_API;
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  tagTypes: ["Events", "EventMarkers", "Markers", "VenueMarkers", "Post"],
+  tagTypes: [
+    "Venues",
+    "EventMarkers",
+    "Markers",
+    "VenueMarkers",
+    "Post",
+    "Events",
+  ],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints: (builder) => ({}),
 });

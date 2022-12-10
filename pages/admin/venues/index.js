@@ -1,14 +1,13 @@
 import TableScrollArea from "../../../src/components/AdminPage/TableScrollArea/TableScrollArea";
 import AppContainer from "../../../src/components/AdminPage/AppContainer/AppContainer";
-import { useGetEventsQuery } from "../../../src/features/event/eventSlice";
-
+import { useGetVenuesQuery } from "../../../src/features/venue/venueSlice";
 const EditEventPage = () => {
-  const { data, isLoading, error } = useGetEventsQuery();
+  const { data, isLoading, error } = useGetVenuesQuery();
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <AppContainer>
-      <TableScrollArea data={data} />
+      <TableScrollArea data={data} link="venues" />
     </AppContainer>
   );
 };

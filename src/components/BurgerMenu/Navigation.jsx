@@ -1,33 +1,17 @@
-import { Menu, Text, Burger } from "@mantine/core";
+import { Menu, Button, Text, Burger } from "@mantine/core";
 import { useState } from "react";
-import Link from "next/link";
 
 import {
   IconSettings,
   IconSearch,
   IconPhoto,
+  IconMessageCircle,
   IconTrash,
   IconArrowsLeftRight,
-  IconHome2,
 } from "@tabler/icons";
 
 export default function Navigation() {
   const [opened, setOpened] = useState(false);
-
-  const menuItems = [
-    { icon: <IconHome2 />, link: "/", label: "Home" },
-    { icon: <IconSettings />, link: "/admin", label: "Admin Panel" },
-    { icon: <IconSearch />, link: "/something", label: "Something Else" },
-  ];
-
-  const menuList = menuItems.map(({ icon, label, link }) => (
-    <Menu.Item key={label} icon={icon} onClick={() => setOpened(false)}>
-      <Link href={link} style={{ textDecoration: "none" }}>
-        {label}
-      </Link>
-    </Menu.Item>
-  ));
-
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
@@ -40,7 +24,19 @@ export default function Navigation() {
 
       <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
-        {menuList}
+        <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
+        <Menu.Item icon={<IconMessageCircle size={14} />}>Messages</Menu.Item>
+        <Menu.Item icon={<IconPhoto size={14} />}>Gallery</Menu.Item>
+        <Menu.Item
+          icon={<IconSearch size={14} />}
+          rightSection={
+            <Text size="xs" color="dimmed">
+              ⌘K
+            </Text>
+          }
+        >
+          Search
+        </Menu.Item>
 
         <Menu.Divider />
 

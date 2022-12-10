@@ -8,7 +8,7 @@ export const VenueSchema = new Schema({
   town: { type: String },
   postcode: { type: String },
   country: { type: String },
-  location: { type: { type: String }, coordinates: [Number] },
+  location: { type: { type: String, default: "Point" }, coordinates: [] },
   formatted_address: { type: String },
   type: { type: String },
   phone: { type: String },
