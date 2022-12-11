@@ -1,6 +1,6 @@
 
 
-.loader-wrap{
+.loaderWrap{
 	top:50%;
 	left:50%;
 	width:374px;
@@ -52,7 +52,7 @@
 	background-color:#FBCE13;
 	animation:move-cap 2500ms linear infinite;
 }
-.bottle-fill{
+.bottleFill{
 	animation:waves 2500ms infinite linear, fill 2500ms infinite forwards;
 }
 .bottle-wrap{
