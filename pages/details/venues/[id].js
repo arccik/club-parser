@@ -13,8 +13,8 @@ const VenuePage = ({ venue }) => {
 export async function getStaticProps({ params }) {
   try {
     await dbConnect();
-    const venue = await Venue.findById(params.id).lean();
-    venue._id = venue._id.toString();
+    const data = await Venue.findById(params.id).lean();
+    const venue = JSON.parse(JSON.stringify(data));
     return { props: { venue } };
   } catch (error) {
     console.error("Static Generation Error", error);
