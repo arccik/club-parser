@@ -1,5 +1,6 @@
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../../src/components/Map/Map";
+import Loading from "../../src/utils/Loading/Loading";
 
 const mapPlugins = ["places"];
 
@@ -8,7 +9,7 @@ const MapPage = () => {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: mapPlugins,
   });
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <Loading />;
   return <Map />;
 };
 

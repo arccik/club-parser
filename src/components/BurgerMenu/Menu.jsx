@@ -1,7 +1,8 @@
-import { Menu, Text, Burger } from "@mantine/core";
+import { Menu, Burger, NavLink, Button } from "@mantine/core";
 import { useState } from "react";
-import Link from "next/link";
 
+import { useRouter } from "next/router";
+import Link from "next/link";
 import {
   IconSettings,
   IconSearch,
@@ -9,22 +10,41 @@ import {
   IconTrash,
   IconArrowsLeftRight,
   IconHome2,
+  IconRadio,
+  IconMusic,
+  IconFriends,
+  IconBuildingSkyscraper,
 } from "@tabler/icons";
 
 export default function Navigation() {
+  const [active, setActive] = useState(0);
   const [opened, setOpened] = useState(false);
-
-  const menuItems = [
+  const router = useRouter();
+  const items = [
     { icon: <IconHome2 />, link: "/", label: "Home" },
     { icon: <IconSettings />, link: "/admin", label: "Admin Panel" },
-    { icon: <IconSearch />, link: "/something", label: "Something Else" },
+    { icon: <IconMusic />, link: "/admin/events", label: "Events" },
+    {
+      icon: <IconBuildingSkyscraper />,
+      link: "/admin/venues",
+      label: "Venues",
+    },
   ];
 
-  const menuList = menuItems.map(({ icon, label, link }) => (
-    <Menu.Item key={label} icon={icon} onClick={() => setOpened(false)}>
-      <Link href={link} style={{ textDecoration: "none" }}>
-        {label}
-      </Link>
+  const list = items.map(({ icon, label, link }, index) => (
+    <Menu.Item key={label} onClick={() => setOpened(false)}>
+      <NavLink
+        href={link}
+        component={Link}
+        key={label}
+        active={active === index}
+        label={label}
+        icon={icon}
+        onClick={() => {
+          setActive(index);
+        }}
+        variant="light"
+      />
     </Menu.Item>
   ));
 
@@ -40,7 +60,7 @@ export default function Navigation() {
 
       <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
-        {menuList}
+        {list}
 
         <Menu.Divider />
 

@@ -4,12 +4,13 @@ import Link from "next/link";
 import { IconTrashX } from "@tabler/icons";
 
 import useStyles from "./styles";
+import Loading from "../../../utils/Loading/Loading";
 
 export default function TableScrollArea({ data, link = "events" }) {
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
-
-  const rows = data.map((row) => (
+  // if (!data) return <Loading />;
+  const rows = data?.map((row) => (
     <tr key={row._id}>
       <td>
         <Link

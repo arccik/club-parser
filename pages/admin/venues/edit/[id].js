@@ -1,10 +1,12 @@
-import EditEvent from "../../../../src/components/AdminPage/EditPageFields/EditPage";
+import Edit from "../../../../src/components/AdminPage/EditPageFields/Edit";
 import {
   useGetVenueByIdQuery,
   useDeleteVenueMutation,
+  useUpdateVenueMutation,
 } from "../../../../src/features/venue/venueSlice";
 import { useRouter } from "next/router";
-import AppContainer from "../../../../src/components/AdminPage/AppContainer/AppContainer";
+import { useAddNewEventMutation } from "../../../../src/features/event/eventSlice";
+import Loading from "../../../../src/utils/Loading/Loading";
 
 const EditEventPage = () => {
   const router = useRouter();
@@ -15,21 +17,20 @@ const EditEventPage = () => {
   const [removeItem, { isLoading: isDeleting, error: deletingError }] =
     useDeleteVenueMutation();
 
+  const [updateVenue, { isLoading: eventAdding, isError: eventAddError }] =
+    useUpdateVenueMutation(id);
+
   if (isDeleting) return <p>Deleting...</p>;
-  if (isLoading) return <p>Loading...</p>;
-  if (isError || !id)
+  if (isLoading || eventAdding) return <Loading />;
+  if (isError || !id || eventAddError)
     return (
       <p>
-        Problem on the server: {error.data.message}
+        Problem on the server
         {console.log({ error })}
       </p>
     );
 
-  return (
-    <AppContainer>
-      <EditEvent data={venue} onDelete={removeItem} />
-    </AppContainer>
-  );
+  return <Edit data={venue} onDelete={removeItem} onSave={updateVenue} />;
 };
 
 export default EditEventPage;

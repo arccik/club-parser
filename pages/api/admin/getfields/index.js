@@ -1,5 +1,5 @@
-import Event from "../../../src/models/event-model";
-import Venue from "../../../src/models/venue-model";
+import Event from "../../../../src/models/event-model";
+import Venue from "../../../../src/models/venue-model";
 
 export default async function handler(req, res) {
   try {
@@ -19,6 +19,8 @@ export default async function handler(req, res) {
             "distance",
             "rating",
             "type",
+            "createdAt",
+            "updatedAt",
           ].includes(v)
       );
       return res.status(200).send(fields);

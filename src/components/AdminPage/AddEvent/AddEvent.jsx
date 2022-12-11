@@ -1,77 +1,80 @@
+import React from "react";
+import { Formik, Field, ErrorMessage } from "formik";
+import formValidation from "./formValidation";
+import { IconX } from "@tabler/icons";
+import { Text, Title, Container, Button, Notification } from "@mantine/core";
+import useStyles from "./styles";
+import initialValues from "../AddVenue/initialValues";
 import {
-  Container,
-  Grid,
-  Title,
-  TextInput,
-  Button,
-  Textarea,
-} from "@mantine/core";
-import { DatePicker } from "@mantine/dates";
-
+  useGetFieldsNamesQuery,
+  useAddNewEventMutation,
+} from "../../../features/event/eventSlice";
+// import { useAddNewEventMutation } from "../../../features/venue/venueSlice";
 import { useRouter } from "next/router";
-
-//   "link",
-//   "address",
-//   "town",
-//   "postcode",
-//   "country",
-//   "location",
-//   "phone",
-//   "imageUrl",
-//   "close",
-//   "open",
-//   "startdate",
-//   "enddate",
-//   "minage",
-//   "price",
-//   "description",
+import ErrorDispay from "../AddVenue/ErrorDispay";
 
 const AddEvent = () => {
+  const router = useRouter();
+  const { data: fieldNames, isLoading } = useGetFieldsNamesQuery("events");
+  const [saveToDB, { isLoading: isAdding, error: errorAdding }] =
+    useAddNewEventMutation();
+  const { classes } = useStyles();
+  if (isLoading) return <p>Loading...</p>;
+
+  if (isLoading) return <p>Loading...</p>;
+
   return (
     <Container size="sm">
-      <div>
-        <Title order={4} ta="center">
-          Add New Event
-        </Title>
+      <h2 className={classes.pageHeader}>Add Event</h2>
+      <Formik
+        initialValues={initialValues(fieldNames)}
+        validate={formValidation}
+        onSubmit={async (values, { setSubmitting }) => {
+          const location = {
+            type: "Point",
+            coordinates: values.location.trim().split(","),
+          };
+          const valuesToSend = { ...values, location };
+          const response = await saveToDB(valuesToSend).unwrap();
+          if (response.status === "OK") setSubmitting(false);
+          router.push("/admin/events");
+          console.log("Clicked", response);
+        }}
+      >
+        {({ handleSubmit, isSubmitting, errors, touched }) => (
+          <form onSubmit={handleSubmit}>
+            {fieldNames?.map((field) => (
+              <span key={field}>
+                <Text className={classes.fieldLabel}>{field}</Text>
+                <Field name={field} className={classes.field} />
+                <ErrorMessage name={field} component="div" />
+              </span>
+            ))}
 
-        <TextInput
-          m="lg"
-          onChange={console.log}
-          label="Name"
-          placeholder="Write Something"
-        />
-        <Textarea
-          m="lg"
-          placeholder="Write Something"
-          label="Description"
-          autosize
-        />
-        <DatePicker
-          m="lg"
-          placeholder={"Select Date"}
-          value={new Date()}
-          label={"Pick Date"}
-        />
-        <TextInput
-          m="lg"
-          onChange={console.log}
-          label="Link to website"
-          placeholder="Write Something"
-        />
+            <Button
+              variant="light"
+              type="submit"
+              fullWidth
+              mt="lg"
+              mb="lg"
+              loading={isSubmitting}
+            >
+              Submit
+            </Button>
 
-        <Grid mt="lg" mb="lg">
-          <Grid.Col span={6}>
-            <Button variant="light" fullWidth color="green">
-              Save
-            </Button>
-          </Grid.Col>
-          <Grid.Col span={6}>
-            <Button variant="light" fullWidth color="red">
-              Delete
-            </Button>
-          </Grid.Col>
-        </Grid>
-      </div>
+            {Object.keys(errors).length && touched ? (
+              <Notification
+                m="lg"
+                disallowClose
+                icon={<IconX size={18} />}
+                color="red"
+              >
+                <ErrorDispay errors={errors} />
+              </Notification>
+            ) : null}
+          </form>
+        )}
+      </Formik>
     </Container>
   );
 };

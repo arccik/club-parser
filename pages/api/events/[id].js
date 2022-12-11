@@ -11,15 +11,18 @@ export default async function handler(req, res) {
       case "GET":
         const data = await Event.findById(id).populate("venue");
         return res.status(200).json(data);
-      case "POST":
-        const body = req.body;
-        if (!body) {
+
+      case "PUT":
+        if (!req.body) {
           return res
             .status(200)
-            .json({ message: "Please provide Event Details" });
+            .json({ message: "Couldn't found Venue Details" });
         }
-        const created = await Event.create(body);
-        return res.status(200).json({ message: "Event Created", created });
+        const updatedEvent = await Event.findByIdAndUpdate(id, req.body);
+        return res
+          .status(200)
+          .json({ status: "OK", message: "Event Updated!", updatedEvent });
+
       case "DELETE":
         const deletedEvent = await Event.deleteOne({ _id: id });
         return res.status(200).json({ message: "Event deleted", deletedEvent });

@@ -1,4 +1,4 @@
-import Venue from "../../../src/models/venue-model";
+import Venue from "../../../../src/models/venue-model";
 
 const url = "https://picsum.photos/1024/700?random=1";
 export default async function handler(req, res) {

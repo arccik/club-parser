@@ -14,7 +14,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       query: () => "/venues",
       transformFromResponse: (responseData) => {
         const loadedVenues = responseData.map((post) => {
-          if (!post.date) post.date = new Date();
           if (!post.reaction) post.reaction = "😃";
           return post;
         });
@@ -22,20 +21,18 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: (result, error, arg) => [
         { type: "Venues", id: "LIST" },
-        ...result.map(({ _id }) => ({ type: "Venues", id: _id })),
+        ...result.map(({ _id }) => ({ type: "Venues", _id: _id })),
       ],
     }),
     getVenueById: builder.query({
       query: (_id) => `/venues/${_id}`,
-      transformFromResponse: (responseData) => {
-        return venueAdapter.setAll(initialState, responseData);
-      },
 
       providesTags: (result, error, _id) => {
-        console.log("Provide Tags: ", _id);
         return [{ type: "Venues", _id }];
       },
       invalidatesTags: (result, error, _id) => {
+        console.log("invalidatesTags Venue id", _id);
+
         return [{ type: "Venues", _id }];
       },
     }),
@@ -50,22 +47,32 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: [{ type: "Venues", _id: "LIST" }],
     }),
     updateVenue: builder.mutation({
-      query: (initialPost) => ({
-        url: `/venues/${initialPost._id}`,
-        method: "PUT",
-        body: {
-          ...initialPost,
-          date: new Date().toISOString(),
-        },
-      }),
-      invalidatesTags: (result, error, _id) => [{ type: "Venues", _id }],
+      query: (initialPost) => {
+        return {
+          url: `/venues/${initialPost._id}`,
+          method: "PUT",
+          body: {
+            ...initialPost,
+          },
+        };
+      },
+      providesTags: (result, error, arg) => {
+        console.log("Provide Tags: Update Venye", result);
+        return [
+          { type: "Venues", id: "LIST" },
+          ...result.map(({ _id }) => ({ type: "Venues", id: _id })),
+        ];
+      },
+      invalidatesTags: (result, error, { _id }) => {
+        return [{ type: "Venues", _id }];
+      },
     }),
     deleteVenue: builder.mutation({
       query: (_id) => ({
         url: `/venues/${_id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, _id) => [{ type: "Venues", _id }],
+      invalidatesTags: (result, error, { _id }) => [{ type: "Venues", _id }],
     }),
   }),
 });

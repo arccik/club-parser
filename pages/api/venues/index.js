@@ -7,6 +7,7 @@ export default async function handler(req, res) {
       case "GET":
         const venues = await Venue.find({}).limit(40);
         return res.status(200).json(venues);
+
       case "POST":
         const body = req.body;
         console.log("POST VENUE> >>> ", body);

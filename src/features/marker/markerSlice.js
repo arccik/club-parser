@@ -43,7 +43,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return markerAdapter.setAll(initialState, loadedEvents);
       },
       providesTags: (result, error, arg) => [
-        ...result.map(({ _id }) => ({ type: "EventMarkers", _id })),
+        ...result.map(({ _id }) => ({ type: "Markers", _id })),
       ],
     }),
     getVenueMarkers: builder.query({
@@ -61,8 +61,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return markerAdapter.setAll(initialState, loadedVenues);
       },
       providesTags: (result, error, arg) => [
-        { type: "VenueMarkers", id: "LIST" },
-        ...result.map(({ _id }) => ({ type: "VenueMarkers", _id })),
+        { type: "Markers", id: "LIST" },
+        ...result.map(({ _id }) => ({ type: "Markers", _id })),
       ],
     }),
   }),

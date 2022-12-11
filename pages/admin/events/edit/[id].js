@@ -1,12 +1,11 @@
-import EditEvent from "../../../../src/components/AdminPage/EditPageFields/EditPage";
+import Edit from "../../../../src/components/AdminPage/EditPageFields/Edit";
 import {
   useDeleteEventMutation,
   useGetEventByIdQuery,
-  useUpdateEventMutation,
+  useAddNewEventMutation,
 } from "../../../../src/features/event/eventSlice";
-import {} from "../../../../src/features/venue/venueSlice";
 import { useRouter } from "next/router";
-import AppContainer from "../../../../src/components/AdminPage/AppContainer/AppContainer";
+import Loading from "../../../../src/utils/Loading/Loading";
 
 const EditEventPage = () => {
   const router = useRouter();
@@ -17,18 +16,14 @@ const EditEventPage = () => {
     useDeleteEventMutation();
 
   const [saveItem, { isLoading: isSaving, error: savingError }] =
-    useUpdateEventMutation();
+    useAddNewEventMutation();
 
   if (isDeleting) return <p>Deleting....</p>;
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   if (isError || !id || deletingError)
     return <p>Error check console : {console.log({ error, deletingError })}</p>;
 
-  return (
-    <AppContainer>
-      <EditEvent data={data} onDelete={removeItem} onSave={saveItem} />
-    </AppContainer>
-  );
+  return <Edit data={data} onDelete={removeItem} onSave={saveItem} />;
 };
 
 export default EditEventPage;

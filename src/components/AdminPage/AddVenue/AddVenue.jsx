@@ -20,9 +20,7 @@ const AddVenue = () => {
 
   return (
     <Container size="sm">
-      <h2 m="lg" className={classes.pageHeader}>
-        Add Venue
-      </h2>
+      <h2 className={classes.pageHeader}>Add Venue</h2>
       <Formik
         initialValues={initialValues(fieldNames)}
         validate={formValidation}
@@ -38,25 +36,16 @@ const AddVenue = () => {
           console.log("Clicked", response);
         }}
       >
-        {({ handleSubmit, isSubmitting, errors }) => (
+        {({ handleSubmit, isSubmitting, errors, touched }) => (
           <form onSubmit={handleSubmit}>
             {fieldNames?.map((field) => (
               <span key={field}>
                 <Text className={classes.fieldLabel}>{field}</Text>
-                <Field type="text" name={field} className={classes.field} />
+                <Field name={field} className={classes.field} />
                 <ErrorMessage name={field} component="div" />
               </span>
             ))}
-            {errors && (
-              <Notification
-                m="lg"
-                disallowClose
-                icon={<IconX size={18} />}
-                color="red"
-              >
-                <ErrorDispay errors={errors} />
-              </Notification>
-            )}
+
             <Button
               variant="light"
               type="submit"
@@ -67,6 +56,17 @@ const AddVenue = () => {
             >
               Submit
             </Button>
+
+            {Object.keys(errors).length && touched ? (
+              <Notification
+                m="lg"
+                disallowClose
+                icon={<IconX size={18} />}
+                color="red"
+              >
+                <ErrorDispay errors={errors} />
+              </Notification>
+            ) : null}
           </form>
         )}
       </Formik>

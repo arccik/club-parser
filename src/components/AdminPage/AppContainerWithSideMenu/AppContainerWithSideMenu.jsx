@@ -30,7 +30,7 @@ const mockdata = [
   { icon: IconDeviceDesktopAnalytics, link: "/admin/venues", label: "Venues" },
 ];
 
-export default function AppContainer({ children }) {
+export default function AppContainerWithSideMenu({ children }) {
   const router = useRouter();
   const links = mockdata.map((link, index) => (
     <Link href={link.link} key={link.label}>

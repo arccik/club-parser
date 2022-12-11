@@ -21,6 +21,10 @@ const EditPage = ({ data, onSave, onDelete }) => {
     onDelete(data._id).then(() => router.push(`/admin/${data.placeType}s`));
   };
 
+  const handleSave = (data) => {
+    onSave(data);
+  };
+
   if (!data) router.back();
   const fields =
     data &&

@@ -6,3 +6,40 @@
   text-align: center;
 }
 
+.floationAddItemButton{display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  text-transform: initial;
+  font-weight: 700;
+  letter-spacing: 0px;
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 0.875rem;
+  line-height: 1.75;
+  scroll-margin-top: calc(var(--MuiDocs-header-height) + 32px);
+  min-height: 36px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 50%;
+  padding: 0px;
+  min-width: 0px;
+  width: 40px;
+  height: 40px;
+  color: rgba(0, 0, 0, 0.87);
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10;
+  background-color: rgb(194, 224, 255);
+  box-shadow: rgb(170 180 190 / 30%) 0px 4px 20px;
+}
