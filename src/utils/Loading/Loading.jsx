@@ -151,7 +151,7 @@ const Loading = () => {
               width="31.314px"
               height="102.629px"
               viewBox="0 0 31.314 102.629"
-              enable-background="new 0 0 31.314 102.629"
+              enableBackground="new 0 0 31.314 102.629"
               xmlSpace="preserve"
             >
               <defs>
