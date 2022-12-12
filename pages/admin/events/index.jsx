@@ -11,7 +11,7 @@ const AdminEventsPage = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <Container size={"100%"}>
+    <Container size={"100%"} px={0}>
       <ActionIcon
         component={Link}
         title="Add new Event"
