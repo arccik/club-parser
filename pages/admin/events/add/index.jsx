@@ -1,6 +1,4 @@
-import { useAddNewEventMutation } from "../../../../src/features/event/eventSlice";
-import { Container, Button, Grid, ActionIcon } from "@mantine/core";
-import { IconPlus } from "@tabler/icons";
+import { Container } from "@mantine/core";
 import AddEvent from "../../../../src/components/AdminPage/AddEvent/AddEvent";
 
 const EditEventPage = () => {

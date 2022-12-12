@@ -1,13 +1,13 @@
 import TableScrollArea from "../../../src/components/AdminPage/TableScrollArea/TableScrollArea";
-import { useGetEventsQuery } from "../../../src/features/event/eventSlice";
+import { useGetAdminEventsQuery } from "../../../src/features/admin/adminSlice";
 import { Container, Button, Grid, ActionIcon } from "@mantine/core";
 import { IconPlus } from "@tabler/icons";
 import styles from "../../../src/styles/Home.module.css";
 import Link from "next/link";
 import Loading from "../../../src/utils/Loading/Loading";
 
-const AddEventPage = () => {
-  const { data, isLoading, error } = useGetEventsQuery();
+const AdminEventsPage = () => {
+  const { data, isLoading, error } = useGetAdminEventsQuery();
   if (isLoading) return <Loading />;
 
   return (
@@ -25,4 +25,4 @@ const AddEventPage = () => {
   );
 };
 
-export default AddEventPage;
+export default AdminEventsPage;

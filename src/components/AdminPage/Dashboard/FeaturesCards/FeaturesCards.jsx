@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { IconGauge, IconUser, IconCookie } from "@tabler/icons";
 import useStyles from "./styles";
+import Link from "next/link";
 
 const FeaturesCards = ({ totalVenues, totalEvents }) => {
   const { classes, theme } = useStyles();
@@ -52,7 +53,14 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
             needs and overall our success, we need to push it up!
           </Text>
         </Card>
-        <Card shadow="md" radius="md" className={classes.card} p="xl">
+        <Card
+          component={Link}
+          href="/admin/events"
+          shadow="md"
+          radius="md"
+          className={classes.card}
+          p="xl"
+        >
           <IconUser size={50} stroke={2} color={theme.fn.primaryColor()} />
           <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
             Events: {totalEvents}
@@ -62,7 +70,14 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
             needs and overall our success, we need to push it up!
           </Text>
         </Card>
-        <Card shadow="md" radius="md" className={classes.card} p="xl">
+        <Card
+          component={Link}
+          href="/admin/venues"
+          shadow="md"
+          radius="md"
+          className={classes.card}
+          p="xl"
+        >
           <IconCookie size={50} stroke={2} color={theme.fn.primaryColor()} />
           <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
             Venues: {totalVenues}

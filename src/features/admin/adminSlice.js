@@ -1,8 +1,7 @@
-import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
+import { createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 
 const adminAdapter = createEntityAdapter({
-  // sortComparer: (a, b) => b.date.localeCompare(a.date), // sort list
   selectId: (e) => e._id,
 });
 
@@ -10,20 +9,19 @@ const initialState = adminAdapter.getInitialState();
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getEvents: builder.query({
-      query: () => "/events",
+    getAdminEvents: builder.query({
+      query: () => "/admin/events",
       transformFromResponse: (responseData) => {
-        const loadedEvents = responseData.map((post) => {
-          if (!post.date) post.date = new Date();
-          if (!post.reaction) post.reaction = "😃";
-          return post;
-        });
-        return adminAdapter.setAll(initialState, loadedEvents);
+        return adminAdapter.setAll(initialState, responseData);
       },
-      providesTags: (result, error, arg) => [
-        { type: "Events", id: "LIST" },
-        ...result.map(({ _id }) => ({ type: "Events", _id })),
-      ],
+      providesTags: (result, error, arg) => [{ type: "Events", id: "LIST" }],
+    }),
+    getAdminVenues: builder.query({
+      query: () => "/admin/venues",
+      transformFromResponse: (responseData) => {
+        return adminAdapter.setAll(initialState, responseData);
+      },
+      providesTags: (result, error, arg) => [{ type: "Venues", id: "LIST" }],
     }),
 
     getFieldsNames: builder.query({
@@ -39,7 +37,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetEventsQuery,
+  useGetAdminEventsQuery,
+  useGetAdminVenuesQuery,
   useGetFieldsNamesQuery,
   useGetDocumentsCountQuery,
 } = extendedApiSlice;
