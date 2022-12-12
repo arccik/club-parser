@@ -1,5 +1,5 @@
-import dbConnect from "../../../src/utils/dbConnect";
-import Venue from "../../../src/models/venue-model";
+import dbConnect from "../../../../src/utils/dbConnect";
+import Venue from "../../../../src/models/venue-model";
 export default async function handler(req, res) {
   try {
     await dbConnect();
@@ -33,5 +33,4 @@ export default async function handler(req, res) {
       .status(503)
       .json({ message: "Oh, no something went wrong on server", error });
   }
-
 }

@@ -1,5 +1,5 @@
-import dbConnect from "../../../src/utils/dbConnect";
-import Event from "../../../src/models/event-model";
+import dbConnect from "../../../../src/utils/dbConnect";
+import Event from "../../../../src/models/event-model";
 export default async function handler(req, res) {
   try {
     const { id } = req.query;
@@ -34,5 +34,4 @@ export default async function handler(req, res) {
       .status(503)
       .json({ message: "Oh, no something went wrong on server", error });
   }
-
 }
