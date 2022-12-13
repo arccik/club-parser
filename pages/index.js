@@ -8,6 +8,7 @@ import Venue from "../src/models/venue-model";
 import Event from "../src/models/event-model";
 import dbConnect from "../src/utils/dbConnect";
 import { useState } from "react";
+import Hero from "../src/components/Hero/Hero";
 
 export async function getStaticProps() {
   await dbConnect();
@@ -38,6 +39,7 @@ export default function Home(props) {
         <meta name="description" content="Strip Radar - Find night adventure" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Hero />
 
       <main>
         {/* <Search

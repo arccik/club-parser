@@ -20,7 +20,9 @@ export default function CardsCarousel({ events }) {
   return (
     <>
       <Container size="md" pb="sm">
-        <Text fz="xl">Upcoming events</Text>
+        <Text fz="xl" color="white" weight="bolder">
+          Upcoming events
+        </Text>
         <Carousel
           loop
           slideSize="25%"
