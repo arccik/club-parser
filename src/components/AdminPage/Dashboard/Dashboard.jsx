@@ -1,4 +1,4 @@
-import { useGetDocumentsCountQuery } from "../../../features/event/eventSlice";
+import { useGetDocumentsCountQuery } from "../../../features/admin/adminSlice";
 
 import FeaturesCards from "./FeaturesCards/FeaturesCards";
 

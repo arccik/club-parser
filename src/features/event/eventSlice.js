@@ -28,8 +28,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/events/${id}`,
       transformFromResponse: (responseData) => {
         const loadedEvent = responseData.map((post) => {
-          if (!post.date) post.date = new Date();
-          if (!post.reaction) post.reaction = "😃";
+          if (!post?.reaction) post.reaction = "😃";
           return post;
         });
         return eventAdapter.setAll(initialState, loadedEvent);
@@ -41,12 +40,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: (result, error, _id) => {
         return [{ type: "Events", _id }];
       },
-    }),
-    getFieldsNames: builder.query({
-      query: (type) => `/admin/getfields?type=${type}`,
-    }),
-    getDocumentsCount: builder.query({
-      query: (type) => `/admin/getcounts/${type}`,
     }),
     addNewEvent: builder.mutation({
       query: (initialPost) => ({
@@ -67,9 +60,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
           date: new Date().toISOString(),
         },
       }),
-      invalidatesTags: (result, error, arg) => [
-        { type: "Events", id: arg._id },
-      ],
+      providesTags: (result, error, _id) => {
+        return [{ type: "Events", _id }];
+      },
+      invalidatesTags: (result, error, { _id }) => {
+        return [{ type: "Events", _id }];
+      },
     }),
     deleteEvent: builder.mutation({
       query: (_id) => ({
@@ -84,8 +80,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetEventsQuery,
   useGetEventByIdQuery,
-  useGetFieldsNamesQuery,
-  useGetDocumentsCountQuery,
   useAddNewEventMutation,
   useDeleteEventMutation,
   useUpdateEventMutation,

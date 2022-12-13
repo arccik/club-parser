@@ -2,7 +2,7 @@ import Edit from "../../../../src/components/AdminPage/EditPageFields/Edit";
 import {
   useDeleteEventMutation,
   useGetEventByIdQuery,
-  useAddNewEventMutation,
+  useUpdateEventMutation,
 } from "../../../../src/features/event/eventSlice";
 import { useRouter } from "next/router";
 import Loading from "../../../../src/utils/Loading/Loading";
@@ -15,15 +15,16 @@ const EditEventPage = () => {
   const [removeItem, { isLoading: isDeleting, error: deletingError }] =
     useDeleteEventMutation();
 
-  const [saveItem, { isLoading: isSaving, error: savingError }] =
-    useAddNewEventMutation();
+  const [saveUpdatedItem, { isLoading: isSaving, error: savingError }] =
+    useUpdateEventMutation();
 
+  if (isSaving) return <p>Updates saving...</p>;
   if (isDeleting) return <p>Deleting....</p>;
   if (isLoading) return <Loading />;
   if (isError || !id || deletingError)
     return <p>Error check console : {console.log({ error, deletingError })}</p>;
 
-  return <Edit data={data} onDelete={removeItem} onSave={saveItem} />;
+  return <Edit data={data} onDelete={removeItem} onSave={saveUpdatedItem} />;
 };
 
 export default EditEventPage;

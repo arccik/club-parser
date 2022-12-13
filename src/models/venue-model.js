@@ -16,11 +16,12 @@ export const VenueSchema = new Schema(
     rating: { type: Number },
     image: { type: String },
     distance: { type: Number },
-    categories: { type: String },
-    views: { type: String },
+    genres: { type: String },
+    views: { type: String, default: 0 },
     open: { type: String },
     close: { type: String },
     placeType: { type: String, default: "venue" },
+    description: { type: String },
   },
   { timestamps: true }
 );

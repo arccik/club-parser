@@ -5,10 +5,8 @@ import { IconX } from "@tabler/icons";
 import { Text, Title, Container, Button, Notification } from "@mantine/core";
 import useStyles from "./styles";
 import initialValues from "../AddVenue/initialValues";
-import {
-  useGetFieldsNamesQuery,
-  useAddNewEventMutation,
-} from "../../../features/event/eventSlice";
+import { useAddNewEventMutation } from "../../../features/event/eventSlice";
+import { useGetFieldsNamesQuery } from "../../../features/admin/adminSlice";
 // import { useAddNewEventMutation } from "../../../features/venue/venueSlice";
 import { useRouter } from "next/router";
 import ErrorDispay from "../AddVenue/ErrorDispay";

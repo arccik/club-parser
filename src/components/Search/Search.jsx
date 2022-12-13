@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { useGetMarkersQuery } from "../../features/api/apiSlice";
 import SearchBarSkeleton from "./SearchBarSkeleton";
 
-export default function Search() {
+export default function Search({ eventData }) {
   // const { data: eventData, error, isLoading } = useGetMarkersQuery();
   const [showCalendar, setShowCalendar] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -24,7 +24,7 @@ export default function Search() {
   const router = useRouter();
   // if (isLoading) return null;
   // if (error) return <p>Error check console {console.error({ error })}</p>;
-  return null;
+  // return null;
   const data = eventData.map((item) => ({
     key: item._id,
     image: item.image,

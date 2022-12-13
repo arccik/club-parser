@@ -14,7 +14,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IconX } from "@tabler/icons";
 import * as Yup from "yup";
 import useStyles from "./styles";
-import { useGetFieldsNamesQuery } from "../../../features/event/eventSlice";
+import { useGetFieldsNamesQuery } from "../../../features/admin/adminSlice";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()

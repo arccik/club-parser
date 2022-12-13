@@ -31,7 +31,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getDocumentsCount: builder.query({
-      query: () => `/evetns?count`,
+      query: (type) => `/admin/getcounts/${type}`,
     }),
   }),
 });

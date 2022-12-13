@@ -16,9 +16,9 @@ export async function getStaticProps() {
 
   return {
     props: { events: JSON.stringify(events), venues: JSON.stringify(venues) },
+    revalidate: 30,
   };
 }
-
 
 export default function Home(props) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,11 +40,11 @@ export default function Home(props) {
       </Head>
 
       <main>
-        <Search
+        {/* <Search
           setSeach={handleSearch}
           eventsData={filtredEvents}
           venuesData={filtredVenues}
-        />
+        /> */}
         {filtredEvents.length > 10 && (
           <Carousel events={filtredEvents.splice(10, 20)} />
         )}
