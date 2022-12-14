@@ -33,6 +33,10 @@ export default function Home(props) {
         <title>Strip Radar - Find night adventure</title>
         <meta name="description" content="Strip Radar - Find night adventure" />
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        ></meta>
       </Head>
       <Hero />
       <Search />
