@@ -6,16 +6,18 @@ import Venue from "../../../src/models/venue-model";
 export default async function handler(req, res) {
   try {
     if (req.method === "GET") {
-      await dbConnect();
-      const eventsResponse = await Event.find().select(
-        "name location image description open close placeType"
-      );
-      const venuesResponse = await Venue.find().select(
-        "name location image description open close placeType"
-      );
+      const searchString = req.query.search;
 
-      const data = [...eventsResponse, ...venuesResponse];
-      return res.status(200).json(data);
+      await dbConnect();
+
+      const eventResponse = await Event.find({
+        name: { $regex: searchString, $options: "i" },
+      });
+      const venueResponse = await Venue.find({
+        name: { $regex: searchString },
+      });
+      const reponse = [...eventResponse, ...venueResponse];
+      return res.status(200).json(reponse);
     }
   } catch (error) {
     return res.status(503).json({ message: "Issue with server" });

@@ -2,7 +2,7 @@
     width: 100wv;
     margin: 0;
     /* background-color: red; */
-    margin-bottom: -50px;
+    margin-bottom: -80px;
     padding: 0px;
 }
 .video {
@@ -20,8 +20,9 @@
 .serachField {
     width: 800px;
     z-index: 10;
-    opacity: 0.4;
+    /* opacity: 0.6; */
     position: absolute;
+    border-radius: 30px;
     left: 50%;
     height: 50px;
     top: 50%;
@@ -33,7 +34,7 @@
         top:20%;
     }
     .serachField {
-        width: 300px;
+        width: 90%;
         top: 180px;
     }
 }

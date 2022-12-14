@@ -1,4 +1,18 @@
-import { createStyles } from "@mantine/core";
+import { createStyles, keyframes } from "@mantine/core";
+
+export const glower = keyframes({
+  "0%": {
+    backgroundPosition: " 0 0",
+  },
+
+  "50%": {
+    backgroundPosition: "400% 0",
+  },
+
+  "100%": {
+    backgroundPosition: "0 0",
+  },
+});
 
 const useStyles = createStyles((theme) => {
   return {
@@ -16,7 +30,9 @@ const useStyles = createStyles((theme) => {
         height: 300,
       },
     },
-
+    gradient: {
+      background: "linear-gradient(from top, rgba(0, 0, 0, 0.85), transparent)",
+    },
     title: {
       fontFamily: `Greycliff CF, ${theme.fontFamily}`,
       fontWeight: 900,

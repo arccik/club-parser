@@ -3,7 +3,7 @@ import PlacesCardsGrid from "../src/components/CardsGrid/CardsGrid";
 import { FooterSocial } from "../src/components/Footer/Footer";
 import { Divider } from "@mantine/core";
 import Carousel from "../src/components/Carousel/Carousel";
-import Search from "../src/components/Search/Search";
+import Search from "../src/components/Hero/Search/Search";
 import Venue from "../src/models/venue-model";
 import Event from "../src/models/event-model";
 import dbConnect from "../src/utils/dbConnect";
@@ -22,16 +22,11 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filtredEvents, setFiltredEvents] = useState(JSON.parse(props.events));
-  const [filtredVenues, setFiltredVenues] = useState(JSON.parse(props.venues));
+  const [filtredData, setFiltredData] = useState([]);
 
-  const handleSearch = (value) => {
-    const data = [...filtredEvents, ...filtredVenues].filter((item) =>
-      item.toString().includes(value)
-    );
-    setFiltredEvents(data);
-  };
+  const events = JSON.parse(props.events);
+  const venues = JSON.parse(props.venues);
+
   return (
     <>
       <Head>
@@ -40,26 +35,18 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero />
-
+      <Search />
+      {filtredData?.length > 0 && <Carousel events={filtredData} />}
       <main>
-        {/* <Search
-          setSeach={handleSearch}
-          eventsData={filtredEvents}
-          venuesData={filtredVenues}
-        /> */}
-        {filtredEvents.length > 10 && (
-          <Carousel events={filtredEvents.splice(10, 20)} />
-        )}
+        {events.length > 10 && <Carousel events={events.splice(10, 20)} />}
 
         <Divider />
 
-        <PlacesCardsGrid venues={filtredVenues.splice(0, 4)} />
+        <PlacesCardsGrid venues={venues.splice(0, 4)} />
 
-        <Carousel events={filtredEvents.splice(0, 10)} />
+        {events.length > 2 && <Carousel events={events.splice(0, 10)} />}
 
-        {filtredVenues.length > 4 && (
-          <PlacesCardsGrid venues={filtredVenues.splice(4, 10)} />
-        )}
+        {venues.length > 4 && <PlacesCardsGrid venues={venues.splice(4, 10)} />}
       </main>
       <FooterSocial />
     </>

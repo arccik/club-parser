@@ -13,7 +13,7 @@ export default function Card({ image, title, category, id }) {
       sx={{ backgroundImage: `url(${image})` }}
       className={classes.card}
     >
-      <div>
+      <div className={classes.gradient}>
         <Text className={classes.category} size="xs">
           {category}
         </Text>
