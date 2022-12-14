@@ -31,8 +31,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return [{ type: "Venues", _id }];
       },
       invalidatesTags: (result, error, _id) => {
-        console.log("invalidatesTags Venue id", _id);
-
         return [{ type: "Venues", _id }];
       },
     }),
@@ -57,7 +55,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         };
       },
       providesTags: (result, error, arg) => {
-        console.log("Provide Tags: Update Venye", result);
         return [
           { type: "Venues", id: "LIST" },
           ...result.map(({ _id }) => ({ type: "Venues", id: _id })),

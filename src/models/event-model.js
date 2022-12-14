@@ -32,6 +32,7 @@ const EventSchema = new Schema(
   { timestamps: true }
 );
 
-EventSchema.index({ location: "2dsphere", "$**": "text" });
+EventSchema.index({ location: "2dsphere" });
+EventSchema.index({ "$**": "text" });
 
 export default models.Event || model("Event", EventSchema);

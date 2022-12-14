@@ -37,7 +37,6 @@ const AddEvent = () => {
           const valuesToSend = { ...result, location };
 
           const response = await addEvent(valuesToSend).unwrap();
-          console.log("ADD NEW EVENT RESPONSE: ", response);
           if (response.status === "OK") setSubmitting(false);
           // router.push("/admin/events");
           console.log("Clicked", response);

@@ -26,6 +26,8 @@ export const VenueSchema = new Schema(
   { timestamps: true }
 );
 
-VenueSchema.index({ location: "2dsphere", "$**": "text" });
+VenueSchema.index({ location: "2dsphere" });
+VenueSchema.index({ "$**": "text" });
+
 
 export default models.Venue || model("Venue", VenueSchema);

@@ -5,7 +5,7 @@ import { Group, Avatar, Text } from "@mantine/core";
 const AutoCompleteItem = forwardRef(
   ({ description, value, image, placeType, ...others }, ref) => {
     return (
-      <div ref={ref} key={value} {...others}>
+      <div ref={ref} key={ref} {...others}>
         <Group noWrap>
           <Avatar src={image} />
           <div>

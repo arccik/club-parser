@@ -12,13 +12,24 @@ export default async function handler(req, res) {
       await dbConnect();
 
       const eventResponse = await Event.find({
-        name: { $regex: searchString, $options: "i" },
+        $or: [
+          {
+            name: { $regex: searchString, $options: "i" },
+          },
+          { description: { $regex: searchString, $options: "i" } },
+        ],
       });
       const venueResponse = await Venue.find({
-        name: { $regex: searchString },
+        $or: [
+          {
+            name: { $regex: searchString, $options: "i" },
+          },
+          { description: { $regex: searchString, $options: "i" } },
+        ],
       });
-      const reponse = [...eventResponse, ...venueResponse];
-      return res.status(200).json(reponse);
+      const response = [...eventResponse, ...venueResponse];
+
+      return res.status(200).json(response);
     }
   } catch (error) {
     return res.status(503).json({ message: "Issue with server" });

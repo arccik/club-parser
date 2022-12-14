@@ -8,6 +8,7 @@
 	position:fixed;
 	margin-top:-97px;
 	margin-left:-187px;
+	z-index: 100;
 }
 .bar{
 	height:5px;

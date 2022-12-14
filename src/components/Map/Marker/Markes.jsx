@@ -9,7 +9,6 @@ const Markes = ({ center, mapRef, active, setActive }) => {
   const { data: markers, error, isLoading } = useGetMarkersQuery(state);
   if (isLoading) return <h2>Loading...</h2>;
   if (error) return <p>Error check console {console.error({ error })}</p>;
-  console.log("Marker quantity", markers.length);
 
   const handleMarkerClick = (marker) => {
     const coords = { lat: marker.coordinates[0], lng: marker.coordinates[1] };

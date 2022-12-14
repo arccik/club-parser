@@ -10,7 +10,6 @@ export default async function handler(req, res) {
 
       case "POST":
         const body = req.body;
-        console.log("POST EVENT> >>> ", body);
         if (!body) {
           return res
             .status(200)
