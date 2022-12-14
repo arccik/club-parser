@@ -32,7 +32,7 @@ const AddVenue = () => {
           const valuesToSend = { ...values, location };
           const response = await addVenue(valuesToSend).unwrap();
           if (response.status === "OK") setSubmitting(false);
-          router.push("/admin/venues");
+          // router.push("/admin/venues");
           console.log("Clicked", response);
         }}
       >

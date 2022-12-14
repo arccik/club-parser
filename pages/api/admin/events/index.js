@@ -5,11 +5,12 @@ export default async function handler(req, res) {
     await dbConnect();
     switch (req.method) {
       case "GET":
-        const events = await Event.find({});
+        const events = await Event.find({}).limit(40);
         return res.status(200).json(events);
 
       case "POST":
         const body = req.body;
+        console.log("POST EVENT> >>> ", body);
         if (!body) {
           return res
             .status(200)
@@ -27,8 +28,6 @@ export default async function handler(req, res) {
   } catch (error) {
     return res
       .status(503)
-      .json({ message: "Cannnot get Events API to work, Issue with server" });
+      .json({ message: "Cannnot get Venue API to work, Issue with server" });
   }
-
-  return res.status(404).json({ message: "Wrong request method!" });
 }

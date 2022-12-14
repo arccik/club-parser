@@ -1,8 +1,15 @@
 import Event from "../../../src/models/event-model";
 import ProfileDetails from "../../../src/components/DetailsPage/Details";
 import dbConnect from "../../../src/utils/dbConnect";
+import { useLoadScript } from "@react-google-maps/api";
+import Loading from "../../../src/utils/Loading/Loading";
 
 const EventById = ({ event }) => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries: [],
+  });
+  if (!isLoaded) return <Loading />;
   return <ProfileDetails data={event} />;
 };
 

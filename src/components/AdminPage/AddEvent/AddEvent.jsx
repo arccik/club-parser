@@ -10,16 +10,14 @@ import { useGetFieldsNamesQuery } from "../../../features/admin/adminSlice";
 // import { useAddNewEventMutation } from "../../../features/venue/venueSlice";
 import { useRouter } from "next/router";
 import ErrorDispay from "../AddVenue/ErrorDispay";
+import Loading from "../../../utils/Loading/Loading";
 
 const AddEvent = () => {
   const router = useRouter();
   const { data: fieldNames, isLoading } = useGetFieldsNamesQuery("events");
-  const [saveToDB, { isLoading: isAdding, error: errorAdding }] =
-    useAddNewEventMutation();
+  const [addEvent] = useAddNewEventMutation();
   const { classes } = useStyles();
-  if (isLoading) return <p>Loading...</p>;
-
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
 
   return (
     <Container size="sm">
@@ -32,10 +30,16 @@ const AddEvent = () => {
             type: "Point",
             coordinates: values.location.trim().split(","),
           };
-          const valuesToSend = { ...values, location };
-          const response = await saveToDB(valuesToSend).unwrap();
+          const result = Object.entries(values).reduce(
+            (a, [k, v]) => (v ? ((a[k] = v), a) : a),
+            {}
+          );
+          const valuesToSend = { ...result, location };
+
+          const response = await addEvent(valuesToSend).unwrap();
+          console.log("ADD NEW EVENT RESPONSE: ", response);
           if (response.status === "OK") setSubmitting(false);
-          router.push("/admin/events");
+          // router.push("/admin/events");
           console.log("Clicked", response);
         }}
       >

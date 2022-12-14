@@ -26,7 +26,10 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     lineHeight: 1,
   },
-
+  mapContainer: {
+    width: "100%",
+    height: 200,
+  },
 }));
 
 export default useStyles;

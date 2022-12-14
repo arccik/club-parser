@@ -8,10 +8,25 @@ import {
   Button,
   Container,
 } from "@mantine/core";
+import { GoogleMap } from "@react-google-maps/api";
+import Markers from "../../components/Map/Marker/Markes";
 import Stars from "../Stars/Stars";
 import useStyles from "./styles";
+import { useCallback, useMemo, useRef } from "react";
 
 export default function DetailsPage({ data }) {
+  const onLoad = useCallback((map) => (mapRef.current = map), []);
+  const mapRef = useRef();
+  const options = useMemo(
+    () => ({
+      // mapId: "216185b90ab09587",
+      disableDefaultUI: true,
+      clickableIcons: false,
+      gestureHandling: "greedy",
+      panControl: true,
+    }),
+    []
+  );
   const { classes } = useStyles();
   return (
     <Card withBorder className={classes.card}>
@@ -48,6 +63,16 @@ export default function DetailsPage({ data }) {
         <Text size="sm">{data.postcode}</Text>
         <Text size="sm">{data.country}</Text>
       </Container>
+      <GoogleMap
+        zoom={10}
+        center={{
+          lat: data.location.coordinates[0],
+          lat: data.location.coordinates[1],
+        }}
+        onLoad={onLoad}
+        options={options}
+        mapContainerClassName={classes.mapContainer}
+      ></GoogleMap>
       <Button variant="dark" mt="lg" color="blue" fullWidth radius="md">
         Open On Map
       </Button>

@@ -7,6 +7,7 @@ export default async function handler(req, res) {
   try {
     if (req.method === "GET") {
       const searchString = req.query.search;
+      if (!searchString) return res.send("ok");
 
       await dbConnect();
 

@@ -28,6 +28,7 @@ const Search = () => {
       onItemSubmit={(e) => router.push(`/details/${e.placeType}s/${e.id}`)}
       value={searchValue}
       onChange={handleSearch}
+      dropdownPosition="bottom"
       label="Search..."
       placeholder="What you are looking for ?"
       className={styles.serachField}
