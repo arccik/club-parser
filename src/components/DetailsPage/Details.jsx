@@ -7,12 +7,20 @@ import {
   Rating,
   Button,
   Container,
+  ActionIcon,
+  Badge,
 } from "@mantine/core";
 import Stars from "../Stars/Stars";
 import useStyles from "./styles";
+import SmallMap from "../Map/SmallMap";
+
+import { IconShare, IconHeart, IconBookmark } from "@tabler/icons";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 export default function DetailsPage({ data }) {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
   return (
     <Card withBorder className={classes.card}>
       <Card.Section>
@@ -28,6 +36,16 @@ export default function DetailsPage({ data }) {
           {/* <RingProgress size={18} sections={[{ value: 80, color: "blue" }]} /> */}
         </Group>
       </Group>
+      <Text color="dimmed" weight={700} size="xs">
+        {dayjs(data.startdate).format("D MMMM YYYY")}
+      </Text>
+      <Badge
+        variant="gradient"
+        gradient={{ from: "indigo", to: "cyan" }}
+        size="sm"
+      >
+        {dayjs(data.startdate).fromNow()}
+      </Badge>
 
       <Text mt="sm" mb="md" color="dimmed" size="xs">
         {data.description || (
@@ -40,6 +58,7 @@ export default function DetailsPage({ data }) {
           </>
         )}
       </Text>
+
       <Text mt="sm" mb="md" size="sm">
         Venue
       </Text>
@@ -49,9 +68,6 @@ export default function DetailsPage({ data }) {
         <Text size="sm">{data.country}</Text>
       </Container>
 
-      <Button variant="dark" mt="lg" color="blue" fullWidth radius="md">
-        Open On Map
-      </Button>
       <Button
         variant="light"
         color="blue"
@@ -59,19 +75,23 @@ export default function DetailsPage({ data }) {
         mt="md"
         radius="md"
         mb="lg"
+        component="a"
+        target="_blank"
+        href={data.link}
       >
         Book Ticket
       </Button>
+      <SmallMap center={data.location.coordinates} />
 
       <Card.Section className={classes.footer}>
-        {/* <div>
+        <div>
           <Text size="xs" color="dimmed">
             Distance
           </Text>
           <Text weight={500} size="sm">
             {data.distance}
           </Text>
-        </div> */}
+        </div>
         <div>
           <Text size="xs" color="dimmed">
             Open
@@ -82,10 +102,10 @@ export default function DetailsPage({ data }) {
         </div>
         <div>
           <Text size="xs" color="dimmed">
-            Address
+            Genres
           </Text>
           <Text weight={500} size="sm">
-            {data.formatted_address}
+            {data?.genres}
           </Text>
         </div>
       </Card.Section>

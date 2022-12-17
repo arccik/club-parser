@@ -43,7 +43,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     addNewEvent: builder.mutation({
       query: (initialPost) => ({
-        url: "/events",
+        url: "/admin/events",
         method: "POST",
         body: {
           ...initialPost,
@@ -57,7 +57,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: {
           ...initialPost,
-          date: new Date().toISOString(),
         },
       }),
       providesTags: (result, error, _id) => {
@@ -76,9 +75,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     searchEvents: builder.query({
       query: (searchTerm) => {
+        if (!searchTerm) return;
         return `/search/${searchTerm}`;
       },
       transformResponse: (response) => {
+        if (!response) return;
         return response.map((item) => ({
           placeType: item.placeType,
           id: item._id,

@@ -7,8 +7,8 @@
 }
 .video {
     width: 100%;
-    margin: 0px;
 }
+
 .title {
     position: absolute;
     left: 50%;
@@ -36,6 +36,6 @@
     }
     .serachField {
         width: 90%;
-        top: 180px;
+        top: 160px;
     }
 }

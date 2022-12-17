@@ -5,7 +5,7 @@ export default function validation(values) {
     errors.name = "Requerid";
   }
   if (!values.close) {
-    errors.startdate = "Required";
+    errors.close = "Required";
   }
 
   return errors;

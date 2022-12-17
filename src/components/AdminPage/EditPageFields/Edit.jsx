@@ -2,10 +2,10 @@ import {
   Container,
   Grid,
   Title,
-  TextInput,
   Button,
   Textarea,
   Notification,
+  MultiSelect,
   Text,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
@@ -15,6 +15,7 @@ import { IconX } from "@tabler/icons";
 import * as Yup from "yup";
 import useStyles from "./styles";
 import { useGetFieldsNamesQuery } from "../../../features/admin/adminSlice";
+import genres from "../../../utils/musicGenres";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -27,27 +28,12 @@ const Edit = ({ data, onSave, onDelete }) => {
   const { classes } = useStyles();
   const router = useRouter();
 
-  const { data: fieldsName, isLoading } = useGetFieldsNamesQuery("venues");
+  const { data: fieldsName, isLoading } = useGetFieldsNamesQuery(
+    data.placeType
+  );
   const handleDelete = () => {
     onDelete(data._id).then(() => router.push(`/admin/${data.placeType}s`));
   };
-
-  const fields = fieldsName?.map((field) => {
-    if (
-      ["__v", "_id", "id", "views", "category", "eventId", "location"].includes(
-        field
-      )
-    ) {
-      return;
-    }
-    return (
-      <span key={field}>
-        <Text mt="lg">{field.toUpperCase()}</Text>
-        <Field name={field} className={classes.input} />
-        <ErrorMessage name={field} />
-      </span>
-    );
-  });
 
   const handleSubmit = async (data) => {
     const { data: response, errors } = await onSave(data);
@@ -57,7 +43,7 @@ const Edit = ({ data, onSave, onDelete }) => {
   };
 
   if (!data) router.back();
-
+  console.log("Edit Event Data >> ", data);
   return (
     <Container size="sm">
       <Title order={4} ta="center">
@@ -69,9 +55,57 @@ const Edit = ({ data, onSave, onDelete }) => {
         validationSchema={SignupSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, values, setFieldValue }) => (
           <Form>
-            {fields}
+            {fieldsName?.map((field) => {
+              if (field === "genres")
+                return (
+                  <MultiSelect
+                    key={field}
+                    size="md"
+                    label="Genres"
+                    onChange={(e) => setFieldValue("genres", e)}
+                    placeholder="Yeah c'on Simon select Genres"
+                    searchable
+                    value={values[field]}
+                    data={genres}
+                  />
+                );
+              if (field === "startdate" || field === "enddate")
+                return (
+                  <DatePicker
+                    size="lg"
+                    defaultValue={new Date(values[field])}
+                    key={field}
+                    label={field}
+                    placeholder={values[field]}
+                    name={field}
+                    // value={values[field]}
+                    onChange={(e) => setFieldValue(field, e)}
+                  />
+                );
+              if (field === "description")
+                return (
+                  <Textarea
+                    size="md"
+                    name="description"
+                    key={field}
+                    label={field}
+                    placeholder="C'om Simon Write something"
+                    autosize
+                    value={values[field]}
+                    onChange={(e) => setFieldValue(field, e.target.value)}
+                    minRows={2}
+                  />
+                );
+              return (
+                <span key={field}>
+                  <Text mt="lg">{field.toUpperCase()}</Text>
+                  <Field name={field} className={classes.input} />
+                  <ErrorMessage name={field} />
+                </span>
+              );
+            })}
 
             {!!Object.values(errors).length && (
               <Notification color="red">

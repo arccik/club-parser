@@ -35,15 +35,16 @@ const useStyles = createStyles((theme) => {
     },
     title: {
       fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-      fontWeight: 900,
+      fontWeight: "bolder",
       color: theme.white,
       lineHeight: 1.2,
-      fontSize: "1.2rem",
+      fontSize: "1.4rem",
       marginTop: theme.spacing.xs,
-      textStroke: "1px solid black",
+      WebkitTextStrokeColor: "black",
+      WebkitTextStrokeWidth: 1,
     },
 
-    category: {
+    date: {
       color: theme.white,
       opacity: 0.7,
       fontWeight: 700,

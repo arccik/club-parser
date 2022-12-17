@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   try {
     const { type } = req.query;
     if (!type) return res.status(404).json({ message: "Type is required" });
-    if (type === "events") {
+    if (type === "events" || type === "event") {
       const fields = Object.keys(Event.schema.tree).filter(
         (v) =>
           ![
@@ -16,11 +16,12 @@ export default async function handler(req, res) {
             "updatedAt",
             "createdAt",
             "views",
+            "location",
           ].includes(v)
       );
       return res.status(200).send(fields);
     }
-    if (type === "venues") {
+    if (type === "venues" || type === "venue") {
       const fields = Object.keys(Venue.schema.tree).filter(
         (v) =>
           ![

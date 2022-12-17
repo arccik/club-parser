@@ -12,13 +12,24 @@ export default async function handler(req, res) {
       await dbConnect();
 
       const eventResponse = await Event.find({
-        $or: [
-          {
-            name: { $regex: searchString, $options: "i" },
+        $search: {
+          index: "text",
+          text: {
+            query: searchString,
+            path: {
+              wildcard: "*",
+            },
           },
-          { description: { $regex: searchString, $options: "i" } },
-        ],
+        },
       });
+      // const eventResponse = await Event.find({
+      //   $or: [
+      //     {
+      //       name: { $regex: searchString, $options: "i" },
+      //     },
+      //     { description: { $regex: searchString, $options: "i" } },
+      //   ],
+      // });
       const venueResponse = await Venue.find({
         $or: [
           {

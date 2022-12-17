@@ -1,7 +1,8 @@
 import { Paper, Text, Button, Title } from "@mantine/core";
 import useStyles from "./styles";
 import { useRouter } from "next/router";
-export default function Card({ image, title, category, id }) {
+
+export default function Card({ image, title, date, id }) {
   const { classes } = useStyles();
   const router = useRouter();
 
@@ -14,15 +15,16 @@ export default function Card({ image, title, category, id }) {
       className={classes.card}
     >
       <div className={classes.gradient}>
-        <Text className={classes.category} size="xs">
-          {category}
+        <Text className={classes.date} size="xs">
+          {date}
         </Text>
         <Title order={3} className={classes.title}>
           {title}
         </Title>
       </div>
       <Button
-        variant="white"
+        variant="filled"
+        size="xs"
         color="dark"
         onClick={() => router.push(`/details/events/${id}`)}
       >

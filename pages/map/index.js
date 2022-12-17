@@ -9,11 +9,8 @@ const OnlyMapPage = () => {
     libraries: mapPlugins,
   });
   if (!isLoaded) return <div>Loading...</div>;
-  return (
-    <>
-      <Map />
-    </>
-  );
+  return <Map />
+
 };
 
 export default OnlyMapPage;

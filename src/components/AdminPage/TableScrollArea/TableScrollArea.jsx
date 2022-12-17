@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Table, ScrollArea } from "@mantine/core";
+import { Table, ScrollArea, ActionIcon } from "@mantine/core";
 import Link from "next/link";
 import { IconTrashX } from "@tabler/icons";
 import { useMediaQuery } from "@mantine/hooks";
 
 import useStyles from "./styles";
+import { useDeleteEventMutation } from "../../../features/event/eventSlice";
 
 export default function TableScrollArea({ data, type = "events" }) {
   const { classes, cx, theme } = useStyles();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const [scrolled, setScrolled] = useState(false);
+  const [deleteItem] = useDeleteEventMutation();
+
   const rows = data?.map((row) => (
     <tr key={row._id}>
       <td>
@@ -23,7 +26,9 @@ export default function TableScrollArea({ data, type = "events" }) {
       {!mobile && <td>{row.startdate?.split("T")[0] || row.open}</td>}
       {!mobile && (
         <td>
-          <IconTrashX />
+          <ActionIcon title="Add new Event" onClick={() => deleteItem(row._id)}>
+            <IconTrashX />
+          </ActionIcon>
         </td>
       )}
     </tr>

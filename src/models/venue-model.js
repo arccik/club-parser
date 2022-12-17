@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-export const VenueSchema = new Schema(
+const VenueSchema = new Schema(
   {
     venueId: { type: String },
     name: { type: String },
@@ -16,7 +16,7 @@ export const VenueSchema = new Schema(
     rating: { type: Number },
     image: { type: String },
     distance: { type: Number },
-    genres: { type: String },
+    genres: { type: [String] },
     views: { type: String, default: 0 },
     open: { type: String },
     close: { type: String },
@@ -27,7 +27,6 @@ export const VenueSchema = new Schema(
 );
 
 VenueSchema.index({ location: "2dsphere" });
-VenueSchema.index({ "$**": "text" });
 
 
 export default models.Venue || model("Venue", VenueSchema);

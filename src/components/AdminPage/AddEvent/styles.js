@@ -4,7 +4,7 @@ const useStyles = createStyles((theme) => ({
   field: {
     width: "100%",
     height: 40,
-    borderRadius: 10,
+    borderRadius: 5,
     border: "1px solid lightgrey",
     padding: 10,
     "&:hover, &:focus": {

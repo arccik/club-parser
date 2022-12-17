@@ -13,26 +13,28 @@ const EventSchema = new Schema(
     formatted_address: { type: String },
     type: { type: String },
     phone: { type: String },
-    rating: { type: Number, default: 0 },
+    rating: { type: Number },
     image: { type: String },
     distance: { type: Number, default: 0 },
-    category: { type: String },
+    genres: { type: String },
+    views: { type: String, default: 0 },
     open: { type: String },
     close: { type: String },
+    placeType: { type: String, default: "event" },
+    description: { type: String },
     venue: { type: Schema.Types.ObjectId, ref: "Venue" },
-    genres: { type: String },
+    genres: { type: [String] },
     startdate: { type: Date },
     enddate: { type: Date },
     minage: { type: Number },
     price: { type: String },
-    description: { type: String },
-    views: { type: String, default: 0 },
-    placeType: { type: String, default: "event" },
   },
   { timestamps: true }
 );
 
 EventSchema.index({ location: "2dsphere" });
-EventSchema.index({ "$**": "text" });
 
 export default models.Event || model("Event", EventSchema);
+
+
+

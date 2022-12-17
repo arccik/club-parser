@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     await dbConnect();
     switch (req.method) {
       case "GET":
-        const data = await Event.findById(id).populate("venue");
+        const data = await Event.findById(id);
         return res.status(200).json(data);
 
       case "PUT":

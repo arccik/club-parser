@@ -28,26 +28,23 @@ const Map = () => {
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
   return (
-    <div className={styles.map}>
-      <GoogleMap
-        zoom={zoom}
+    <GoogleMap
+      zoom={zoom}
+      center={center}
+      // onZoomChanged={setZoom}
+      options={options}
+      onLoad={onLoad}
+      onClick={() => setActiveMarker(null)}
+      mapContainerClassName={styles.mapContainer}
+    >
+      <Markers
         center={center}
-        // onZoomChanged={setZoom}
-        options={options}
-        onLoad={onLoad}
-        onClick={() => setActiveMarker(null)}
-        mapContainerClassName={styles.mapContainer}
-      >
-        <Markers
-          center={center}
-          mapRef={mapRef}
-          setZoom={setZoom}
-          active={activeMarker}
-          setActive={setActiveMarker}
-        />
-      </GoogleMap>
-      {/* <MapNavBar /> */}
-    </div>
+        mapRef={mapRef}
+        setZoom={setZoom}
+        active={activeMarker}
+        setActive={setActiveMarker}
+      />
+    </GoogleMap>
   );
 };
 

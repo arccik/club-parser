@@ -7,7 +7,7 @@ export default async function saveEventToDB(data) {
       .select("eventId")
       .lean();
     if (!result) {
-      const venue = await Venue.find({ venueID: data.venueId });
+      const venue = await Venue.find({ venueID: data.venue?.id });
       await Event.create({
         eventId: data?.id,
         name: data?.eventname,
@@ -33,7 +33,7 @@ export default async function saveEventToDB(data) {
         enddate: data?.enddate,
         open: data?.openingtimes.doorsopen,
         close: data?.openingtimes.doorsclose,
-        minage: data?.minage,
+        minage: data?.minage || 18,
         price: data?.entryprice,
         venue: venue[0],
       });

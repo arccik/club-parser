@@ -11,7 +11,9 @@ const initialState = venueAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getVenues: builder.query({
-      query: () => "/venues",
+      query: () => {
+        return "/admin/venues";
+      },
       transformFromResponse: (responseData) => {
         const loadedVenues = responseData.map((post) => {
           if (!post.reaction) post.reaction = "😃";
@@ -25,7 +27,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     getVenueById: builder.query({
-      query: (_id) => `/venues/${_id}`,
+      query: (_id) => `/admin/venues/${_id}`,
 
       providesTags: (result, error, _id) => {
         return [{ type: "Venues", _id }];
@@ -36,7 +38,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     addNewVenue: builder.mutation({
       query: (initialPost) => ({
-        url: "/venues",
+        url: "/admin/venues",
         method: "POST",
         body: {
           ...initialPost,
@@ -47,7 +49,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     updateVenue: builder.mutation({
       query: (initialPost) => {
         return {
-          url: `/venues/${initialPost._id}`,
+          url: `/admin/venues/${initialPost._id}`,
           method: "PUT",
           body: {
             ...initialPost,
@@ -66,7 +68,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     deleteVenue: builder.mutation({
       query: (_id) => ({
-        url: `/venues/${_id}`,
+        url: `/admin/venues/${_id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result, error, { _id }) => [{ type: "Venues", _id }],

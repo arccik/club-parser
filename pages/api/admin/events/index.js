@@ -15,18 +15,15 @@ export default async function handler(req, res) {
             .status(200)
             .json({ message: "Please provide Event Details" });
         }
-        const created = await Event.create(body, (error) => {
-          if (error) return res.status(503).json({ message: "Corupted Data" });
-        });
-        return res
-          .status(200)
-          .json({ status: "OK", message: "Event Created", created });
+        const created = await Event.create(body);
+        if(created) return res.status(200).json({ status: "OK", message: "Event Created", created });
+        else return res.status(503).json({message: 'Error during saving, check DB connection'})
       default:
         return res.status(404).json({ message: "Method not recognised" });
     }
   } catch (error) {
     return res
       .status(503)
-      .json({ message: "Cannnot get Venue API to work, Issue with server" });
+      .json({ message: "Cannnot get Event API to work, Issue with server" });
   }
 }

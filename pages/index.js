@@ -1,14 +1,14 @@
 import Head from "next/head";
-import PlacesCardsGrid from "../src/components/CardsGrid/CardsGrid";
+import PlacesCardsGrid from "../src/components/PlacesCardsGrid/PlacesCardsGrid";
 import { FooterSocial } from "../src/components/Footer/Footer";
-import { Divider } from "@mantine/core";
+import { Divider, Title } from "@mantine/core";
 import Carousel from "../src/components/Carousel/Carousel";
 import Search from "../src/components/Hero/Search/Search";
 import Venue from "../src/models/venue-model";
 import Event from "../src/models/event-model";
 import dbConnect from "../src/utils/dbConnect";
-import { useState } from "react";
 import Hero from "../src/components/Hero/Hero";
+import OldEvents from "../src/components/OldEvents/OldEvents";
 
 export async function getStaticProps() {
   await dbConnect();
@@ -22,16 +22,17 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
-  const [filtredData, setFiltredData] = useState([]);
-
   const events = JSON.parse(props.events);
   const venues = JSON.parse(props.venues);
 
   return (
     <>
       <Head>
-        <title>Strip Radar - Find night adventure</title>
-        <meta name="description" content="Strip Radar - Find night adventure" />
+        <title>Strip Radar - Events all over the globe</title>
+        <meta
+          name="description"
+          content="Strip Radar - Events all over the globe"
+        />
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
@@ -40,15 +41,16 @@ export default function Home(props) {
       </Head>
       <Hero />
       <Search />
-      {filtredData?.length > 0 && <Carousel events={filtredData} />}
       <main>
-        {events.length > 10 && <Carousel events={events.splice(10, 20)} />}
+        {events.length && <Carousel events={events} />}
 
         <Divider />
 
         <PlacesCardsGrid venues={venues.splice(0, 4)} />
 
         {events.length > 2 && <Carousel events={events.splice(0, 10)} />}
+
+        <OldEvents />
 
         {venues.length > 4 && <PlacesCardsGrid venues={venues.splice(4, 10)} />}
       </main>
