@@ -56,7 +56,7 @@ export default function DetailsPage({ data }) {
               </Text>
               {data.genres.length > 1 ? (
                 <Text weight={500} size="sm">
-                  data.genres
+                  {data.genres}
                 </Text>
               ) : null}
             </div>
