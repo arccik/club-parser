@@ -54,11 +54,11 @@ export default function DetailsPage({ data }) {
               <Text size="xs" color="dimmed">
                 Genres
               </Text>
-              <Text weight={500} size="sm">
-                {data.genres?.length > 1
-                  ? data.genres.join(" / ")
-                  : data.genres}
-              </Text>
+              {data.genres.length > 1 ? (
+                <Text weight={500} size="sm">
+                  data.genres
+                </Text>
+              ) : null}
             </div>
           )}
         </Card.Section>
