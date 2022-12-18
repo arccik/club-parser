@@ -1,14 +1,8 @@
-import {
-  Container,
-  Grid,
-  SimpleGrid,
-  Skeleton,
-  Title,
-  useMantineTheme,
-} from "@mantine/core";
+import { Container, Grid, SimpleGrid, Title, Text } from "@mantine/core";
 import OldCard from "./OldEventsCard";
+import Link from "next/link";
 
-const OldEvents = () => {
+const OldEvents = ({ events }) => {
   return (
     <Container my="md">
       <Title>ENDED EVENTS</Title>
@@ -17,19 +11,25 @@ const OldEvents = () => {
         spacing="md"
         breakpoints={[{ maxWidth: "sm", cols: 1 }]}
       >
-        <OldCard />
-        {/* <Skeleton height={300} radius="md" animate={false} /> */}
+        <OldCard data={events[0]} />
         <Grid gutter="xs">
           <Grid.Col span={6}>
-            <OldCard />
-            {/* <Skeleton height={142} radius="md" animate={false} /> */}
+            <OldCard data={events[1]} />
           </Grid.Col>
           <Grid.Col span={6}>
-            <OldCard />
-            {/* <Skeleton height={142} radius="md" animate={false} /> */}
+            <OldCard data={events[2]} />
           </Grid.Col>
         </Grid>
       </SimpleGrid>
+      <Text
+        color="blue"
+        fw={700}
+        size="md"
+        component={Link}
+        href="/details/oldevents"
+      >
+        See More...
+      </Text>
     </Container>
   );
 };

@@ -24,6 +24,16 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
       ],
     }),
+    getOldEvents: builder.query({
+      query: () => "/admin/oldevents",
+      transformFromResponse: (responseData) => {
+        return eventAdapter.setAll(initialState, responseData);
+      },
+      providesTags: (result, error, arg) => [
+        { type: "Events", id: "LIST" },
+        ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
+      ],
+    }),
     getEventById: builder.query({
       query: (id) => `/admin/events/${id}`,
       transformFromResponse: (responseData) => {
@@ -100,6 +110,7 @@ export const {
   useGetEventsQuery,
   useGetEventByIdQuery,
   useSearchEventsQuery,
+  useGetOldEventsQuery,
   useAddNewEventMutation,
   useDeleteEventMutation,
   useUpdateEventMutation,

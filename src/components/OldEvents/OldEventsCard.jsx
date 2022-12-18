@@ -1,44 +1,14 @@
 import { createStyles, Paper, Text, Title, Button } from "@mantine/core";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
-const useStyles = createStyles((theme) => ({
-  card: {
-    height: 200,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
+import useStyles from "./styles";
+import Link from "next/link";
 
-  title: {
-    // fontFamily: `Greycliff CF ${theme.fontFamily}`,
-    color: theme.white,
-    fontWeight: 900,
-    lineHeight: 1.2,
-    fontSize: "2rem",
-    marginTop: theme.spacing.xs,
-    WebkitTextStroke: 1,
-    WebkitTextStrokeColor: "black",
-  },
-
-  category: {
-    color: theme.white,
-    opacity: 0.7,
-    fontWeight: 700,
-    textTransform: "uppercase",
-  },
-}));
-
-let data = {
-  image: "https://i.ytimg.com/vi/3CGNM-VnO5g/maxresdefault.jpg",
-  title: "Most Advanced party",
-  category: "Category",
-};
-
-export default function ArticleCardImage(props) {
+export default function ArticleCardImage({ data }) {
   const { classes } = useStyles();
-  const { image, title, category } = data;
+  const { image, name, enddate, _id } = data;
   return (
     <Paper
       shadow="md"
@@ -48,14 +18,19 @@ export default function ArticleCardImage(props) {
       className={classes.card}
     >
       <div>
-        {/* <Text className={classes.category} size="xs">
-          {category}
-        </Text> */}
+        <Text className={classes.category} size="xs">
+          {dayjs(enddate).fromNow()}
+        </Text>
         <Title order={3} className={classes.title}>
-          {title}
+          <span className={classes.textBackground}>{name}</span>
         </Title>
       </div>
-      <Button variant="black" color="dark">
+      <Button
+        variant="black"
+        color="dark"
+        component={Link}
+        href={`/details/events/${_id}`}
+      >
         Read
       </Button>
     </Paper>

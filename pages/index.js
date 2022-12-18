@@ -12,11 +12,18 @@ import OldEvents from "../src/components/OldEvents/OldEvents";
 
 export async function getStaticProps() {
   await dbConnect();
-  const events = await Event.find().limit(30);
+  const events = await Event.find({ startdate: { $gte: new Date() } }).limit(
+    30
+  );
   const venues = await Venue.find().limit(30);
+  const oldEvents = await Event.find({ startdate: { $lt: new Date() } });
 
   return {
-    props: { events: JSON.stringify(events), venues: JSON.stringify(venues) },
+    props: {
+      events: JSON.stringify(events),
+      venues: JSON.stringify(venues),
+      oldEvents: JSON.stringify(oldEvents),
+    },
     revalidate: 30,
   };
 }
@@ -24,6 +31,7 @@ export async function getStaticProps() {
 export default function Home(props) {
   const events = JSON.parse(props.events);
   const venues = JSON.parse(props.venues);
+  const oldEvents = JSON.parse(props.oldEvents);
 
   return (
     <>
@@ -50,7 +58,7 @@ export default function Home(props) {
 
         {events.length > 2 && <Carousel events={events.splice(0, 10)} />}
 
-        <OldEvents />
+        <OldEvents events={oldEvents} />
 
         {venues.length > 4 && <PlacesCardsGrid venues={venues.splice(4, 10)} />}
       </main>
