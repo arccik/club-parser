@@ -14,6 +14,7 @@ import {
 import Stars from "../Stars/Stars";
 import useStyles from "./styles";
 import SmallMap from "../Map/SmallMap";
+import Link from "next/link";
 
 import { IconShare, IconHeart, IconBookmark, IconPhoto } from "@tabler/icons";
 import dayjs from "dayjs";
@@ -34,6 +35,18 @@ export default function DetailsPage({ data }) {
         </Card.Section>
         <Card.Section className={classes.distanceSection}>
           <div>
+            <Text color="dimmed" weight={700} size="xs">
+              {dayjs(data.startdate).format("D MMMM YYYY")}
+            </Text>
+            <Badge
+              variant="gradient"
+              gradient={{ from: "indigo", to: "cyan" }}
+              size="sm"
+            >
+              {dayjs(data.startdate).fromNow()}
+            </Badge>
+          </div>
+          <div>
             <Text size="xs" color="dimmed">
               Open
             </Text>
@@ -49,18 +62,6 @@ export default function DetailsPage({ data }) {
               {data.distance}
             </Text>
           </div>
-          {data.genres && (
-            <div>
-              <Text size="xs" color="dimmed">
-                Genres
-              </Text>
-              {data.genres.length > 1 ? (
-                <Text weight={500} size="sm">
-                  {data.genres}
-                </Text>
-              ) : null}
-            </div>
-          )}
         </Card.Section>
 
         <Group position="apart" mt="sm">
@@ -73,16 +74,6 @@ export default function DetailsPage({ data }) {
             {/* <RingProgress size={18} sections={[{ value: 80, color: "blue" }]} /> */}
           </Group>
         </Group>
-        <Text color="dimmed" weight={700} size="xs">
-          {dayjs(data.startdate).format("D MMMM YYYY")}
-        </Text>
-        <Badge
-          variant="gradient"
-          gradient={{ from: "indigo", to: "cyan" }}
-          size="sm"
-        >
-          {dayjs(data.startdate).fromNow()}
-        </Badge>
 
         <Text mt="sm" mb="md" color="dimmed" size="xs">
           {data.description || (
@@ -95,28 +86,17 @@ export default function DetailsPage({ data }) {
             </>
           )}
         </Text>
-
-        <Accordion
-          sx={{ maxWidth: 420 }}
-          mx="auto"
-          variant="filled"
-          defaultValue="customization"
-          classNames={classes}
-          className={classes.venueRoot}
-        >
-          <Accordion.Item value="photos" mb="lg">
-            <Accordion.Control>Venue Address</Accordion.Control>
-            <Accordion.Panel>
-              <Text size="sm">{data.formatted_address}</Text>
-              <Text size="sm">{data.postcode}</Text>
-              <Text size="sm">{data.country}</Text>
-            </Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-
-        <SmallMap center={data.location.coordinates} />
+        {data.genres?.length && (
+          <div>
+            <Text size="md" color="dimmed">
+              Genres
+            </Text>
+            <Text weight={500} size="sm">
+              {data.genres}
+            </Text>
+          </div>
+        )}
         <Button
-          variant="light"
           color="blue"
           fullWidth
           mt="md"
@@ -127,6 +107,32 @@ export default function DetailsPage({ data }) {
           href={data.link}
         >
           Book Ticket
+        </Button>
+        <Accordion
+          mx="auto"
+          variant="filled"
+          defaultValue="customization"
+          classNames={classes}
+          className={classes.venueRoot}
+        >
+          <Accordion.Item value="photos" variant="filled" mb="lg">
+            <Accordion.Control>Address</Accordion.Control>
+            <Accordion.Panel>
+              <Text size="sm">{data.formatted_address}</Text>
+              <Text size="sm">{data.postcode}</Text>
+              <Text size="sm">{data.country}</Text>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+
+        <SmallMap center={data.location.coordinates} />
+
+        <Button
+          variant="outline"
+          component={Link}
+          href={`/admin/${data.placeType}s/edit/${data._id}`}
+        >
+          Edit
         </Button>
       </Card>
       <FooterSocial />

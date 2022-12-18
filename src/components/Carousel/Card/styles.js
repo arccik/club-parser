@@ -38,10 +38,12 @@ const useStyles = createStyles((theme) => {
       fontWeight: "bolder",
       color: theme.white,
       lineHeight: 1.2,
-      fontSize: "1.4rem",
+      fontSize: "1.2rem",
       marginTop: theme.spacing.xs,
-      WebkitTextStrokeColor: "black",
-      WebkitTextStrokeWidth: 1,
+    },
+    textBackground: {
+      backgroundColor: "black",
+      boxShadow: "10px 0 0px 0px black, -10px 0 0px 0px black",
     },
 
     date: {

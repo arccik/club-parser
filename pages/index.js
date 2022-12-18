@@ -9,6 +9,7 @@ import Event from "../src/models/event-model";
 import dbConnect from "../src/utils/dbConnect";
 import Hero from "../src/components/Hero/Hero";
 import OldEvents from "../src/components/OldEvents/OldEvents";
+import GenresBox from "../src/components/Home/GenresBox/GenresBox";
 
 export async function getStaticProps() {
   await dbConnect();
@@ -16,7 +17,9 @@ export async function getStaticProps() {
     30
   );
   const venues = await Venue.find().limit(30);
-  const oldEvents = await Event.find({ startdate: { $lt: new Date() } });
+  const oldEvents = await Event.find({ startdate: { $lt: new Date() } }).limit(
+    3
+  );
 
   return {
     props: {
@@ -54,13 +57,12 @@ export default function Home(props) {
 
         <Divider />
 
-        <PlacesCardsGrid venues={venues.splice(0, 4)} />
+        <PlacesCardsGrid venues={venues.splice(0, 10)} />
 
-        {events.length > 2 && <Carousel events={events.splice(0, 10)} />}
-
+        <GenresBox />
         <OldEvents events={oldEvents} />
-
-        {venues.length > 4 && <PlacesCardsGrid venues={venues.splice(4, 10)} />}
+        {/* {venues.length > 4 && <PlacesCardsGrid venues={venues.splice(4, 10)} />} */}
+        {/* {events.length > 10 && <Carousel events={events.splice(10, 20)} />} */}
       </main>
       <FooterSocial />
     </>

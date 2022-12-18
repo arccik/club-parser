@@ -85,11 +85,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     searchEvents: builder.query({
       query: (searchTerm) => {
-        if (!searchTerm) return;
         return `/search/${searchTerm}`;
       },
       transformResponse: (response) => {
-        if (!response) return;
         return response.map((item) => ({
           placeType: item.placeType,
           id: item._id,
@@ -100,7 +98,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         }));
       },
       providesTags: (result, error, arg) => {
-        return [{ type: "Events", _id: "LIST" }];
+        if (error) return [];
+
+        return [
+          { type: "Events", id: "LIST" },
+          ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
+        ];
       },
     }),
   }),

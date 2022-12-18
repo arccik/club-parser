@@ -5,7 +5,9 @@ import Link from "next/link";
 const OldEvents = ({ events }) => {
   return (
     <Container my="md">
-      <Title>ENDED EVENTS</Title>
+      <Title order={4}>
+        Also, you can check events which recently ended. Check how it was
+      </Title>
       <SimpleGrid
         cols={2}
         spacing="md"

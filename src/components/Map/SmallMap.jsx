@@ -25,10 +25,12 @@ const SmallMap = (props) => {
   const options = useMemo(
     () => ({
       // mapId: "216185b90ab09587",
-      disableDefaultUI: true,
+      // disableDefaultUI: false,
       clickableIcons: false,
       gestureHandling: "greedy",
       panControl: true,
+      panControl: false,
+      gestureHandling: "none",
     }),
     []
   );

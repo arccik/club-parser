@@ -18,7 +18,7 @@ export async function getStaticProps({ params }) {
     await dbConnect();
     const data = await Event.findById(params.id).lean();
     const event = JSON.parse(JSON.stringify(data));
-    return { props: { event } };
+    return { props: { event }, revalidate: 30 };
   } catch (error) {
     console.error("event fetching error: ", error);
     return error;

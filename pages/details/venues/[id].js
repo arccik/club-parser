@@ -15,7 +15,7 @@ export async function getStaticProps({ params }) {
     await dbConnect();
     const data = await Venue.findById(params.id).lean();
     const venue = JSON.parse(JSON.stringify(data));
-    return { props: { venue } };
+    return { props: { venue }, revalidate: 30 };
   } catch (error) {
     console.error("Static Generation Error", error);
   }
