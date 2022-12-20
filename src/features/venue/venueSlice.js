@@ -36,6 +36,24 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return [{ type: "Venues", _id }];
       },
     }),
+    getVenueByLocation: builder.query({
+      query: (coords) => {
+        return `/admin/venues?coords=${coords.lat},${coords.lng}`;
+      },
+      transformFromResponse: (responseData) => {
+        if (responseData) {
+          return venueAdapter.setAll(initialState, responseData);
+        }
+      },
+      providesTags: (result, error, arg) => {
+        if (error) [{ type: "Events", id: "LIST" }];
+        return [
+          { type: "Events", id: "LIST" },
+          ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
+        ];
+      },
+    }),
+
     addNewVenue: builder.mutation({
       query: (initialPost) => ({
         url: "/admin/venues",
@@ -79,6 +97,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetVenuesQuery,
   useGetVenueByIdQuery,
+  useGetVenueByLocationQuery,
   useAddNewVenueMutation,
   useDeleteVenueMutation,
   useUpdateVenueMutation,

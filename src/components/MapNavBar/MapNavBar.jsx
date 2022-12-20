@@ -15,11 +15,13 @@ export default function MapNavBar({ handleClick }) {
     <SegmentedControl
       radius="xl"
       size="md"
+      onLoad={(e) => console.log("Loading ", e)}
       onClick={onSelectHandle}
+      defaultValue={"venues"}
       data={[
         { label: "All", value: "all" },
         { label: "Clubs", value: "venues" },
-        { label: "Bars", value: "bars" },
+        // { label: "Bars", value: "bars" },
         { label: "Events", value: "events" },
       ]}
       classNames={classes}

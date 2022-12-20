@@ -13,7 +13,9 @@ const Search = () => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [itemPicked, setItemPicked] = useState(false);
-  const { data, isLoading } = useSearchEventsQuery(searchValue);
+  const { data, isLoading } = useSearchEventsQuery(searchValue, {
+    skip: !searchValue,
+  });
   const theme = useMantineTheme();
 
   const handleSearch = (e) => {

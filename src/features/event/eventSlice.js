@@ -24,6 +24,27 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
       ],
     }),
+    getEventsByLocation: builder.query({
+      query: (coords) => {
+        return `/admin/events?coords=${coords.lat},${coords.lng}`;
+      },
+      transformFromResponse: (responseData) => {
+        // const loadedEvents = responseData.map((post) => {
+        //   return post;
+        // });
+        console.log("transformFromResponse", responseData);
+        if (responseData) {
+          return eventAdapter.setAll(initialState, responseData);
+        }
+      },
+      providesTags: (result, error, arg) => {
+        if (error) [{ type: "Events", id: "LIST" }];
+        return [
+          { type: "Events", id: "LIST" },
+          ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
+        ];
+      },
+    }),
     getOldEvents: builder.query({
       query: () => "/admin/oldevents",
       transformFromResponse: (responseData) => {
@@ -100,10 +121,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       providesTags: (result, error, arg) => {
         if (error) return [];
 
-        return [
-          { type: "Events", id: "LIST" },
-          ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
-        ];
+        return [...result.map(({ _id }) => ({ type: "Events", _id: _id }))];
       },
     }),
   }),
@@ -111,6 +129,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetEventsQuery,
+  useGetEventsByLocationQuery,
   useGetEventByIdQuery,
   useSearchEventsQuery,
   useGetOldEventsQuery,

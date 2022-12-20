@@ -16,7 +16,15 @@ import useStyles from "./styles";
 import SmallMap from "../Map/SmallMap";
 import Link from "next/link";
 
-import { IconShare, IconHeart, IconBookmark, IconPhoto } from "@tabler/icons";
+import {
+  IconShare,
+  IconHeart,
+  IconBookmark,
+  IconPhoto,
+  IconNavigation,
+  IconSettings,
+  IconEdit,
+} from "@tabler/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FooterSocial } from "../Footer/Footer";
@@ -35,12 +43,12 @@ export default function DetailsPage({ data }) {
         </Card.Section>
         <Card.Section className={classes.distanceSection}>
           <div>
-            <Text color="dimmed" weight={700} size="xs">
+            <Text color="dimmed" size="xs">
               {dayjs(data.startdate).format("D MMMM YYYY")}
             </Text>
             <Badge
               variant="gradient"
-              gradient={{ from: "indigo", to: "cyan" }}
+              gradient={{ from: "black", to: "white" }}
               size="sm"
             >
               {dayjs(data.startdate).fromNow()}
@@ -50,6 +58,7 @@ export default function DetailsPage({ data }) {
             <Text size="xs" color="dimmed">
               Open
             </Text>
+
             <Text weight={500} size="sm">
               {`${data.open} - ${data.close}`}
             </Text>
@@ -59,7 +68,7 @@ export default function DetailsPage({ data }) {
               Distance
             </Text>
             <Text weight={500} size="sm">
-              {data.distance}
+              {data.distance} km
             </Text>
           </div>
         </Card.Section>
@@ -86,18 +95,18 @@ export default function DetailsPage({ data }) {
             </>
           )}
         </Text>
-        {data.genres?.length && (
+        {Array.isArray(data.genres) && data.genres.length ? (
           <div>
             <Text size="md" color="dimmed">
               Genres
             </Text>
             <Text weight={500} size="sm">
-              {data.genres}
+              {data.genres.join(" / ")}
             </Text>
           </div>
-        )}
+        ) : null}
         <Button
-          color="blue"
+          color="dark"
           fullWidth
           mt="md"
           radius="md"
@@ -128,12 +137,25 @@ export default function DetailsPage({ data }) {
         <SmallMap center={data.location.coordinates} />
 
         <Button
-          variant="outline"
+          color="dark"
+          fullWidth
+          mt="md"
+          radius="md"
+          mb="lg"
+          component="a"
+          leftIcon={<IconNavigation />}
+          target="_blank"
+          href={`https://www.google.com/maps?q=${data.location.coordinates[0]}, ${data.location.coordinates[1]}`}
+        >
+          Get me there
+        </Button>
+        <ActionIcon
+          variant="light"
           component={Link}
           href={`/admin/${data.placeType}s/edit/${data._id}`}
         >
-          Edit
-        </Button>
+          <IconEdit size={16} />
+        </ActionIcon>
       </Card>
       <FooterSocial />
     </>

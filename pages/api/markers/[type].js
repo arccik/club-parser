@@ -10,7 +10,6 @@ export default async function handler(req, res) {
     await dbConnect();
     if (req.method === "GET") {
       const { type } = req.query;
-
       switch (type) {
         case "events":
           const response = await Event.find().select(selectedField);

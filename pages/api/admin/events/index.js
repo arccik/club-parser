@@ -3,10 +3,32 @@ import Event from "../../../../src/models/event-model";
 export default async function handler(req, res) {
   try {
     await dbConnect();
+
     switch (req.method) {
       case "GET":
-        const events = await Event.find({}).limit(40);
-        return res.status(200).json(events);
+        const { coords } = req.query;
+        if (coords) {
+          const location = coords.split(",").map(Number);
+
+          const eventsWithDistance = await Event.aggregate([
+            {
+              $geoNear: {
+                near: {
+                  type: "Point",
+                  coordinates: location,
+                },
+                maxDistance: 1000 * 1000,
+                spherical: true,
+                distanceField: "distance",
+                distanceMultiplier: 0.001,
+              },
+            },
+          ]).limit(40);
+          return res.status(200).json(eventsWithDistance);
+        } else {
+          const events = await Event.find({}).limit(40);
+          return res.status(200).json(events);
+        }
 
       case "POST":
         const body = req.body;
@@ -16,8 +38,14 @@ export default async function handler(req, res) {
             .json({ message: "Please provide Event Details" });
         }
         const created = await Event.create(body);
-        if(created) return res.status(200).json({ status: "OK", message: "Event Created", created });
-        else return res.status(503).json({message: 'Error during saving, check DB connection'})
+        if (created)
+          return res
+            .status(200)
+            .json({ status: "OK", message: "Event Created", created });
+        else
+          return res
+            .status(503)
+            .json({ message: "Error during saving, check DB connection" });
       default:
         return res.status(404).json({ message: "Method not recognised" });
     }

@@ -11,8 +11,9 @@ const initialState = markerAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getMarkers: builder.query({
-      query: (type) => `/markers?type=${type}`,
+      query: (type) => `/markers/${type}`,
       transformFromResponse: (responseData) => {
+        console.log({ responseData });
         const loadedEvents = responseData.map((post) => {
           if (!post.position) {
             post.position = {
@@ -29,7 +30,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getEventMarkers: builder.query({
-      query: () => "/markers?type=event",
+      query: () => "/markers/events",
       transformFromResponse: (responseData) => {
         const loadedEvents = responseData.map((post) => {
           if (!post.position) {
@@ -47,7 +48,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     getVenueMarkers: builder.query({
-      query: () => "/markers?type=venue",
+      query: () => "/markers/venues",
       transformFromResponse: (responseData) => {
         const loadedVenues = responseData.map((post) => {
           if (!post.position) {

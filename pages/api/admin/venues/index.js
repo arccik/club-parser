@@ -5,8 +5,30 @@ export default async function handler(req, res) {
     await dbConnect();
     switch (req.method) {
       case "GET":
-        const venues = await Venue.find({});
-        return res.status(200).json(venues);
+        const { coords } = req.query;
+        if (coords) {
+          const location = coords.split(",").map(Number);
+          console.log('VENUES COORDINATESL: >> ', coords)
+          const venues = await Venue.aggregate([
+            {
+              $geoNear: {
+                near: {
+                  type: "Point",
+                  coordinates: location,
+                },
+                maxDistance: 1000 * 1000,
+                spherical: true,
+                distanceField: "distance",
+                distanceMultiplier: 0.001,
+              },
+            },
+          ]).limit(40);
+          return res.status(200).json(venues);
+        } else {
+         
+          const venues = await Venue.find({});
+          return res.status(200).json(venues);
+        }
 
       case "POST":
         const body = req.body;

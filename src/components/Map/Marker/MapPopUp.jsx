@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { Card, Image, Text, Group, Badge, Button } from "@mantine/core";
 
 const MapPopUp = (props) => {
+  console.log("Map POPO ", props);
   const { image, name, description, _id, open, close, placeType } = props.data;
   const router = useRouter();
 

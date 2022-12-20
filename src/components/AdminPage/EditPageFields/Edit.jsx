@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import useStyles from "./styles";
 import { useGetFieldsNamesQuery } from "../../../features/admin/adminSlice";
 import genres from "../../../utils/musicGenres";
+import UploadFile from "./UploadFile/UploadFile";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -58,6 +59,8 @@ const Edit = ({ data, onSave, onDelete }) => {
         {({ errors, touched, values, setFieldValue }) => (
           <Form>
             {fieldsName?.map((field) => {
+              if (field === "image")
+                return <UploadFile key={field} file={data.image} />;
               if (field === "genres")
                 return (
                   <MultiSelect
