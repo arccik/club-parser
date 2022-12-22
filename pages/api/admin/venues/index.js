@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 distanceMultiplier: 0.001,
               },
             },
-          ]).limit(40);
+          ]).limit(10);
           return res.status(200).json(venues);
         } else {
          

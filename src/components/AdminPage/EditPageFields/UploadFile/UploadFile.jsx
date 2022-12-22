@@ -1,24 +1,67 @@
-import { FileInput } from "@mantine/core";
-import { IconUpload } from "@tabler/icons";
+import {
+  FileInput,
+  Image,
+  BackgroundImage,
+  Center,
+  Text,
+  Button,
+  ActionIcon,
+} from "@mantine/core";
+import { IconUpload, IconSettings, IconTrashX } from "@tabler/icons";
 import { useState } from "react";
 
 const UploadFile = (props) => {
-  const [file, setFile] = useState(props.file);
+  const [file, setFile] = useState(props.fileUrl);
 
-  const handleUpload = (value) => {
-    return;
+  const handleUpload = async (value) => {
+    const url = await fetch("/api/admin/upload").then((res) => res.json());
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: value,
+    });
+    const imageUrl = url.split("?")[0];
+    props.setValue("image", imageUrl);
+    setFile(imageUrl);
+  };
+
+  const handleDelete = async () => {
+    console.log("Delete Clicked!");
+    setFile("");
   };
   return (
-    <FileInput
-      size="md"
-      value={file}
-      onChange={setFile}
-      mt="md"
-      radius="md"
-      label="Image"
-      placeholder="Upload File"
-      icon={<IconUpload size={14} />}
-    />
+    <>
+      <Image
+        mt="lg"
+        fill
+        radius="lg"
+        height={300}
+        src={file}
+        alt="With default placeholder"
+        withPlaceholder
+      />
+      {file ? (
+        <ActionIcon variant="subtle" onClick={handleDelete}>
+          {/* <IconTrashX color="red" size={30} /> */}
+          Delete
+        </ActionIcon>
+      ) : (
+        <FileInput
+          clearButtonLabel
+          size="md"
+          // value={file}
+          onChange={handleUpload}
+          // defaultValue={file}
+          mt="lg"
+          radius="md"
+          label="Image"
+          placeholder="Upload File"
+          icon={<IconUpload size={14} />}
+        />
+      )}
+    </>
   );
 };
 

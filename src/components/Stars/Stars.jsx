@@ -15,7 +15,14 @@ const Stars = ({ rating, id }) => {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
-  return <Rating defaultValue={rating} onChange={setValue} readOnly={value} />;
+  return (
+    <Rating
+      style={{ marginTop: -15 }}
+      defaultValue={rating}
+      onChange={setValue}
+      readOnly={value}
+    />
+  );
 };
 
 export default Stars;

@@ -1,4 +1,4 @@
-import { SegmentedControl } from "@mantine/core";
+import { Loader, SegmentedControl } from "@mantine/core";
 import useStyles from "./styles";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ export default function MapNavBar({ handleClick }) {
     <SegmentedControl
       radius="xl"
       size="md"
-      onLoad={(e) => console.log("Loading ", e)}
+      onLoad={(e) => <Loader />}
       onClick={onSelectHandle}
       defaultValue={"venues"}
       data={[

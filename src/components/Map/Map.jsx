@@ -16,9 +16,9 @@ const Map = () => {
     () => location || { lat: 51.57937620404864, lng: -0.08660418339429162 },
     [location]
   );
+  // mapId: "216185b90ab09587",
   const options = useMemo(
     () => ({
-      // mapId: "216185b90ab09587",
       disableDefaultUI: true,
       clickableIcons: false,
       gestureHandling: "greedy",

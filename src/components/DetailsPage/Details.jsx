@@ -63,14 +63,14 @@ export default function DetailsPage({ data }) {
               {`${data.open} - ${data.close}`}
             </Text>
           </div>
-          <div>
+          {/* <div>
             <Text size="xs" color="dimmed">
               Distance
             </Text>
             <Text weight={500} size="sm">
               {data.distance} km
             </Text>
-          </div>
+          </div> */}
         </Card.Section>
 
         <Group position="apart" mt="sm">
@@ -78,9 +78,8 @@ export default function DetailsPage({ data }) {
             {data.name}
           </Text>
 
-          <Group spacing={5}>
+          <Group>
             <Stars rating={data.rating} id={data._id} />
-            {/* <RingProgress size={18} sections={[{ value: 80, color: "blue" }]} /> */}
           </Group>
         </Group>
 

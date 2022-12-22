@@ -7,6 +7,7 @@ import {
   Notification,
   MultiSelect,
   Text,
+  TextInput,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useRouter } from "next/router";
@@ -40,11 +41,9 @@ const Edit = ({ data, onSave, onDelete }) => {
     const { data: response, errors } = await onSave(data);
     if (errors) return <p>Cannot update Item</p>;
     if (response.status === "OK") return router.back();
-    console.log("Handle Submit: File Saved: ", response);
   };
 
   if (!data) router.back();
-  console.log("Edit Event Data >> ", data);
   return (
     <Container size="sm">
       <Title order={4} ta="center">
@@ -57,10 +56,16 @@ const Edit = ({ data, onSave, onDelete }) => {
         onSubmit={handleSubmit}
       >
         {({ errors, touched, values, setFieldValue }) => (
-          <Form>
+          <Form style={{ margin: 20 }}>
             {fieldsName?.map((field) => {
               if (field === "image")
-                return <UploadFile key={field} file={data.image} />;
+                return (
+                  <UploadFile
+                    key={field}
+                    fileUrl={data.image}
+                    setValue={setFieldValue}
+                  />
+                );
               if (field === "genres")
                 return (
                   <MultiSelect
@@ -90,6 +95,7 @@ const Edit = ({ data, onSave, onDelete }) => {
               if (field === "description")
                 return (
                   <Textarea
+                    radius="md"
                     size="md"
                     name="description"
                     key={field}

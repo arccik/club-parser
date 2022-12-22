@@ -4,8 +4,10 @@ import Link from "next/link";
 
 const OldEvents = ({ events }) => {
   return (
-    <Container my="md">
-      <Title order={4}>Check how it was</Title>
+    <Container my="md" style={{ position: "relative" }}>
+      <Title order={4} color="white">
+        Check how it was
+      </Title>
       <SimpleGrid
         cols={2}
         spacing="md"
@@ -22,7 +24,7 @@ const OldEvents = ({ events }) => {
         </Grid>
       </SimpleGrid>
       <Text
-        color="blue"
+        color="white"
         fw={700}
         size="md"
         component={Link}

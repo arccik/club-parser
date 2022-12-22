@@ -9,7 +9,7 @@ const SmallMap = (props) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   });
-  const [zoom, setZoom] = useState(16);
+  const [zoom, setZoom] = useState(15);
   // const [activeMarker, setActiveMarker] = useState(null);
 
   const coorinates = useMemo(
@@ -24,12 +24,10 @@ const SmallMap = (props) => {
   );
   const options = useMemo(
     () => ({
-      mapId: "bd5694e712fdb7c5",
-      disableDefaultUI: true,
+      disableDefaultUI: false,
       clickableIcons: false,
-      gestureHandling: "greedy",
-      panControl: true,
-      panControl: false,
+
+      mapTypeControl: false,
       gestureHandling: "none",
     }),
     []

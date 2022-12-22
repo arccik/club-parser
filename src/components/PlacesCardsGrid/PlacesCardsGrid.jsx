@@ -23,6 +23,7 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
       shadow="sm"
       radius="md"
       withBorder
+      size="lg"
       component={Link}
       href={`/details/${type}/${article._id}`}
     >
@@ -30,8 +31,8 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
         <Image src={article.image} alt="article image" />
       </AspectRatio>
 
-      <Group position="apart" mt="md" mb="xs">
-        <Text size="md" weight={700} style={{ width: 140 }}>
+      <Group position="apart" mt="sm" mb="xs">
+        <Text size="md" weight={700} className={classes.title}>
           {article.name}
         </Text>
         <Rating defaultValue={article.rating} />
@@ -45,7 +46,7 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
             {`Doors Open ${article.open}`}
           </Text>
           <Text size="xs" color="dimmed">
-            Distance: {article.distance} km
+            Distance: {article.distance.toPrecision(3)} km
           </Text>
         </Group>
       ) : (
@@ -60,10 +61,13 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
     </Card>
   ));
   return (
-    <Container size="md">
+    <Container style={{ position: "relative", top: 300 }}>
       {type === "venues" && (
-        <Text className={classes.placesNearBy}>Places near by</Text>
+        <Text fz="xl" color="white" weight="bolder">
+          Places near by
+        </Text>
       )}
+
       <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
         {cards}
       </SimpleGrid>
