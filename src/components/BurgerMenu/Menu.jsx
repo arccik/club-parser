@@ -15,10 +15,8 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 export default function Navigation() {
   const [active, setActive] = useState(0);
   const [opened, setOpened] = useState(false);
-  const { user, error, isLoading } = useUser();
+  const { user } = useUser();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
 
   const items = [
     { icon: <IconHome2 />, link: "/", label: "Home" },
