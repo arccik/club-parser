@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import useStyles from "./styles";
 import dayjs from "dayjs";
+import OpenCloseBadge from "../../utils/OpenCloseBadge/OpenCloseBadge";
 
 export default function PlacesCardsGrid({ venues, type = "venues" }) {
   const { classes } = useStyles();
@@ -23,7 +24,7 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
       shadow="sm"
       radius="md"
       withBorder
-      size="lg"
+      size="xs"
       component={Link}
       href={`/details/${type}/${article._id}`}
     >
@@ -41,19 +42,21 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
         <Text size="sm">{article.description || "Descriptions"}</Text>
       </Group>
       {type === "venues" ? (
-        <Group position="apart" mt="md">
+        <Group position="apart">
           <Text size="xs" color="dimmed">
             {`Doors Open ${article.open}`}
           </Text>
+          <OpenCloseBadge from={article.open} to={article.close} />
           <Text size="xs" color="dimmed">
             Distance: {article.distance.toPrecision(3)} km
           </Text>
         </Group>
       ) : (
         <Group position="apart" mt="md">
-          <Badge>
+          <Badge color="pink">
             <Text size="xs" color="dimmed">
-              {`Ended ${dayjs(article.enddate).format("DD MMM YYYY")}`}
+              Ended on
+              <b> {dayjs(article.enddate).format("DD MMM YYYY")}</b>
             </Text>
           </Badge>
         </Group>

@@ -78,7 +78,7 @@ export default function Home(props) {
       <Hero />
       <Search />
       <main>
-        <Container size="lg">
+        <Container px={0}>
           {events?.length && <Carousel events={events} />}
           <PlacesCardsGrid venues={venues} />
           <GenresBox />

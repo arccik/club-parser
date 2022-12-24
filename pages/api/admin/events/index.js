@@ -26,7 +26,7 @@ export default async function handler(req, res) {
           ]).limit(40);
           return res.status(200).json(eventsWithDistance);
         } else {
-          const events = await Event.find({}).limit(40);
+          const events = await Event.find({});
           return res.status(200).json(events);
         }
 

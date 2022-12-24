@@ -3,10 +3,7 @@ import {
   Image,
   Text,
   Group,
-  RingProgress,
-  Rating,
   Button,
-  Container,
   ActionIcon,
   Badge,
   Accordion,
@@ -16,24 +13,16 @@ import useStyles from "./styles";
 import SmallMap from "../Map/SmallMap";
 import Link from "next/link";
 
-import {
-  IconShare,
-  IconHeart,
-  IconBookmark,
-  IconPhoto,
-  IconNavigation,
-  IconSettings,
-  IconEdit,
-} from "@tabler/icons";
+import { IconNavigation, IconEdit } from "@tabler/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FooterSocial } from "../Footer/Footer";
+import { useUser } from "@auth0/nextjs-auth0/client";
 dayjs.extend(relativeTime);
 
 export default function DetailsPage({ data }) {
   const { classes, theme } = useStyles();
-  const getColor = (color) =>
-    theme.colors[color][theme.colorScheme === "dark" ? 5 : 7];
+  const { user } = useUser();
 
   return (
     <>
@@ -63,14 +52,6 @@ export default function DetailsPage({ data }) {
               {`${data.open} - ${data.close}`}
             </Text>
           </div>
-          {/* <div>
-            <Text size="xs" color="dimmed">
-              Distance
-            </Text>
-            <Text weight={500} size="sm">
-              {data.distance} km
-            </Text>
-          </div> */}
         </Card.Section>
 
         <Group position="apart" mt="sm">
@@ -84,15 +65,7 @@ export default function DetailsPage({ data }) {
         </Group>
 
         <Text mt="sm" mb="md" color="dimmed" size="xs">
-          {data.description || (
-            <>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-              libero, perspiciatis minima blanditiis labore quam quisquam odit
-              voluptates, error quos omnis nihil quaerat ab voluptate dicta? At
-              cum minus, nesciunt ut quis debitis? Hic recusandae tenetur ex
-              nostrum fugiat aliquid.
-            </>
-          )}
+          {data.description || ""}
         </Text>
         {Array.isArray(data.genres) && data.genres.length ? (
           <div>
@@ -148,13 +121,17 @@ export default function DetailsPage({ data }) {
         >
           Get me there
         </Button>
-        <ActionIcon
-          variant="light"
-          component={Link}
-          href={`/admin/${data.placeType}s/edit/${data._id}`}
-        >
-          <IconEdit size={16} />
-        </ActionIcon>
+        {user && (
+          <ActionIcon
+            variant="light"
+            component={Link}
+            className={classes.editButton}
+            href={`/admin/${data.placeType}s/edit/${data._id}`}
+          >
+            {console.log("event Place ", data)}
+            <IconEdit size={16} />
+          </ActionIcon>
+        )}
       </Card>
       <FooterSocial />
     </>

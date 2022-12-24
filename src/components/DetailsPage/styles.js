@@ -69,6 +69,12 @@ const useStyles = createStyles((theme) => ({
       transform: "rotate(-90deg)",
     },
   },
+
+  editButton: {
+    position: "absolute",
+    top: theme.spacing.xs,
+    right: theme.spacing.xs + 2,
+  },
 }));
 
 export default useStyles;

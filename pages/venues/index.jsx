@@ -3,11 +3,11 @@ import TableScrollArea from "../../src/components/AdminPage/TableScrollArea/Tabl
 import { Container, TextInput, Grid } from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
 import { useState } from "react";
-import { useGetEventsQuery } from "../../src/features/event/eventSlice";
+import { useGetVenuesQuery } from "../../src/features/venue/venueSlice";
 import EventPageCard from "../../src/components/EventPageCard/EventPageCard";
 
 const AdminEventsPage = () => {
-  const { data, isLoading, error } = useGetEventsQuery();
+  const { data, isLoading, error } = useGetVenuesQuery();
 
   const [filteredData, setFilteredData] = useState(null);
 

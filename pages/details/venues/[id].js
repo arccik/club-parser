@@ -13,7 +13,7 @@ const VenuePage = ({ venue }) => {
 export async function getStaticProps({ params }) {
   try {
     await dbConnect();
-    const data = await Venue.findById(params.id).lean();
+    const data = await Venue.findById(params.id);
     const venue = JSON.parse(JSON.stringify(data));
     return { props: { venue }, revalidate: 30 };
   } catch (error) {

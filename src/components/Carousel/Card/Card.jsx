@@ -9,8 +9,8 @@ export default function Card({ image, title, date, id }) {
 
   return (
     <Paper
-      shadow="md"
-      p="xl"
+      shadow="lg"
+      p="md"
       radius="md"
       sx={{ backgroundImage: `url(${image})` }}
       className={classes.card}
@@ -26,7 +26,7 @@ export default function Card({ image, title, date, id }) {
         </Title>
       </div>
       <Button
-        variant="filled"
+        variant="outline"
         size="xs"
         color="dark"
         onClick={() => router.push(`/details/events/${id}`)}

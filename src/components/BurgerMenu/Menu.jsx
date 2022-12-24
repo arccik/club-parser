@@ -7,17 +7,25 @@ import {
   IconMusic,
   IconMap2,
   IconBuildingSkyscraper,
+  IconLogout,
+  IconLogin,
 } from "@tabler/icons";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Navigation() {
   const [active, setActive] = useState(0);
   const [opened, setOpened] = useState(false);
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
   const items = [
     { icon: <IconHome2 />, link: "/", label: "Home" },
     { icon: <IconMusic />, link: "/events", label: "Events" },
     {
       icon: <IconBuildingSkyscraper />,
-      link: "/admin/venues",
+      link: "/venues",
       label: "Venues",
     },
     { icon: <IconMap2 />, link: "/map", label: "Map" },
@@ -56,40 +64,71 @@ export default function Navigation() {
 
         <Menu.Divider />
 
-        <Menu.Label>ADMIN zone</Menu.Label>
-        <Menu.Item icon={<IconArrowsLeftRight size={14} />}>
-          <NavLink
-            href="/admin"
-            component={Link}
-            label="Admin Panel"
-            onClick={() => {
-              setOpened(false);
-            }}
-            variant="light"
-          />
-        </Menu.Item>
-        <Menu.Item color="red" icon={<IconMusic size={14} />}>
-          <NavLink
-            href="/admin/events"
-            component={Link}
-            label="Events List"
-            onClick={() => {
-              setOpened(false);
-            }}
-            variant="light"
-          />
-        </Menu.Item>
-        <Menu.Item color="green" icon={<IconBuildingSkyscraper size={14} />}>
-          <NavLink
-            href="/admin/venues"
-            component={Link}
-            label="Venues List"
-            onClick={() => {
-              setOpened(false);
-            }}
-            variant="light"
-          />
-        </Menu.Item>
+        {user ? (
+          <>
+            <Menu.Label>ADMIN zone</Menu.Label>
+
+            <Menu.Item icon={<IconArrowsLeftRight size={14} />}>
+              <NavLink
+                href="/admin"
+                component={Link}
+                label="Admin Panel"
+                onClick={() => {
+                  setOpened(false);
+                }}
+                variant="light"
+              />
+            </Menu.Item>
+            <Menu.Item color="red" icon={<IconMusic size={14} />}>
+              <NavLink
+                href="/admin/events"
+                component={Link}
+                label="Events List"
+                onClick={() => {
+                  setOpened(false);
+                }}
+                variant="light"
+              />
+            </Menu.Item>
+            <Menu.Item
+              color="green"
+              icon={<IconBuildingSkyscraper size={14} />}
+            >
+              <NavLink
+                href="/admin/venues"
+                component={Link}
+                label="Venues List"
+                onClick={() => {
+                  setOpened(false);
+                }}
+                variant="light"
+              />
+            </Menu.Item>
+            <Menu.Item color="green" icon={<IconLogout size={14} />}>
+              <NavLink
+                href="/api/auth/logout"
+                component={Link}
+                label="Logout"
+                onClick={() => {
+                  setOpened(false);
+                }}
+                variant="light"
+              />
+            </Menu.Item>
+          </>
+        ) : (
+          <Menu.Item color="green" icon={<IconLogin size={14} />}>
+            <NavLink
+              href="/api/auth/login"
+              component={Link}
+              label="Login"
+              onClick={() => {
+                setOpened(false);
+              }}
+              variant="light"
+            />
+          </Menu.Item>
+        )}
       </Menu.Dropdown>
     </Menu>
   );

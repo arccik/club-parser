@@ -4,28 +4,26 @@ import { ApplicationContainer } from "../src/components/ApplicationContainer";
 
 import { store } from "../store";
 import { Provider } from "react-redux";
-
-import { ApiProvider } from "@reduxjs/toolkit/query/react";
-import { apiSlice } from "../src/features/api/apiSlice";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { extendedApiSlice } from "../src/features/event/eventSlice";
 
 store.dispatch(extendedApiSlice.endpoints.getEvents.initiate());
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      {/* <ApiProvider api={apiSlice}> */}
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{ colorSchema: "light" }}
-      >
-        <ApplicationContainer>
-          <Component {...pageProps} />
-        </ApplicationContainer>
-      </MantineProvider>
-      {/* </ApiProvider> */}
-    </Provider>
+    <UserProvider>
+      <Provider store={store}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{ colorSchema: "light" }}
+        >
+          <ApplicationContainer>
+            <Component {...pageProps} />
+          </ApplicationContainer>
+        </MantineProvider>
+      </Provider>
+    </UserProvider>
   );
 }
 

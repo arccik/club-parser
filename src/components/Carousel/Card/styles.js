@@ -40,17 +40,26 @@ const useStyles = createStyles((theme) => {
       lineHeight: 1.2,
       fontSize: "1.2rem",
       marginTop: theme.spacing.xs,
+      display: "inline-block",
+      textOverflow: "ellipsis",
+      wordWrap: "break-word",
+      overflow: "hidden",
+      maxHeight: "4.8em",
+      lineHeight: "1.2em",
     },
     textBackground: {
+      opacity: 0.8,
+
       backgroundColor: "black",
       boxShadow: "10px 0 0px 0px black, -10px 0 0px 0px black",
     },
 
     date: {
       color: theme.white,
-      opacity: 0.7,
       fontWeight: 700,
       textTransform: "uppercase",
+      textShadow:
+        "3px 3px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;",
     },
   };
 });

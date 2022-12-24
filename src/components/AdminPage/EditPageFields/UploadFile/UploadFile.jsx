@@ -33,20 +33,25 @@ const UploadFile = (props) => {
   };
   return (
     <>
-      <Image
-        mt="lg"
-        fill
-        radius="lg"
-        height={300}
-        src={file}
-        alt="With default placeholder"
-        withPlaceholder
-      />
       {file ? (
-        <ActionIcon variant="subtle" onClick={handleDelete}>
-          {/* <IconTrashX color="red" size={30} /> */}
-          Delete
-        </ActionIcon>
+        <div style={{ position: "relative" }}>
+          <Image
+            mt="lg"
+            fill
+            radius="lg"
+            height={300}
+            src={file}
+            alt="With default placeholder"
+            withPlaceholder
+          />
+          <ActionIcon
+            style={{ position: "absolute", top: 10, right: 10 }}
+            variant="subtle"
+            onClick={handleDelete}
+          >
+            <IconTrashX color="red" size={30} />
+          </ActionIcon>
+        </div>
       ) : (
         <FileInput
           clearButtonLabel

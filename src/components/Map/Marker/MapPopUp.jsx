@@ -1,16 +1,11 @@
 import { useRouter } from "next/router";
 import { Card, Image, Text, Group, Badge, Button } from "@mantine/core";
+import OpenCloseBadge from "../../../utils/OpenCloseBadge/OpenCloseBadge";
 
 const MapPopUp = (props) => {
-  const { image, name, description, _id, open, close, placeType } = props.data;
+  const { image, name, description, _id, open, close, placeType, startdate } =
+    props.data;
   const router = useRouter();
-
-  const isOpen = (from, to) => {
-    return new Date().toLocaleTimeString() >= from &&
-      new Date().toLocaleTimeString() <= to
-      ? "Open"
-      : "Close";
-  };
   return (
     <>
       <Card shadow="sm" radius="md" withBorder>
@@ -20,9 +15,7 @@ const MapPopUp = (props) => {
 
         <Group position="apart" mt="md" mb="xs">
           <Text weight={500}>{name}</Text>
-          <Badge color="pink" variant="light">
-            {isOpen(open, close)}
-          </Badge>
+          <OpenCloseBadge from={open} to={close} />
         </Group>
 
         <Text size="sm" color="dimmed">
