@@ -4,41 +4,54 @@ import formatLocations from "../../../src/utils/formatLocations";
 import Venue from "../../../src/models/venue-model";
 
 export default async function handler(req, res) {
+  await dbConnect();
   try {
     if (req.method === "GET") {
       const searchString = req.query.search;
       if (!searchString) return res.send("ok");
 
-      await dbConnect();
+      // const eventResponse = await Event.find({
+      //   $search: {
+      //     index: "text",
+      //     text: {
+      //       query: searchString,
+      //       path: {
+      //         wildcard: "*",
+      //       },
+      //     },
+      //   },
+      // });
+      // const venueResponse = await Venue.find({
+      //   $search: {
+      //     index: "text",
+      //     text: {
+      //       query: searchString,
+      //       path: {
+      //         wildcard: "*",
+      //       },
+      //     },
+      //   },
+      // });
 
       const eventResponse = await Event.find({
-        $search: {
-          index: "text",
-          text: {
-            query: searchString,
-            path: {
-              wildcard: "*",
-            },
-          },
-        },
+        $text: { $search: searchString },
       });
-      // const eventResponse = await Event.find({
-      //   $or: [
-      //     {
-      //       name: { $regex: searchString, $options: "i" },
-      //     },
-      //     { description: { $regex: searchString, $options: "i" } },
-      //   ],
-      // });
       const venueResponse = await Venue.find({
-        $or: [
-          {
-            name: { $regex: searchString, $options: "i" },
-          },
-          { description: { $regex: searchString, $options: "i" } },
-        ],
+        $text: { $search: searchString },
       });
-      const response = [...eventResponse, ...venueResponse];
+
+      let response = [...eventResponse, ...venueResponse];
+      if (!response.length) {
+        response.push({
+          placeType: "none",
+          id: "404",
+          image: "/assets/logo.png",
+          label: "Nothing was found",
+          description: "Check you search query",
+          value: "Not Found",
+        });
+        console.log("VErnueee ", response);
+      }
 
       return res.status(200).json(response);
     }

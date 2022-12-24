@@ -26,6 +26,7 @@ const VenueSchema = new Schema(
   { timestamps: true }
 );
 
+VenueSchema.index({ name: "text", description: "text", genres: "text" });
 VenueSchema.index({ location: "2dsphere" });
 
 

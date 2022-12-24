@@ -61,9 +61,9 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
     </Card>
   ));
   return (
-    <Container style={{ position: "relative", top: 300 }}>
+    <Container mt="md">
       {type === "venues" && (
-        <Text fz="xl" color="white" weight="bolder">
+        <Text fz="xl" weight="bolder">
           Places near by
         </Text>
       )}

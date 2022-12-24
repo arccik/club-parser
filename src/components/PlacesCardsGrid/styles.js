@@ -2,7 +2,6 @@ import { createStyles } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   card: {
     margin: 0,
-    // top: 300,
     transition: "transform 150ms ease, box-shadow 150ms ease",
     "&:hover": {
       transform: "scale(1.01)",
@@ -23,7 +22,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
   placesNearBy: {
-    color: theme.white,
+    color: theme.black,
     marginBottom: 8,
     marginTop: 10,
     fontWeight: 800,

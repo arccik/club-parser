@@ -19,7 +19,7 @@ export default function CardsCarousel({ events }) {
   ));
 
   return (
-    <Container size="md" style={{ position: "relative", top: 300 }}>
+    <Container size="md">
       <Text fz="xl" color="white" weight="bolder">
         Upcoming events
       </Text>

@@ -1,5 +1,4 @@
 import {
-  createStyles,
   Card,
   Text,
   SimpleGrid,
@@ -7,18 +6,7 @@ import {
   Anchor,
   Group,
 } from "@mantine/core";
-import {
-  IconCreditCard,
-  IconBuildingBank,
-  IconRepeat,
-  IconReceiptRefund,
-  IconReceipt,
-  IconReceiptTax,
-  IconReport,
-  IconCashBanknote,
-  IconCoin,
-  IconVinyl,
-} from "@tabler/icons";
+import { IconVinyl } from "@tabler/icons";
 
 import useStyles from "./styles";
 
@@ -33,8 +21,6 @@ const mockdata = [
   { title: "Electro", icon: IconVinyl, color: "red" },
   { title: "House", icon: IconVinyl, color: "orange" },
 ];
-
-
 
 const GenresBox = () => {
   const { classes, theme } = useStyles();

@@ -1,34 +1,26 @@
-import { Menu, Burger, NavLink, Button } from "@mantine/core";
+import { Menu, Burger, NavLink } from "@mantine/core";
 import { useState } from "react";
-
-import { useRouter } from "next/router";
 import Link from "next/link";
 import {
-  IconSettings,
-  IconSearch,
-  IconPhoto,
-  IconTrash,
   IconArrowsLeftRight,
   IconHome2,
-  IconRadio,
   IconMusic,
-  IconFriends,
+  IconMap2,
   IconBuildingSkyscraper,
 } from "@tabler/icons";
 
 export default function Navigation() {
   const [active, setActive] = useState(0);
   const [opened, setOpened] = useState(false);
-  const router = useRouter();
   const items = [
     { icon: <IconHome2 />, link: "/", label: "Home" },
-    { icon: <IconSettings />, link: "/admin", label: "Admin Panel" },
-    { icon: <IconMusic />, link: "/admin/events", label: "Events" },
+    { icon: <IconMusic />, link: "/events", label: "Events" },
     {
       icon: <IconBuildingSkyscraper />,
       link: "/admin/venues",
       label: "Venues",
     },
+    { icon: <IconMap2 />, link: "/map", label: "Map" },
   ];
 
   const list = items.map(({ icon, label, link }, index) => (
@@ -64,12 +56,39 @@ export default function Navigation() {
 
         <Menu.Divider />
 
-        <Menu.Label>Danger zone</Menu.Label>
+        <Menu.Label>ADMIN zone</Menu.Label>
         <Menu.Item icon={<IconArrowsLeftRight size={14} />}>
-          Transfer my data
+          <NavLink
+            href="/admin"
+            component={Link}
+            label="Admin Panel"
+            onClick={() => {
+              setOpened(false);
+            }}
+            variant="light"
+          />
         </Menu.Item>
-        <Menu.Item color="red" icon={<IconTrash size={14} />}>
-          Delete my account
+        <Menu.Item color="red" icon={<IconMusic size={14} />}>
+          <NavLink
+            href="/admin/events"
+            component={Link}
+            label="Events List"
+            onClick={() => {
+              setOpened(false);
+            }}
+            variant="light"
+          />
+        </Menu.Item>
+        <Menu.Item color="green" icon={<IconBuildingSkyscraper size={14} />}>
+          <NavLink
+            href="/admin/venues"
+            component={Link}
+            label="Venues List"
+            onClick={() => {
+              setOpened(false);
+            }}
+            variant="light"
+          />
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

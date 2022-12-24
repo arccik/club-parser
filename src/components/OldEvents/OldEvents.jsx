@@ -23,13 +23,7 @@ const OldEvents = ({ events }) => {
           </Grid.Col>
         </Grid>
       </SimpleGrid>
-      <Text
-        color="white"
-        fw={700}
-        size="md"
-        component={Link}
-        href="/details/oldevents"
-      >
+      <Text fw={700} size="md" component={Link} href="/details/oldevents">
         See More...
       </Text>
     </Container>
