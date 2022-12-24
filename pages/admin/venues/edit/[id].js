@@ -5,10 +5,12 @@ import {
   useUpdateVenueMutation,
 } from "../../../../src/features/venue/venueSlice";
 import { useRouter } from "next/router";
-import { useAddNewEventMutation } from "../../../../src/features/event/eventSlice";
+import ErrorPage from "next/error";
 import Loading from "../../../../src/utils/Loading/Loading";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const EditEventPage = () => {
+  const { user } = useUser();
   const router = useRouter();
   const { id } = router.query;
 
@@ -20,8 +22,10 @@ const EditEventPage = () => {
   const [updateVenue, { isLoading: eventAdding, isError: eventAddError }] =
     useUpdateVenueMutation(id);
 
+  if (!user) return <ErrorPage statusCode={404} />;
   if (isDeleting) return <p>Deleting...</p>;
   if (isLoading || eventAdding) return <Loading />;
+
   if (isError || !id || eventAddError)
     return (
       <p>

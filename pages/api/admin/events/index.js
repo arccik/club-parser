@@ -3,10 +3,26 @@ import Event from "../../../../src/models/event-model";
 export default async function handler(req, res) {
   try {
     await dbConnect();
+    
+    const { page } = req.query;
+    const { coords } = req.query;
+    const PAGE_LIMIT = 10;
+    const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
     switch (req.method) {
       case "GET":
-        const { coords } = req.query;
+        if (page) {
+          const eventTotal = await Event.countDocuments({});
+          const events = await Event.find({})
+            .sort({ startdate: -1 })
+            .limit(PAGE_LIMIT)
+            .skip(startIndex);
+          return res.status(200).json({
+            events,
+            currentPage: Number(page),
+            numberOfPages: Math.ceil(eventTotal / PAGE_LIMIT),
+          });
+        }
         if (coords) {
           const location = coords.split(",").map(Number);
 

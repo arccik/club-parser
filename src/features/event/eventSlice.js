@@ -11,7 +11,10 @@ const initialState = eventAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getEvents: builder.query({
-      query: () => "/admin/events",
+      query: (page) => {
+        if (page) return `/admin/events?page=${page}`;
+        return "/admin/events";
+      },
       transformFromResponse: (responseData) => {
         const loadedEvents = responseData.map((post) => {
           if (!post.reaction) post.reaction = "😃";
@@ -19,10 +22,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         });
         return eventAdapter.setAll(initialState, loadedEvents);
       },
-      providesTags: (result, error, arg) => [
-        { type: "Events", id: "LIST" },
-        ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
-      ],
+      providesTags: ({ events }, error, arg) => {
+        if (!events) return [{ type: "Events", id: "LIST" }];
+        else {
+          return [...events.map(({ _id }) => ({ type: "Events", _id: _id }))];
+        }
+      },
     }),
     getEventsByLocation: builder.query({
       query: (coords) => {

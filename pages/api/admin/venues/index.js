@@ -1,14 +1,34 @@
 import dbConnect from "../../../../src/utils/dbConnect";
 import Venue from "../../../../src/models/venue-model";
+
+
+
 export default async function handler(req, res) {
+  const { page } = req.query;
+  const { coords } = req.query;
+  const PAGE_LIMIT = 10;
+  const startIndex = (Number(page) - 1) * PAGE_LIMIT;
+
   try {
     await dbConnect();
     switch (req.method) {
       case "GET":
-        const { coords } = req.query;
+        if (page) {
+          const venueTotal = await Venue.countDocuments({});
+          const venues = await Venue.find({})
+            .sort({ startdate: -1 })
+            .limit(PAGE_LIMIT)
+            .skip(startIndex);
+          return res.status(200).json({
+            venues,
+            currentPage: Number(page),
+            numberOfPages: Math.ceil(venueTotal / PAGE_LIMIT),
+          });
+        }
+
         if (coords) {
           const location = coords.split(",").map(Number);
-          console.log('VENUES COORDINATESL: >> ', coords)
+          console.log("VENUES COORDINATESL: >> ", coords);
           const venues = await Venue.aggregate([
             {
               $geoNear: {
@@ -25,7 +45,6 @@ export default async function handler(req, res) {
           ]).limit(10);
           return res.status(200).json(venues);
         } else {
-         
           const venues = await Venue.find({});
           return res.status(200).json(venues);
         }

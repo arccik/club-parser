@@ -11,7 +11,8 @@ const initialState = venueAdapter.getInitialState();
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getVenues: builder.query({
-      query: () => {
+      query: (page) => {
+        if (page) return `/admin/venues?page=${page}`;
         return "/admin/venues";
       },
       transformFromResponse: (responseData) => {
@@ -21,10 +22,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         });
         return venueAdapter.setAll(initialState, loadedVenues);
       },
-      providesTags: (result, error, arg) => [
-        { type: "Venues", id: "LIST" },
-        ...result.map(({ _id }) => ({ type: "Venues", _id: _id })),
-      ],
+      providesTags: ({ venues }, error, arg) => {
+        if (!venues) return [{ type: "Venues", id: "LIST" }];
+        else {
+          return [...venues.map(({ _id }) => ({ type: "Venues", _id: _id }))];
+        }
+      },
     }),
     getVenueById: builder.query({
       query: (_id) => `/admin/venues/${_id}`,

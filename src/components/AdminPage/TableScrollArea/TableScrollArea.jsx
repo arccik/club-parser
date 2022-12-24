@@ -35,10 +35,7 @@ export default function TableScrollArea({ data, type = "events" }) {
   ));
 
   return (
-    <ScrollArea
-      sx={{ height: "100vh", mt: "md" }}
-      onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
-    >
+    <ScrollArea onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
       <Table striped withBorder highlightOnHover withColumnBorders>
         <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
           <tr>
