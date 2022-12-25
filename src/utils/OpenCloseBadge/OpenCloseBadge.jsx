@@ -3,14 +3,15 @@ import useStyles from "./styles";
 
 const OpenCloseBadge = ({ from, to }) => {
   const { classes } = useStyles();
-  return new Date().toLocaleTimeString() >= from &&
-    new Date().toLocaleTimeString() < to ? (
-    <Badge className={classes.bagde} size="xs" color="green">
-      Place Open
-    </Badge>
-  ) : (
-    <Badge className={classes.bagde} size="xs" color="red">
-      Place Closed
+  const nowTime = new Date().getHours();
+  const fromHours = from.split(":")[0];
+  const toHours = to.split(":")[0];
+
+  const isOpen = nowTime >= fromHours && nowTime > toHours;
+
+  return (
+    <Badge className={classes.bagde} size="xs" color={isOpen ? "green" : "red"}>
+      Place {isOpen ? "Open" : "Close"}
     </Badge>
   );
 };

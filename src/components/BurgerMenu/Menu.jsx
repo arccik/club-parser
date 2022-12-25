@@ -105,7 +105,7 @@ export default function Navigation() {
             <Menu.Item color="green" icon={<IconLogout size={14} />}>
               <NavLink
                 href="/api/auth/logout"
-                component={Link}
+                component="a"
                 label="Logout"
                 onClick={() => {
                   setOpened(false);
@@ -118,7 +118,7 @@ export default function Navigation() {
           <Menu.Item color="green" icon={<IconLogin size={14} />}>
             <NavLink
               href="/api/auth/login"
-              component={Link}
+              component="a"
               label="Login"
               onClick={() => {
                 setOpened(false);

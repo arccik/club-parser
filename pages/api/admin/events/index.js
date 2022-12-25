@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     
     const { page } = req.query;
     const { coords } = req.query;
-    const PAGE_LIMIT = 10;
+    const PAGE_LIMIT = 12;
     const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
     switch (req.method) {
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
                 distanceMultiplier: 0.001,
               },
             },
-          ]).limit(40);
+          ]).limit(10);
           return res.status(200).json(eventsWithDistance);
         } else {
           const events = await Event.find({});

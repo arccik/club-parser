@@ -6,7 +6,7 @@ import Venue from "../../../../src/models/venue-model";
 export default async function handler(req, res) {
   const { page } = req.query;
   const { coords } = req.query;
-  const PAGE_LIMIT = 10;
+  const PAGE_LIMIT = 12;
   const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
   try {
