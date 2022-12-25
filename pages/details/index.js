@@ -1,5 +1,5 @@
 import { useLoadScript } from "@react-google-maps/api";
-import Map from "../../src/components/Map/Map";
+import Map from "../../src/components/MapPage/Map";
 import Loading from "../../src/utils/Loading/Loading";
 
 const mapPlugins = ["places"];
