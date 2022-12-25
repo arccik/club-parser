@@ -1,4 +1,4 @@
-import Navigation from "../BurgerMenu/Menu";
+import Navigation from "./BurgerMenu/Menu";
 import { IconMapPin, ActionIcon } from "@tabler/icons";
 import Image from "next/image";
 import { Header, Group } from "@mantine/core";

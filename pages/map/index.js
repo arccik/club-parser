@@ -1,7 +1,7 @@
 import { useLoadScript } from "@react-google-maps/api";
-import Map from "../../src/components/Map/Map";
-const mapPlugins = ["places"];
+import Map from "../../src/components/MapPage/Map";
 
+const mapPlugins = ["places"];
 
 const OnlyMapPage = () => {
   const { isLoaded } = useLoadScript({
@@ -9,8 +9,12 @@ const OnlyMapPage = () => {
     libraries: mapPlugins,
   });
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map />
 
+  return (
+    <>
+      <Map />
+    </>
+  );
 };
 
 export default OnlyMapPage;

@@ -7,3 +7,9 @@
     height: 300px;
     margin-bottom: 20px;
 }
+.currentLocationButton {
+    position: absolute;
+    right: 15px;
+    bottom: 25px;
+    z-index: 100;
+}

@@ -1,6 +1,6 @@
 import Head from "next/head";
-import PlacesCardsGrid from "../src/components/PlacesCardsGrid/PlacesCardsGrid";
-import { FooterSocial } from "../src/components/Footer/Footer";
+import PlacesCardsGrid from "../src/components/HomePage/PlacesCardsGrid/PlacesCardsGrid";
+import { FooterSocial } from "../src/components/HomePage/Footer/Footer";
 import {
   Container,
   Divider,
@@ -8,14 +8,14 @@ import {
   Loader,
   LoadingOverlay,
 } from "@mantine/core";
-import Carousel from "../src/components/Carousel/Carousel";
-import Search from "../src/components/Hero/Search/Search";
+import Carousel from "../src/components/HomePage/Carousel/Carousel";
+import Search from "../src/components/HomePage/Hero/Search/Search";
 import Venue from "../src/models/venue-model";
 import Event from "../src/models/event-model";
 import dbConnect from "../src/utils/dbConnect";
-import Hero from "../src/components/Hero/Hero";
-import OldEvents from "../src/components/OldEvents/OldEvents";
-import GenresBox from "../src/components/Home/GenresBox/GenresBox";
+import Hero from "../src/components/HomePage/Hero/Hero";
+import OldEvents from "../src/components/HomePage/OldEvents/OldEvents";
+import GenresBox from "../src/components/HomePage/GenresBox/GenresBox";
 import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
 import { useState, useEffect } from "react";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
@@ -25,8 +25,10 @@ import { useGetVenueByLocationQuery } from "../src/features/venue/venueSlice";
 export async function getStaticProps() {
   await dbConnect();
   // prettier-ignore
-  const events = await Event.find({ startdate: { $gte: new Date() } }).limit(30);
-  const venues = await Venue.find().limit(30);
+  const events = await Event.find({ startdate: { $gte: new Date() } }).limit(
+    10
+  );
+  const venues = await Venue.find().limit(10);
   // prettier-ignore
   const oldEvents = await Event.find({ startdate: { $lt: new Date() } }).limit(3);
 
@@ -66,7 +68,6 @@ export default function Home(props) {
     }
   }, [location, eventsByLocation, venuesByLocation]);
 
-  // if (isLoading || isVenueLoading) return <Loader />;
   return (
     <>
       <Head>

@@ -14,24 +14,11 @@ const AdminEventsPage = () => {
   const { data, isLoading, error } = useGetEventsQuery(activePage);
   const { user } = useUser();
 
-  const [filteredData, setFilteredData] = useState(null);
-  const handleSearch = ({ target }) => {
-    if (target.value === "") setFilteredData(null);
-    setFilteredData(
-      data.events.filter((value) =>
-        value.name.toLowerCase().includes(target.value.toLowerCase())
-      )
-    );
-  };
+
   if (isLoading) return <Loading />;
   if (!user) return <ErrorPage statusCode={404} />;
   return (
     <Container size={"100%"} px={0}>
-      <TextInput
-        onChange={handleSearch}
-        size="sm"
-        placeholder="What's looking for ?"
-      />
       <ActionIcon
         component={Link}
         title="Add new Event"
@@ -40,7 +27,7 @@ const AdminEventsPage = () => {
       >
         <IconPlus />
       </ActionIcon>
-      <TableScrollArea data={filteredData || data.events} />
+      <TableScrollArea data={data.events} />
       <Pagination
         position="center"
         m="lg"

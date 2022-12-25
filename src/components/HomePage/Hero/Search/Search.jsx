@@ -1,11 +1,10 @@
 import { TextInput, ActionIcon, useMantineTheme, Loader } from "@mantine/core";
 import { IconSearch, IconArrowRight, IconArrowLeft } from "@tabler/icons";
-import Loading from "../../../utils/Loading/Loading";
 import styles from "../hero.module.css";
 
 import { useState } from "react";
 import { Autocomplete } from "@mantine/core";
-import { useSearchEventsQuery } from "../../../features/event/eventSlice";
+import { useSearchEventsQuery } from "../../../../features/event/eventSlice";
 import { useRouter } from "next/router";
 import AutoCompleteItem from "./AutoCompleteItem";
 

@@ -1,6 +1,6 @@
 import { ActionIcon, AppShell, Group, Header } from "@mantine/core";
 import { useRouter } from "next/router";
-import Navigation from "./BurgerMenu/Menu";
+import Navigation from "./AppHeader/BurgerMenu/Menu";
 
 import { IconMapPin } from "@tabler/icons";
 import Image from "next/image";

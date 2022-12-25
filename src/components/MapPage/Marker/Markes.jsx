@@ -2,9 +2,9 @@ import { Marker, MarkerClusterer, InfoWindow } from "@react-google-maps/api";
 import MapPopUp from "./MapPopUp";
 import { useGetMarkersQuery } from "../../../features/marker/markerSlice";
 import { useState } from "react";
-import MapNavBar from "../../MapNavBar/MapNavBar";
+import MapNavBar from "../MapNavBar/MapNavBar";
 
-const Markes = ({ center, mapRef, active, setActive }) => {
+const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
   const [state, setState] = useState("venues");
   const { data: markers, error, isLoading } = useGetMarkersQuery(state);
   if (isLoading) return <h2>Loading...</h2>;
@@ -33,6 +33,13 @@ const Markes = ({ center, mapRef, active, setActive }) => {
   return (
     <>
       <MapNavBar handleClick={setState} />
+      <Marker
+        icon={{
+          url: "assets/current-location-icon.png",
+        }}
+        position={currentLocation}
+        onClick={() => mapRef.current.panTo(currentLocation)}
+      ></Marker>
 
       <MarkerClusterer>
         {(clusterer) =>

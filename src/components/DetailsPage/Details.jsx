@@ -8,15 +8,15 @@ import {
   Badge,
   Accordion,
 } from "@mantine/core";
-import Stars from "../Stars/Stars";
+import Stars from "./Stars/Stars";
 import useStyles from "./styles";
-import SmallMap from "../Map/SmallMap";
+import SmallMap from "../MapPage/SmallMap";
 import Link from "next/link";
 
 import { IconNavigation, IconEdit } from "@tabler/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FooterSocial } from "../Footer/Footer";
+import { FooterSocial } from "../HomePage/Footer/Footer";
 import { useUser } from "@auth0/nextjs-auth0/client";
 dayjs.extend(relativeTime);
 

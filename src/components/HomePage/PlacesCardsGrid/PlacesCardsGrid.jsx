@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import useStyles from "./styles";
 import dayjs from "dayjs";
-import OpenCloseBadge from "../../utils/OpenCloseBadge/OpenCloseBadge";
+import OpenCloseBadge from "../../../utils/OpenCloseBadge/OpenCloseBadge";
 
 export default function PlacesCardsGrid({ venues, type = "venues" }) {
   const { classes } = useStyles();

@@ -1,4 +1,4 @@
-import { Menu, Burger, NavLink } from "@mantine/core";
+import { Menu, Burger, NavLink, Button } from "@mantine/core";
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -9,6 +9,7 @@ import {
   IconBuildingSkyscraper,
   IconLogout,
   IconLogin,
+  IconPlus,
 } from "@tabler/icons";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
@@ -16,7 +17,6 @@ export default function Navigation() {
   const [active, setActive] = useState(0);
   const [opened, setOpened] = useState(false);
   const { user } = useUser();
-
 
   const items = [
     { icon: <IconHome2 />, link: "/", label: "Home" },
@@ -77,7 +77,7 @@ export default function Navigation() {
                 variant="light"
               />
             </Menu.Item>
-            <Menu.Item color="red" icon={<IconMusic size={14} />}>
+            <Menu.Item icon={<IconMusic size={14} />}>
               <NavLink
                 href="/admin/events"
                 component={Link}
@@ -88,10 +88,7 @@ export default function Navigation() {
                 variant="light"
               />
             </Menu.Item>
-            <Menu.Item
-              color="green"
-              icon={<IconBuildingSkyscraper size={14} />}
-            >
+            <Menu.Item icon={<IconBuildingSkyscraper size={14} />}>
               <NavLink
                 href="/admin/venues"
                 component={Link}
@@ -102,29 +99,28 @@ export default function Navigation() {
                 variant="light"
               />
             </Menu.Item>
-            <Menu.Item color="green" icon={<IconLogout size={14} />}>
-              <NavLink
-                href="/api/auth/logout"
+            <Menu.Divider />
+            <Menu.Item color="red" icon={<IconLogout size={14} />}>
+              <Button
+                variant="subtle"
+                color="red"
                 component="a"
-                label="Logout"
-                onClick={() => {
-                  setOpened(false);
-                }}
-                variant="light"
-              />
+                href="/api/auth/logout"
+              >
+                Logout
+              </Button>
             </Menu.Item>
           </>
         ) : (
           <Menu.Item color="green" icon={<IconLogin size={14} />}>
-            <NavLink
-              href="/api/auth/login"
+            <Button
+              variant="subtle"
+              color="red"
               component="a"
-              label="Login"
-              onClick={() => {
-                setOpened(false);
-              }}
-              variant="light"
-            />
+              href="/api/auth/login"
+            >
+              Login
+            </Button>
           </Menu.Item>
         )}
       </Menu.Dropdown>
