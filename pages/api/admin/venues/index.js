@@ -28,7 +28,6 @@ export default async function handler(req, res) {
 
         if (coords) {
           const location = coords.split(",").map(Number);
-          console.log("VENUES COORDINATESL: >> ", coords);
           const venues = await Venue.aggregate([
             {
               $geoNear: {
@@ -70,6 +69,4 @@ export default async function handler(req, res) {
       .status(503)
       .json({ message: "Cannnot get Venue API to work, Issue with server" });
   }
-
-  return res.status(404).json({ message: "Wrong request method!" });
 }

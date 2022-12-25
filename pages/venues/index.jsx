@@ -23,6 +23,7 @@ const AdminEventsPage = () => {
         <Pagination
           position="center"
           mt="lg"
+          noWrap
           styles={(theme) => ({
             item: {
               "&[data-active]": {

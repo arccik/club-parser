@@ -43,7 +43,8 @@ const AdminEventsPage = () => {
       <TableScrollArea data={filteredData || data.events} />
       <Pagination
         position="center"
-        mt="lg"
+        m="lg"
+        noWrap
         styles={(theme) => ({
           item: {
             "&[data-active]": {

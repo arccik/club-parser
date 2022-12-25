@@ -5,12 +5,12 @@ const useCurrentLocaiton = () => {
   const [location, setLocation] = useState();
   const [storeValue, setStoreValue] = useLocalStorage({
     key: "location",
-    defaultValue: { lat: 51.57937620404864, lng: -0.08660418339429162 },
+    defaultValue: null,
     getInitialValueInEffect: true,
   });
 
   useEffect(() => {
-    if (storeValue.length) {
+    if (storeValue?.length) {
       setLocation(storeValue);
     }
     if ("geolocation" in navigator) {

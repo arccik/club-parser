@@ -1,7 +1,13 @@
 import Head from "next/head";
 import PlacesCardsGrid from "../src/components/PlacesCardsGrid/PlacesCardsGrid";
 import { FooterSocial } from "../src/components/Footer/Footer";
-import { Container, Divider, Title } from "@mantine/core";
+import {
+  Container,
+  Divider,
+  Title,
+  Loader,
+  LoadingOverlay,
+} from "@mantine/core";
 import Carousel from "../src/components/Carousel/Carousel";
 import Search from "../src/components/Hero/Search/Search";
 import Venue from "../src/models/venue-model";
@@ -41,7 +47,7 @@ export default function Home(props) {
   const location = useCurrentLocaiton();
   const {
     data: eventsByLocation,
-    isLoading,
+    isLoading: isEventsLoading,
     isError,
     error,
   } = useGetEventsByLocationQuery(location, {
@@ -49,7 +55,7 @@ export default function Home(props) {
   });
   const {
     data: venuesByLocation,
-    isLoading: isVenueLoading,
+    isLoading: isVenuesLoading,
     error: venueError,
   } = useGetVenueByLocationQuery(location, { skip: !location });
 
@@ -60,7 +66,7 @@ export default function Home(props) {
     }
   }, [location, eventsByLocation, venuesByLocation]);
 
-  if (isLoading || isVenueLoading) return <Loading />;
+  // if (isLoading || isVenueLoading) return <Loader />;
   return (
     <>
       <Head>
@@ -79,6 +85,10 @@ export default function Home(props) {
       <Search />
       <main>
         <Container px={0}>
+          <LoadingOverlay
+            visible={isEventsLoading || isVenuesLoading}
+            overlayBlur={2}
+          />
           {events?.length && <Carousel events={events} />}
           <PlacesCardsGrid venues={venues} />
           <GenresBox />

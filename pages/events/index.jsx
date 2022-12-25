@@ -24,7 +24,8 @@ const AdminEventsPage = () => {
         </Grid>
         <Pagination
           position="center"
-          mt="lg"
+          m="lg"
+          noWrap
           styles={(theme) => ({
             item: {
               "&[data-active]": {
