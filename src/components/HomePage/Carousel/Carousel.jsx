@@ -25,6 +25,7 @@ export default function CardsCarousel({ events }) {
       </Text>
       <Carousel
         loop
+        dragFree
         slideSize="25%"
         breakpoints={[
           {

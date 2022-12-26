@@ -27,6 +27,7 @@ const useStyles = createStyles((theme) => ({
     lineHeight: 1,
     fontSize: "larger",
     marginBottom: 20,
+    fontSize: 24,
   },
   mapContainer: {
     width: "100%",

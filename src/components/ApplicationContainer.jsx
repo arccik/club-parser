@@ -22,7 +22,7 @@ export const ApplicationContainer = ({ children }) => {
             }}
           >
             <Image
-              onClick={() => router.back()}
+              onClick={() => router.push("/")}
               src="/assets/logo.png"
               alt="StripRadar logo"
               width={120}

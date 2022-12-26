@@ -86,16 +86,14 @@ export default function Home(props) {
       <Search />
       <main>
         <Container px={0}>
+          {events.length ? <Carousel events={events} /> : null}
           <LoadingOverlay
             visible={isEventsLoading || isVenuesLoading}
             overlayBlur={2}
           />
-          {events?.length && <Carousel events={events} />}
           <PlacesCardsGrid venues={venues} />
           <GenresBox />
-          <OldEvents events={oldEvents} />
-          {/* {venues.length > 4 && <PlacesCardsGrid venues={venues.splice(4, 10)} />} */}
-          {/* {events.length > 10 && <Carousel events={events.splice(10, 20)} />} */}
+          {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
         </Container>
       </main>
       <FooterSocial />

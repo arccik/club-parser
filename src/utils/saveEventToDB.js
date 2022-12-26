@@ -7,7 +7,7 @@ export default async function saveEventToDB(data) {
       .select("eventId")
       .lean();
     if (!result) {
-      const venue = await Venue.find({ venueID: data.venue?.id });
+      const venue = await Venue.find({ venueId: data.venue?.id });
       await Event.create({
         eventId: data?.id,
         name: data?.eventname,
