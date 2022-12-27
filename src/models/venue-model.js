@@ -15,7 +15,7 @@ const VenueSchema = new Schema(
     phone: { type: String },
     rating: { type: Number },
     image: { type: String },
-    distance: { type: Number },
+    distance: { type: Number, default: null },
     genres: { type: [String] },
     views: { type: String, default: 0 },
     open: { type: String },

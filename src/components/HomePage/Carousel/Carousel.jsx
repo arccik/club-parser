@@ -35,7 +35,7 @@ export default function CardsCarousel({ events }) {
         ]}
         slideGap="xs"
         align="start"
-        slidesToScroll={mobile ? 1 : 2}
+        // slidesToScroll={mobile ? 1 : 2}
       >
         {slides}
       </Carousel>

@@ -17,7 +17,7 @@ const SimilarPlaces = ({ coords, type }) => {
       title={place.name}
       image={place.image}
       distance={place.distance}
-      link={`/details/${place.placeType}s/${place._id}`}
+      link={`/details/${place.placeType || "venue"}s/${place._id}`}
     />
   ));
   return (

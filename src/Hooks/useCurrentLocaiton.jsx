@@ -5,7 +5,7 @@ const useCurrentLocaiton = () => {
   const [location, setLocation] = useState();
   const [storeValue, setStoreValue] = useLocalStorage({
     key: "location",
-    defaultValue: { lat: 51, lng: 0.3 },
+    defaultValue: null,
     getInitialValueInEffect: true,
   });
 

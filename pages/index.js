@@ -1,13 +1,7 @@
 import Head from "next/head";
 import PlacesCardsGrid from "../src/components/HomePage/PlacesCardsGrid/PlacesCardsGrid";
 import { FooterSocial } from "../src/components/HomePage/Footer/Footer";
-import {
-  Container,
-  Divider,
-  Title,
-  Loader,
-  LoadingOverlay,
-} from "@mantine/core";
+import { Container, Loader, LoadingOverlay } from "@mantine/core";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
 import Venue from "../src/models/venue-model";
@@ -17,9 +11,8 @@ import Hero from "../src/components/HomePage/Hero/Hero";
 import OldEvents from "../src/components/HomePage/OldEvents/OldEvents";
 import GenresBox from "../src/components/HomePage/GenresBox/GenresBox";
 import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
-import Loading from "../src/utils/Loading/Loading";
 import { useGetVenueByLocationQuery } from "../src/features/venue/venueSlice";
 import LoadLocalDialog from "../src/components/HomePage/LoadLocalDigalog/LoadLocalDialog";
 
@@ -31,7 +24,7 @@ export async function getStaticProps() {
   );
   const venues = await Venue.find().limit(10);
   // prettier-ignore
-  const oldEvents = await Event.find({ startdate: { $lt: new Date() } }).limit(3);
+  const oldEvents = await Event.find().sort({ startdate: 1 }).limit(3);
 
   return {
     props: {
@@ -55,14 +48,15 @@ export default function Home(props) {
     isError,
     error,
   } = useGetEventsByLocationQuery(location, {
-    skip: !location,
+    skip: !location || !loadLocal,
   });
   const {
     data: venuesByLocation,
     isLoading: isVenuesLoading,
     error: venueError,
-  } = useGetVenueByLocationQuery(location, { skip: !location });
+  } = useGetVenueByLocationQuery(location, { skip: !location || !loadLocal });
 
+  if (isVenuesLoading || isEventsLoading) return <Loader />;
   const updateContent = () => {
     if (location) {
       if (eventsByLocation) setEvents(eventsByLocation);
@@ -79,6 +73,7 @@ export default function Home(props) {
   // }, [location, eventsByLocation, venuesByLocation]);
   const handleDialog = () => {
     updateContent();
+    setLoadLocal(true);
   };
   return (
     <>
