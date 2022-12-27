@@ -23,7 +23,7 @@ const useCurrentLocaiton = () => {
       setLocation(null);
       setStoreValue("");
     }
-  }, []);
+  });
 
   return location;
 };

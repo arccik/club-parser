@@ -1,7 +1,7 @@
 import Head from "next/head";
 import PlacesCardsGrid from "../src/components/HomePage/PlacesCardsGrid/PlacesCardsGrid";
 import { FooterSocial } from "../src/components/HomePage/Footer/Footer";
-import { Container, Loader, LoadingOverlay } from "@mantine/core";
+import { Container, LoadingOverlay } from "@mantine/core";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
 import Venue from "../src/models/venue-model";
@@ -11,7 +11,6 @@ import Hero from "../src/components/HomePage/Hero/Hero";
 import OldEvents from "../src/components/HomePage/OldEvents/OldEvents";
 import GenresBox from "../src/components/HomePage/GenresBox/GenresBox";
 import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
-import { useState } from "react";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
 import { useGetVenueByLocationQuery } from "../src/features/venue/venueSlice";
 import LoadLocalDialog from "../src/components/HomePage/LoadLocalDigalog/LoadLocalDialog";
@@ -26,7 +25,7 @@ export async function getStaticProps() {
   );
   const venues = await Venue.find().limit(10);
   // prettier-ignore
-  const oldEvents = await Event.find().sort({ startdate: 1 }).limit(3);
+  const oldEvents = await Event.find().sort({ startdate: -1 }).limit(3);
 
   return {
     props: {
