@@ -21,7 +21,6 @@ const GenresPage = (props) => {
   const { data, isLoading, error } = useGetByGenresQuery(type, {
     skip: !type,
   });
-  console.log("GenresPage DATA", data);
   if (isLoading) return <Loading />;
   if (error) return <p>Could not load data</p>;
   return (

@@ -5,7 +5,6 @@ import { Carousel } from "@mantine/carousel";
 
 const SimilarPlaces = ({ coords, type }) => {
   const { data, isLoading, error } = useGetNearByPlacesQuery(coords);
-  console.log("SimilarPlaces  ", data);
   if (isLoading) return <Loader />;
   if (error) return <p>No Similar Found</p>;
 
@@ -17,7 +16,7 @@ const SimilarPlaces = ({ coords, type }) => {
       title={place.name}
       image={place.image}
       distance={place.distance}
-      link={`/details/${place.placeType || "venue"}s/${place._id}`}
+      link={`/details/${type}s/${place._id}`}
     />
   ));
   return (

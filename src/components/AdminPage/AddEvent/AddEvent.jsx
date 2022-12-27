@@ -51,12 +51,9 @@ const AddEvent = () => {
             {}
           );
           const valuesToSend = { ...result, location };
-          console.log("Value TO Send ADD EVENT ", valuesToSend);
           const response = await addEvent(valuesToSend).unwrap();
-          console.log("Saved to DB ", response);
           if (response.status === "OK") setSubmitting(false);
           // router.push("/admin/events");
-          console.log("Clicked", response);
         }}
       >
         {({
