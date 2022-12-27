@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import useStyles from "./styles";
 
-export default function PlacesCardsGrid({ venues }) {
+export default function CardsGrid({ venues }) {
   const { classes } = useStyles();
 
   const cards = venues.map((article, i) => (

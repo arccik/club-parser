@@ -50,7 +50,6 @@ export default async function handler(req, res) {
           description: "Check you search query",
           value: "Not Found",
         });
-        console.log("VErnueee ", response);
       }
 
       return res.status(200).json(response);

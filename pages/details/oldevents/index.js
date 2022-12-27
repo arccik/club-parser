@@ -7,9 +7,7 @@ const OldEventsPage = () => {
   const { data, isLoading, isError, error } = useGetOldEventsQuery();
   if (isLoading) return <Loading />;
   if (isError)
-    return (
-      <p> There was an error on service check console {console.log(error)}</p>
-    );
+    return <p>Error with this service. Check console {console.log(error)}</p>;
   return (
     <>
       <Title align="center" color="dimmed">

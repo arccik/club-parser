@@ -13,7 +13,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getMarkers: builder.query({
       query: (type) => `/markers/${type}`,
       transformFromResponse: (responseData) => {
-        console.log({ responseData });
         const loadedEvents = responseData.map((post) => {
           if (!post.position) {
             post.position = {

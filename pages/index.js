@@ -15,6 +15,8 @@ import { useState } from "react";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
 import { useGetVenueByLocationQuery } from "../src/features/venue/venueSlice";
 import LoadLocalDialog from "../src/components/HomePage/LoadLocalDigalog/LoadLocalDialog";
+import Loading from "../src/utils/Loading/Loading";
+import { useLocalStorage } from "@mantine/hooks";
 
 export async function getStaticProps() {
   await dbConnect();
@@ -28,52 +30,40 @@ export async function getStaticProps() {
 
   return {
     props: {
-      events: JSON.stringify(events),
-      venues: JSON.stringify(venues),
-      oldEvents: JSON.stringify(oldEvents),
+      events: JSON.parse(JSON.stringify(events)),
+      venues: JSON.parse(JSON.stringify(venues)),
+      oldEvents: JSON.parse(JSON.stringify(oldEvents)),
     },
     revalidate: 30,
   };
 }
 
-export default function Home(props) {
-  const [loadLocal, setLoadLocal] = useState(false);
-  const [events, setEvents] = useState(JSON.parse(props.events));
-  const [venues, setVenues] = useState(JSON.parse(props.venues));
-  const oldEvents = JSON.parse(props.oldEvents);
+export default function Home({ events, venues, oldEvents }) {
   const location = useCurrentLocaiton();
+  const [showLocalLoad, setLoadLocal] = useLocalStorage({
+    key: "loadLocal",
+    defaultValue: true,
+  });
   const {
     data: eventsByLocation,
     isLoading: isEventsLoading,
-    isError,
-    error,
+    error: eventError,
   } = useGetEventsByLocationQuery(location, {
-    skip: !location || !loadLocal,
+    skip: !location || showLocalLoad,
   });
   const {
     data: venuesByLocation,
     isLoading: isVenuesLoading,
     error: venueError,
-  } = useGetVenueByLocationQuery(location, { skip: !location || !loadLocal });
+  } = useGetVenueByLocationQuery(location, {
+    skip: !location || showLocalLoad,
+  });
 
-  if (isVenuesLoading || isEventsLoading) return <Loader />;
-  const updateContent = () => {
-    if (location) {
-      if (eventsByLocation) setEvents(eventsByLocation);
-      if (venuesByLocation) setVenues(venuesByLocation);
-    }
-  };
+  if (isVenuesLoading || isEventsLoading) return <Loading />;
+  if (eventError && venueError) return <p> Cannot fetch data</p>;
 
-  // useEffect(() => {
-  //   if (location) {
-  //     if (loadLocal) {
-  //       updateContent();
-  //     }
-  //   }
-  // }, [location, eventsByLocation, venuesByLocation]);
   const handleDialog = () => {
-    updateContent();
-    setLoadLocal(true);
+    setLoadLocal(false);
   };
   return (
     <>
@@ -89,17 +79,19 @@ export default function Home(props) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         ></meta>
       </Head>
-      <LoadLocalDialog setAgree={handleDialog} />
+      <LoadLocalDialog setAgree={handleDialog} show={showLocalLoad} />
       <Hero />
       <Search />
       <main>
         <Container px={0}>
-          {events.length ? <Carousel events={events} /> : null}
+          {events.length ? (
+            <Carousel events={eventsByLocation || events} />
+          ) : null}
           <LoadingOverlay
             visible={isEventsLoading || isVenuesLoading}
             overlayBlur={2}
           />
-          <PlacesCardsGrid venues={venues} />
+          <PlacesCardsGrid venues={venuesByLocation || venues} />
           <GenresBox />
           {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
         </Container>

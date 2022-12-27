@@ -7,10 +7,10 @@ import {
   Notification,
 } from "@mantine/core";
 import { useState } from "react";
-import { IconTruckLoading, IconShadow } from "@tabler/icons";
+import { IconTruckLoading, IconAnalyze } from "@tabler/icons";
 
-const LoadLocalDialog = ({ setAgree }) => {
-  const [opened, setOpened] = useState(true);
+const LoadLocalDialog = ({ setAgree, show }) => {
+  const [opened, setOpened] = useState(show);
 
   const handleClick = () => {
     setOpened(false);
@@ -21,12 +21,18 @@ const LoadLocalDialog = ({ setAgree }) => {
     opened && (
       <Notification
         closeButtonProps={{ color: "red" }}
-        icon={<IconShadow size={18} />}
-        color="blue"
+        icon={<IconAnalyze size={18} />}
+        color="pink"
         onClose={() => setOpened((prev) => !prev)}
       >
-        Show most related content
-        <Button variant="outline" ml="sm" radius={50} onClick={handleClick}>
+        Show nearby places
+        <Button
+          color="pink"
+          variant="outline"
+          ml="sm"
+          radius={50}
+          onClick={handleClick}
+        >
           Load
         </Button>
       </Notification>
