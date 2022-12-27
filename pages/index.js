@@ -21,6 +21,7 @@ import { useState, useEffect } from "react";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
 import Loading from "../src/utils/Loading/Loading";
 import { useGetVenueByLocationQuery } from "../src/features/venue/venueSlice";
+import LoadLocalDialog from "../src/components/HomePage/LoadLocalDigalog/LoadLocalDialog";
 
 export async function getStaticProps() {
   await dbConnect();
@@ -43,6 +44,7 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
+  const [loadLocal, setLoadLocal] = useState(false);
   const [events, setEvents] = useState(JSON.parse(props.events));
   const [venues, setVenues] = useState(JSON.parse(props.venues));
   const oldEvents = JSON.parse(props.oldEvents);
@@ -61,13 +63,23 @@ export default function Home(props) {
     error: venueError,
   } = useGetVenueByLocationQuery(location, { skip: !location });
 
-  useEffect(() => {
+  const updateContent = () => {
     if (location) {
       if (eventsByLocation) setEvents(eventsByLocation);
       if (venuesByLocation) setVenues(venuesByLocation);
     }
-  }, [location, eventsByLocation, venuesByLocation]);
+  };
 
+  // useEffect(() => {
+  //   if (location) {
+  //     if (loadLocal) {
+  //       updateContent();
+  //     }
+  //   }
+  // }, [location, eventsByLocation, venuesByLocation]);
+  const handleDialog = () => {
+    updateContent();
+  };
   return (
     <>
       <Head>
@@ -82,6 +94,7 @@ export default function Home(props) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         ></meta>
       </Head>
+      <LoadLocalDialog setAgree={handleDialog} />
       <Hero />
       <Search />
       <main>

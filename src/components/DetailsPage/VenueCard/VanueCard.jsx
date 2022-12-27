@@ -29,12 +29,13 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const VenueCard = ({ venue }) => {
-  console.log("VenueCard", venue);
   const { classes } = useStyles();
   if (!venue) return <Loader />;
   return (
     <>
-      <Title size="sx">Venue</Title>
+      <Title mt="lg" mb="sm" size="md">
+        Venue
+      </Title>
       <Card
         withBorder
         radius="md"

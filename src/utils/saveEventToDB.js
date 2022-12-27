@@ -26,7 +26,7 @@ export default async function saveEventToDB(data) {
         phone: data?.venue.phone,
         rating: data?.venue.rating,
         image: data?.xlargeimageurl,
-        distance: 10,
+        distance: null,
         category: data?.type,
         views: 1,
         startdate: data?.startdate,

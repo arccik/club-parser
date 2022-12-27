@@ -31,15 +31,32 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       transformFromResponse: (responseData) => {
         return bothAdapter.setAll(initialState, responseData);
       },
-      providesTags: ({ reuslt }, error, arg) => {
-        if (!reuslt) return [{ type: "Events", id: "LIST" }];
+      providesTags: ({ result }, error, arg) => {
+        if (!result) return [{ type: "Events", id: "LIST" }];
         else {
-          return [...reuslt.map(({ _id }) => ({ type, _id: _id }))];
+          return [...result.map(({ _id }) => ({ type, _id: _id }))];
+        }
+      },
+    }),
+    getByGenres: builder.query({
+      query: (genre) => `/genres/${genre}`,
+      providesTags: ({ result }, error, arg) => {
+        if (!result) return [{ type: "Events", id: "LIST" }];
+        else {
+          return [
+            ...result.map(({ _id }) => ({
+              type: result.placeType === "event" ? "Events" : "Venues",
+              _id: _id,
+            })),
+          ];
         }
       },
     }),
   }),
 });
 
-export const { useGetNearByPlacesQuery, useGetUpcomingEventsForVenueQuery } =
-  extendedApiSlice;
+export const {
+  useGetNearByPlacesQuery,
+  useGetUpcomingEventsForVenueQuery,
+  useGetByGenresQuery,
+} = extendedApiSlice;

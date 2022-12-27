@@ -11,7 +11,7 @@ const OpenCloseBadge = ({ from, to }) => {
 
   return (
     <Badge className={classes.bagde} size="xs" color={isOpen ? "green" : "red"}>
-      Place {isOpen ? "Open" : "Close"}
+      Place {isOpen ? "Open" : "Closed"}
     </Badge>
   );
 };

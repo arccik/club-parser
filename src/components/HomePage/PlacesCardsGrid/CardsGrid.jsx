@@ -40,9 +40,11 @@ export default function PlacesCardsGrid({ venues }) {
           <Text size="xs" mt="xs" color="dimmed">
             {`Doors Open ${article.open}`}
           </Text>
-          <Text size="xs" mt="xs" color="dimmed">
-            Distance: {article.distance} km
-          </Text>
+          {article.distance && (
+            <Text size="xs" mt="xs" color="dimmed">
+              Distance: {article.distance} km
+            </Text>
+          )}
         </Group>
       </Link>
     </Card>

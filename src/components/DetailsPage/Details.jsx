@@ -91,15 +91,11 @@ export default function DetailsPage({ data }) {
           <EventsFeed venueId={data._id} />
         )}
         {data.price && (
-          <div>
+          <Badge leftSection="price" size="lg" radius="sm">
             <Text size="sm" color="dimmed">
-              Price
-            </Text>
-
-            <Text weight={500} size="sm">
               {!data.price.includes("£") && "£"} {data.price}
             </Text>
-          </div>
+          </Badge>
         )}
         {data.placeType === "event" && (
           <Button

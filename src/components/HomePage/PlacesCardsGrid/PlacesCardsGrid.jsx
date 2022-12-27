@@ -47,9 +47,11 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
             {`Doors Open ${article.open}`}
           </Text>
           <OpenCloseBadge from={article.open} to={article.close} />
-          <Text size="xs" color="dimmed">
-            Distance: {article.distance.toPrecision(3)} km
-          </Text>
+          {article.distance && (
+            <Text size="xs" color="dimmed">
+              Distance: {article.distance.toPrecision(3)} km
+            </Text>
+          )}
         </Group>
       ) : (
         <Group position="apart" mt="md">

@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const { coords } = req.query;
     const { venueid } = req.query;
     if (venueid) {
-      const events = await Event.find({ venue: venueid.toString() })
+      const events = await Event.find({ venue: venueid })
         .sort({ startdate: 1 })
         .limit(5);
       return res.status(200).json(events);
