@@ -1,8 +1,7 @@
 import { createStyles } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   card: {
-    height: 150,
-    width: 150,
+    width: 300,
     backgroundSize: "cover",
     backgroundPosition: "center",
   },

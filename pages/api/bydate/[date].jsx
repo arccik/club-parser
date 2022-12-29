@@ -6,7 +6,18 @@ import dayjs from "dayjs";
 export default async function handler(req, res) {
   try {
     await dbConnect();
-    const { date } = req.query;
+    const { fromDate, date } = req.query;
+    if (fromDate) {
+      const events = await Event.find()
+        .sort({ startdate: 1 })
+        .where({
+          startdate: {
+            $gte: dayjs(date).startOf("date").toDate(),
+          },
+        })
+        .limit(10);
+      return res.status(200).json(events);
+    }
     const events = await Event.find({
       startdate: {
         $gte: dayjs(date).startOf("date").toDate(),

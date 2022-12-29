@@ -55,6 +55,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getByDate: builder.query({
       query: (date) => `/bydate/${date}`,
     }),
+    getFromDate: builder.query({
+      query: (date) => `/bydate/${date}?fromDate=true`,
+    }),
   }),
 });
 
@@ -63,4 +66,5 @@ export const {
   useGetUpcomingEventsForVenueQuery,
   useGetByGenresQuery,
   useGetByDateQuery,
+  useGetFromDateQuery,
 } = extendedApiSlice;

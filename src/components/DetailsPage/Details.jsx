@@ -25,7 +25,7 @@ import VenueCard from "./VenueCard/VanueCard";
 import EventsFeed from "./EventsFeed/EventsFeed";
 dayjs.extend(relativeTime);
 
-export default function DetailsPage({ data }) {
+export default function DetailsPage({ data, venue }) {
   const { classes, theme } = useStyles();
   const { user } = useUser();
 
@@ -86,7 +86,7 @@ export default function DetailsPage({ data }) {
         ) : null}
 
         {data.placeType === "event" ? (
-          <VenueCard venue={data.venue} />
+          <VenueCard venue={venue} />
         ) : (
           <EventsFeed venueId={data._id} />
         )}
@@ -155,7 +155,7 @@ export default function DetailsPage({ data }) {
         )}
 
         <SimilarPlaces
-          type={data.placeType}
+          id={data._id}
           coords={{
             lat: data.location.coordinates[0],
             lng: data.location.coordinates[1],

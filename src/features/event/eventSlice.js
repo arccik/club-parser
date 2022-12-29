@@ -129,6 +129,15 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return [...result.map(({ _id }) => ({ type: "Events", _id: _id }))];
       },
     }),
+    rateEvent: builder.mutation({
+      query: ({ _id, score }) => {
+        return {
+          url: `/rate?type=event&id=${_id}&score=${score}`,
+          method: "PUT",
+        };
+      },
+      invalidatesTags: (result, error, _id) => [{ type: "Events", _id }],
+    }),
   }),
 });
 
@@ -141,4 +150,5 @@ export const {
   useAddNewEventMutation,
   useDeleteEventMutation,
   useUpdateEventMutation,
+  useRateEventMutation,
 } = extendedApiSlice;

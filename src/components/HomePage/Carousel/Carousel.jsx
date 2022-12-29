@@ -19,7 +19,12 @@ export default function CardsCarousel({ events }) {
   ));
 
   return (
-    <Container size="md">
+    <Container
+      style={{
+        boxShadow: "0 8px 8px -4px lightblue",
+        backgroundColor: "black",
+      }}
+    >
       <Text fz="xl" color="white" weight="bolder">
         Upcoming events
       </Text>

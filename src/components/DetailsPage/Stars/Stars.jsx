@@ -1,26 +1,34 @@
 import { Rating } from "@mantine/core";
-import useSWR from "swr";
 import { useLocalStorage } from "@mantine/hooks";
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
+import { useRateEventMutation } from "../../../features/event/eventSlice";
+import { useMemo } from "react";
 
 const Stars = ({ rating, id }) => {
-  const [value, setValue] = useLocalStorage({
-    key: `Rate for : ${id}`,
-    defaultValue: rating,
+  const [localStorage, setLocalStorage] = useLocalStorage({
+    key: `rating`,
+    defaultValue: [],
   });
+  const ratingAvarage = useMemo(() => {
+    return (
+      rating?.length > 0 &&
+      rating?.reduce((acc, val) => (acc += val)) / rating?.length
+    );
+  }, [rating]);
+  const fromStorage = localStorage.find((v) => v.id === id);
+  const result = fromStorage ? fromStorage.score : ratingAvarage;
 
-  const { data, error } = useSWR(`/api/rating/event?id=${id}`, fetcher);
+  const [rate, {}] = useRateEventMutation();
 
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-
+  const handleClick = async (score) => {
+    setLocalStorage([...localStorage, { id, score }]);
+    await rate({ _id: id, score });
+  };
   return (
     <Rating
       style={{ marginTop: -15 }}
-      defaultValue={rating}
-      onChange={setValue}
-      readOnly={value}
+      onChange={handleClick}
+      value={result}
+      readOnly={fromStorage}
     />
   );
 };

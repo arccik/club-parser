@@ -13,6 +13,7 @@ import Link from "next/link";
 import useStyles from "./styles";
 import dayjs from "dayjs";
 import OpenCloseBadge from "../../../utils/OpenCloseBadge/OpenCloseBadge";
+import Stars from "../../DetailsPage/Stars/Stars";
 
 export default function PlacesCardsGrid({ venues, type = "venues" }) {
   const { classes } = useStyles();
@@ -36,7 +37,7 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
         <Text size="md" weight={700} className={classes.title}>
           {article.name}
         </Text>
-        <Rating defaultValue={article.rating} />
+        <Stars rating={article.rating} id={article._id} />
       </Group>
       <Group position="apart" mt="md" mb="xs">
         <Text size="sm">{article.description || "Descriptions"}</Text>
@@ -68,7 +69,16 @@ export default function PlacesCardsGrid({ venues, type = "venues" }) {
   return (
     <Container mt="md">
       {type === "venues" && (
-        <Text fz="xl" weight="bolder">
+        <Text
+          fz="xl"
+          weight="bolder"
+          style={{
+            color: "#fff",
+            fontWeight: 700,
+            textShadow:
+              "1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
+          }}
+        >
           Places near by
         </Text>
       )}

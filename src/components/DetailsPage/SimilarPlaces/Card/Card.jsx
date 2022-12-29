@@ -8,9 +8,9 @@ const SimilarCard = ({ open, title, image, distance, link, close }) => {
 
   return (
     <Paper
-      shadow="md"
+      shadow="lg"
       p="md"
-      radius="md"
+      // radius="md"
       sx={{ backgroundImage: `url(${image})` }}
       className={classes.card}
       component={Link}

@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 const UniversalCards = ({ data, cardType }) => {
+  const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [filtredData, setFiltredData] = useState(data);
 
@@ -33,19 +34,7 @@ const UniversalCards = ({ data, cardType }) => {
     setFiltredData(filterd);
     console.log("Filtred Data: ", filterd);
   };
-  // console.log("UniversalCards", data);
-  const router = useRouter();
-  if (!data.length)
-    return (
-      <>
-        <Text align="center" m="lg">
-          Nothing was found
-        </Text>
-        <Button fullWidth onClick={() => router.back()}>
-          Back
-        </Button>
-      </>
-    );
+
   return (
     <Container>
       <ActionIcon onClick={() => router.back()}>&#171;Back</ActionIcon>
@@ -55,7 +44,7 @@ const UniversalCards = ({ data, cardType }) => {
         value={searchValue}
         onChange={(e) => handleSearch(e.target.value)}
       />
-      {[...(filtredData || data)]?.map((place) => (
+      {data?.map((place) => (
         <Card key={place._id} shadow="sm" p="lg" mt="lg" radius="md" withBorder>
           <Card.Section
             component={Link}
