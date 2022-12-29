@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "./hero.module.css";
-import { useState } from "react";
 
 const Hero = () => {
   return (

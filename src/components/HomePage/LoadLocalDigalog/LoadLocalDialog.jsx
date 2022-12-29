@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { IconTruckLoading, IconAnalyze } from "@tabler/icons";
 
-const LoadLocalDialog = ({ setAgree, show }) => {
+const LoadLocalDialog = ({ setAgree, show, getCurrentLocation }) => {
   const [opened, setOpened] = useState(show);
 
   const handleClick = () => {

@@ -5,6 +5,7 @@ let i = 0;
 // eslint-disable-next-line react/display-name
 const AutoCompleteItem = forwardRef(
   ({ description, value, image, placeType, ...others }, ref) => {
+    console.log("Auto complete : ", description);
     return (
       <div ref={ref} key={value + i++} {...others}>
         <Group noWrap>

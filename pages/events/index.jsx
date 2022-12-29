@@ -1,13 +1,21 @@
 import TableScrollArea from "../../src/components/AdminPage/TableScrollArea/TableScrollArea";
 
-import { Container, TextInput, Grid, Pagination } from "@mantine/core";
+import {
+  Container,
+  TextInput,
+  Grid,
+  Pagination,
+  Badge,
+  Text,
+  Title,
+} from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
 import { useState } from "react";
 import { useGetEventsQuery } from "../../src/features/event/eventSlice";
 import EventPageCard from "../../src/components/EventsPage/EventPageCard";
-import { FooterSocial } from "../../src/components/HomePage/Footer/Footer";
+import FooterSocial from "../../src/components/HomePage/Footer/Footer";
 
-const AdminEventsPage = () => {
+const EventsPage = () => {
   const [activePage, setPage] = useState(1);
   const { data, isLoading, error } = useGetEventsQuery(activePage);
   if (error) return <p>cannot get data</p>;
@@ -15,6 +23,11 @@ const AdminEventsPage = () => {
   return (
     <>
       <Container size="md">
+        <Title align="center">Events</Title>
+        <Text size="sx">
+          Sort By <Badge ml="md"> date</Badge>
+        </Text>
+
         <Grid mt="lg">
           {data.events.map((event) => (
             <Grid.Col key={event._id} lg={4} xs={6}>
@@ -46,4 +59,4 @@ const AdminEventsPage = () => {
   );
 };
 
-export default AdminEventsPage;
+export default EventsPage;

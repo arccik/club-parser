@@ -1,5 +1,6 @@
 .container {
     width: 100wv;
+    height: 12%;
     margin: 0;
     /* background-color: red; */
     margin-bottom: -50px;
@@ -9,15 +10,11 @@
     width: 100%;
     margin: 0px;
 }
-.title {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    color: white;
-}
+
 .serachField {
+    width: 700px;
+}
+.searchSection {
     width: 800px;
     z-index: 10;
     position: absolute;
@@ -26,12 +23,24 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.calendar {
+    margin: auto;
+    background-color:white;
+    z-index: 100; 
+    border-radius: 20px; 
+}
 @media (max-width: 800px) {
-    .title {
-        top:20%;
+    .container {
+        height: 200px;
+    }
+    .searchSection  {
+        width: 400px;
+        align-items: center;
+        justify-content: center;
+        top: 160px;
     }
     .serachField {
-        width: 300px;
-        top: 180px;
+        width: 250px;
     }
+
 }

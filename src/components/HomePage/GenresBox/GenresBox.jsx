@@ -41,17 +41,28 @@ const GenresBox = () => {
   ));
 
   return (
-    <Card withBorder radius="md" m="md" className={classes.card}>
-      <Group position="apart">
-        <Text className={classes.title}>Check your Favorite Genre</Text>
-        {/* <Anchor size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
+    <>
+      <Text fz="xl" weight="bolder" ml="lg" mt="lg">
+        By Genres
+      </Text>
+      <Card
+        withBorder
+        radius="md"
+        size="sm"
+        ml="md"
+        mr="md"
+        className={classes.card}
+      >
+        <Group position="apart">
+          {/* <Anchor size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
           + 21 other services
         </Anchor> */}
-      </Group>
-      <SimpleGrid cols={3} mt="md">
-        {items}
-      </SimpleGrid>
-    </Card>
+        </Group>
+        <SimpleGrid cols={3} mt="md">
+          {items}
+        </SimpleGrid>
+      </Card>
+    </>
   );
 };
 

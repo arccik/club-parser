@@ -37,13 +37,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         // const loadedEvents = responseData.map((post) => {
         //   return post;
         // });
-        console.log("transformFromResponse", responseData);
         if (responseData) {
           return eventAdapter.setAll(initialState, responseData);
         }
       },
       providesTags: (result, error, arg) => {
-        if (error) [{ type: "Events", id: "LIST" }];
+        if (error) return [{ type: "Events", id: "LIST" }];
         return [
           { type: "Events", id: "LIST" },
           ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
@@ -114,6 +113,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return `/search/${searchTerm}`;
       },
       transformResponse: (response) => {
+        if (response[0].notFound) return response[0];
         return response.map((item) => ({
           placeType: item.placeType,
           id: item._id,

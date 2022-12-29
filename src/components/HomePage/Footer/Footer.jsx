@@ -1,4 +1,4 @@
-import { createStyles, Container, Group, ActionIcon } from "@mantine/core";
+import { Container, Group, ActionIcon } from "@mantine/core";
 import {
   IconBrandTwitter,
   IconBrandYoutube,
@@ -8,7 +8,7 @@ import Image from "next/image";
 
 import useStyles from "./styles";
 
-export function FooterSocial() {
+const FooterSocial = () => {
   const { classes } = useStyles();
 
   return (
@@ -34,4 +34,5 @@ export function FooterSocial() {
       </Container>
     </div>
   );
-}
+};
+export default FooterSocial;

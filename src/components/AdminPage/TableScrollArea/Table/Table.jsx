@@ -100,7 +100,7 @@ function sortData(
   );
 }
 
-export function TableSort({ data }) {
+export default function TableSort({ data }) {
   const [search, setSearch] = useState("");
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState(null);

@@ -10,6 +10,7 @@ import {
   IconLogout,
   IconLogin,
   IconPlus,
+  IconBrandDjango,
 } from "@tabler/icons";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
@@ -27,6 +28,7 @@ export default function Navigation() {
       label: "Venues",
     },
     { icon: <IconMap2 />, link: "/map", label: "Map" },
+    { icon: <IconBrandDjango />, link: "/genres", label: "Genres" },
   ];
 
   const list = items.map(({ icon, label, link }, index) => (

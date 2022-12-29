@@ -16,7 +16,7 @@ const EventById = ({ event }) => {
 export async function getStaticProps({ params }) {
   try {
     await dbConnect();
-    const data = await Event.findById(params.id);
+    const data = await Event.findById(params.id).populate("venue");
     const event = JSON.parse(JSON.stringify(data));
     return { props: { event }, revalidate: 30 };
   } catch (error) {

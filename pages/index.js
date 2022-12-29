@@ -1,6 +1,6 @@
 import Head from "next/head";
 import PlacesCardsGrid from "../src/components/HomePage/PlacesCardsGrid/PlacesCardsGrid";
-import { FooterSocial } from "../src/components/HomePage/Footer/Footer";
+import FooterSocial from "../src/components/HomePage/Footer/Footer";
 import { Container, LoadingOverlay } from "@mantine/core";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
@@ -38,8 +38,8 @@ export async function getStaticProps() {
 }
 
 export default function Home({ events, venues, oldEvents }) {
-  const location = useCurrentLocaiton();
-  const [showLocalLoad, setLoadLocal] = useLocalStorage({
+  const [location, error, getLocation] = useCurrentLocaiton();
+  const [showLocalLoad, setShowLoadLocal] = useLocalStorage({
     key: "loadLocal",
     defaultValue: true,
   });
@@ -62,7 +62,8 @@ export default function Home({ events, venues, oldEvents }) {
   if (eventError && venueError) return <p> Cannot fetch data</p>;
 
   const handleDialog = () => {
-    setLoadLocal(false);
+    setShowLoadLocal(false);
+    if (!location) getLocation();
   };
   return (
     <>
@@ -91,6 +92,7 @@ export default function Home({ events, venues, oldEvents }) {
             overlayBlur={2}
           />
           <PlacesCardsGrid venues={venuesByLocation || venues} />
+
           <GenresBox />
           {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
         </Container>

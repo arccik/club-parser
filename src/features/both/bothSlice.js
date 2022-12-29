@@ -52,6 +52,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    getByDate: builder.query({
+      query: (date) => `/bydate/${date}`,
+    }),
   }),
 });
 
@@ -59,4 +62,5 @@ export const {
   useGetNearByPlacesQuery,
   useGetUpcomingEventsForVenueQuery,
   useGetByGenresQuery,
+  useGetByDateQuery,
 } = extendedApiSlice;

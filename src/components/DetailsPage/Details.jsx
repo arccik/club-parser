@@ -18,7 +18,7 @@ import Link from "next/link";
 import { IconNavigation, IconEdit } from "@tabler/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { FooterSocial } from "../HomePage/Footer/Footer";
+import FooterSocial from "../HomePage/Footer/Footer";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import SimilarPlaces from "./SimilarPlaces/SimilarPlaces";
 import VenueCard from "./VenueCard/VanueCard";

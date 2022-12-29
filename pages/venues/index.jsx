@@ -3,7 +3,7 @@ import Loading from "../../src/utils/Loading/Loading";
 import { useState } from "react";
 import { useGetVenuesQuery } from "../../src/features/venue/venueSlice";
 import EventPageCard from "../../src/components/EventsPage/EventPageCard";
-import { FooterSocial } from "../../src/components/HomePage/Footer/Footer";
+import FooterSocial from "../../src/components/HomePage/Footer/Footer";
 
 const AdminEventsPage = () => {
   const [activePage, setPage] = useState(1);

@@ -43,12 +43,14 @@ export default async function handler(req, res) {
       let response = [...eventResponse, ...venueResponse];
       if (!response.length) {
         response.push({
-          placeType: "none",
-          id: "404",
+          notFound: true,
+          placeType: "event",
+          value: "Not found value",
+          label: "Not found label",
+          _id: "404",
           image: "/assets/logo.png",
-          label: "Nothing was found",
+          name: "Nothing was found",
           description: "Check you search query",
-          value: "Not Found",
         });
       }
 
