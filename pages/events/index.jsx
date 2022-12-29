@@ -20,12 +20,24 @@ const EventsPage = () => {
   const { data, isLoading, error } = useGetEventsQuery(activePage);
   if (error) return <p>cannot get data</p>;
   if (isLoading) return <Loading />;
+
+  const handleSort = (event) => {
+    const btnName = event.target.innerText.toLowerCase();
+  };
   return (
     <>
       <Container size="md">
         <Title align="center">Events</Title>
         <Text size="sx">
-          Sort By <Badge ml="md"> date</Badge>
+          Sort By
+          <Badge
+            ml="md"
+            onClick={(e) => console.log("Data clicked", e.target.innerText)}
+          >
+            date
+          </Badge>
+          <Badge ml="md"> Distance</Badge>
+          <Badge ml="md"> Price</Badge>
         </Text>
 
         <Grid mt="lg">

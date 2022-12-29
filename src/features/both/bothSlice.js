@@ -58,6 +58,17 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getFromDate: builder.query({
       query: (date) => `/bydate/${date}?fromDate=true`,
     }),
+    rate: builder.mutation({
+      query: ({ _id, score, type }) => {
+        return {
+          url: `/rate?type=${type}&id=${_id}&score=${score}`,
+          method: "PUT",
+        };
+      },
+      invalidatesTags: (result, error, _id) => [
+        { type: type === "event" ? "Events" : "Venues", _id },
+      ],
+    }),
   }),
 });
 
@@ -67,4 +78,5 @@ export const {
   useGetByGenresQuery,
   useGetByDateQuery,
   useGetFromDateQuery,
+  useRateMutation,
 } = extendedApiSlice;

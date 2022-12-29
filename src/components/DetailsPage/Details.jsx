@@ -66,7 +66,7 @@ export default function DetailsPage({ data, venue }) {
           </Text>
 
           <Group>
-            <Stars rating={data.rating} id={data._id} />
+            <Stars rating={data.rating} id={data._id} type={data.placeType} />
           </Group>
         </Group>
 

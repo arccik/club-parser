@@ -16,12 +16,13 @@ export default async function handler(req, res) {
       if (type === "event") {
         const event = await Event.findById(id);
         event.rating.push(score);
-        // event.ratedIPs.push(ip);
+        event.ratedIPs.push(ip);
         await event.save();
         return res.status(200).json({ message: `${type} rated ${score}` });
       } else if (type === "venue") {
         const venue = await Venue.findById(id);
-        venue.$inc("rating", 1);
+        venue.rating.push(score);
+        venue.ratedIPs.push(ip);
         await venue.save();
         return res.status(200).json(venue);
       }
