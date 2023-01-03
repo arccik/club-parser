@@ -13,7 +13,7 @@ const SmallMap = (props) => {
   // const [activeMarker, setActiveMarker] = useState(null);
 
   const coorinates = useMemo(
-    () => ({ lat: props.center[0], lng: props.center[1] }),
+    () => ({ lng: props.center[0], lat: props.center[1] }),
     [props.center]
   );
 
@@ -45,7 +45,7 @@ const SmallMap = (props) => {
       onLoad={onLoad}
       mapContainerClassName={styles.newMap}
     >
-      <Marker position={{ lat: props.center[0], lng: props.center[1] }} />
+      <Marker position={{ lng: props.center[0], lat: props.center[1] }} />
     </GoogleMap>
   );
 };

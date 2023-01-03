@@ -10,49 +10,37 @@ export default async function handler(req, res) {
       const searchString = req.query.search;
       if (!searchString) return res.send("ok");
 
-      // const eventResponse = await Event.find({
-      //   $search: {
-      //     index: "text",
-      //     text: {
-      //       query: searchString,
-      //       path: {
-      //         wildcard: "*",
-      //       },
-      //     },
-      //   },
-      // });
-      // const venueResponse = await Venue.find({
-      //   $search: {
-      //     index: "text",
-      //     text: {
-      //       query: searchString,
-      //       path: {
-      //         wildcard: "*",
-      //       },
-      //     },
-      //   },
-      // });
-
       const eventResponse = await Event.find({
-        $text: { $search: searchString },
+        $search: {
+          index: "text",
+          text: {
+            query: searchString,
+            path: {
+              wildcard: "*",
+            },
+          },
+        },
       });
       const venueResponse = await Venue.find({
-        $text: { $search: searchString },
+        $search: {
+          index: "text",
+          text: {
+            query: searchString,
+            path: {
+              wildcard: "*",
+            },
+          },
+        },
       });
 
+      // const eventResponse = await Event.find({
+      //   $text: { $search: searchString },
+      // });
+      // const venueResponse = await Venue.find({
+      //   $text: { $search: searchString },
+      // });
+
       let response = [...eventResponse, ...venueResponse];
-      if (!response.length) {
-        response.push({
-          notFound: true,
-          placeType: "event",
-          value: "Not found value",
-          label: "Not found label",
-          _id: "404",
-          image: "/assets/logo.png",
-          name: "Nothing was found",
-          description: "Check you search query",
-        });
-      }
 
       return res.status(200).json(response);
     }

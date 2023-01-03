@@ -12,7 +12,6 @@ export default async function handler(req, res) {
         : req.connection.remoteAddress;
 
       const { type, id, score } = req.query;
-      console.log("RATE ", type, id, score);
       if (type === "event") {
         const event = await Event.findById(id);
         event.rating.push(score);

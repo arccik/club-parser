@@ -9,13 +9,17 @@ import Image from "next/image";
 import useStyles from "./styles";
 
 const FooterSocial = () => {
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
 
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
         <Image
-          src="/assets/logo.png"
+          src={
+            theme.colorScheme === "light"
+              ? "/assets/logo.png"
+              : "/assets/white-logo.png"
+          }
           width={120}
           height={60}
           alt="StripRadar logo"

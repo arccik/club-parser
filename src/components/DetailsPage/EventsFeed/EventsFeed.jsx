@@ -1,10 +1,20 @@
-import { Card, Text, Badge, Group, Avatar, Title, Loader } from "@mantine/core";
+import {
+  Card,
+  Text,
+  Badge,
+  Group,
+  Avatar,
+  Title,
+  Loader,
+  Stack,
+} from "@mantine/core";
 import { useGetUpcomingEventsForVenueQuery } from "../../../features/both/bothSlice";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
 dayjs.extend(relativeTime);
-const EventsFeed = ({ venueId }) => {
+const EventsFeed = ({ venueId, size }) => {
+  console.log("Event Feeds", size);
   const {
     data: events,
     isLoading,
@@ -20,10 +30,14 @@ const EventsFeed = ({ venueId }) => {
       </Text>
     );
   return (
-    <>
-      <Title order={4}>Upcoming Events</Title>
+    <Stack spacing={0} m="sm">
+      {size == "mini" ? (
+        <Title order={6}>Next events</Title>
+      ) : (
+        <Title order={4}>Upcoming Events</Title>
+      )}
       {events.map((event) => (
-        <Group noWrap spacing="xs" m="md" key={event._id}>
+        <Group noWrap spacing="xs" key={event._id}>
           <Group spacing="xs" noWrap>
             <Avatar size={20} src={event.image} />
             <Text
@@ -31,7 +45,7 @@ const EventsFeed = ({ venueId }) => {
               component={Link}
               href={`/details/events/${event._id}`}
             >
-              {event.name}
+              {event.name.slice(0, 20)}
             </Text>
           </Group>
           <Text size="xs" color="dimmed">
@@ -42,7 +56,7 @@ const EventsFeed = ({ venueId }) => {
           </Text>
         </Group>
       ))}
-    </>
+    </Stack>
   );
 };
 

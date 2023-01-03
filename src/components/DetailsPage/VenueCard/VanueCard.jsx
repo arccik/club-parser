@@ -45,7 +45,13 @@ const VenueCard = ({ venue }) => {
         href={`/details/venues/${venue._id}`}
       >
         <Group noWrap spacing={0}>
-          <Image src={venue.image} height={140} width={140} alt={venue.name} />
+          <Image
+            src={venue.image}
+            height={100}
+            width={100}
+            alt={venue.name}
+            withPlaceholder
+          />
           <div className={classes.body}>
             <Text className={classes.title} mt="xs" mb="md">
               {venue.name}
@@ -53,7 +59,9 @@ const VenueCard = ({ venue }) => {
             <Group noWrap spacing="xs">
               <Group spacing="xs" noWrap>
                 <IconHome />
-                <Text size="xs">{venue.address}</Text>
+                <Text size="xs">
+                  {venue.address}, {venue.postcode}
+                </Text>
               </Group>
             </Group>
           </div>

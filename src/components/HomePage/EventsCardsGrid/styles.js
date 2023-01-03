@@ -1,7 +1,6 @@
 import { createStyles } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   card: {
-    margin: 0,
     transition: "transform 150ms ease, box-shadow 150ms ease",
     "&:hover": {
       transform: "scale(1.01)",
@@ -11,14 +10,16 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    fontSize: "1.2rem",
     fontWeight: 600,
-    width: 140,
+    width: 220,
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
     "&:hover": {
       textOverflow: "unset",
-      zIndex: 10,
+      display: "block",
+      zIndex: 100,
     },
   },
   placesNearBy: {

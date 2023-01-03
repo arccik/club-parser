@@ -7,6 +7,7 @@ export default async function handler(req, res) {
     await dbConnect();
     const { coords } = req.query;
     const { venueid } = req.query;
+
     if (venueid) {
       const events = await Event.find({ venue: venueid })
         .sort({ startdate: 1 })

@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 export default function CardsCarousel({ events }) {
   const theme = useMantineTheme();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
-  const slides = events.map((item) => (
+  const slides = events?.map((item) => (
     <Carousel.Slide key={item._id}>
       <Card
         image={item.image}
@@ -21,12 +21,14 @@ export default function CardsCarousel({ events }) {
   return (
     <Container
       style={{
-        boxShadow: "0 8px 8px -4px lightblue",
+        marginTop: -20,
+        boxShadow:
+          "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
         backgroundColor: "black",
       }}
     >
       <Text fz="xl" color="white" weight="bolder">
-        Upcoming events
+        Recomended
       </Text>
       <Carousel
         loop

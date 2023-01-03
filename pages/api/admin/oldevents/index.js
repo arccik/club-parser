@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   try {
     await dbConnect();
     if (req.method === "GET") {
-      const events = await Event.find({ startdate: { $lt: new Date() } });
+      const events = await Event.find({ startdate: { $lte: new Date() } });
       return res.status(200).json(events);
     } else {
       return res.status(404).json({

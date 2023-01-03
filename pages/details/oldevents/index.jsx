@@ -1,7 +1,7 @@
 import { Title } from "@mantine/core";
 import { useGetOldEventsQuery } from "../../../src/features/event/eventSlice";
 import Loading from "../../../src/utils/Loading/Loading";
-import PlacesCardsGrid from "../../../src/components/HomePage/PlacesCardsGrid/PlacesCardsGrid";
+import PlacesCardsGrid from "../../../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
 
 const OldEventsPage = () => {
   const { data, isLoading, isError, error } = useGetOldEventsQuery();

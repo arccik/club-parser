@@ -1,9 +1,12 @@
 import dbConnect from "../../../../src/utils/dbConnect";
 import Event from "../../../../src/models/event-model";
+import Venue from "../../../../src/models/venue-model";
+import Artist from "../../../../src/models/artist-model";
+
 export default async function handler(req, res) {
   try {
     await dbConnect();
-    
+
     const { page } = req.query;
     const { coords } = req.query;
     const PAGE_LIMIT = 12;
@@ -33,16 +36,19 @@ export default async function handler(req, res) {
                   type: "Point",
                   coordinates: location,
                 },
-                maxDistance: 1000 * 1000,
+                maxDistance: 1000 * 10000,
                 spherical: true,
                 distanceField: "distance",
                 distanceMultiplier: 0.001,
               },
             },
           ]).limit(10);
+          await Artist.populate(eventsWithDistance, { path: "artists" });
+          await Venue.populate(eventsWithDistance, { path: "venue" });
+
           return res.status(200).json(eventsWithDistance);
         } else {
-          const events = await Event.find({});
+          const events = await Event.find({}).limit(100);
           return res.status(200).json(events);
         }
 

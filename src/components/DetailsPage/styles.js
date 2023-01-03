@@ -2,7 +2,7 @@ import { createStyles } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   card: {
     margin: "auto",
-    width: 600,
+    // width: 600,
     [theme.fn.smallerThan("xs")]: {
       width: "100%",
     },
@@ -26,7 +26,7 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     lineHeight: 1,
     fontSize: "larger",
-    marginBottom: 20,
+    // marginBottom: 20,
     fontSize: 24,
   },
   mapContainer: {

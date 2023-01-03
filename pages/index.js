@@ -1,48 +1,47 @@
 import Head from "next/head";
-import PlacesCardsGrid from "../src/components/HomePage/PlacesCardsGrid/PlacesCardsGrid";
+import EventsCardsGrid from "../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
 import FooterSocial from "../src/components/HomePage/Footer/Footer";
-import { Container, LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Title } from "@mantine/core";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
-import Venue from "../src/models/venue-model";
-import Event from "../src/models/event-model";
 import dbConnect from "../src/utils/dbConnect";
 import Hero from "../src/components/HomePage/Hero/Hero";
+import Event from "../src/models/event-model";
 import OldEvents from "../src/components/HomePage/OldEvents/OldEvents";
 import GenresBox from "../src/components/HomePage/GenresBox/GenresBox";
 import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
-import { useGetVenueByLocationQuery } from "../src/features/venue/venueSlice";
 import LoadLocalDialog from "../src/components/HomePage/LoadLocalDigalog/LoadLocalDialog";
 import Loading from "../src/utils/Loading/Loading";
 import { useLocalStorage } from "@mantine/hooks";
+import Artist from "../src/models/artist-model";
+import Venue from "../src/models/venue-model";
 
 export async function getStaticProps() {
   await dbConnect();
-  // prettier-ignore
-  const events = await Event.find({ startdate: { $gte: new Date() } }).limit(
-    10
-  );
-  const venues = await Venue.find().limit(10);
-  // prettier-ignore
-  const oldEvents = await Event.find().sort({ startdate: -1 }).limit(3);
+  const events = await Event.find()
+    .populate({ path: "artists", model: Artist })
+    .populate({ path: "venue", model: Venue })
+    .limit(10);
+  const oldEvents = await Event.find().sort({ startdate: 1 }).limit(3);
 
   return {
     props: {
       events: JSON.parse(JSON.stringify(events)),
-      venues: JSON.parse(JSON.stringify(venues)),
       oldEvents: JSON.parse(JSON.stringify(oldEvents)),
     },
     revalidate: 30,
   };
 }
 
-export default function Home({ events, venues, oldEvents }) {
+export default function Home({ events, oldEvents }) {
   const [location, error, getLocation] = useCurrentLocaiton();
+
   const [showLocalLoad, setShowLoadLocal] = useLocalStorage({
     key: "loadLocal",
     defaultValue: true,
   });
+
   const {
     data: eventsByLocation,
     isLoading: isEventsLoading,
@@ -50,21 +49,15 @@ export default function Home({ events, venues, oldEvents }) {
   } = useGetEventsByLocationQuery(location, {
     skip: !location || showLocalLoad,
   });
-  const {
-    data: venuesByLocation,
-    isLoading: isVenuesLoading,
-    error: venueError,
-  } = useGetVenueByLocationQuery(location, {
-    skip: !location || showLocalLoad,
-  });
 
-  if (isVenuesLoading || isEventsLoading) return <Loading />;
-  if (eventError && venueError) return <p> Cannot fetch data</p>;
+  if (isEventsLoading) return <Loading />;
+  if (eventError) return <p> Cannot fetch data</p>;
 
   const handleDialog = () => {
     setShowLoadLocal(false);
     if (!location) getLocation();
   };
+  console.log("Main Page : ", eventsByLocation);
   return (
     <>
       <Head>
@@ -79,23 +72,29 @@ export default function Home({ events, venues, oldEvents }) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         ></meta>
       </Head>
-      <LoadLocalDialog setAgree={handleDialog} show={showLocalLoad} />
-      <Hero />
-      <Search />
-      <main>
-        <Container px={0}>
-          {events.length ? (
-            <Carousel events={eventsByLocation || events} />
-          ) : null}
-          <LoadingOverlay
-            visible={isEventsLoading || isVenuesLoading}
-            overlayBlur={2}
-          />
-          <PlacesCardsGrid venues={venuesByLocation || venues} />
+      <main style={{ padding: 0, margin: 0 }}>
+        <LoadLocalDialog setAgree={handleDialog} show={showLocalLoad} />
+        <Hero />
+        <Search />
+        {events.length ? <Carousel events={events} /> : null}
+        <LoadingOverlay visible={isEventsLoading} overlayBlur={2} />
+        <Title
+          mt="md"
+          order={3}
+          variant="gradient"
+          gradient={{ from: "white", to: "dark", deg: 90 }}
+          sx={{ fontFamily: "Greycliff CF, sans-serif" }}
+          fz="xl"
+          fw={700}
+        >
+          Upcoming Events
+        </Title>
+        <EventsCardsGrid
+          events={eventsByLocation?.length ? eventsByLocation : events}
+        />
 
-          <GenresBox />
-          {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
-        </Container>
+        <GenresBox />
+        {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
       </main>
       <FooterSocial />
     </>

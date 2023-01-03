@@ -7,6 +7,20 @@ export default async function handler(req, res) {
   try {
     await dbConnect();
     const { fromDate, date } = req.query;
+    const { sortby } = req.query;
+
+    const { page } = req.query;
+    const { coords } = req.query;
+    const PAGE_LIMIT = 20;
+    const startIndex = (Number(page) - 1) * PAGE_LIMIT;
+
+    if (sortby) {
+      const events = await Event.find()
+        .sort({ [sortby]: 1 })
+        .limit(PAGE_LIMIT)
+        .skip(startIndex);
+      return res.status(200).json(events);
+    }
     if (fromDate) {
       const events = await Event.find()
         .sort({ startdate: 1 })

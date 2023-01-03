@@ -6,12 +6,10 @@ import {
   Badge,
   Button,
   Group,
-  Title,
   Blockquote,
   ActionIcon,
   TextInput,
 } from "@mantine/core";
-import Error from "next/error";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -24,7 +22,6 @@ const UniversalCards = ({ data, cardType }) => {
   const handleSearch = (value) => {
     setSearchValue(value);
     if (!value) {
-      console.log("value empty", value);
       return setFiltredData(data);
     }
     const filterd = filtredData.filter((v) => {
@@ -32,7 +29,6 @@ const UniversalCards = ({ data, cardType }) => {
       return v.toString().match(re);
     });
     setFiltredData(filterd);
-    console.log("Filtred Data: ", filterd);
   };
 
   return (

@@ -1,14 +1,24 @@
-import Event from "../models/event-model";
-import Venue from "../models/venue-model";
+import Event from "../../models/event-model";
+import saveVenue from "./saveVenue";
+import getArtistsIDs from "./getArtistsIDs";
 
 export default async function saveEventToDB(data) {
   try {
-    const result = await Event.findOne({ eventId: data?.id })
-      .select("eventId")
-      .lean();
-    if (!result) {
-      const venue = await Venue.find({ venueId: data.venue?.id });
-      await Event.create({
+    const event = await Event.findOne({ eventId: data?.id }).select("eventId");
+    console.log("DOes event Exist ? ", event);
+    if (!event) {
+      console.log("Event not in DB, creating new one");
+
+      // const promisAll = await Promise.all([
+      //   saveVenue(data.venue),
+      //   getArtistsIDs(data.artists),
+      // ]);
+      let savedVenue = await saveVenue(data.venue);
+
+      const genres =
+        data.genres.length > 0 && data.genres.map((genre) => genre.name);
+      const artistIDs = await getArtistsIDs(data.artists);
+      return await Event.create({
         eventId: data?.id,
         name: data?.eventname,
         description: data?.description,
@@ -20,7 +30,7 @@ export default async function saveEventToDB(data) {
         country: data?.venue.country,
         location: {
           type: "Point",
-          coordinates: [data?.venue.latitude, data?.venue.longitude],
+          coordinates: [data?.venue.longitude, data?.venue.latitude],
         },
         type: "Event",
         phone: data?.venue.phone,
@@ -35,7 +45,9 @@ export default async function saveEventToDB(data) {
         close: data?.openingtimes.doorsclose,
         minage: data?.minage || 18,
         price: data?.entryprice,
-        venue: venue[0],
+        venue: savedVenue,
+        genres: genres,
+        artists: artistIDs,
       });
     }
   } catch (error) {

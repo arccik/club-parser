@@ -28,9 +28,9 @@ const useCurrentLocation = () => {
     );
   };
 
-  useEffect(() => {
-    getLocation();
-  }, []);
+  // useEffect(() => {
+  //   getLocation();
+  // }, []);
 
   return [location, error, getLocation];
 };

@@ -31,10 +31,10 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       transformFromResponse: (responseData) => {
         return bothAdapter.setAll(initialState, responseData);
       },
-      providesTags: ({ result }, error, arg) => {
+      providesTags: (result, error, arg) => {
         if (!result) return [{ type: "Events", id: "LIST" }];
         else {
-          return [...result.map(({ _id }) => ({ type, _id: _id }))];
+          return [...result.map(({ _id }) => ({ type: "Events", _id: _id }))];
         }
       },
     }),
@@ -53,10 +53,10 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getByDate: builder.query({
-      query: (date) => `/bydate/${date}`,
+      query: (date) => `/sortby?date=${date}`,
     }),
     getFromDate: builder.query({
-      query: (date) => `/bydate/${date}?fromDate=true`,
+      query: (date) => `/sortby?date=${date}?fromDate=true`,
     }),
     rate: builder.mutation({
       query: ({ _id, score, type }) => {

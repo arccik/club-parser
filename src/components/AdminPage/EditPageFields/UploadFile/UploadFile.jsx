@@ -37,7 +37,6 @@ const UploadFile = (props) => {
         <div style={{ position: "relative" }}>
           <Image
             mt="lg"
-            fill
             radius="lg"
             height={300}
             src={file}

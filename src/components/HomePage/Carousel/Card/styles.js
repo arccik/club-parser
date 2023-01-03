@@ -49,7 +49,6 @@ const useStyles = createStyles((theme) => {
     },
     textBackground: {
       opacity: 0.8,
-
       backgroundColor: "black",
       boxShadow: "10px 0 0px 0px black, -10px 0 0px 0px black",
     },

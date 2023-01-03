@@ -14,9 +14,9 @@ function MyApp({ Component, pageProps }) {
     <UserProvider>
       <Provider store={store}>
         <MantineProvider
+          theme={{ colorScheme: "dark" }}
           withGlobalStyles
           withNormalizeCSS
-          theme={{ colorSchema: "light" }}
         >
           <ApplicationContainer>
             <Component {...pageProps} />

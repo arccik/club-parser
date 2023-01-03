@@ -1,4 +1,10 @@
-import { ActionIcon, AppShell, Group, Header } from "@mantine/core";
+import {
+  ActionIcon,
+  AppShell,
+  Group,
+  Header,
+  useMantineTheme,
+} from "@mantine/core";
 import { useRouter } from "next/router";
 import Navigation from "./AppHeader/BurgerMenu/Menu";
 
@@ -6,13 +12,23 @@ import { IconMapPin } from "@tabler/icons";
 import Image from "next/image";
 
 export const ApplicationContainer = ({ children }) => {
+  const theme = useMantineTheme();
   const router = useRouter();
   return (
     <AppShell
-      fixed
+      // fixed
       padding={0}
       header={
-        <Header height={60} p="md">
+        <Header
+          height={60}
+          p="md"
+          style={{
+            backgroundColor:
+              theme.colorScheme === "dark"
+                ? theme.colors.dark[7]
+                : theme.colors.dark[4],
+          }}
+        >
           <div
             style={{
               display: "flex",
@@ -23,7 +39,11 @@ export const ApplicationContainer = ({ children }) => {
           >
             <Image
               onClick={() => router.push("/")}
-              src="/assets/logo.png"
+              src={
+                theme.colorScheme === "light"
+                  ? "/assets/logo.png"
+                  : "/assets/white-logo.png"
+              }
               alt="StripRadar logo"
               width={120}
               height={60}

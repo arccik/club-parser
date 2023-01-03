@@ -31,7 +31,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     }),
     getEventsByLocation: builder.query({
       query: (coords) => {
-        return `/admin/events?coords=${coords.lat},${coords.lng}`;
+        return `/admin/events?coords=${coords.lng},${coords.lat}`;
       },
       transformFromResponse: (responseData) => {
         // const loadedEvents = responseData.map((post) => {
@@ -125,7 +125,15 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: (result, error, arg) => {
         if (error) return [];
-
+        if (result.notFound) return [{ type: "Events", _id: "LIST" }];
+        return [...result.map(({ _id }) => ({ type: "Events", _id: _id }))];
+      },
+    }),
+    getSortedEvents: builder.query({
+      query: ({ sortValue, activePage }) =>
+        `/sortby?sortby=${sortValue}&page=${activePage}`,
+      providesTags: (result, error, arg) => {
+        if (error) return [];
         return [...result.map(({ _id }) => ({ type: "Events", _id: _id }))];
       },
     }),
@@ -138,6 +146,7 @@ export const {
   useGetEventByIdQuery,
   useSearchEventsQuery,
   useGetOldEventsQuery,
+  useGetSortedEventsQuery,
   useAddNewEventMutation,
   useDeleteEventMutation,
   useUpdateEventMutation,

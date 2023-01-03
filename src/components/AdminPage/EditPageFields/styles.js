@@ -17,7 +17,7 @@ const useStyles = createStyles((theme) => ({
       "0 1px 3px rgb(0 0 0 / 5%), rgb(0 0 0 / 5%) 0px 28px 23px -7px, rgb(0 0 0 / 4%) 0px 12px 12px -7px",
     border: "1px solid #e9ecef",
     "&:hover, &:focus": {
-      backgroundColor: "lightblue",
+      // backgroundColor: "lightblue",
       opacity: 0.4,
       boxShadow: "2px 2px 2px red",
     },

@@ -7,7 +7,6 @@ import {
   ActionIcon,
   Badge,
   Accordion,
-  Avatar,
   Title,
 } from "@mantine/core";
 import Stars from "./Stars/Stars";
@@ -25,8 +24,8 @@ import VenueCard from "./VenueCard/VanueCard";
 import EventsFeed from "./EventsFeed/EventsFeed";
 dayjs.extend(relativeTime);
 
-export default function DetailsPage({ data, venue }) {
-  const { classes, theme } = useStyles();
+export default function DetailsPage({ data }) {
+  const { classes } = useStyles();
   const { user } = useUser();
 
   return (
@@ -37,27 +36,31 @@ export default function DetailsPage({ data, venue }) {
         </Card.Section>
 
         <Card.Section className={classes.distanceSection}>
-          <div>
-            <Text color="dimmed" size="xs">
-              {dayjs(data.startdate).format("D MMMM YYYY")}
-            </Text>
-            <Badge
-              variant="gradient"
-              gradient={{ from: "black", to: "white" }}
-              size="sm"
-            >
-              {dayjs(data.startdate).fromNow()}
-            </Badge>
-          </div>
-          <div>
-            <Text size="xs" color="dimmed">
-              Open
-            </Text>
+          {data.placeType === "event" && (
+            <div>
+              <Text color="dimmed" size="xs">
+                {dayjs(data.startdate).format("D MMMM YYYY")}
+              </Text>
+              <Badge
+                variant="gradient"
+                gradient={{ from: "black", to: "white" }}
+                size="sm"
+              >
+                {dayjs(data.startdate).fromNow()}
+              </Badge>
+            </div>
+          )}
+          {data.open && (
+            <div>
+              <Text size="xs" color="dimmed">
+                Open
+              </Text>
 
-            <Text weight={500} size="sm">
-              {`${data.open} - ${data.close}`}
-            </Text>
-          </div>
+              <Text weight={500} size="sm">
+                {`${data.open} - ${data.close}`}
+              </Text>
+            </div>
+          )}
         </Card.Section>
 
         <Group position="apart" mt="sm">
@@ -74,19 +77,23 @@ export default function DetailsPage({ data, venue }) {
           {data.description || ""}
         </Text>
 
-        {Array.isArray(data.genres) && data.genres.length ? (
-          <div>
-            <Text size="md" color="dimmed">
+        {data.genres && data.placeType === "event" && (
+          <>
+            <Title mt="lg" mb="sm" size="md">
               Genres
-            </Text>
-            <Text weight={500} size="sm">
-              {data.genres.join(" / ")}
-            </Text>
-          </div>
-        ) : null}
+            </Title>
+            <Group spacing={0} m={0} ml="sm" mt="sm">
+              {data.genres.map((genre) => (
+                <Badge m={0} key={genre} color="light">
+                  {genre}
+                </Badge>
+              ))}
+            </Group>
+          </>
+        )}
 
         {data.placeType === "event" ? (
-          <VenueCard venue={venue} />
+          <VenueCard venue={data.venue} />
         ) : (
           <EventsFeed venueId={data._id} />
         )}
@@ -121,7 +128,7 @@ export default function DetailsPage({ data, venue }) {
           <Accordion.Item value="photos" variant="filled" mb="lg">
             <Accordion.Control>Address</Accordion.Control>
             <Accordion.Panel>
-              <Text size="sm">{data.formatted_address}</Text>
+              <Text size="sm">{data.formatted_address || data.address}</Text>
               <Text size="sm">{data.postcode}</Text>
               <Text size="sm">{data.country}</Text>
             </Accordion.Panel>
@@ -139,7 +146,7 @@ export default function DetailsPage({ data, venue }) {
           component="a"
           leftIcon={<IconNavigation />}
           target="_blank"
-          href={`https://www.google.com/maps?q=${data.location.coordinates[0]}, ${data.location.coordinates[1]}`}
+          href={`https://www.google.com/maps?q=${data.location.coordinates[1]}, ${data.location.coordinates[0]}`}
         >
           Get me there
         </Button>

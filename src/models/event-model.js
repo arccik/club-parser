@@ -29,16 +29,13 @@ const EventSchema = new Schema(
     enddate: { type: Date },
     minage: { type: Number },
     price: { type: String },
+    artists: [{ type: Schema.Types.ObjectId, ref: "Artist" }],
   },
   { timestamps: true }
 );
-
 
 EventSchema.index({ name: "text", description: "text", genres: "text" });
 
 EventSchema.index({ location: "2dsphere" });
 
 export default models.Event || model("Event", EventSchema);
-
-
-

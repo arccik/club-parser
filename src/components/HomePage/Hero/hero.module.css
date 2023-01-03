@@ -6,6 +6,10 @@
     /* margin-bottom: -50px; */
     padding: 0px;
 }
+.heroImage {
+    object-fit: cover;
+    width: 100%;
+}
 .video {
     width: 100%;
 }
@@ -23,13 +27,13 @@
 }
 .calendar {
     margin: auto;
-    background-color: rgb(232, 232, 232); 
+    background-color: black; 
+    border-radius: 20px;
     z-index: 100;
-    border-radius: 20px; 
 }
 .calendarContainer {
     background-color: black;
-    margin-top: -100px;
+    margin-top: -80px;
 }
 @media (max-width: 800px) {
     .container {

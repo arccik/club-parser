@@ -24,12 +24,7 @@ const Stars = ({ rating, id, type }) => {
     await rate({ _id: id, score, type });
   };
   return (
-    <Rating
-      style={{ marginTop: -15 }}
-      onChange={handleClick}
-      value={result}
-      readOnly={fromStorage}
-    />
+    <Rating onChange={handleClick} value={result} readOnly={fromStorage} />
   );
 };
 
