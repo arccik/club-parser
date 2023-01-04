@@ -25,7 +25,7 @@ const useStyles = createStyles((theme) => {
       marginTop: -300,
       "@media (max-width: 600px)": {
         width: "90%",
-        marginTop: -100,
+        marginTop: -120,
       },
     },
     serachField: {

@@ -10,7 +10,13 @@ const MapPopUp = (props) => {
     <>
       <Card shadow="sm" radius="md" withBorder>
         <Card.Section>
-          <Image src={image} height={160} alt="Norway" />
+          <Image
+            src={image}
+            height={200}
+            fit="contain"
+            alt={name}
+            withPlaceholder
+          />
         </Card.Section>
 
         <Group position="apart" mt="md" mb="xs">

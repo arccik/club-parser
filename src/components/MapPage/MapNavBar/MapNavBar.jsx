@@ -1,6 +1,5 @@
 import { Loader, SegmentedControl } from "@mantine/core";
 import useStyles from "./styles";
-import { useState } from "react";
 
 export default function MapNavBar({ handleClick }) {
   const { classes } = useStyles();
@@ -19,9 +18,7 @@ export default function MapNavBar({ handleClick }) {
       onClick={onSelectHandle}
       defaultValue={"venues"}
       data={[
-        { label: "All", value: "all" },
         { label: "Clubs", value: "venues" },
-        // { label: "Bars", value: "bars" },
         { label: "Events", value: "events" },
       ]}
       classNames={classes}

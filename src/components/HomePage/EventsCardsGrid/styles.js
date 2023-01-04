@@ -21,6 +21,9 @@ const useStyles = createStyles((theme) => ({
       display: "block",
       zIndex: 100,
     },
+    "@media (min-width: 520px)": {
+      width: "70%",
+    },
   },
   placesNearBy: {
     color: theme.black,

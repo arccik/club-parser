@@ -9,7 +9,6 @@ import {
   IconBuildingSkyscraper,
   IconLogout,
   IconLogin,
-  IconPlus,
   IconBrandDjango,
 } from "@tabler/icons";
 import { useUser } from "@auth0/nextjs-auth0/client";
