@@ -17,6 +17,7 @@ export default async function handler(req, res) {
             "createdAt",
             "views",
             "location",
+            "ratedIPs",
           ].includes(v)
       );
       return res.status(200).send(fields);
@@ -37,6 +38,7 @@ export default async function handler(req, res) {
             "updatedAt",
             "location",
             "town",
+            "ratedIPs",
           ].includes(v)
       );
       return res.status(200).send(fields);

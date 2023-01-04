@@ -1,22 +1,15 @@
-import Image from "next/image";
-import styles from "./hero.module.css";
-
+// import Image from "next/image";
+import useStyles from "./styles";
+import { Image } from "@mantine/core";
 const Hero = () => {
+  const { classes } = useStyles();
   return (
-    <div className={styles.container}>
-      {/* <video autoPlay muted loop className={styles.video}>
-        <source src="/assets/next-stripradar-intro.mov" type="video/mp4" />
-      </video> */}
-      {/* <Image
+    <div className={classes.container}>
+      <Image
         src="/assets/hero-stripradar.png"
-        fill
+        fill="true"
         alt="hero image"
-        className={styles.heroImage}
-      /> */}
-      <img
-        src="/assets/hero-stripradar.png"
-        alt="hero-img"
-        className={styles.heroImage}
+        className={classes.heroImage}
       />
     </div>
   );

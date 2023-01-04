@@ -43,8 +43,14 @@ export default async function handler(req, res) {
               },
             },
           ]).limit(10);
-          await Artist.populate(eventsWithDistance, { path: "artists" });
-          await Venue.populate(eventsWithDistance, { path: "venue" });
+          await Artist.populate(eventsWithDistance, {
+            path: "artists",
+            model: Artist,
+          });
+          await Venue.populate(eventsWithDistance, {
+            path: "venue",
+            model: Venue,
+          });
 
           return res.status(200).json(eventsWithDistance);
         } else {

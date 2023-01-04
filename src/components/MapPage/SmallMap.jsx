@@ -45,7 +45,7 @@ const SmallMap = (props) => {
       onLoad={onLoad}
       mapContainerClassName={styles.newMap}
     >
-      <Marker position={{ lng: props.center[0], lat: props.center[1] }} />
+      <Marker position={{ lat: props.center[0], lng: props.center[1] }} />
     </GoogleMap>
   );
 };

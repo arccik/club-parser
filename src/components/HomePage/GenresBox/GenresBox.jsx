@@ -3,8 +3,9 @@ import {
   Text,
   SimpleGrid,
   UnstyledButton,
-  Anchor,
   Group,
+  Container,
+  Anchor,
 } from "@mantine/core";
 import { IconVinyl } from "@tabler/icons";
 import Link from "next/link";
@@ -41,28 +42,28 @@ const GenresBox = () => {
   ));
 
   return (
-    <>
-      <Text fz="xl" weight="bolder" ml="lg" mt="lg">
-        By Genres
-      </Text>
-      <Card
-        withBorder
-        radius="md"
-        size="sm"
-        ml="md"
-        mr="md"
-        className={classes.card}
-      >
+    <Container
+      sx={{
+        "@media (max-width: 755px)": {
+          margin: 0,
+          padding: 0,
+        },
+      }}
+    >
+      <Card radius="sm" size="sm" className={classes.card}>
         <Group position="apart">
+          <Text fz="xl" weight="bolder">
+            By Genres
+          </Text>
           {/* <Anchor size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
-          + 21 other services
-        </Anchor> */}
+            All other Genres
+          </Anchor> */}
         </Group>
         <SimpleGrid cols={3} mt="md">
           {items}
         </SimpleGrid>
       </Card>
-    </>
+    </Container>
   );
 };
 

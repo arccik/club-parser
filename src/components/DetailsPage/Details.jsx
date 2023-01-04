@@ -8,6 +8,7 @@ import {
   Badge,
   Accordion,
   Title,
+  Container,
 } from "@mantine/core";
 import Stars from "./Stars/Stars";
 import useStyles from "./styles";
@@ -29,7 +30,7 @@ export default function DetailsPage({ data }) {
   const { user } = useUser();
 
   return (
-    <>
+    <Container px={0}>
       <Card withBorder className={classes.card}>
         <Card.Section>
           <Image src={data.image} alt={data.name} height={400} />
@@ -170,6 +171,6 @@ export default function DetailsPage({ data }) {
         />
       </Card>
       <FooterSocial />
-    </>
+    </Container>
   );
 }

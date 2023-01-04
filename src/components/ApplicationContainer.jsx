@@ -6,7 +6,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useRouter } from "next/router";
-import Navigation from "./AppHeader/BurgerMenu/Menu";
+import BurgerMenu from "./AppHeader/BurgerMenu/BurgerMenu";
 
 import { IconMapPin } from "@tabler/icons";
 import Image from "next/image";
@@ -62,7 +62,7 @@ export const ApplicationContainer = ({ children }) => {
               </ActionIcon>
             </Group>
 
-            <Navigation />
+            <BurgerMenu />
           </div>
         </Header>
       }

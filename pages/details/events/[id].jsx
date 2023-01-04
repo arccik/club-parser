@@ -3,6 +3,8 @@ import DetailsPage from "../../../src/components/DetailsPage/Details";
 import dbConnect from "../../../src/utils/dbConnect";
 import { useLoadScript } from "@react-google-maps/api";
 import Loading from "../../../src/utils/Loading/Loading";
+import Venue from "../../../src/models/venue-model";
+import Artist from "../../../src/models/artist-model";
 
 const EventById = ({ event }) => {
   const { isLoaded } = useLoadScript({
@@ -18,9 +20,16 @@ const EventById = ({ event }) => {
 export async function getStaticProps({ params }) {
   try {
     await dbConnect();
-    const preEvent = await Event.findById(params.id)
-      .populate("venue")
-      .populate("artists");
+    const preEvent = await Event.findById(params.id);
+    await Venue.populate(preEvent, {
+      path: "venue",
+      model: Venue,
+    });
+
+    await Artist.populate(preEvent, {
+      path: "artists",
+      model: Artist,
+    });
     const event = JSON.parse(JSON.stringify(preEvent));
 
     return { props: { event }, revalidate: 30 };

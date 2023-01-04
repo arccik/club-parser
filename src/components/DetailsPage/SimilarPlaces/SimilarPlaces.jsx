@@ -4,13 +4,11 @@ import SimilarCard from "./Card/Card";
 import { Carousel } from "@mantine/carousel";
 
 const SimilarPlaces = ({ coords, id }) => {
-  console.log("Similar places : coords : ", coords);
   const { data, isLoading, error } = useGetNearByPlacesQuery(coords);
   if (isLoading) return <Loader />;
   if (error) return <p>No Similar Found</p>;
 
   const cards = data?.map((place) => {
-    console.log("Similar places : ", place);
     if (place._id === id) return null;
     if (!place.open) return null;
     return (

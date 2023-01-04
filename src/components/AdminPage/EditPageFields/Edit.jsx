@@ -7,17 +7,16 @@ import {
   Notification,
   MultiSelect,
   Text,
-  TextInput,
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useRouter } from "next/router";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { IconX } from "@tabler/icons";
 import * as Yup from "yup";
 import useStyles from "./styles";
 import { useGetFieldsNamesQuery } from "../../../features/admin/adminSlice";
 import genres from "../../../utils/musicGenres";
 import UploadFile from "./UploadFile/UploadFile";
+import Loading from "../../../utils/Loading/Loading";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -42,7 +41,7 @@ const Edit = ({ data, onSave, onDelete }) => {
     if (errors) return <p>Cannot update Item</p>;
     if (response.status === "OK") return router.back();
   };
-
+  if (isLoading) return <Loading />;
   if (!data) router.back();
   return (
     <Container size="sm">
@@ -108,11 +107,22 @@ const Edit = ({ data, onSave, onDelete }) => {
                   />
                 );
               return (
-                <span key={field}>
-                  <Text mt="lg">{field.toUpperCase()}</Text>
-                  <Field name={field} className={classes.input} />
-                  <ErrorMessage name={field} />
-                </span>
+                <Textarea
+                  radius="md"
+                  size="md"
+                  name={field}
+                  key={field}
+                  label={field[0].toUpperCase() + field.slice(1)}
+                  // placeholder="C'om write something"
+                  autosize
+                  value={values[field]}
+                  onChange={(e) => setFieldValue(field, e.target.value)}
+                />
+                // <span key={field}>
+                //   <Text mt="lg">{field.toUpperCase()}</Text>
+                //   <Field name={field} className={classes.input} />
+                //   <ErrorMessage name={field} />
+                // </span>
               );
             })}
 

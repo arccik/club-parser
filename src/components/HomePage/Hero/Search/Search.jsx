@@ -1,20 +1,12 @@
 import {
-  TextInput,
   ActionIcon,
   useMantineTheme,
   Loader,
   Group,
-  Center,
   Transition,
-  GroupedTransition,
 } from "@mantine/core";
-import {
-  IconSearch,
-  IconArrowRight,
-  IconArrowLeft,
-  IconCalendar,
-} from "@tabler/icons";
-import classes from "../hero.module.css";
+import { IconSearch, IconArrowRight, IconCalendar } from "@tabler/icons";
+import useStyles from "../styles";
 
 import { useState } from "react";
 import { Autocomplete } from "@mantine/core";
@@ -24,6 +16,7 @@ import AutoCompleteItem from "./AutoCompleteItem";
 import { Calendar } from "@mantine/dates";
 
 const Search = () => {
+  const { classes } = useStyles();
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [itemPicked, setItemPicked] = useState(false);

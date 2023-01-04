@@ -14,7 +14,7 @@ import {
 } from "@tabler/icons";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-export default function Navigation() {
+const BurgerMenu = () => {
   const [active, setActive] = useState(0);
   const [opened, setOpened] = useState(false);
   const { user } = useUser();
@@ -128,4 +128,5 @@ export default function Navigation() {
       </Menu.Dropdown>
     </Menu>
   );
-}
+};
+export default BurgerMenu;

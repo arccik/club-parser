@@ -7,11 +7,12 @@ import MapNavBar from "../MapNavBar/MapNavBar";
 const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
   const [state, setState] = useState("venues");
   const { data: markers, error, isLoading } = useGetMarkersQuery(state);
+  console.log("Markers:: ? ", markers);
   if (isLoading) return <h2>Loading...</h2>;
   if (error) return <p>Error check console {console.error({ error })}</p>;
 
   const handleMarkerClick = (marker) => {
-    const coords = { lat: marker.coordinates[0], lng: marker.coordinates[1] };
+    const coords = { lat: marker.coordinates[1], lng: marker.coordinates[0] };
     mapRef.current.panTo(coords);
     mapRef.current.setZoom(18);
     handleActiveMarker(coords);
@@ -26,8 +27,8 @@ const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
 
   const getPosition = (coordinates) => {
     return {
-      lat: coordinates[0],
-      lng: coordinates[1],
+      lat: coordinates[1],
+      lng: coordinates[0],
     };
   };
   return (
@@ -61,7 +62,7 @@ const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
                 handleMarkerClick(house.location);
               }}
             >
-              {active?.lat === house.location.coordinates[0] ? (
+              {active?.lat === house.location.coordinates[1] ? (
                 <InfoWindow onCloseClick={() => setActive(null)}>
                   <>
                     <MapPopUp data={house} />

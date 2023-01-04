@@ -13,13 +13,14 @@ const useStyles = createStyles((theme) => ({
     boxSizing: "borderBox",
     alignItems: "center",
     borderRadius: 10,
-    boxShadow:
-      "0 1px 3px rgb(0 0 0 / 5%), rgb(0 0 0 / 5%) 0px 28px 23px -7px, rgb(0 0 0 / 4%) 0px 12px 12px -7px",
+    opacity: 0.4,
+    boxShadow: "2px 2px 2px red",
     border: "1px solid #e9ecef",
     "&:hover, &:focus": {
       // backgroundColor: "lightblue",
-      opacity: 0.4,
-      boxShadow: "2px 2px 2px red",
+
+      boxShadow:
+        "0 1px 3px rgb(0 0 0 / 5%), rgb(0 0 0 / 5%) 0px 28px 23px -7px, rgb(0 0 0 / 4%) 0px 12px 12px -7px",
     },
   },
 

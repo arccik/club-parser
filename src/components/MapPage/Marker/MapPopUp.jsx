@@ -15,7 +15,7 @@ const MapPopUp = (props) => {
 
         <Group position="apart" mt="md" mb="xs">
           <Text weight={500}>{name}</Text>
-          <OpenCloseBadge from={open} to={close} />
+          {open && close && <OpenCloseBadge from={open} to={close} />}
         </Group>
 
         <Text size="sm" color="dimmed">

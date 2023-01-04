@@ -57,7 +57,6 @@ export default function Home({ events, oldEvents }) {
     setShowLoadLocal(false);
     if (!location) getLocation();
   };
-  console.log("Main Page : ", eventsByLocation);
   return (
     <>
       <Head>
@@ -78,17 +77,7 @@ export default function Home({ events, oldEvents }) {
         <Search />
         {events.length ? <Carousel events={events} /> : null}
         <LoadingOverlay visible={isEventsLoading} overlayBlur={2} />
-        <Title
-          mt="md"
-          order={3}
-          variant="gradient"
-          gradient={{ from: "white", to: "dark", deg: 90 }}
-          sx={{ fontFamily: "Greycliff CF, sans-serif" }}
-          fz="xl"
-          fw={700}
-        >
-          Upcoming Events
-        </Title>
+
         <EventsCardsGrid
           events={eventsByLocation?.length ? eventsByLocation : events}
         />

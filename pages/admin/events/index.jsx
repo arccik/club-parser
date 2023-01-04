@@ -14,7 +14,6 @@ const AdminEventsPage = () => {
   const { data, isLoading, error } = useGetEventsQuery(activePage);
   const { user } = useUser();
 
-
   if (isLoading) return <Loading />;
   if (!user) return <ErrorPage statusCode={404} />;
   return (

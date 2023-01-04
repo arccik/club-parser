@@ -1,4 +1,4 @@
-import Navigation from "./BurgerMenu/Menu";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import { IconMapPin, ActionIcon } from "@tabler/icons";
 import Image from "next/image";
 import { Header, Group, useMantineTheme } from "@mantine/core";
@@ -40,7 +40,7 @@ export default function AppHeader() {
           </ActionIcon>
         </Group>
 
-        <Navigation />
+        <BurgerMenu />
       </div>
     </Header>
   );

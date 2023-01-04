@@ -13,8 +13,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
 dayjs.extend(relativeTime);
-const EventsFeed = ({ venueId, size }) => {
-  console.log("Event Feeds", size);
+const EventsFeed = ({ venueId }) => {
   const {
     data: events,
     isLoading,
@@ -31,11 +30,8 @@ const EventsFeed = ({ venueId, size }) => {
     );
   return (
     <Stack spacing={0} m="sm">
-      {size == "mini" ? (
-        <Title order={6}>Next events</Title>
-      ) : (
-        <Title order={4}>Upcoming Events</Title>
-      )}
+      <Title order={4}>Upcoming Events</Title>
+
       {events.map((event) => (
         <Group noWrap spacing="xs" key={event._id}>
           <Group spacing="xs" noWrap>

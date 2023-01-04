@@ -38,6 +38,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getVenuesForEvents: builder.query({
       query: () => `/admin/venues/venue-list`,
     }),
+    checkUser: builder.query({
+      query: (user) => `/admin/checkuser/${user.email}`,
+    }),
   }),
 });
 
@@ -47,4 +50,5 @@ export const {
   useGetFieldsNamesQuery,
   useGetDocumentsCountQuery,
   useGetVenuesForEventsQuery,
+  useCheckUserQuery,
 } = extendedApiSlice;
