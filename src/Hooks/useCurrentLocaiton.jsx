@@ -28,14 +28,6 @@ const useCurrentLocation = () => {
     );
   };
 
-  useEffect(() => {
-    if (location) {
-      return () =>
-        setInterval(() => {
-          getLocation();
-        }, 5000);
-    }
-  });
 
   return [location, error, getLocation];
 };

@@ -53,7 +53,7 @@ export default async function handler(req, res) {
       const result = [...venues, ...events];
       return res.status(200).json(result);
     }
-    return await Event.find().sort({ startdate: 1 }).limit(10);
+    return await Event.find({ startdate: { $gte: new Date() } }).limit(10);
   } catch (error) {
     return res.status(404).json({ message: error.message });
   }

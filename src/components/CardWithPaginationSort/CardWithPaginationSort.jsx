@@ -1,11 +1,7 @@
-import TableScrollArea from "../../src/components/AdminPage/TableScrollArea/TableScrollArea";
-
 import {
   Container,
-  TextInput,
   Grid,
   Pagination,
-  Badge,
   Text,
   Title,
   Divider,
@@ -13,27 +9,20 @@ import {
   Button,
   LoadingOverlay,
 } from "@mantine/core";
+import EventPageCard from "../../../src/components/EventsPage/EventPageCard";
+import FooterSocial from "../../../src/components/HomePage/Footer/Footer";
 import Loading from "../../src/utils/Loading/Loading";
-import { useState } from "react";
-import {
-  useGetEventsQuery,
-  useGetSortedEventsQuery,
-} from "../../src/features/event/eventSlice";
-import EventPageCard from "../../src/components/EventsPage/EventPageCard";
-import FooterSocial from "../../src/components/HomePage/Footer/Footer";
 
-const EventsPage = () => {
-  const [activePage, setPage] = useState(1);
-  const [sortValue, setSortValue] = useState("");
-  const { data, isLoading, error } = useGetEventsQuery(activePage);
+import { useGetSortedEventsQuery } from "../../src/features/event/eventSlice";
+
+const CardWithPaginationSort = ({ data }) => {
   const {
     data: sortedData,
     isLoading: isSortedLoading,
     error: sortedError,
   } = useGetSortedEventsQuery({ sortValue, activePage }, { skip: !sortValue });
   if (error) return <p>cannot get data</p>;
-  if (isLoading) return <Loading />;
-
+  if (isSortedLoading) return <Loading />;
   return (
     <>
       <Container size="md">
@@ -77,8 +66,8 @@ const EventsPage = () => {
         </Group>
         <Divider mt="sm" />
         <Grid mt="lg">
-          <LoadingOverlay visible={isSortedLoading} overlayBlur={2} />
-          {(sortedData || data.events).map((event) => (
+          <LoadingOverlay visible={isLoading} overlayBlur={2} />
+          {data.events.map((event) => (
             <Grid.Col key={event._id} lg={4} xs={6}>
               <EventPageCard event={event} />
             </Grid.Col>
@@ -108,4 +97,4 @@ const EventsPage = () => {
   );
 };
 
-export default EventsPage;
+export default CardWithPaginationSort;

@@ -13,7 +13,7 @@ const OldEventsPage = () => {
       <Title align="center" color="dimmed">
         Events Ended Recently
       </Title>
-      <PlacesCardsGrid venues={data} type="events" />;
+      <PlacesCardsGrid events={data} type="events" old={true} />;
     </>
   );
 };

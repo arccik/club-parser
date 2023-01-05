@@ -19,11 +19,12 @@ import Venue from "../src/models/venue-model";
 
 export async function getStaticProps() {
   await dbConnect();
-  const events = await Event.find()
+  const today = new Date();
+  const events = await Event.find({ startdate: { $gte: today } })
     .populate({ path: "artists", model: Artist })
     .populate({ path: "venue", model: Venue })
     .limit(10);
-  const oldEvents = await Event.find().sort({ startdate: 1 }).limit(3);
+  const oldEvents = await Event.find({ startdate: { $lt: today } }).limit(3);
 
   return {
     props: {

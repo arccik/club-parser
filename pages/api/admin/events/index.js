@@ -42,6 +42,16 @@ export default async function handler(req, res) {
                 distanceMultiplier: 0.001,
               },
             },
+            {
+              $match: {
+                startdate: { $gt: new Date() },
+              },
+            },
+            {
+              $sort: {
+                startdate: 1,
+              },
+            },
           ]).limit(10);
           await Artist.populate(eventsWithDistance, {
             path: "artists",

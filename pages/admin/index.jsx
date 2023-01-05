@@ -6,7 +6,6 @@ import Loading from "../../src/utils/Loading/Loading";
 
 const AdminPage = () => {
   const { user } = useUser();
-  console.log("ADMIN PANEL USER ", user);
 
   return (
     <Container size="sm">

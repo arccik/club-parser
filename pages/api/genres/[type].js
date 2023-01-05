@@ -7,7 +7,9 @@ export default async function handler(req, res) {
     await dbConnect();
     const { type } = req.query;
     if (type) {
-      const events = await Event.find().where("genres").in(type);
+      const events = await Event.find({ startdate: { $gt: new Date() } })
+        .where("genres")
+        .in(type);
       const venues = await Venue.find().where("genres").in(type);
       const data = [...events, ...venues];
       return res.status(200).json(data);

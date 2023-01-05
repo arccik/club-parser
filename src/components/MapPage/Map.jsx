@@ -21,7 +21,7 @@ const Map = () => {
   // mapId: "216185b90ab09587",
   const options = useMemo(
     () => ({
-      mapId: "216185b90ab09587",
+      mapId: "17ded2ca5b1b08df",
       disableDefaultUI: true,
       clickableIcons: false,
       gestureHandling: "greedy",

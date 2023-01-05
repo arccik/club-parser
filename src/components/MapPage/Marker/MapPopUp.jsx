@@ -7,38 +7,36 @@ const MapPopUp = (props) => {
     props.data;
   const router = useRouter();
   return (
-    <>
-      <Card shadow="sm" radius="md" withBorder>
-        <Card.Section>
-          <Image
-            src={image}
-            height={200}
-            fit="contain"
-            alt={name}
-            withPlaceholder
-          />
-        </Card.Section>
+    <Card shadow="sm" withBorder p="xs">
+      <Card.Section>
+        <Image
+          src={image}
+          height={200}
+          fit="contain"
+          alt={name}
+          withPlaceholder
+        />
+      </Card.Section>
 
-        <Group position="apart" mt="md" mb="xs">
-          <Text weight={500}>{name}</Text>
-          {open && close && <OpenCloseBadge from={open} to={close} />}
-        </Group>
+      <Group position="apart" mt="md" mb="xs">
+        <Text weight={500}>{name}</Text>
+        {open && close && <OpenCloseBadge from={open} to={close} />}
+      </Group>
 
-        <Text size="sm" color="dimmed">
-          {description}
-        </Text>
-        <Button
-          onClick={() => router.push(`/details/${placeType}s/${_id}`)}
-          variant="light"
-          color="blue"
-          fullWidth
-          mt="md"
-          radius="md"
-        >
-          Open
-        </Button>
-      </Card>
-    </>
+      <Text size="sm" color="dimmed">
+        {description}
+      </Text>
+      <Button
+        onClick={() => router.push(`/details/${placeType}s/${_id}`)}
+        variant="light"
+        color="blue"
+        fullWidth
+        mt="md"
+        radius="md"
+      >
+        Open
+      </Button>
+    </Card>
   );
 };
 

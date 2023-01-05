@@ -13,7 +13,9 @@ export default async function handler(req, res) {
 
       switch (type) {
         case "events":
-          const response = await Event.find().select(selectedField);
+          const response = await Event.find({
+            startdate: { $gte: new Date() },
+          }).select(selectedField);
           return res.status(200).json(response);
         case "venues":
           const venuesResponse = await Venue.find().select(selectedField);

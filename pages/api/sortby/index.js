@@ -15,20 +15,15 @@ export default async function handler(req, res) {
     const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
     if (sortby) {
-      const events = await Event.find()
+      const events = await Event.find({ startdate: { $gt: new Date() } })
         .sort({ [sortby]: 1 })
         .limit(PAGE_LIMIT)
         .skip(startIndex);
       return res.status(200).json(events);
     }
     if (fromDate) {
-      const events = await Event.find()
+      const events = await Event.find({ startdate: { $gte: date } })
         .sort({ startdate: 1 })
-        .where({
-          startdate: {
-            $gte: dayjs(date).startOf("date").toDate(),
-          },
-        })
         .limit(10);
       return res.status(200).json(events);
     }

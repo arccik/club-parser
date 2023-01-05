@@ -24,6 +24,7 @@ const GenresPage = (props) => {
   });
   if (isLoading) return <Loading />;
   if (error) return <p>Could not load data</p>;
+  console.log("Genres SS s ", data);
   return <UniversalCards data={data} />;
 };
 

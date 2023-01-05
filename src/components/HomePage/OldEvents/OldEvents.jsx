@@ -5,8 +5,8 @@ import Link from "next/link";
 const OldEvents = ({ events }) => {
   return (
     <Container my="md" style={{ position: "relative" }}>
-      <Title order={4} color="white">
-        Check how it was
+      <Title order={4} color="dimmed">
+        Check past Events
       </Title>
       <SimpleGrid
         cols={2}

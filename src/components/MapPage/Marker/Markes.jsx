@@ -3,11 +3,12 @@ import MapPopUp from "./MapPopUp";
 import { useGetMarkersQuery } from "../../../features/marker/markerSlice";
 import { useState } from "react";
 import MapNavBar from "../MapNavBar/MapNavBar";
+import Loading from "../../../utils/Loading/Loading";
 
 const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
   const [state, setState] = useState("venues");
   const { data: markers, error, isLoading } = useGetMarkersQuery(state);
-  if (isLoading) return <h2>Loading...</h2>;
+  if (isLoading) return <Loading />;
   if (error) return <p>Error check console {console.error({ error })}</p>;
 
   const handleMarkerClick = (marker) => {
@@ -66,9 +67,7 @@ const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
             >
               {active?.lat === house.location.coordinates[1] ? (
                 <InfoWindow onCloseClick={() => setActive(null)}>
-                  <>
-                    <MapPopUp data={house} />
-                  </>
+                  <MapPopUp data={house} />
                 </InfoWindow>
               ) : null}
             </Marker>
