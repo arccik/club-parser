@@ -6,6 +6,7 @@ import {
 } from "../../../src/features/both/bothSlice";
 import Loading from "../../../src/utils/Loading/Loading";
 import UniversalCards from "../../../src/components/UniversalCards/UniversalCards";
+import dayjs from "dayjs";
 
 const ByDatePage = () => {
   const router = useRouter();
@@ -30,7 +31,9 @@ const ByDatePage = () => {
     );
   if (isLoading) return <Loading />;
   if (error) return;
-  return <UniversalCards data={data} cardType="Sorted By Date" />;
+  return (
+    <UniversalCards data={data} cardType={dayjs(date).format("D MMM YYYY")} />
+  );
 };
   
 export default ByDatePage;

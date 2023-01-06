@@ -13,7 +13,6 @@ const EventById = ({ event }) => {
   });
   if (!isLoaded) return <Loading />;
 
-  console.log("Event By ID ", event);
   return <DetailsPage data={event} />;
 };
 

@@ -74,7 +74,13 @@ export default function DetailsPage({ data }) {
           </Group>
         </Group>
 
-        <Text mt="sm" mb="md" color="dimmed" size="xs">
+        <Text
+          mt="sm"
+          mb="md"
+          color="dimmed"
+          size="xs"
+          style={{ whiteSpace: "pre-line" }}
+        >
           {data.description || ""}
         </Text>
 

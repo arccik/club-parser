@@ -33,6 +33,8 @@ const BurgerMenu = () => {
   const list = items.map(({ icon, label, link }, index) => (
     <Menu.Item key={label} onClick={() => setOpened(false)}>
       <NavLink
+        m={0}
+        p={0}
         href={link}
         component={Link}
         key={label}
@@ -57,7 +59,7 @@ const BurgerMenu = () => {
         />
       </Menu.Target>
 
-      <Menu.Dropdown>
+      <Menu.Dropdown p={0}>
         <Menu.Label>Application</Menu.Label>
         {list}
 
@@ -69,6 +71,8 @@ const BurgerMenu = () => {
 
             <Menu.Item icon={<IconArrowsLeftRight size={14} />}>
               <NavLink
+                m={0}
+                p={0}
                 href="/admin"
                 component={Link}
                 label="Admin Panel"
@@ -80,6 +84,8 @@ const BurgerMenu = () => {
             </Menu.Item>
             <Menu.Item icon={<IconMusic size={14} />}>
               <NavLink
+                m={0}
+                p={0}
                 href="/admin/events"
                 component={Link}
                 label="Events List"
@@ -91,6 +97,8 @@ const BurgerMenu = () => {
             </Menu.Item>
             <Menu.Item icon={<IconBuildingSkyscraper size={14} />}>
               <NavLink
+                m={0}
+                p={0}
                 href="/admin/venues"
                 component={Link}
                 label="Venues List"
@@ -103,6 +111,8 @@ const BurgerMenu = () => {
             <Menu.Divider />
             <Menu.Item color="red" icon={<IconLogout size={14} />}>
               <Button
+                m={0}
+                p={0}
                 variant="subtle"
                 color="red"
                 component="a"

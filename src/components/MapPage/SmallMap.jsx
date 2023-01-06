@@ -26,7 +26,7 @@ const SmallMap = (props) => {
     () => ({
       disableDefaultUI: false,
       clickableIcons: false,
-
+      mapId: "216185b90ab09587",
       mapTypeControl: false,
       gestureHandling: "none",
     }),
@@ -45,7 +45,7 @@ const SmallMap = (props) => {
       onLoad={onLoad}
       mapContainerClassName={styles.newMap}
     >
-      <Marker position={{ lat: props.center[0], lng: props.center[1] }} />
+      <Marker position={coorinates} icon="/assets/event-icon.png" />
     </GoogleMap>
   );
 };

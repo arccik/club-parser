@@ -9,6 +9,7 @@ import {
   Blockquote,
   ActionIcon,
   TextInput,
+  Stack,
 } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -33,13 +34,23 @@ const UniversalCards = ({ data, cardType }) => {
 
   return (
     <Container>
-      <ActionIcon onClick={() => router.back()}>&#171;Back</ActionIcon>
-      <Blockquote align="center">{cardType || "Event"}</Blockquote>
       <TextInput
         placeholder="Search.."
         value={searchValue}
         onChange={(e) => handleSearch(e.target.value)}
       />
+      <ActionIcon onClick={() => router.back()}>&#171;Back</ActionIcon>
+      <Blockquote
+        style={{
+          padding: 10,
+          margin: 10,
+          boxShadow:
+            "-1px 0 0 1px rgba(255, 203, 82, 0.75), -1px -1px 0 1px rgba(255, 170, 70, 0.25), -1px 1px 0 1px rgba(255, 170, 70, 0.25), 0 -1px 0 1px rgba(255, 136, 57, 0.5), 0 1px 0 1px rgba(255, 136, 57, 0.5), 1px -1px 0 1px rgba(255, 103, 44, 0.25), 1px 1px 0 1px rgba(255, 103, 44, 0.25), 1px 0 0 1px rgba(255, 69, 31, 0.75)",
+        }}
+        align="center"
+      >
+        {cardType || router.query.type || "Event"}
+      </Blockquote>
       {data?.map((place) => (
         <Card key={place._id} shadow="sm" p="lg" mt="lg" radius="md" withBorder>
           <Card.Section
@@ -49,25 +60,24 @@ const UniversalCards = ({ data, cardType }) => {
             <Image src={place.image} height={160} alt={place.name} />
           </Card.Section>
 
-          <Group position="apart" mt="md" mb="xs">
-            <Text weight={500}>
+          <Stack mt="sm" mb="xs" spacing={0}>
+            <Text weight={500} m={0} p={0}>
               {place.placeType.toUpperCase()}: {place.name}
             </Text>
-          </Group>
-          {place.genres?.map((genre) => (
-            <Badge key={genre} color="pink" variant="light">
-              {genre}
-            </Badge>
-          ))}
+            <Text size="sm" color="dimmed">
+              {place.formatted_address || place.address}
+            </Text>
+          </Stack>
+
           <Card.Section align="center">
             {place.startdate && (
               <Group position="center">
-                <Badge size="sm">
+                <Badge size="lg">
                   {new Date(place.startdate).toUTCString().split("GMT")}
                 </Badge>
                 {place.price && (
                   <Badge size="sm">
-                    Price
+                    Price{" "}
                     {place.price.includes("£")
                       ? place.price
                       : " £ " + place.price}
@@ -79,6 +89,11 @@ const UniversalCards = ({ data, cardType }) => {
           <Text size="sm" m="md" color="dimmed">
             {place.description}
           </Text>
+          {place.genres?.map((genre) => (
+            <Badge key={genre} color="pink" variant="light">
+              {genre}
+            </Badge>
+          ))}
 
           <Button
             variant="light"
