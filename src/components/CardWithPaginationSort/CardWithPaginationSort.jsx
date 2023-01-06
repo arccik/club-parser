@@ -7,38 +7,33 @@ import {
   Divider,
   Group,
   Button,
-  LoadingOverlay,
 } from "@mantine/core";
 import EventPageCard from "../../../src/components/EventsPage/EventPageCard";
 import FooterSocial from "../../../src/components/HomePage/Footer/Footer";
-import Loading from "../../src/utils/Loading/Loading";
 
-import { useGetSortedEventsQuery } from "../../src/features/event/eventSlice";
-
-const CardWithPaginationSort = ({ data }) => {
-  const {
-    data: sortedData,
-    isLoading: isSortedLoading,
-    error: sortedError,
-  } = useGetSortedEventsQuery({ sortValue, activePage }, { skip: !sortValue });
-  if (error) return <p>cannot get data</p>;
-  if (isSortedLoading) return <Loading />;
+const CardWithPaginationSort = ({
+  data,
+  activePage,
+  setPage,
+  setSortValue,
+  title,
+  numberOfPages,
+}) => {
   return (
     <>
       <Container size="md">
         <Title
           align="center"
-          m="lg"
           style={{
             position: "relative",
 
             zIndex: -1,
             fontSize: 100,
-            WebkitTextStroke: "4px black",
+            WebkitTextStroke: "3px black",
             color: "white",
           }}
         >
-          Events
+          {title}
         </Title>
         <Group spacing="xs">
           <Text size="sm">Sort By</Text>
@@ -66,8 +61,7 @@ const CardWithPaginationSort = ({ data }) => {
         </Group>
         <Divider mt="sm" />
         <Grid mt="lg">
-          <LoadingOverlay visible={isLoading} overlayBlur={2} />
-          {data.events.map((event) => (
+          {data.map((event) => (
             <Grid.Col key={event._id} lg={4} xs={6}>
               <EventPageCard event={event} />
             </Grid.Col>
@@ -89,7 +83,7 @@ const CardWithPaginationSort = ({ data }) => {
           })}
           page={activePage}
           onChange={setPage}
-          total={data.numberOfPages}
+          total={numberOfPages}
         />
       </Container>
       <FooterSocial />

@@ -1,18 +1,19 @@
 import TableScrollArea from "../../../src/components/AdminPage/TableScrollArea/TableScrollArea";
 import { useGetEventsQuery } from "../../../src/features/event/eventSlice";
-import { Container, ActionIcon, TextInput, Pagination } from "@mantine/core";
+import { Container, ActionIcon, Pagination } from "@mantine/core";
 import { IconPlus } from "@tabler/icons";
 import styles from "../../../src/styles/Home.module.css";
 import Link from "next/link";
 import Loading from "../../../src/utils/Loading/Loading";
 import { useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import ErrorPage from "next/error";
 
 const AdminEventsPage = () => {
   const [activePage, setPage] = useState(1);
   const { data, isLoading, error } = useGetEventsQuery(activePage);
   const { user } = useUser();
+  if (user?.role !== "admin") return null;
 
   if (isLoading) return <Loading />;
   if (!user) return <ErrorPage statusCode={404} />;
@@ -49,4 +50,4 @@ const AdminEventsPage = () => {
   );
 };
 
-export default AdminEventsPage;
+export default withPageAuthRequired(AdminEventsPage);

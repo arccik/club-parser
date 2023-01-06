@@ -1,12 +1,11 @@
 import { Container } from "@mantine/core";
 import Dashboard from "../../src/components/AdminPage/Dashboard/Dashboard";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { useCheckUserQuery } from "../../src/features/admin/adminSlice";
-import Loading from "../../src/utils/Loading/Loading";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 const AdminPage = () => {
   const { user } = useUser();
-
+  console.log("ADmin Panel User", user);
+  if (user?.role !== "admin") return null;
   return (
     <Container size="sm">
       <Dashboard />
@@ -14,4 +13,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default withPageAuthRequired(AdminPage);

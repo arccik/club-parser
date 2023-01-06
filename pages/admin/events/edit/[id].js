@@ -6,7 +6,7 @@ import {
 } from "../../../../src/features/event/eventSlice";
 import { useRouter } from "next/router";
 import Loading from "../../../../src/utils/Loading/Loading";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import ErrorPage from "next/error";
 
 const EditEventPage = () => {
@@ -20,6 +20,7 @@ const EditEventPage = () => {
 
   const [saveUpdatedItem, { isLoading: isSaving, error: savingError }] =
     useUpdateEventMutation();
+  if (user?.role !== "admin") return router.push("/");
   if (!user) return <ErrorPage statusCode={404} />;
   if (isSaving) return <p>Updates saving...</p>;
   if (isDeleting) return <p>Deleting....</p>;
@@ -30,4 +31,4 @@ const EditEventPage = () => {
   return <Edit data={data} onDelete={removeItem} onSave={saveUpdatedItem} />;
 };
 
-export default EditEventPage;
+export default withPageAuthRequired(EditEventPage);

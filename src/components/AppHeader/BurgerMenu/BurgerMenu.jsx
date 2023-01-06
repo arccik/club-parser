@@ -65,7 +65,7 @@ const BurgerMenu = () => {
 
         <Menu.Divider />
 
-        {user ? (
+        {user && user.role === "admin" && (
           <>
             <Menu.Label>ADMIN zone</Menu.Label>
 
@@ -109,19 +109,21 @@ const BurgerMenu = () => {
               />
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item color="red" icon={<IconLogout size={14} />}>
-              <Button
-                m={0}
-                p={0}
-                variant="subtle"
-                color="red"
-                component="a"
-                href="/api/auth/logout"
-              >
-                Logout
-              </Button>
-            </Menu.Item>
           </>
+        )}
+        {user ? (
+          <Menu.Item color="red" icon={<IconLogout size={14} />}>
+            <Button
+              m={0}
+              p={0}
+              variant="subtle"
+              color="red"
+              component="a"
+              href="/api/auth/logout"
+            >
+              Logout
+            </Button>
+          </Menu.Item>
         ) : (
           <Menu.Item color="green" icon={<IconLogin size={14} />}>
             <Button

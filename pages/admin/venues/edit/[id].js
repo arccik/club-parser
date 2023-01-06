@@ -7,7 +7,7 @@ import {
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Loading from "../../../../src/utils/Loading/Loading";
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 const EditEventPage = () => {
   const { user } = useUser();
@@ -21,7 +21,7 @@ const EditEventPage = () => {
 
   const [updateVenue, { isLoading: eventAdding, isError: eventAddError }] =
     useUpdateVenueMutation(id);
-
+  if (user?.role !== "admin") return null;
   if (!user) return <ErrorPage statusCode={404} />;
   if (isDeleting) return <p>Deleting...</p>;
   if (isLoading || eventAdding) return <Loading />;
@@ -37,4 +37,4 @@ const EditEventPage = () => {
   return <Edit data={venue} onDelete={removeItem} onSave={updateVenue} />;
 };
 
-export default EditEventPage;
+export default withPageAuthRequired(EditEventPage);

@@ -11,16 +11,21 @@ import dayjs from "dayjs";
 const ByDatePage = () => {
   const router = useRouter();
   const { date } = router.query;
-  const { data, isLoading, error, isSuccess } = useGetByDateQuery(date);
+  const {
+    data: { events },
+    isLoading,
+    error,
+    isSuccess,
+  } = useGetByDateQuery(date);
   const { data: otherData, isLoading: otherLoading } = useGetFromDateQuery(
     date,
     {
-      skip: !isSuccess && data,
+      skip: !isSuccess && events,
     }
   );
   console.log({ otherData });
   if (otherLoading) return <Loading />;
-  if (isSuccess && !data.length)
+  if (isSuccess && !events.length)
     return (
       <>
         <Title order={3} mt="md" align="center">
@@ -32,7 +37,7 @@ const ByDatePage = () => {
   if (isLoading) return <Loading />;
   if (error) return;
   return (
-    <UniversalCards data={data} cardType={dayjs(date).format("D MMM YYYY")} />
+    <UniversalCards data={events} cardType={dayjs(date).format("D MMM YYYY")} />
   );
 };
   

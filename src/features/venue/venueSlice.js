@@ -49,14 +49,22 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         }
       },
       providesTags: (result, error, arg) => {
-        if (error) [{ type: "Events", id: "LIST" }];
+        if (error) [{ type: "Venues", id: "LIST" }];
         return [
-          { type: "Events", id: "LIST" },
-          ...result.map(({ _id }) => ({ type: "Events", _id: _id })),
+          { type: "Venues", id: "LIST" },
+          ...result.map(({ _id }) => ({ type: "Venues", _id: _id })),
         ];
       },
     }),
 
+    getSortedVenues: builder.query({
+      query: ({ sortValue, activePage }) =>
+        `/sortby?sortby=${sortValue}&page=${activePage}&venue=true`,
+      providesTags: ({ venues }, error, arg) => {
+        if (error) return [];
+        return [...venues.map(({ _id }) => ({ type: "Venues", _id: _id }))];
+      },
+    }),
     addNewVenue: builder.mutation({
       query: (initialPost) => ({
         url: "/admin/venues",
@@ -100,6 +108,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetVenuesQuery,
   useGetVenueByIdQuery,
+  useGetSortedVenuesQuery,
   useGetVenueByLocationQuery,
   useAddNewVenueMutation,
   useDeleteVenueMutation,
