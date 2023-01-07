@@ -22,10 +22,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         });
         return eventAdapter.setAll(initialState, loadedEvents);
       },
-      providesTags: ({ events }, error, arg) => {
-        if (!events) return [{ type: "Events", id: "LIST" }];
+      providesTags: (result, error, arg) => {
+        if (!result.events) return [{ type: "Events", id: "LIST" }];
         else {
-          return [...events.map(({ _id }) => ({ type: "Events", _id: _id }))];
+          return [
+            ...result.events.map(({ _id }) => ({ type: "Events", _id: _id })),
+          ];
         }
       },
     }),
@@ -132,9 +134,12 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getSortedEvents: builder.query({
       query: ({ sortValue, activePage }) =>
         `/sortby?sortby=${sortValue}&page=${activePage}`,
-      providesTags: ({ events }, error, arg) => {
+      providesTags: (result, error, arg) => {
+        if (!result.events) return { type: "Events", _id: "LIST" };
         if (error) return [];
-        return [...events.map(({ _id }) => ({ type: "Events", _id: _id }))];
+        return [
+          ...result.events.map(({ _id }) => ({ type: "Events", _id: _id })),
+        ];
       },
     }),
   }),
