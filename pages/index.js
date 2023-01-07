@@ -1,7 +1,7 @@
 import Head from "next/head";
 import EventsCardsGrid from "../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
 import FooterSocial from "../src/components/HomePage/Footer/Footer";
-import { LoadingOverlay, Title } from "@mantine/core";
+import { LoadingOverlay } from "@mantine/core";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
 import dbConnect from "../src/utils/dbConnect";
@@ -16,7 +16,6 @@ import Loading from "../src/utils/Loading/Loading";
 import { useLocalStorage } from "@mantine/hooks";
 import Artist from "../src/models/artist-model";
 import Venue from "../src/models/venue-model";
-import { useEffect } from "react";
 
 export async function getStaticProps() {
   await dbConnect();

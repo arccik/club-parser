@@ -65,7 +65,7 @@ const BurgerMenu = () => {
 
         <Menu.Divider />
 
-        {user && user.role === "admin" && (
+        {user && user?.role === "admin" && (
           <>
             <Menu.Label>ADMIN zone</Menu.Label>
 
