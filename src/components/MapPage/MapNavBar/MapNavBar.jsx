@@ -16,9 +16,9 @@ export default function MapNavBar({ handleClick }) {
       size="md"
       onLoad={(e) => <Loader />}
       onClick={onSelectHandle}
-      defaultValue={"venues"}
+      defaultValue={"events"}
       data={[
-        { label: "Clubs", value: "venues" },
+        { label: "Venues", value: "venues" },
         { label: "Events", value: "events" },
       ]}
       classNames={classes}

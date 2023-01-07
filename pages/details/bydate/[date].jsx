@@ -23,7 +23,6 @@ const ByDatePage = () => {
       skip: !isSuccess && events,
     }
   );
-  console.log({ otherData });
   if (otherLoading) return <Loading />;
   if (isSuccess && !events.length)
     return (

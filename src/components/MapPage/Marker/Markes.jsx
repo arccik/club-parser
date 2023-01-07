@@ -6,7 +6,7 @@ import MapNavBar from "../MapNavBar/MapNavBar";
 import Loading from "../../../utils/Loading/Loading";
 
 const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
-  const [state, setState] = useState("venues");
+  const [state, setState] = useState("events");
   const { data: markers, error, isLoading } = useGetMarkersQuery(state);
   if (isLoading) return <Loading />;
   if (error) return <p>Error check console {console.error({ error })}</p>;

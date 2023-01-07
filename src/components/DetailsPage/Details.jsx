@@ -23,6 +23,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import SimilarPlaces from "./SimilarPlaces/SimilarPlaces";
 import VenueCard from "./VenueCard/VanueCard";
 import EventsFeed from "./EventsFeed/EventsFeed";
+import BuyTickets from "./BuyTickets/BuyTickets";
 dayjs.extend(relativeTime);
 
 export default function DetailsPage({ data }) {
@@ -112,18 +113,7 @@ export default function DetailsPage({ data }) {
           </Badge>
         )}
         {data.placeType === "event" && (
-          <Button
-            color="dark"
-            fullWidth
-            mt="md"
-            radius="md"
-            mb="lg"
-            component="a"
-            target="_blank"
-            href={data.link}
-          >
-            Book Ticket
-          </Button>
+          <BuyTickets eventId={data.eventId} title={data.name} />
         )}
         <Accordion
           mx="auto"

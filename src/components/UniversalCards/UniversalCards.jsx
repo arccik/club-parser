@@ -22,23 +22,24 @@ const UniversalCards = ({ data, cardType }) => {
 
   const handleSearch = (value) => {
     setSearchValue(value);
-    if (!value) {
-      return setFiltredData(data);
-    }
+    // if (!value) {
+    //   return setFiltredData(data);
+    // }
     const filterd = filtredData.filter((v) => {
       const re = new RegExp(`/${value}/`, "gi");
       return v.toString().match(re);
     });
+    console.log("FIlterd Data ", filterd);
     setFiltredData(filterd);
   };
 
   return (
     <Container>
-      <TextInput
+      {/* <TextInput
         placeholder="Search.."
         value={searchValue}
         onChange={(e) => handleSearch(e.target.value)}
-      />
+      /> */}
       <ActionIcon onClick={() => router.back()}>&#171;Back</ActionIcon>
       <Blockquote
         style={{

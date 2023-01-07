@@ -16,6 +16,7 @@ import Loading from "../src/utils/Loading/Loading";
 import { useLocalStorage } from "@mantine/hooks";
 import Artist from "../src/models/artist-model";
 import Venue from "../src/models/venue-model";
+import { useEffect } from "react";
 
 export async function getStaticProps() {
   await dbConnect();
@@ -50,6 +51,7 @@ export default function Home({ events, oldEvents }) {
   } = useGetEventsByLocationQuery(location, {
     skip: !location || showLocalLoad,
   });
+
 
   if (isEventsLoading) return <Loading />;
   if (eventError) return <p> Cannot fetch data</p>;

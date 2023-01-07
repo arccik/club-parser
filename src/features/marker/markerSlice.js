@@ -13,16 +13,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     getMarkers: builder.query({
       query: (type) => `/markers/${type}`,
       transformFromResponse: (responseData) => {
-        const loadedEvents = responseData.map((post) => {
-          if (!post.position) {
-            post.position = {
-              lat: post.location.coordinates[0],
-              lng: post.location.coordinates[1],
-            };
-          }
-          return post;
-        });
-        return markerAdapter.setAll(initialState, loadedEvents);
+        return markerAdapter.setAll(initialState, responseData);
       },
       providesTags: (result, error, arg) => {
         return [...result.map(({ _id }) => ({ type: "Markers", _id }))];

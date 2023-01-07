@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const useCookie = (key, value) => {
-  const [cookie, setCookieData] = useState(getCookie(location));
+const useCookie = (cname) => {
+  const [cookie, setCookieData] = useState("");
 
-  const setCookie = (cname, cvalue, exMinutes) => {
+  useEffect(() => {
+    if (!cookie) setCookieData(getCookie(cname));
+  }, []);
+
+  const setCookie = (cvalue) => {
     const d = new Date();
-    // d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-    d.setTime(d.getTime() + exMinutes * 60 * 1000);
+    d.setTime(d.getTime() + 5 * 60 * 1000);
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   };
-  const getCookie = (cname) => {
+  const getCookie = () => {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(";");
@@ -30,27 +33,3 @@ const useCookie = (key, value) => {
 };
 
 export default useCookie;
-
-export function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-export function setCookie(cname, cvalue, exMinutes) {
-  const d = new Date();
-  // d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  d.setTime(d.getTime() + exMinutes * 60 * 1000);
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
