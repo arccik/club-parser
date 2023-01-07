@@ -147,16 +147,18 @@ export default function DetailsPage({ data }) {
         >
           Get me there
         </Button>
-        {user && (
-          <ActionIcon
-            variant="light"
-            component={Link}
-            className={classes.editButton}
-            href={`/admin/${data.placeType}s/edit/${data._id}`}
-          >
-            <IconEdit size={16} />
-          </ActionIcon>
-        )}
+        {user &&
+          user.role ===
+            "admin"(
+              <ActionIcon
+                variant="light"
+                component={Link}
+                className={classes.editButton}
+                href={`/admin/${data.placeType}s/edit/${data._id}`}
+              >
+                <IconEdit size={16} />
+              </ActionIcon>
+            )}
 
         <SimilarPlaces
           id={data._id}

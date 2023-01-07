@@ -45,6 +45,7 @@ const EventsPage = () => {
         setSortValue={setSortValue}
         title="Event"
         numberOfPages={sortedData?.numberOfPages || data.numberOfPages}
+        type="event"
       />
     </>
   );
