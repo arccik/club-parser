@@ -11,32 +11,33 @@ import dayjs from "dayjs";
 const ByDatePage = () => {
   const router = useRouter();
   const { date } = router.query;
-  const {
-    data: { events },
-    isLoading,
-    error,
-    isSuccess,
-  } = useGetByDateQuery(date);
+  const { data, isLoading, error, isSuccess } = useGetByDateQuery(date);
   const { data: otherData, isLoading: otherLoading } = useGetFromDateQuery(
     date,
     {
-      skip: !isSuccess && events,
+      skip: !isSuccess && data?.events,
     }
   );
-  if (otherLoading) return <Loading />;
-  if (isSuccess && !events.length)
+  if (otherLoading && isLoading) return <Loading />;
+  if (isSuccess && !data?.events.length)
     return (
       <>
         <Title order={3} mt="md" align="center">
           Nothing found on selected date
         </Title>
-        <UniversalCards data={otherData} cardType="Check upcoming events" />
+        <UniversalCards
+          data={otherData?.events}
+          cardType="Check upcoming events"
+        />
       </>
     );
   if (isLoading) return <Loading />;
   if (error) return;
   return (
-    <UniversalCards data={events} cardType={dayjs(date).format("D MMM YYYY")} />
+    <UniversalCards
+      data={data?.events}
+      cardType={dayjs(date).format("D MMM YYYY")}
+    />
   );
 };
   
