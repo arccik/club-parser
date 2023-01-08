@@ -4,8 +4,7 @@ import Venue from "../../../../src/models/venue-model";
 
 
 export default async function handler(req, res) {
-  const { page } = req.query;
-  const { coords } = req.query;
+  const { page, coords } = req.query;
   const PAGE_LIMIT = 12;
   const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
@@ -16,7 +15,6 @@ export default async function handler(req, res) {
         if (page) {
           const venueTotal = await Venue.countDocuments({});
           const venues = await Venue.find({})
-            .sort({ startdate: -1 })
             .limit(PAGE_LIMIT)
             .skip(startIndex);
           return res.status(200).json({

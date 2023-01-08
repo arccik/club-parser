@@ -38,19 +38,36 @@ const CardWithPaginationSort = ({
         </Title>
         <Group spacing="xs">
           <Text size="sm">Sort By</Text>
-          <Button
-            onClick={() => {
-              setPage(1);
 
-              type === "event"
-                ? setSortValue("startdate")
-                : setSortValue("date");
-            }}
-            size="xs"
-            variant="light"
-          >
-            Date
-          </Button>
+          {type === "event" ? (
+            <>
+              <Button
+                onClick={() => setSortValue("price")}
+                size="xs"
+                variant="light"
+              >
+                Price
+              </Button>
+              <Button
+                onClick={() => {
+                  setPage(1);
+                  setSortValue("startdate");
+                }}
+                size="xs"
+                variant="light"
+              >
+                Date
+              </Button>
+            </>
+          ) : (
+            <Button
+              onClick={() => setSortValue("name")}
+              size="xs"
+              variant="light"
+            >
+              Name
+            </Button>
+          )}
           <Button
             onClick={() => {
               setPage(1);
@@ -61,15 +78,6 @@ const CardWithPaginationSort = ({
           >
             Distance
           </Button>
-          {type === "event" && (
-            <Button
-              onClick={() => setSortValue("price")}
-              size="xs"
-              variant="light"
-            >
-              Price
-            </Button>
-          )}
         </Group>
         <Divider mt="sm" />
         <Grid mt="lg">
@@ -94,7 +102,10 @@ const CardWithPaginationSort = ({
             },
           })}
           page={activePage}
-          onChange={setPage}
+          onChange={(e) => {
+            setPage(e);
+            window.scrollTo(0, 0);
+          }}
           total={numberOfPages}
         />
       </Container>

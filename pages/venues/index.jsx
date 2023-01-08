@@ -10,7 +10,9 @@ import CardWithPaginationSort from "../../src/components/CardWithPaginationSort/
 const AdminVenuePage = () => {
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
-  const { data, isLoading, error } = useGetVenuesQuery(activePage);
+  const { data, isLoading, error } = useGetVenuesQuery(activePage, {
+    skip: sortValue,
+  });
   const {
     data: sortedData,
     isLoading: isSortedLoading,
@@ -30,6 +32,7 @@ const AdminVenuePage = () => {
         setSortValue={setSortValue}
         title="Venues"
         numberOfPages={sortedData?.numberOfPages || data.numberOfPages}
+        type="venue"
       />
     </>
   );

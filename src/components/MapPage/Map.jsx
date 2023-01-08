@@ -10,7 +10,7 @@ import useCurrentLocaiton from "../../Hooks/useCurrentLocaiton";
 const Map = () => {
   const [zoom, setZoom] = useState(14);
   const [activeMarker, setActiveMarker] = useState(null);
-  const [currentLocation, _] = useCurrentLocaiton();
+  const { location: currentLocation } = useCurrentLocaiton();
 
   const mapRef = useRef();
   const center = useMemo(

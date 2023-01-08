@@ -15,17 +15,10 @@ import { IconCalendar, IconGps, IconMoneybag } from "@tabler/icons";
 import displayPrice from "../../../utils/displayPrice";
 import { useRouter } from "next/router";
 import ArtistsCards from "./ArtistsCards/ArtistsCards";
-import { useRef } from "react";
-import { useIntersection } from "@mantine/hooks";
 
 const Cards = ({ data }) => {
   const { classes } = useStyles();
   const router = useRouter();
-  const containerRef = useRef();
-  const { ref, entry } = useIntersection({
-    root: containerRef.current,
-    threshold: 1,
-  });
 
   return data.map((article) => (
     <div key={article._id} className={classes.card}>

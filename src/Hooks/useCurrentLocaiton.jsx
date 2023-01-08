@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
-import { useLocalStorage } from "@mantine/hooks";
 import Cookies from "js-cookie";
 
 const useCurrentLocation = () => {
-  // const [location, setLocation] = useLocalStorage({
-  //   key: "location",
-  //   defaultValue: null,
-  // });
   const [location, setLocation] = useState("");
   const [error, setError] = useState(null);
 
@@ -16,7 +11,7 @@ const useCurrentLocation = () => {
   useEffect(() => {
     if (!location && !coords) getLocation();
     if (!location && coords) setLocation(JSON.parse(coords));
-  });
+  }, []);
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -40,7 +35,7 @@ const useCurrentLocation = () => {
       }
     );
   };
-  return [location, error, getLocation];
+  return { location, error, getLocation };
 };
 
 export default useCurrentLocation;

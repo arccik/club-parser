@@ -59,7 +59,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
     getSortedVenues: builder.query({
       query: ({ sortValue, activePage }) =>
-        `/sortby?sortby=${sortValue}&page=${activePage}&venue=true`,
+        `/sortby/venue?sortby=${sortValue}&page=${activePage}`,
       providesTags: ({ venues }, error, arg) => {
         if (error) return [];
         return [...venues.map(({ _id }) => ({ type: "Venues", _id: _id }))];

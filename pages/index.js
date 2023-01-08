@@ -36,7 +36,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ events, oldEvents }) {
-  const [location, error, getLocation] = useCurrentLocaiton();
+  const { location, getLocation } = useCurrentLocaiton();
 
   const [showLocalLoad, setShowLoadLocal] = useLocalStorage({
     key: "loadLocal",
