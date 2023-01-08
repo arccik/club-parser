@@ -1,4 +1,5 @@
-import { Card, Image, Avatar, Text, Group } from "@mantine/core";
+import { Card, Avatar, Text, Group } from "@mantine/core";
+import Image from "next/image";
 import dayjs from "dayjs";
 import useStyles from "./styles";
 import Link from "next/link";
@@ -15,7 +16,16 @@ const EventPageCard = ({ event }) => {
       href={`/details/${event.placeType}s/${event._id}`}
     >
       <Group noWrap spacing={0}>
-        <Image src={event.image} height={140} width={140} alt={event.name} />
+        {event.image && (
+          <Image
+            src={event?.image}
+            height={140}
+            width={140}
+            alt={event.name}
+            blurDataURL="/assets/blur.jpg"
+            placeholder="blur"
+          />
+        )}
         <div className={classes.body}>
           <Text transform="uppercase" color="dimmed" weight={700} size="xs">
             {event.startdate ? (

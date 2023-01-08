@@ -4,12 +4,12 @@ import {
   Group,
   Header,
   useMantineTheme,
+  Image,
 } from "@mantine/core";
 import { useRouter } from "next/router";
 import BurgerMenu from "./AppHeader/BurgerMenu/BurgerMenu";
 
 import { IconMapPin } from "@tabler/icons";
-import Image from "next/image";
 
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
@@ -39,13 +39,12 @@ export const ApplicationContainer = ({ children }) => {
           >
             <Image
               onClick={() => router.push("/")}
-              src={
-                theme.colorScheme === "light"
-                  ? "/assets/logo.png"
-                  : "/assets/white-logo.png"
-              }
+              src="/assets/white-logo.png"
+              // theme.colorScheme === "light"
+              // ? "/assets/logo.png"
+              // : "/assets/white-logo.png"
               alt="StripRadar logo"
-              width={120}
+              width={140}
               height={60}
               style={{ cursor: "pointer", padding: "5px 5px 5px 0px" }}
             />

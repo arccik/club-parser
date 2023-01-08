@@ -1,13 +1,5 @@
-import {
-  createStyles,
-  Card,
-  Image,
-  Avatar,
-  Text,
-  Group,
-  Loader,
-  Title,
-} from "@mantine/core";
+import { createStyles, Card, Text, Group, Loader, Title } from "@mantine/core";
+import Image from "next/image";
 import { IconHome } from "@tabler/icons";
 import Link from "next/link";
 
@@ -45,13 +37,16 @@ const VenueCard = ({ venue }) => {
         href={`/details/venues/${venue._id}`}
       >
         <Group noWrap spacing={0}>
-          <Image
-            src={venue.image}
-            height={100}
-            width={100}
-            alt={venue.name}
-            withPlaceholder
-          />
+          {venue.image && (
+            <Image
+              src={venue.image}
+              blurDataURL="/assets/blur.jpg"
+              placeholder="blur"
+              height={100}
+              width={100}
+              alt={venue.name}
+            />
+          )}
           <div className={classes.body}>
             <Text className={classes.title} mt="xs" mb="md">
               {venue.name}

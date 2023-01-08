@@ -23,7 +23,7 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   await dbConnect();
-  const venues = await Venue.find();
+  const venues = await Venue.find().distinct("_id");
   const paths = venues.map((venue) => ({
     params: { id: venue._id.toString() },
   }));

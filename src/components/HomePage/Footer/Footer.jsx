@@ -15,14 +15,17 @@ const FooterSocial = () => {
     <div className={classes.footer}>
       <Container className={classes.inner}>
         <Image
-          src={
-            theme.colorScheme === "light"
-              ? "/assets/logo.png"
-              : "/assets/white-logo.png"
-          }
+          src="/assets/white-logo.png"
+          // {
+          //   theme.colorScheme === "light"
+          //     ? "/assets/logo.png"
+          //     : "/assets/white-logo.png"
+          // }
           width={120}
           height={60}
           alt="StripRadar logo"
+          blurDataURL="/assets/blur.jpg"
+          placeholder="blur"
         />
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon size="lg">

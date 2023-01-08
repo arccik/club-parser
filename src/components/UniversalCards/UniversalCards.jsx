@@ -1,16 +1,15 @@
 import {
   Container,
   Card,
-  Image,
   Text,
   Badge,
   Button,
   Group,
   Blockquote,
   ActionIcon,
-  TextInput,
   Stack,
 } from "@mantine/core";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -58,7 +57,15 @@ const UniversalCards = ({ data, cardType }) => {
             component={Link}
             href={`/details/${place.placeType}s/${place._id}`}
           >
-            <Image src={place.image} height={160} alt={place.name} />
+            {place.image && (
+              <Image
+                src={place.image}
+                height={160}
+                alt={place.name}
+                blurDataURL="/assets/blur.jpg"
+                placeholder="blur"
+              />
+            )}
           </Card.Section>
 
           <Stack mt="sm" mb="xs" spacing={0}>

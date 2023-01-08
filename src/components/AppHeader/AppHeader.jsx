@@ -17,11 +17,14 @@ export default function AppHeader() {
       >
         <Image
           onClick={() => router.replace("/")}
-          src={
-            theme.colorScheme === "light"
-              ? "/assets/logo.png"
-              : "/assets/white-logo.png"
-          }
+          src="/assets/white-logo.png"
+          // {
+          //   theme.colorScheme === "light"
+          //     ? "/assets/logo.png"
+          //     : "/assets/white-logo.png"
+          // }
+          blurDataURL="/assets/blur.jpg"
+          placeholder="blur"
           alt="StripRadar logo"
           width={120}
           height={60}

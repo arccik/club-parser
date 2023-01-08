@@ -1,13 +1,5 @@
-import {
-  FileInput,
-  Image,
-  BackgroundImage,
-  Center,
-  Text,
-  Button,
-  ActionIcon,
-} from "@mantine/core";
-import { IconUpload, IconSettings, IconTrashX } from "@tabler/icons";
+import { FileInput, ActionIcon, Image } from "@mantine/core";
+import { IconUpload, IconTrashX } from "@tabler/icons";
 import { useState } from "react";
 
 const UploadFile = (props) => {
@@ -39,6 +31,7 @@ const UploadFile = (props) => {
             mt="lg"
             radius="lg"
             height={300}
+            width={200}
             src={file}
             alt="With default placeholder"
             withPlaceholder
@@ -55,9 +48,7 @@ const UploadFile = (props) => {
         <FileInput
           clearButtonLabel
           size="md"
-          // value={file}
           onChange={handleUpload}
-          // defaultValue={file}
           mt="lg"
           radius="md"
           label="Image"

@@ -1,12 +1,5 @@
-import {
-  Image,
-  Text,
-  AspectRatio,
-  Group,
-  Badge,
-  Stack,
-  Divider,
-} from "@mantine/core";
+import { Text, AspectRatio, Group, Badge, Stack, Divider } from "@mantine/core";
+import Image from "next/image";
 import Stars from "../../DetailsPage/Stars/Stars";
 import dayjs from "dayjs";
 import useStyles from "./styles";
@@ -23,11 +16,17 @@ const Cards = ({ data }) => {
   return data.map((article) => (
     <div key={article._id} className={classes.card}>
       <AspectRatio ratio={1920 / 1080}>
-        <Image
-          src={article.image}
-          alt="article image"
-          onClick={() => router.push(`/details/events/${article._id}`)}
-        />
+        {article.image && (
+          <Image
+            fill
+            sizes="(max-width: 500px) 100px"
+            src={article.image}
+            alt="article image"
+            onClick={() => router.push(`/details/events/${article._id}`)}
+            blurDataURL="/assets/blur.jpg"
+            placeholder="blur"
+          />
+        )}
       </AspectRatio>
 
       <Group position="apart" m="sm">

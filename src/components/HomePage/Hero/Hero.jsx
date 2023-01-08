@@ -7,7 +7,6 @@ const Hero = () => {
     <div className={classes.container}>
       <Image
         src="/assets/hero-stripradar.png"
-        fill="true"
         alt="hero image"
         className={classes.heroImage}
       />
