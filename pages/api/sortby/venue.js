@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   try {
 
     await dbConnect();
-    if (coords) {
+    if (sortby === "distance") {
       const venueTotal = await Venue.countDocuments();
       const location = coords.split(",").map(Number);
       const venues = await Venue.aggregate([

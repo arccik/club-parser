@@ -9,32 +9,34 @@ const useCurrentLocation = () => {
   const coords = Cookies.get("location");
 
   useEffect(() => {
-    if (!location && !coords) getLocation();
-    if (!location && coords) setLocation(JSON.parse(coords));
-  }, []);
+    if (coords) setLocation(JSON.parse(coords));
+  }, [coords]);
 
   const getLocation = () => {
     if (!navigator.geolocation) {
       setError("Geolocation is not supported by your browser");
       return;
     }
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const coordinates = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        Cookies.set("location", JSON.stringify(coordinates), {
-          expires: inFiveMinutes,
-        });
-        setLocation(coordinates);
-      },
-      (error) => {
-        setError(error.message);
-        setLocation(null);
-      }
-    );
+    if (coords) {
+      setLocation(JSON.parse(coords));
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const coordinates = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          Cookies.set("location", JSON.stringify(coordinates), {
+            expires: inFiveMinutes,
+          });
+          setLocation(coordinates);
+        },
+        (error) => {
+          setError(error.message);
+          setLocation(null);
+        }
+      );
+    }
   };
   return { location, error, getLocation };
 };

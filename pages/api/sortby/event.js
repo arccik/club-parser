@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     const PAGE_LIMIT = 20;
     const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
-    if (coords) {
+    if (sortby === "distance") {
       const eventTotal = await Event.countDocuments({
         startdate: { $gte: new Date() },
       });

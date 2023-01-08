@@ -1,7 +1,7 @@
 import Head from "next/head";
 import EventsCardsGrid from "../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
 import FooterSocial from "../src/components/HomePage/Footer/Footer";
-import { LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Text } from "@mantine/core";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
 import dbConnect from "../src/utils/dbConnect";
@@ -48,11 +48,16 @@ const Home = ({ events, oldEvents }) => {
     isLoading: isEventsLoading,
     error: eventError,
   } = useGetEventsByLocationQuery(location, {
-    skip: !location || showLocalLoad,
+    skip: !location,
   });
 
   if (isEventsLoading) return <Loading />;
-  if (eventError) return <p> Cannot fetch data</p>;
+  if (eventError)
+    return (
+      <Text align="center" m="lg">
+        Problem on the server
+      </Text>
+    );
 
   const handleDialog = () => {
     setShowLoadLocal(false);
@@ -73,7 +78,6 @@ const Home = ({ events, oldEvents }) => {
         ></meta>
       </Head>
       <main style={{ padding: 0, margin: 0 }}>
-        <LoadLocalDialog setAgree={handleDialog} show={showLocalLoad} />
         <Hero />
         <Search />
         {events.length ? <Carousel events={events} /> : null}
@@ -86,6 +90,8 @@ const Home = ({ events, oldEvents }) => {
         <GenresBox />
         {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
       </main>
+      <LoadLocalDialog setAgree={handleDialog} show={showLocalLoad} />
+
       <FooterSocial />
     </>
   );

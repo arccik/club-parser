@@ -7,10 +7,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "**.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "next-stripradar.s3.eu-west-2.amazonaws.com",
       },
     ],
-    domains: ["next-stripradar.s3.eu-west-2.amazonaws.com", "cloudfront.net"],
+    // domains: ["next-stripradar.s3.eu-west-2.amazonaws.com", "cloudfront.net"],
     formats: ["image/avif", "image/webp"],
   },
 };

@@ -19,23 +19,30 @@ const LoadLocalDialog = ({ setAgree, show, getCurrentLocation }) => {
 
   return (
     opened && (
-      <Notification
-        closeButtonProps={{ color: "red" }}
-        icon={<IconAnalyze size={18} />}
-        color="pink"
-        onClose={() => setOpened((prev) => !prev)}
+      <Dialog
+        opened={opened}
+        withCloseButton
+        position={{ bottom: 20, right: 10 }}
+        onClose={() => setOpened(false)}
+        radius="md"
+        size="md"
+        mx={0}
       >
-        Show nearby places
-        <Button
-          color="pink"
-          variant="outline"
-          ml="sm"
-          radius={50}
-          onClick={handleClick}
-        >
-          Load
-        </Button>
-      </Notification>
+        <Group spacing="xs" position="apart">
+          <Text size="sm" style={{ marginBottom: 10 }} weight={500}>
+            Show nearby places
+          </Text>
+          <Button
+            color="pink"
+            variant="outline"
+            radius="md"
+            onClick={handleClick}
+            mr="lg"
+          >
+            Load
+          </Button>
+        </Group>
+      </Dialog>
     )
   );
 };

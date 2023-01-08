@@ -6,7 +6,6 @@ import Link from "next/link";
 
 const EventPageCard = ({ event }) => {
   const { classes } = useStyles();
-  console.log("Event Page Card : ", event);
   return (
     <Card
       withBorder

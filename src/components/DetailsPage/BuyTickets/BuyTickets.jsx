@@ -6,6 +6,9 @@ const BuyTickets = ({ eventId, title }) => {
   return (
     <>
       <Modal
+        transition="fade"
+        transitionDuration={600}
+        transitionTimingFunction="ease"
         opened={opened}
         onClose={() => setOpened(false)}
         title={title}
