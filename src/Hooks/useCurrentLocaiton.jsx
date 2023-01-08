@@ -21,17 +21,18 @@ const useCurrentLocation = () => {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        Cookies.set(
-          "location",
-          JSON.stringify({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          }),
-          { expires: inFiveMinutes }
-        );
+        const coordinates = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        Cookies.set("location", JSON.stringify(coordinates), {
+          expires: inFiveMinutes,
+        });
+        setLocation(coordinates);
       },
       (error) => {
         setError(error.message);
+        setLocation(null);
       }
     );
   };

@@ -6,7 +6,7 @@ dayjs.extend(relativeTime);
 import useStyles from "./styles";
 import Link from "next/link";
 
-export default function ArticleCardImage({ data }) {
+const ArticleCardImage = ({ data }) => {
   const { classes } = useStyles();
   const { image, name, enddate, _id } = data;
   return (
@@ -35,4 +35,5 @@ export default function ArticleCardImage({ data }) {
       </Button>
     </Paper>
   );
-}
+};
+export default ArticleCardImage;

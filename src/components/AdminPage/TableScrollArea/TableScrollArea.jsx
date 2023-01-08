@@ -7,7 +7,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import useStyles from "./styles";
 import { useDeleteEventMutation } from "../../../features/event/eventSlice";
 
-export default function TableScrollArea({ data, type = "events" }) {
+const TableScrollArea = ({ data, type = "events" }) => {
   const { classes, cx, theme } = useStyles();
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
   const [scrolled, setScrolled] = useState(false);
@@ -48,4 +48,5 @@ export default function TableScrollArea({ data, type = "events" }) {
       </Table>
     </ScrollArea>
   );
-}
+};
+export default TableScrollArea;

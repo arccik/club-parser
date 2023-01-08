@@ -1,7 +1,7 @@
 import { Loader, SegmentedControl } from "@mantine/core";
 import useStyles from "./styles";
 
-export default function MapNavBar({ handleClick }) {
+const MapNavBar = ({ handleClick }) => {
   const { classes } = useStyles();
 
   const onSelectHandle = (event) => {
@@ -24,4 +24,6 @@ export default function MapNavBar({ handleClick }) {
       classNames={classes}
     />
   );
-}
+};
+
+export default MapNavBar;

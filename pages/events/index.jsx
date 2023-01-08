@@ -22,18 +22,25 @@ import {
 import EventPageCard from "../../src/components/EventsPage/EventPageCard";
 import FooterSocial from "../../src/components/HomePage/Footer/Footer";
 import CardWithPaginationSort from "../../src/components/CardWithPaginationSort/CardWithPaginationSort";
+import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 
 const EventsPage = () => {
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
-  const { data, isLoading, error } = useGetEventsQuery(activePage);
+  const { data, isLoading, error } = useGetEventsQuery(activePage, {
+    skip: sortValue,
+  });
+  const { location } = useCurrentLocation();
   const {
     data: sortedData,
     isLoading: isSortedLoading,
     error: sortedError,
-  } = useGetSortedEventsQuery({ sortValue, activePage }, { skip: !sortValue });
-  if (error) return <p>cannot get data</p>;
-  if (isLoading) return <Loading />;
+  } = useGetSortedEventsQuery(
+    { sortValue, activePage, location },
+    { skip: !sortValue }
+  );
+  if (error || sortedError) return <p>cannot get data</p>;
+  if (isLoading || isSortedLoading) return <Loading />;
 
   return (
     <>
@@ -49,7 +56,6 @@ const EventsPage = () => {
       />
     </>
   );
-
 };
 
 export default EventsPage;

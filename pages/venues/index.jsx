@@ -6,10 +6,12 @@ import {
   useGetSortedVenuesQuery,
 } from "../../src/features/venue/venueSlice";
 import CardWithPaginationSort from "../../src/components/CardWithPaginationSort/CardWithPaginationSort";
+import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 
 const AdminVenuePage = () => {
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
+  const { location } = useCurrentLocation();
   const { data, isLoading, error } = useGetVenuesQuery(activePage, {
     skip: sortValue,
   });
@@ -17,9 +19,12 @@ const AdminVenuePage = () => {
     data: sortedData,
     isLoading: isSortedLoading,
     error: sortedError,
-  } = useGetSortedVenuesQuery({ sortValue, activePage }, { skip: !sortValue });
+  } = useGetSortedVenuesQuery(
+    { sortValue, activePage, location },
+    { skip: !sortValue }
+  );
 
-  if (error) return <p>cannot get data</p>;
+  if (error || sortedError) return <p>cannot get data</p>;
   if (isLoading || isSortedLoading) return <Loading />;
 
   return (

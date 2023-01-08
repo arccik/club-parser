@@ -1,12 +1,9 @@
 import { Carousel } from "@mantine/carousel";
-import { useMediaQuery } from "@mantine/hooks";
-import { useMantineTheme, Container, Text } from "@mantine/core";
+import { Container, Text } from "@mantine/core";
 import Card from "./Card/Card";
 import dayjs from "dayjs";
 
-export default function CardsCarousel({ events }) {
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
+const CardsCarousel = ({ events }) => {
   const slides = events?.map((item) => (
     <Carousel.Slide key={item._id}>
       <Card
@@ -40,10 +37,10 @@ export default function CardsCarousel({ events }) {
         ]}
         slideGap="xs"
         align="start"
-        // slidesToScroll={mobile ? 1 : 2}
       >
         {slides}
       </Carousel>
     </Container>
   );
-}
+};
+export default CardsCarousel;

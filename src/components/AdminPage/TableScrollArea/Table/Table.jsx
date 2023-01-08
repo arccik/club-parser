@@ -100,7 +100,7 @@ function sortData(
   );
 }
 
-export default function TableSort({ data }) {
+const TableSort = ({ data }) => {
   const [search, setSearch] = useState("");
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState(null);
@@ -184,4 +184,5 @@ export default function TableSort({ data }) {
       </Table>
     </ScrollArea>
   );
-}
+};
+export default TableSort;

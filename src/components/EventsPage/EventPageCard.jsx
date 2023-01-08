@@ -1,11 +1,12 @@
-import { Card, Avatar, Text, Group } from "@mantine/core";
+import { Card, Text, Group } from "@mantine/core";
 import Image from "next/image";
 import dayjs from "dayjs";
 import useStyles from "./styles";
 import Link from "next/link";
 
 const EventPageCard = ({ event }) => {
-  const { classes, cx, theme } = useStyles();
+  const { classes } = useStyles();
+  console.log("Event Page Card : ", event);
   return (
     <Card
       withBorder
@@ -27,15 +28,20 @@ const EventPageCard = ({ event }) => {
           />
         )}
         <div className={classes.body}>
-          <Text transform="uppercase" color="dimmed" weight={700} size="xs">
-            {event.startdate ? (
-              dayjs(event.startdate).format("DD MMM YY")
-            ) : (
-              <p>
-                {event.open} - {event.close}
-              </p>
+          <Group>
+            <Text transform="uppercase" color="dimmed" weight={700} size="xs">
+              {event.startdate ? (
+                dayjs(event.startdate).format("DD MMM YY")
+              ) : (
+                <p>
+                  {event.open} - {event.close}
+                </p>
+              )}
+            </Text>
+            {event.distance && (
+              <Text size="xs"> {event.distance.toPrecision(3)} km</Text>
             )}
-          </Text>
+          </Group>
           <Text className={classes.title} mt="xs" mb="md">
             {event.name}
           </Text>

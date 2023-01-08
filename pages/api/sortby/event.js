@@ -9,6 +9,34 @@ export default async function handler(req, res) {
     const PAGE_LIMIT = 20;
     const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
+    if (coords) {
+      const eventTotal = await Event.countDocuments({
+        startdate: { $gte: new Date() },
+      });
+      const location = coords.split(",").map(Number);
+      const events = await Event.aggregate([
+        {
+          $geoNear: {
+            near: {
+              type: "Point",
+              coordinates: location,
+            },
+            spherical: true,
+            distanceField: "distance",
+            distanceMultiplier: 0.001,
+          },
+        },
+        { $match: { startdate: { $gte: new Date() } } },
+        { $skip: startIndex },
+        { $limit: PAGE_LIMIT },
+      ]);
+
+      return res.status(200).json({
+        events,
+        currentPage: Number(page),
+        numberOfPages: Math.ceil(eventTotal / PAGE_LIMIT),
+      });
+    }
     if (sortby) {
       const eventTotal = await Event.countDocuments({
         startdate: { $gte: new Date() },

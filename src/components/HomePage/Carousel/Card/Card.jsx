@@ -3,7 +3,7 @@ import useStyles from "./styles";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function Card({ image, title, date, id }) {
+const Card = ({ image, title, date, id }) => {
   const { classes } = useStyles();
   const router = useRouter();
 
@@ -35,4 +35,5 @@ export default function Card({ image, title, date, id }) {
       </Button>
     </Paper>
   );
-}
+};
+export default Card;

@@ -26,7 +26,7 @@ import EventsFeed from "./EventsFeed/EventsFeed";
 import BuyTickets from "./BuyTickets/BuyTickets";
 dayjs.extend(relativeTime);
 
-export default function DetailsPage({ data }) {
+const DetailsPage = ({ data }) => {
   const { classes } = useStyles();
   const { user } = useUser();
 
@@ -169,4 +169,5 @@ export default function DetailsPage({ data }) {
       <FooterSocial />
     </Container>
   );
-}
+};
+export default DetailsPage;

@@ -3,7 +3,7 @@ import { IconMapPin, ActionIcon } from "@tabler/icons";
 import Image from "next/image";
 import { Header, Group, useMantineTheme } from "@mantine/core";
 
-export default function AppHeader() {
+const AppHeader = () => {
   const theme = useMantineTheme();
   return (
     <Header height={60} p="md">
@@ -47,4 +47,5 @@ export default function AppHeader() {
       </div>
     </Header>
   );
-}
+};
+export default AppHeader;

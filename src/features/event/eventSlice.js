@@ -132,10 +132,10 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getSortedEvents: builder.query({
-      query: ({ sortValue, activePage }) =>
-        `/sortby?sortby=${sortValue}&page=${activePage}`,
+      query: ({ sortValue, activePage, location }) =>
+        `/sortby/event?sortby=${sortValue}&page=${activePage}&coords=${location.lng},${location.lat}`,
       providesTags: (result, error, arg) => {
-        if (!result.events) return { type: "Events", _id: "LIST" };
+        if (!result?.events) return { type: "Events", _id: "LIST" };
         if (error) return [];
         return [
           ...result.events.map(({ _id }) => ({ type: "Events", _id: _id })),

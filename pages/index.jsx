@@ -35,7 +35,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ events, oldEvents }) {
+const Home = ({ events, oldEvents }) => {
   const { location, getLocation } = useCurrentLocaiton();
 
   const [showLocalLoad, setShowLoadLocal] = useLocalStorage({
@@ -50,7 +50,6 @@ export default function Home({ events, oldEvents }) {
   } = useGetEventsByLocationQuery(location, {
     skip: !location || showLocalLoad,
   });
-
 
   if (isEventsLoading) return <Loading />;
   if (eventError) return <p> Cannot fetch data</p>;
@@ -90,4 +89,5 @@ export default function Home({ events, oldEvents }) {
       <FooterSocial />
     </>
   );
-}
+};
+export default Home;
