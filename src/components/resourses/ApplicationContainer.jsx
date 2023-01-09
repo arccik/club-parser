@@ -7,7 +7,7 @@ import {
   Image,
 } from "@mantine/core";
 import { useRouter } from "next/router";
-import BurgerMenu from "./AppHeader/BurgerMenu/BurgerMenu";
+import BurgerMenu from "../AppHeader/BurgerMenu/BurgerMenu";
 
 import { IconMapPin } from "@tabler/icons";
 

@@ -1,27 +1,11 @@
-import TableScrollArea from "../../src/components/AdminPage/TableScrollArea/TableScrollArea";
-
-import {
-  Container,
-  TextInput,
-  Grid,
-  Pagination,
-  Badge,
-  Text,
-  Title,
-  Divider,
-  Group,
-  Button,
-  LoadingOverlay,
-} from "@mantine/core";
+import { LoadingOverlay } from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
 import { useState } from "react";
 import {
   useGetEventsQuery,
   useGetSortedEventsQuery,
 } from "../../src/features/event/eventSlice";
-import EventPageCard from "../../src/components/EventsPage/EventPageCard";
-import FooterSocial from "../../src/components/HomePage/Footer/Footer";
-import CardWithPaginationSort from "../../src/components/CardWithPaginationSort/CardWithPaginationSort";
+import CardWithPaginationSort from "../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 
 const EventsPage = () => {

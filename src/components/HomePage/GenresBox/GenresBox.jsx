@@ -6,37 +6,37 @@ import {
   Group,
   Container,
   Anchor,
+  Loader,
 } from "@mantine/core";
-import { IconVinyl } from "@tabler/icons";
+import { IconVinyl, IconMusic } from "@tabler/icons";
 import Link from "next/link";
+import { useGetGenresQuery } from "../../../../src/features/event/eventSlice";
 
 import useStyles from "./styles";
-
-const mockdata = [
-  { title: "Drum And Bass", icon: IconVinyl, color: "indigo" },
-  { title: "Techno", icon: IconVinyl, color: "indigo" },
-  { title: "Dubstep", icon: IconVinyl, color: "indigo" },
-  { title: "Neurofunk", icon: IconVinyl, color: "teal" },
-  { title: "Hip-hop", icon: IconVinyl, color: "teal" },
-  { title: "Trill", icon: IconVinyl, color: "teal" },
-  { title: "Reggie", icon: IconVinyl, color: "pink" },
-  { title: "Electro", icon: IconVinyl, color: "red" },
-  { title: "House", icon: IconVinyl, color: "orange" },
-];
+import { useState } from "react";
 
 const GenresBox = () => {
   const { classes, theme } = useStyles();
+  const [expanded, setExpanded] = useState(false);
 
-  const items = mockdata.map((item) => (
+  const { data: genres, isLoading, error } = useGetGenresQuery();
+
+  if (isLoading) return <Loader />;
+  if (error)
+    return (
+      <Text>Problem getting genres from server, please check connections</Text>
+    );
+  const slicer = expanded ? genres.length : 9;
+  const items = genres.slice(0, slicer).map((item, i) => (
     <UnstyledButton
-      key={item.title}
+      key={item}
       className={classes.item}
       component={Link}
-      href={`/details/genres/${item.title}`}
+      href={`/details/genres/${item.split("/")}`}
     >
-      <item.icon color={theme.colors[item.color][6]} size={32} />
+      <IconMusic color={theme.colors.blue[7]} size={32} />
       <Text size="xs" mt={7}>
-        {item.title}
+        {item}
       </Text>
     </UnstyledButton>
   ));
@@ -55,9 +55,14 @@ const GenresBox = () => {
           <Text fz="xl" weight="bolder">
             By Genres
           </Text>
-          {/* <Anchor size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
-            All other Genres
-          </Anchor> */}
+          <Anchor
+            size="xs"
+            color="dimmed"
+            sx={{ lineHeight: 1 }}
+            onClick={() => setExpanded((prev) => !prev)}
+          >
+            See all Genres
+          </Anchor>
         </Group>
         <SimpleGrid cols={3} mt="md">
           {items}

@@ -7,10 +7,11 @@ export default async function handler(req, res) {
     await dbConnect();
     const { type } = req.query;
     if (type) {
+      const genre = type.replace(",", "/");
       const events = await Event.find({ startdate: { $gt: new Date() } })
         .where("genres")
-        .in(type);
-      const venues = await Venue.find().where("genres").in(type);
+        .in(genre);
+      const venues = await Venue.find().where("genres").in(genre);
       const data = [...events, ...venues];
       return res.status(200).json(data);
     }

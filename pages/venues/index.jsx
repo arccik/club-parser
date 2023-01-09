@@ -5,7 +5,7 @@ import {
   useGetVenuesQuery,
   useGetSortedVenuesQuery,
 } from "../../src/features/venue/venueSlice";
-import CardWithPaginationSort from "../../src/components/CardWithPaginationSort/CardWithPaginationSort";
+import CardWithPaginationSort from "../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 
 const AdminVenuePage = () => {

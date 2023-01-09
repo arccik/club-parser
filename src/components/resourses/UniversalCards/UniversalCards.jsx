@@ -8,8 +8,9 @@ import {
   Blockquote,
   ActionIcon,
   Stack,
+  Image,
 } from "@mantine/core";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -62,7 +63,6 @@ const UniversalCards = ({ data, cardType }) => {
                 src={place.image}
                 height={160}
                 alt={place.name}
-                blurDataURL="/assets/blur.jpg"
                 placeholder="blur"
               />
             )}

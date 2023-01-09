@@ -142,6 +142,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         ];
       },
     }),
+    getGenres: builder.query({
+      query: () => "/genres",
+    }),
   }),
 });
 
@@ -152,6 +155,7 @@ export const {
   useSearchEventsQuery,
   useGetOldEventsQuery,
   useGetSortedEventsQuery,
+  useGetGenresQuery,
   useAddNewEventMutation,
   useDeleteEventMutation,
   useUpdateEventMutation,

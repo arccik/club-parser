@@ -5,7 +5,7 @@ import {
   useGetFromDateQuery,
 } from "../../../src/features/both/bothSlice";
 import Loading from "../../../src/utils/Loading/Loading";
-import UniversalCards from "../../../src/components/UniversalCards/UniversalCards";
+import UniversalCards from "../../../src/components/resourses/UniversalCards/UniversalCards";
 import dayjs from "dayjs";
 
 const ByDatePage = () => {

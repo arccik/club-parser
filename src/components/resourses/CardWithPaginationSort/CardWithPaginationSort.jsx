@@ -8,8 +8,8 @@ import {
   Group,
   Button,
 } from "@mantine/core";
-import EventPageCard from "../../../src/components/EventsPage/EventPageCard";
-import FooterSocial from "../../../src/components/HomePage/Footer/Footer";
+import EventPageCard from "../../EventsPage/EventPageCard";
+import FooterSocial from "../../HomePage/Footer/Footer";
 
 const CardWithPaginationSort = ({
   data,

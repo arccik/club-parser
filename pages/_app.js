@@ -1,6 +1,6 @@
 import "../src/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
-import { ApplicationContainer } from "../src/components/ApplicationContainer";
+import { ApplicationContainer } from "../src/components/resourses/ApplicationContainer";
 
 import { store } from "../store";
 import { Provider } from "react-redux";
