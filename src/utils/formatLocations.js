@@ -1,4 +1,4 @@
-export default function formatLocations(arr) {
+const formatLocations = (arr) => {
   arr.forEach((value) => {
     value.position = {
       lat: value.location.coordinates[0],
@@ -8,4 +8,5 @@ export default function formatLocations(arr) {
   });
 
   return arr;
-}
+};
+export default formatLocations;

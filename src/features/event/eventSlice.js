@@ -115,15 +115,26 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return `/search/${searchTerm}`;
       },
       transformResponse: (response) => {
-        if (response[0].notFound) return response[0];
-        return response.map((item) => ({
-          placeType: item.placeType,
-          id: item._id,
-          image: item.image,
-          label: item.name,
-          description: item.description || "PLACE FOR DESCRIPTIONS",
-          value: item.name,
-        }));
+        if (!response.length) {
+          return [
+            {
+              placeType: "event",
+              id: "1",
+              image: "/assets/white-logo.png",
+              description: "Not Found",
+              name: "Nothing was found",
+            },
+          ];
+        } else {
+          return response.map((item) => ({
+            placeType: item.placeType,
+            id: item._id,
+            image: item.image,
+            label: item.name,
+            description: item.description || "PLACE FOR DESCRIPTIONS",
+            value: item.name,
+          }));
+        }
       },
       providesTags: (result, error, arg) => {
         if (error) return [];

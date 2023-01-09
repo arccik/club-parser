@@ -1,13 +1,10 @@
 import { Marker, MarkerClusterer, InfoWindow } from "@react-google-maps/api";
 import MapPopUp from "./MapPopUp";
 import { useGetMarkersQuery } from "../../../features/marker/markerSlice";
-import { useState } from "react";
-import MapNavBar from "../MapNavBar/MapNavBar";
 import Loading from "../../../utils/Loading/Loading";
 
-const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
-  const [state, setState] = useState("events");
-  const { data: markers, error, isLoading } = useGetMarkersQuery(state);
+const Markes = ({ mapRef, active, setActive, currentLocation }) => {
+  const { data: markers, error, isLoading } = useGetMarkersQuery("venues");
   if (isLoading) return <Loading />;
   if (error) return <p>Error check console {console.error({ error })}</p>;
 
@@ -33,7 +30,6 @@ const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
   };
   return (
     <>
-      <MapNavBar handleClick={setState} />
       <Marker
         icon={{
           url: "assets/current-location-icon.png",
@@ -50,18 +46,8 @@ const Markes = ({ center, mapRef, active, setActive, currentLocation }) => {
               clusterer={clusterer}
               key={house._id}
               position={getPosition(house.location.coordinates)}
-              icon={
-                house.placeType === "venue"
-                  ? "/assets/venue-icon.png"
-                  : "/assets/event-icon.png"
-                // : {
-                //     path: "M13 11H17V17H13V11ZM14.5 12.5V15.5H15.5V12.5H14.5Z M7 11H11V17H7V11ZM8.5 12.5V15.5H9.5V12.5H8.5Z M20 20V5H17V3H15.5V5H8.5V3H7V5H4V20H20ZM5.5 6.5V8H18.5V6.5H5.5ZM18.5 9.5H5.5V18.5H18.5V9.5Z",
-                //     // scale: 1.2,
-                //     strokeColor: "blue",
-                //     strokeWeight: 1,
-                //   }
-              }
-              onClick={(marker) => {
+              icon="/assets/venue-icon.png"
+              onClick={() => {
                 handleMarkerClick(house.location);
               }}
             >

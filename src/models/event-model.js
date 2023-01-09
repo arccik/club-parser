@@ -34,7 +34,10 @@ const EventSchema = new Schema(
   { timestamps: true }
 );
 
-EventSchema.index({ name: "text", description: "text", genres: "text" });
+EventSchema.index(
+  { name: "text", description: "text", genres: "text" },
+  { description: 5, genres: 8, name: 10 }
+);
 
 EventSchema.index({ location: "2dsphere" });
 

@@ -1,4 +1,4 @@
-export default function validation(values) {
+const validation = (values) => {
   const errors = {};
 
   if (!values.name) {
@@ -9,4 +9,5 @@ export default function validation(values) {
   }
 
   return errors;
-}
+};
+export default validation;

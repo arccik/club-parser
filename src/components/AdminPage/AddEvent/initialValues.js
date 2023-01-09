@@ -1,8 +1,10 @@
-export default function initialValues(fields) {
+const initialValues = (fields) => {
   let initialValue = {};
   fields.forEach((field) => {
     if (field === "placeType") initialValue[field] = "events";
     else initialValue[field] = "";
   });
   return initialValue;
-}
+};
+
+export default initialValues;
