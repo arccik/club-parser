@@ -39,13 +39,13 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getByGenres: builder.query({
-      query: (genre) => `/genres/${genre}`,
+      query: ({ genre, page }) => `/genres/${genre}?page=${page}`,
       providesTags: ({ result }, error, arg) => {
         if (!result) return [{ type: "Events", id: "LIST" }];
         else {
           return [
             ...result.map(({ _id }) => ({
-              type: result.placeType === "event" ? "Events" : "Venues",
+              type: result.data.placeType === "event" ? "Events" : "Venues",
               _id: _id,
             })),
           ];
@@ -53,10 +53,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getByDate: builder.query({
-      query: (date) => `/sortby?date=${date}`,
+      query: ({ date, page }) =>
+        `/sortby/event?sortby=date&date=${date}&page=${page}`,
     }),
     getFromDate: builder.query({
-      query: (date) => `/sortby?date=${date}?fromDate=true`,
+      query: (date) => `/sortby/event?date=${date}?fromDate=true`,
     }),
     rate: builder.mutation({
       query: ({ _id, score, type }) => {

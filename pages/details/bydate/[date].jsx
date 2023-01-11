@@ -7,19 +7,29 @@ import {
 import Loading from "../../../src/utils/Loading/Loading";
 import UniversalCards from "../../../src/components/resourses/UniversalCards/UniversalCards";
 import dayjs from "dayjs";
+import { useState } from "react";
 
 const ByDatePage = () => {
+  const [page, setPage] = useState(1);
   const router = useRouter();
   const { date } = router.query;
-  const { data, isLoading, error, isSuccess } = useGetByDateQuery(date);
+  const { data, isLoading, error, isSuccess } = useGetByDateQuery(
+    {
+      date,
+      page,
+    },
+    { skip: !date }
+  );
   const { data: otherData, isLoading: otherLoading } = useGetFromDateQuery(
     date,
     {
-      skip: !isSuccess && data?.events,
+      skip: true,
     }
   );
   if (otherLoading && isLoading) return <Loading />;
-  if (isSuccess && !data?.events.length)
+  if (error) return <Title>Propblem getting the date from server</Title>;
+
+  if (isSuccess && !data?.events.length) {
     return (
       <>
         <Title order={3} mt="md" align="center">
@@ -31,12 +41,14 @@ const ByDatePage = () => {
         />
       </>
     );
-  if (isLoading) return <Loading />;
-  if (error) return;
+  }
   return (
     <UniversalCards
+      numberOfPages={data?.numberOfPages}
       data={data?.events}
       cardType={dayjs(date).format("D MMM YYYY")}
+      page={page}
+      setPage={setPage}
     />
   );
 };

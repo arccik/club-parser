@@ -16,14 +16,8 @@ const AppHeader = () => {
         }}
       >
         <Image
-          onClick={() => router.replace("/")}
+          onClick={() => router.push("/", undefined, { scroll: false })}
           src="/assets/white-logo.png"
-          // {
-          //   theme.colorScheme === "light"
-          //     ? "/assets/logo.png"
-          //     : "/assets/white-logo.png"
-          // }
-          blurDataURL="/assets/blur.jpg"
           placeholder="blur"
           alt="StripRadar logo"
           width={120}

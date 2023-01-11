@@ -13,6 +13,10 @@ const Cards = ({ data }) => {
   const { classes } = useStyles();
   const router = useRouter();
 
+  const handleClick = (id) => {
+    router.push(`/details/events/${id}`);
+  };
+
   return data.map((article) => (
     <div key={article._id} className={classes.card}>
       <AspectRatio ratio={1920 / 1080}>
@@ -20,9 +24,10 @@ const Cards = ({ data }) => {
           <Image
             fill
             sizes="(max-width: 500px) 100px"
+            className={classes.link}
             src={article.image}
             alt="article image"
-            onClick={() => router.push(`/details/events/${article._id}`)}
+            onClick={() => handleClick(article._id)}
             blurDataURL="/assets/blur.jpg"
             placeholder="blur"
           />
@@ -30,7 +35,12 @@ const Cards = ({ data }) => {
       </AspectRatio>
 
       <Group position="apart" m="sm">
-        <Text size="sm" weight={700} className={classes.title}>
+        <Text
+          size="sm"
+          weight={700}
+          className={classes.title}
+          onClick={() => handleClick(article._id)}
+        >
           {article.name}
         </Text>
         <Stars rating={article.rating} id={article._id} />
@@ -63,7 +73,13 @@ const Cards = ({ data }) => {
       {article.genres && (
         <Group spacing={0} m={0} ml="sm" mt="sm">
           {article.genres.map((genre) => (
-            <Badge m={0} key={genre} color="light">
+            <Badge
+              m={0}
+              key={genre}
+              color="light"
+              className={classes.link}
+              onClick={() => router.push(`/details/genres/${genre}`)}
+            >
               {genre}
             </Badge>
           ))}

@@ -76,6 +76,14 @@ const useStyles = createStyles((theme) => ({
     top: theme.spacing.xs,
     right: theme.spacing.xs + 2,
   },
+  badgeLink: {
+    cursor: "pointer",
+    "&:hover": {
+      fontSize: 18,
+      color: "white",
+      transition: "all 1s ease",
+    },
+  },
 }));
 
 export default useStyles;

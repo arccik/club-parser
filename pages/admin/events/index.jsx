@@ -16,6 +16,7 @@ const AdminEventsPage = () => {
   if (user?.role !== "admin") return null;
 
   if (isLoading) return <Loading />;
+  if (error) return <p>Problem to getting data from server</p>;
   if (!user) return <ErrorPage statusCode={404} />;
   return (
     <Container size={"100%"} px={0}>

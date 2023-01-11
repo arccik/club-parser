@@ -5,18 +5,22 @@ import {
   Header,
   useMantineTheme,
   Image,
+  Affix,
+  Button,
+  Transition,
 } from "@mantine/core";
+import { useWindowScroll } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import BurgerMenu from "../AppHeader/BurgerMenu/BurgerMenu";
 
-import { IconMapPin } from "@tabler/icons";
+import { IconMapPin, IconArrowUp } from "@tabler/icons";
 
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
   const router = useRouter();
+  const [scroll, scrollTo] = useWindowScroll();
   return (
     <AppShell
-      // fixed
       padding={0}
       header={
         <Header
@@ -38,11 +42,8 @@ export const ApplicationContainer = ({ children }) => {
             }}
           >
             <Image
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/", undefined, { scroll: false })}
               src="/assets/white-logo.png"
-              // theme.colorScheme === "light"
-              // ? "/assets/logo.png"
-              // : "/assets/white-logo.png"
               alt="StripRadar logo"
               width={140}
               height={60}
@@ -67,6 +68,21 @@ export const ApplicationContainer = ({ children }) => {
       }
     >
       {children}
+
+      <Affix position={{ bottom: 45, right: 20 }}>
+        <Transition transition="slide-up" mounted={scroll.y > 550}>
+          {(transitionStyles) => (
+            <Button
+              leftIcon={<IconArrowUp size={16} />}
+              style={transitionStyles}
+              color="dark"
+              onClick={() => scrollTo({ y: 0 })}
+            >
+              Scroll to top
+            </Button>
+          )}
+        </Transition>
+      </Affix>
     </AppShell>
   );
 };

@@ -1,49 +1,43 @@
-import {
-  Dialog,
-  Group,
-  Button,
-  TextInput,
-  Text,
-  Notification,
-} from "@mantine/core";
-import { useState } from "react";
-import { IconTruckLoading, IconAnalyze } from "@tabler/icons";
+import { Dialog, Group, Button, Text } from "@mantine/core";
+import { useSessionStorage } from "@mantine/hooks";
 
-const LoadLocalDialog = ({ setAgree, show, getCurrentLocation }) => {
-  const [opened, setOpened] = useState(show);
+const LoadLocalDialog = ({ setAgree }) => {
+  const [showCurrentLocationDialog, setShowCurrentLocationDialog] =
+    useSessionStorage({
+      key: "loadLocal",
+      defaultValue: true,
+    });
 
   const handleClick = () => {
-    setOpened(false);
+    setShowCurrentLocationDialog(false);
     setAgree();
   };
 
   return (
-    opened && (
-      <Dialog
-        opened={opened}
-        withCloseButton
-        position={{ bottom: 20, right: 10 }}
-        onClose={() => setOpened(false)}
-        radius="md"
-        size="md"
-        mx={0}
-      >
-        <Group spacing="xs" position="apart">
-          <Text size="sm" style={{ marginBottom: 10 }} weight={500}>
-            Show nearby places
-          </Text>
-          <Button
-            color="pink"
-            variant="outline"
-            radius="md"
-            onClick={handleClick}
-            mr="lg"
-          >
-            Load
-          </Button>
-        </Group>
-      </Dialog>
-    )
+    <Dialog
+      opened={showCurrentLocationDialog}
+      withCloseButton
+      position={{ bottom: 20, right: 10 }}
+      onClose={() => setShowCurrentLocationDialog(false)}
+      radius="md"
+      size="md"
+      mx={0}
+    >
+      <Group spacing="xs" position="apart">
+        <Text size="sm" style={{ marginBottom: 10 }} weight={500}>
+          Show nearby places
+        </Text>
+        <Button
+          color="pink"
+          variant="outline"
+          radius="md"
+          onClick={handleClick}
+          mr="lg"
+        >
+          Load
+        </Button>
+      </Group>
+    </Dialog>
   );
 };
 

@@ -1,18 +1,10 @@
-import {
-  Card,
-  Text,
-  Badge,
-  Group,
-  Avatar,
-  Title,
-  Loader,
-  Stack,
-} from "@mantine/core";
+import { Text, Group, Avatar, Title, Loader, Stack } from "@mantine/core";
 import { useGetUpcomingEventsForVenueQuery } from "../../../features/both/bothSlice";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
 dayjs.extend(relativeTime);
+
 const EventsFeed = ({ venueId }) => {
   const {
     data: events,

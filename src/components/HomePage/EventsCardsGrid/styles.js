@@ -7,15 +7,24 @@ const useStyles = createStyles((theme) => ({
       boxShadow: theme.shadows.md,
     },
   },
-
+  link: {
+    cursor: "pointer",
+    "&:hover": {
+      fontSize: 18,
+      boxShadow: theme.shadows.md,
+      transition: "all 0.5s ease;",
+    },
+  },
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    cursor: "pointer",
     fontSize: "1.2rem",
     fontWeight: 600,
     width: 220,
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
+
     "&:hover": {
       textOverflow: "unset",
       display: "block",

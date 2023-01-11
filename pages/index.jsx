@@ -1,7 +1,8 @@
 import Head from "next/head";
+import { useLocalStorage } from "@mantine/hooks";
+import { LoadingOverlay, Text } from "@mantine/core";
 import EventsCardsGrid from "../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
 import FooterSocial from "../src/components/HomePage/Footer/Footer";
-import { LoadingOverlay, Text } from "@mantine/core";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
 import dbConnect from "../src/utils/dbConnect";
@@ -13,7 +14,6 @@ import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
 import LoadLocalDialog from "../src/components/HomePage/LoadLocalDigalog/LoadLocalDialog";
 import Loading from "../src/utils/Loading/Loading";
-import { useLocalStorage } from "@mantine/hooks";
 import Artist from "../src/models/artist-model";
 import Venue from "../src/models/venue-model";
 
@@ -38,11 +38,6 @@ export async function getStaticProps() {
 const Home = ({ events, oldEvents }) => {
   const { location, getLocation } = useCurrentLocaiton();
 
-  const [showLocalLoad, setShowLoadLocal] = useLocalStorage({
-    key: "loadLocal",
-    defaultValue: true,
-  });
-
   const {
     data: eventsByLocation,
     isLoading: isEventsLoading,
@@ -60,7 +55,6 @@ const Home = ({ events, oldEvents }) => {
     );
 
   const handleDialog = () => {
-    setShowLoadLocal(false);
     if (!location) getLocation();
   };
   return (
@@ -90,7 +84,7 @@ const Home = ({ events, oldEvents }) => {
         <GenresBox />
         {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
       </main>
-      <LoadLocalDialog setAgree={handleDialog} show={showLocalLoad} />
+      <LoadLocalDialog setAgree={handleDialog} />
 
       <FooterSocial />
     </>

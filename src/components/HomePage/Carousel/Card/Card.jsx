@@ -27,8 +27,10 @@ const Card = ({ image, title, date, id }) => {
       </div>
       <Button
         variant="outline"
+        shadow="lg"
         size="xs"
         color="dark"
+        className={classes.date}
         onClick={() => router.push(`/details/events/${id}`)}
       >
         Read

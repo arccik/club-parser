@@ -9,15 +9,13 @@ import {
   Accordion,
   Title,
   Container,
-  UnstyledButton,
-  Avatar,
 } from "@mantine/core";
 import Stars from "./Stars/Stars";
 import useStyles from "./styles";
 import SmallMap from "../MapPage/SmallMap";
 import Link from "next/link";
 
-import { IconNavigation, IconEdit, IconWorld } from "@tabler/icons";
+import { IconNavigation, IconEdit } from "@tabler/icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import FooterSocial from "../HomePage/Footer/Footer";
@@ -27,9 +25,11 @@ import VenueCard from "./VenueCard/VanueCard";
 import EventsFeed from "./EventsFeed/EventsFeed";
 import BuyTickets from "./BuyTickets/BuyTickets";
 import Head from "next/head";
+import { useRouter } from "next/router";
 dayjs.extend(relativeTime);
 
 const DetailsPage = ({ data }) => {
+  const router = useRouter();
   const { classes } = useStyles();
   const { user } = useUser();
 
@@ -100,7 +100,13 @@ const DetailsPage = ({ data }) => {
               </Title>
               <Group spacing={0} m={0} ml="sm" mt="sm">
                 {data.genres.map((genre) => (
-                  <Badge m={0} key={genre} color="light">
+                  <Badge
+                    m={0}
+                    key={genre}
+                    color="light"
+                    className={classes.badgeLink}
+                    onClick={() => router.push(`/details/genres/${genre}`)}
+                  >
                     {genre}
                   </Badge>
                 ))}

@@ -9,37 +9,16 @@ import {
   ActionIcon,
   Stack,
   Image,
+  Pagination,
 } from "@mantine/core";
-// import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
-const UniversalCards = ({ data, cardType }) => {
+const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
   const router = useRouter();
-  const [searchValue, setSearchValue] = useState("");
-  const [filtredData, setFiltredData] = useState(data);
-
-  const handleSearch = (value) => {
-    setSearchValue(value);
-    // if (!value) {
-    //   return setFiltredData(data);
-    // }
-    const filterd = filtredData.filter((v) => {
-      const re = new RegExp(`/${value}/`, "gi");
-      return v.toString().match(re);
-    });
-    console.log("FIlterd Data ", filterd);
-    setFiltredData(filterd);
-  };
 
   return (
-    <Container>
-      {/* <TextInput
-        placeholder="Search.."
-        value={searchValue}
-        onChange={(e) => handleSearch(e.target.value)}
-      /> */}
+    <Container size="sm">
       <ActionIcon onClick={() => router.back()}>&#171;Back</ActionIcon>
       <Blockquote
         style={{
@@ -50,7 +29,7 @@ const UniversalCards = ({ data, cardType }) => {
         }}
         align="center"
       >
-        {cardType || router.query.type || "Event"}
+        {cardType || router.query.genre || "Event"}
       </Blockquote>
       {data?.map((place) => (
         <Card key={place._id} shadow="sm" p="lg" mt="lg" radius="md" withBorder>
@@ -79,13 +58,13 @@ const UniversalCards = ({ data, cardType }) => {
 
           <Card.Section align="center">
             {place.startdate && (
-              <Group position="center">
-                <Badge size="lg">
+              <Group>
+                <Badge size="lg" color="gray">
                   {new Date(place.startdate).toUTCString().split("GMT")}
                 </Badge>
                 {place.price && (
-                  <Badge size="sm">
-                    Price{" "}
+                  <Badge>
+                    <span>Price: </span>
                     {place.price.includes("£")
                       ? place.price
                       : " £ " + place.price}
@@ -98,7 +77,13 @@ const UniversalCards = ({ data, cardType }) => {
             {place.description}
           </Text>
           {place.genres?.map((genre) => (
-            <Badge key={genre} color="pink" variant="light">
+            <Badge
+              key={genre}
+              color="orange"
+              variant="light"
+              style={{ cursor: "pointer" }}
+              onClick={() => router.push(`/details/genres/${genre}`)}
+            >
               {genre}
             </Badge>
           ))}
@@ -116,6 +101,19 @@ const UniversalCards = ({ data, cardType }) => {
           </Button>
         </Card>
       ))}
+      {numberOfPages > 1 && (
+        <Pagination
+          position="center"
+          m="lg"
+          noWrap
+          page={page}
+          onChange={(page) => {
+            setPage(page);
+            window.scrollTo(0, 0);
+          }}
+          total={numberOfPages}
+        />
+      )}
     </Container>
   );
 };
