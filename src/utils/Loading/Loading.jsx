@@ -31,7 +31,7 @@ const Loading = () => {
                 patternContentUnits="objectBoundingBox"
               >
                 <path
-                  fill="#FBCE13"
+                  fill="var(--loader-color)"
                   d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"
                 />
               </pattern>
@@ -63,7 +63,7 @@ const Loading = () => {
             <path
               id="btl-out"
               fill="none"
-              stroke="#FCE480"
+              stroke="var(--loader-color)"
               strokeWidth="3"
               strokeMiterlimit="10"
               d="M17.905,38.109V9.734
@@ -94,7 +94,7 @@ const Loading = () => {
                 patternContentUnits="objectBoundingBox"
               >
                 <path
-                  fill="#FBCE13"
+                  fill="var(--loader-color)"
                   d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"
                 />
               </pattern>
@@ -128,7 +128,7 @@ const Loading = () => {
             <path
               id="btl-out"
               fill="none"
-              stroke="#FCE480"
+              stroke="var(--loader-color)"
               strokeWidth="3"
               strokeMiterlimit="10"
               d="M30.836,48.086
@@ -161,7 +161,7 @@ const Loading = () => {
                 patternContentUnits="objectBoundingBox"
               >
                 <path
-                  fill="#FBCE13"
+                  fill="var(--loader-color)"
                   d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"
                 />
               </pattern>
@@ -194,7 +194,7 @@ const Loading = () => {
             <path
               id="btl-out"
               fill="none"
-              stroke="#FCE480"
+              stroke="var(--loader-color)"
               strokeWidth="3"
               strokeMiterlimit="10"
               d="M29.157,53.497c-2-10.757-6.688-36.18-7.375-40.493
@@ -225,7 +225,7 @@ const Loading = () => {
                 patternContentUnits="objectBoundingBox"
               >
                 <path
-                  fill="#FBCE13"
+                  fill="var(--loader-color)"
                   d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"
                 />
               </pattern>
@@ -258,7 +258,7 @@ const Loading = () => {
             <path
               id="btl-out"
               fill="none"
-              stroke="#FCE480"
+              stroke="var(--loader-color)"
               strokeWidth="3"
               strokeMiterlimit="10"
               d="M25.474,44.253c-0.564-8.625-3.189-12-5.189-20

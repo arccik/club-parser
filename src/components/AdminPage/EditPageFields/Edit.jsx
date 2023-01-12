@@ -10,23 +10,15 @@ import {
 } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { useRouter } from "next/router";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import useStyles from "./styles";
+import { Formik, Form, ErrorMessage } from "formik";
 import { useGetFieldsNamesQuery } from "../../../features/admin/adminSlice";
-import genres from "../../../utils/musicGenres";
+// import genres from "../../../utils/musicGenres";
 import UploadFile from "./UploadFile/UploadFile";
 import Loading from "../../../utils/Loading/Loading";
-
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too Short!")
-    .max(70, "Too Long!")
-    .required("Required"),
-});
+import { useGetGenresQuery } from "../../../features/event/eventSlice";
 
 const Edit = ({ data, onSave, onDelete }) => {
-  const { classes } = useStyles();
+  const { data: genres, isLoading: isGenresLoading } = useGetGenresQuery();
   const router = useRouter();
 
   const { data: fieldsName, isLoading } = useGetFieldsNamesQuery(
@@ -41,7 +33,7 @@ const Edit = ({ data, onSave, onDelete }) => {
     if (errors) return <p>Cannot update Item</p>;
     if (response.status === "OK") return router.back();
   };
-  if (isLoading) return <Loading />;
+  if (isLoading || isGenresLoading) return <Loading />;
   if (!data) router.back();
   return (
     <Container size="sm">
@@ -49,12 +41,8 @@ const Edit = ({ data, onSave, onDelete }) => {
         {data?.name}
       </Title>
 
-      <Formik
-        initialValues={data}
-        validationSchema={SignupSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ errors, touched, values, setFieldValue }) => (
+      <Formik initialValues={data} onSubmit={handleSubmit}>
+        {({ errors, values, setFieldValue }) => (
           <Form style={{ margin: 20 }}>
             {fieldsName?.map((field) => {
               if (field === "image")
@@ -72,7 +60,6 @@ const Edit = ({ data, onSave, onDelete }) => {
                     size="md"
                     label="Genres"
                     onChange={(e) => setFieldValue("genres", e)}
-                    placeholder="Yeah c'on Simon select Genres"
                     searchable
                     value={values[field]}
                     data={genres}
@@ -99,13 +86,13 @@ const Edit = ({ data, onSave, onDelete }) => {
                     name="description"
                     key={field}
                     label={field}
-                    placeholder="C'om Simon Write something"
                     autosize
                     value={values[field]}
                     onChange={(e) => setFieldValue(field, e.target.value)}
                     minRows={2}
                   />
                 );
+
               return (
                 <Textarea
                   radius="md"
@@ -113,16 +100,10 @@ const Edit = ({ data, onSave, onDelete }) => {
                   name={field}
                   key={field}
                   label={field[0].toUpperCase() + field.slice(1)}
-                  // placeholder="C'om write something"
                   autosize
                   value={values[field]}
                   onChange={(e) => setFieldValue(field, e.target.value)}
                 />
-                // <span key={field}>
-                //   <Text mt="lg">{field.toUpperCase()}</Text>
-                //   <Field name={field} className={classes.input} />
-                //   <ErrorMessage name={field} />
-                // </span>
               );
             })}
 

@@ -1,10 +1,10 @@
 import { Dialog, Group, Button, Text } from "@mantine/core";
 import { useSessionStorage } from "@mantine/hooks";
 
-const LoadLocalDialog = ({ setAgree }) => {
+const Notification = ({ setAgree, title = "Show nearby places" }) => {
   const [showCurrentLocationDialog, setShowCurrentLocationDialog] =
     useSessionStorage({
-      key: "loadLocal",
+      key: title,
       defaultValue: true,
     });
 
@@ -25,7 +25,7 @@ const LoadLocalDialog = ({ setAgree }) => {
     >
       <Group spacing="xs" position="apart">
         <Text size="sm" style={{ marginBottom: 10 }} weight={500}>
-          Show nearby places
+          {title}
         </Text>
         <Button
           color="pink"
@@ -41,4 +41,4 @@ const LoadLocalDialog = ({ setAgree }) => {
   );
 };
 
-export default LoadLocalDialog;
+export default Notification;

@@ -10,27 +10,23 @@ import {
   Stack,
   Image,
   Pagination,
+  Title,
 } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import useStyles from "./styles";
 
 const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
+  const { classes } = useStyles();
   const router = useRouter();
 
   return (
     <Container size="sm">
       <ActionIcon onClick={() => router.back()}>&#171;Back</ActionIcon>
-      <Blockquote
-        style={{
-          padding: 10,
-          margin: 10,
-          boxShadow:
-            "-1px 0 0 1px rgba(255, 203, 82, 0.75), -1px -1px 0 1px rgba(255, 170, 70, 0.25), -1px 1px 0 1px rgba(255, 170, 70, 0.25), 0 -1px 0 1px rgba(255, 136, 57, 0.5), 0 1px 0 1px rgba(255, 136, 57, 0.5), 1px -1px 0 1px rgba(255, 103, 44, 0.25), 1px 1px 0 1px rgba(255, 103, 44, 0.25), 1px 0 0 1px rgba(255, 69, 31, 0.75)",
-        }}
-        align="center"
-      >
+
+      <Title className={classes.title} p={0} m={0} align="center">
         {cardType || router.query.genre || "Event"}
-      </Blockquote>
+      </Title>
       {data?.map((place) => (
         <Card key={place._id} shadow="sm" p="lg" mt="lg" radius="md" withBorder>
           <Card.Section

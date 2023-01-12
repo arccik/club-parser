@@ -1,4 +1,4 @@
-import { LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Text } from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
 import { useState } from "react";
 import {
@@ -9,12 +9,12 @@ import CardWithPaginationSort from "../../src/components/resourses/CardWithPagin
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 
 const EventsPage = () => {
+  const { location } = useCurrentLocation();
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
   const { data, isLoading, error } = useGetEventsQuery(activePage, {
     skip: sortValue,
   });
-  const { location } = useCurrentLocation();
   const {
     data: sortedData,
     isLoading: isSortedLoading,
@@ -23,8 +23,10 @@ const EventsPage = () => {
     { sortValue, activePage, location },
     { skip: !sortValue }
   );
-  if (error || sortedError) return <p>cannot get data</p>;
-  if (isLoading || isSortedLoading) return <Loading />;
+  if (error || sortedError) {
+    return <Text align="center">Ops. something went wrong </Text>;
+  }
+  if (isLoading || isSortedLoading || sortedError) return <Loading />;
 
   return (
     <>
@@ -35,7 +37,7 @@ const EventsPage = () => {
         setPage={setPage}
         setSortValue={setSortValue}
         title="Event"
-        numberOfPages={sortedData?.numberOfPages || data.numberOfPages}
+        numberOfPages={sortedData?.numberOfPages || data?.numberOfPages}
         type="event"
       />
     </>

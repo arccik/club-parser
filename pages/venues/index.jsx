@@ -1,6 +1,6 @@
-import { LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Text } from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useGetVenuesQuery,
   useGetSortedVenuesQuery,
@@ -15,6 +15,7 @@ const AdminVenuePage = () => {
   const { data, isLoading, error } = useGetVenuesQuery(activePage, {
     skip: sortValue,
   });
+
   const {
     data: sortedData,
     isLoading: isSortedLoading,
@@ -23,9 +24,10 @@ const AdminVenuePage = () => {
     { sortValue, activePage, location },
     { skip: !sortValue }
   );
-
-  if (error || sortedError) return <p>cannot get data</p>;
-  if (isLoading || isSortedLoading) return <Loading />;
+  if (error || sortedError) {
+    return <Text align="center">Ops. something went wrong </Text>;
+  }
+  if (isLoading || isSortedLoading || sortedError) return <Loading />;
 
   return (
     <>

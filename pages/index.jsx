@@ -12,7 +12,7 @@ import OldEvents from "../src/components/HomePage/OldEvents/OldEvents";
 import GenresBox from "../src/components/HomePage/GenresBox/GenresBox";
 import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
-import LoadLocalDialog from "../src/components/HomePage/LoadLocalDigalog/LoadLocalDialog";
+import Notification from "../src/components/HomePage/Notification/Notification";
 import Loading from "../src/utils/Loading/Loading";
 import Artist from "../src/models/artist-model";
 import Venue from "../src/models/venue-model";
@@ -54,7 +54,7 @@ const Home = ({ events, oldEvents }) => {
       </Text>
     );
 
-  const handleDialog = () => {
+  const handleLocation = () => {
     if (!location) getLocation();
   };
   return (
@@ -84,7 +84,8 @@ const Home = ({ events, oldEvents }) => {
         <GenresBox />
         {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
       </main>
-      <LoadLocalDialog setAgree={handleDialog} />
+      <Notification setAgree={handleLocation} />
+      <Notification setAgree={handleLocation} />
 
       <FooterSocial />
     </>

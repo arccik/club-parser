@@ -57,7 +57,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         `/sortby/event?sortby=date&date=${date}&page=${page}`,
     }),
     getFromDate: builder.query({
-      query: (date) => `/sortby/event?date=${date}?fromDate=true`,
+      query: ({ date, page }) =>
+        `/sortby/event?sortBy=date&fromDate=true&date=${date}&page=${page}`,
     }),
     rate: builder.mutation({
       query: ({ _id, score, type }) => {

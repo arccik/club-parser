@@ -20,14 +20,20 @@ const ByDatePage = () => {
     },
     { skip: !date }
   );
-  const { data: otherData, isLoading: otherLoading } = useGetFromDateQuery(
-    date,
+  const {
+    data: otherData,
+    isLoading: otherLoading,
+    error: otherError,
+  } = useGetFromDateQuery(
     {
-      skip: true,
-    }
+      date,
+      page,
+    },
+    { skip: data?.events?.length || !isSuccess }
   );
   if (otherLoading && isLoading) return <Loading />;
-  if (error) return <Title>Propblem getting the date from server</Title>;
+  if (otherError)
+    return <Title align="center">Ops. something went wrong</Title>;
 
   if (isSuccess && !data?.events.length) {
     return (

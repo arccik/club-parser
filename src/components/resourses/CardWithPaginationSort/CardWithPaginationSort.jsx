@@ -1,15 +1,8 @@
-import {
-  Container,
-  Grid,
-  Pagination,
-  Text,
-  Title,
-  Divider,
-  Group,
-  Button,
-} from "@mantine/core";
+import { Container, Grid, Pagination, Title, Divider } from "@mantine/core";
 import EventPageCard from "../../EventsPage/EventPageCard";
 import FooterSocial from "../../HomePage/Footer/Footer";
+import SortButtons from "./sortButtons";
+import useStyles from "./styles";
 
 const CardWithPaginationSort = ({
   data,
@@ -20,65 +13,19 @@ const CardWithPaginationSort = ({
   numberOfPages,
   type,
 }) => {
+  const { classes } = useStyles();
+
+  const handleSort = (value) => {
+    setSortValue(value);
+    setPage(1);
+  };
   return (
     <>
       <Container size="md">
-        <Title
-          align="center"
-          style={{
-            position: "relative",
-
-            zIndex: -1,
-            fontSize: 100,
-            WebkitTextStroke: "3px black",
-            color: "white",
-          }}
-        >
+        <Title align="center" className={classes.title}>
           {title}
         </Title>
-        <Group spacing="xs">
-          <Text size="sm">Sort By</Text>
-
-          {type === "event" ? (
-            <>
-              <Button
-                onClick={() => setSortValue("price")}
-                size="xs"
-                variant="light"
-              >
-                Price
-              </Button>
-              <Button
-                onClick={() => {
-                  setPage(1);
-                  setSortValue("startdate");
-                }}
-                size="xs"
-                variant="light"
-              >
-                Date
-              </Button>
-            </>
-          ) : (
-            <Button
-              onClick={() => setSortValue("name")}
-              size="xs"
-              variant="light"
-            >
-              Name
-            </Button>
-          )}
-          <Button
-            onClick={() => {
-              setPage(1);
-              setSortValue("distance");
-            }}
-            size="xs"
-            variant="light"
-          >
-            Distance
-          </Button>
-        </Group>
+        <SortButtons setValue={handleSort} placeType={type} />
         <Divider mt="sm" />
         <Grid mt="lg">
           {data.map((event) => (
@@ -91,16 +38,7 @@ const CardWithPaginationSort = ({
           position="center"
           m="lg"
           noWrap
-          styles={(theme) => ({
-            item: {
-              "&[data-active]": {
-                backgroundImage: theme.fn.gradient({
-                  from: "red",
-                  to: "yellow",
-                }),
-              },
-            },
-          })}
+          className={classes.item}
           page={activePage}
           onChange={(e) => {
             setPage(e);

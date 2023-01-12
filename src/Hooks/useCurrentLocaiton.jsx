@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Cookies from "js-cookie";
 
 const useCurrentLocation = () => {
@@ -7,10 +7,6 @@ const useCurrentLocation = () => {
 
   var inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
   const coords = Cookies.get("location");
-
-  useEffect(() => {
-    if (coords) setLocation(JSON.parse(coords));
-  }, [coords]);
 
   const getLocation = () => {
     if (!navigator.geolocation) {

@@ -1,3 +1,7 @@
+:root {
+  --loader-color: rgb(237, 228, 228);
+}
+
 html,
 body {
   padding: 0;

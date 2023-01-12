@@ -2,6 +2,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import Map from "../../src/components/MapPage/Map";
 import { useEffect } from "react";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
+import Loading from "../../src/utils/Loading/Loading";
 
 const mapPlugins = ["places"];
 
@@ -16,7 +17,7 @@ const OnlyMapPage = () => {
   useEffect(() => {
     getLocation();
   }, []);
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <Loading />;
 
   return <Map />;
 };
