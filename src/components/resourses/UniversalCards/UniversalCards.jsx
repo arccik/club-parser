@@ -22,8 +22,6 @@ const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
 
   return (
     <Container size="sm">
-      <ActionIcon onClick={() => router.back()}>&#171;Back</ActionIcon>
-
       <Title className={classes.title} p={0} m={0} align="center">
         {cardType || router.query.genre || "Event"}
       </Title>

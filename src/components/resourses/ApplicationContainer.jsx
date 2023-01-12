@@ -13,7 +13,7 @@ import { useWindowScroll } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import BurgerMenu from "../AppHeader/BurgerMenu/BurgerMenu";
 
-import { IconMapPin, IconArrowUp } from "@tabler/icons";
+import { IconMapPin, IconArrowUp, IconArrowLeft } from "@tabler/icons";
 
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
@@ -67,6 +67,20 @@ export const ApplicationContainer = ({ children }) => {
         </Header>
       }
     >
+      <Affix position={{ top: 70, left: 15 }}>
+        <Transition transition="slide-down" mounted={router.route !== "/"}>
+          {(transitionStyles) => (
+            <Button
+              leftIcon={<IconArrowLeft size={16} />}
+              style={transitionStyles}
+              color="dark"
+              onClick={() => router.back()}
+            >
+              Go Back
+            </Button>
+          )}
+        </Transition>
+      </Affix>
       {children}
 
       <Affix position={{ bottom: 45, right: 20 }}>
