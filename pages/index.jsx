@@ -85,7 +85,6 @@ const Home = ({ events, oldEvents }) => {
         {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
       </main>
       <Notification setAgree={handleLocation} />
-      <Notification setAgree={handleLocation} />
 
       <FooterSocial />
     </>

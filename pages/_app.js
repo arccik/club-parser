@@ -30,15 +30,15 @@ function MyApp({ Component, pageProps }) {
       </Script>
       <UserProvider>
         <Provider store={store}>
-          <MantineProvider
-            theme={{ colorScheme: "dark" }}
-            withGlobalStyles
-            withNormalizeCSS
-          >
-            <ApplicationContainer>
-              <Component {...pageProps} />
-            </ApplicationContainer>
-          </MantineProvider>
+            <MantineProvider
+              theme={{ colorScheme: "dark" }}
+              withGlobalStyles
+              withNormalizeCSS
+            >
+              <ApplicationContainer>
+                <Component {...pageProps} />
+              </ApplicationContainer>
+            </MantineProvider>
         </Provider>
       </UserProvider>
     </>

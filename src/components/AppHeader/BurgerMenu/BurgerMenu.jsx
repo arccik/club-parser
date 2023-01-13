@@ -10,6 +10,7 @@ import {
   IconLogout,
   IconLogin,
   IconBrandDjango,
+  IconMail,
 } from "@tabler/icons";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
@@ -28,6 +29,11 @@ const BurgerMenu = () => {
     },
     { icon: <IconMap2 />, link: "/map", label: "Map" },
     { icon: <IconBrandDjango />, link: "/genres", label: "Genres" },
+    {
+      icon: <IconMail />,
+      link: "/utils/get-in-touch",
+      label: "Contact Us",
+    },
   ];
 
   const list = items.map(({ icon, label, link }, index) => (
@@ -44,7 +50,7 @@ const BurgerMenu = () => {
         onClick={() => {
           setActive(index);
         }}
-        variant="light"
+        // variant="light"
       />
     </Menu.Item>
   ));

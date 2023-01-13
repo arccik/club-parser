@@ -41,6 +41,15 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     checkUser: builder.query({
       query: (user) => `/admin/checkuser/${user.email}`,
     }),
+    sendMessage: builder.mutation({
+      query: (body) => {
+        return {
+          url: `/admin/contact`,
+          method: "POST",
+          body: body,
+        };
+      },
+    }),
   }),
 });
 
@@ -51,4 +60,5 @@ export const {
   useGetDocumentsCountQuery,
   useGetVenuesForEventsQuery,
   useCheckUserQuery,
+  useSendMessageMutation,
 } = extendedApiSlice;

@@ -11,6 +11,7 @@ import {
 } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { useRouter } from "next/router";
+
 import BurgerMenu from "../AppHeader/BurgerMenu/BurgerMenu";
 
 import { IconMapPin, IconArrowUp, IconArrowLeft } from "@tabler/icons";
@@ -70,30 +71,34 @@ export const ApplicationContainer = ({ children }) => {
       <Affix position={{ top: 70, left: 15 }}>
         <Transition transition="slide-down" mounted={router.route !== "/"}>
           {(transitionStyles) => (
-            <Button
-              leftIcon={<IconArrowLeft size={16} />}
+            <ActionIcon
               style={transitionStyles}
-              color="dark"
+              variant="outline"
               onClick={() => router.back()}
             >
-              Go Back
-            </Button>
+              <IconArrowLeft size={16} />
+            </ActionIcon>
           )}
         </Transition>
       </Affix>
       {children}
 
-      <Affix position={{ bottom: 45, right: 20 }}>
+      <Affix position={{ bottom: 40, right: 20 }}>
         <Transition transition="slide-up" mounted={scroll.y > 550}>
           {(transitionStyles) => (
-            <Button
-              leftIcon={<IconArrowUp size={16} />}
+            <IconArrowUp
+              size={16}
               style={transitionStyles}
-              color="dark"
               onClick={() => scrollTo({ y: 0 })}
-            >
-              Scroll to top
-            </Button>
+            />
+            // <Button
+            //   leftIcon={<IconArrowUp size={16} />}
+            //   style={transitionStyles}
+            //   color="dark"
+            //   onClick={() => scrollTo({ y: 0 })}
+            // >
+            //   {/* Scroll to top */}
+            // </Button>
           )}
         </Transition>
       </Affix>
