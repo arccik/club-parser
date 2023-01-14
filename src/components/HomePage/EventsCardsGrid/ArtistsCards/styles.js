@@ -17,6 +17,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     lineHeight: 1.2,
     // fontSize: 32,
     marginTop: theme.spacing.xs,
+    textShadow: "1px 1px black",
   },
 
   category: {

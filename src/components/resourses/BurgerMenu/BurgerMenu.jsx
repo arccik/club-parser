@@ -56,16 +56,12 @@ const BurgerMenu = () => {
   ));
 
   return (
-    <Menu shadow="md" width={200}>
+    <Menu transition="pop" withArrow position="bottom-end">
       <Menu.Target>
-        <Burger
-          opened={opened}
-          onClick={() => setOpened((o) => !o)}
-          title={"title"}
-        />
+        <Burger opened={opened} onClick={() => setOpened((o) => !o)} />
       </Menu.Target>
 
-      <Menu.Dropdown p={0}>
+      <Menu.Dropdown>
         <Menu.Label>Application</Menu.Label>
         {list}
 

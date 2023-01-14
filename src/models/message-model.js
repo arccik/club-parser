@@ -6,6 +6,7 @@ const MessageSchema = new Schema(
     email: String,
     subject: String,
     message: String,
+    isRead: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

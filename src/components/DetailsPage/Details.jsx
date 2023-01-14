@@ -10,13 +10,16 @@ import {
   Title,
   Container,
 } from "@mantine/core";
+import Link from "next/link";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { IconNavigation, IconEdit } from "@tabler/icons";
+import dayjs from "dayjs";
+dayjs.extend(relativeTime);
+
 import Stars from "./Stars/Stars";
 import useStyles from "./styles";
 import SmallMap from "../MapPage/SmallMap";
-import Link from "next/link";
-
-import { IconNavigation, IconEdit } from "@tabler/icons";
-import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import FooterSocial from "../HomePage/Footer/Footer";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -24,9 +27,7 @@ import SimilarPlaces from "./SimilarPlaces/SimilarPlaces";
 import VenueCard from "./VenueCard/VanueCard";
 import EventsFeed from "./EventsFeed/EventsFeed";
 import BuyTickets from "./BuyTickets/BuyTickets";
-import Head from "next/head";
-import { useRouter } from "next/router";
-dayjs.extend(relativeTime);
+import ArtistsCards from "../HomePage/EventsCardsGrid/ArtistsCards/ArtistsCards";
 
 const DetailsPage = ({ data }) => {
   const router = useRouter();
@@ -111,6 +112,15 @@ const DetailsPage = ({ data }) => {
                   </Badge>
                 ))}
               </Group>
+            </>
+          )}
+
+          {data.artists && (
+            <>
+              <Title mt="lg" mb="sm" size="md">
+                Artists
+              </Title>
+              <ArtistsCards artists={data.artists} />
             </>
           )}
 

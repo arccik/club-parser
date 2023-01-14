@@ -23,7 +23,7 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
       </Group>
 
       <Title order={2} className={classes.title} align="center" mt="sm">
-        StripRadar - All it is about the quality time and entertaiments.
+        StripRadar - Best happiness
       </Title>
 
       <Text
@@ -32,9 +32,9 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
         align="center"
         mt="md"
       >
-        Every once in a while, everyone missing some importent moments in the
-        life lost themselves in the fog. This happiness to enjoy the moment when
-        the music and your body merged into one.
+        As the administrator of your website, you have the power to make
+        important decisions and optimizations that can greatly impact the
+        overall success and functionality of your online presence.
       </Text>
 
       <SimpleGrid
@@ -49,8 +49,8 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
             All Posts: {totalVenues + totalEvents}
           </Text>
           <Text size="sm" color="dimmed" mt="sm">
-            Guys, so far, the volume of our posts its not very satisfying our
-            needs and overall our success, we need to push it up!
+            Stay motivated to keep your website running smooth, and your users
+            satisfied.
           </Text>
         </Card>
         <Card
@@ -66,8 +66,7 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
             Events: {totalEvents}
           </Text>
           <Text size="sm" color="dimmed" mt="sm">
-            Guys, so far, the volume of our posts its not very satisfying our
-            needs and overall our success, we need to push it up!
+            Events updating automaticlly
           </Text>
         </Card>
         <Card
@@ -83,8 +82,7 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
             Venues: {totalVenues}
           </Text>
           <Text size="sm" color="dimmed" mt="sm">
-            Guys, so far, the volume of our posts its not very satisfying our
-            needs and overall our success, we need to push it up!
+            These babies we need to push on
           </Text>
         </Card>
       </SimpleGrid>

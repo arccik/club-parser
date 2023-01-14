@@ -41,6 +41,10 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
     checkUser: builder.query({
       query: (user) => `/admin/checkuser/${user.email}`,
     }),
+    getMessages: builder.query({
+      query: () => "/admin/contact",
+      providesTags: (result, error, arg) => [{ type: "Message", id: "LIST" }],
+    }),
     sendMessage: builder.mutation({
       query: (body) => {
         return {
@@ -49,6 +53,16 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
           body: body,
         };
       },
+      invalidatesTags: (result, error, _id) => [{ type: "Message", _id }],
+    }),
+    readMessage: builder.mutation({
+      query: (_id) => {
+        return {
+          url: `/admin/contact?read=${_id}`,
+          method: "PUT",
+        };
+      },
+      invalidatesTags: (result, error, _id) => [{ type: "Message", _id }],
     }),
   }),
 });
@@ -60,5 +74,7 @@ export const {
   useGetDocumentsCountQuery,
   useGetVenuesForEventsQuery,
   useCheckUserQuery,
+  useGetMessagesQuery,
   useSendMessageMutation,
+  useReadMessageMutation,
 } = extendedApiSlice;

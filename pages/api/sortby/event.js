@@ -9,7 +9,6 @@ export default async function handler(req, res) {
     const PAGE_LIMIT = 12;
     const startIndex = (Number(page) - 1) * PAGE_LIMIT;
     if (sortby == "date" && !fromDate) {
-      console.log("ReanDer>> .. . D d", sortby, fromDate);
       const eventTotal = await Event.find({
         startdate: {
           $gte: dayjs(date).startOf("date").toDate(),

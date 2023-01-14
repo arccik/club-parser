@@ -6,13 +6,12 @@ import {
   useMantineTheme,
   Image,
   Affix,
-  Button,
   Transition,
 } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { useRouter } from "next/router";
 
-import BurgerMenu from "../AppHeader/BurgerMenu/BurgerMenu";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
 import { IconMapPin, IconArrowUp, IconArrowLeft } from "@tabler/icons";
 
@@ -91,14 +90,6 @@ export const ApplicationContainer = ({ children }) => {
               style={transitionStyles}
               onClick={() => scrollTo({ y: 0 })}
             />
-            // <Button
-            //   leftIcon={<IconArrowUp size={16} />}
-            //   style={transitionStyles}
-            //   color="dark"
-            //   onClick={() => scrollTo({ y: 0 })}
-            // >
-            //   {/* Scroll to top */}
-            // </Button>
           )}
         </Transition>
       </Affix>
