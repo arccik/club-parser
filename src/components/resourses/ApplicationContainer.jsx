@@ -18,7 +18,7 @@ import { IconMapPin, IconArrowUp, IconArrowLeft } from "@tabler/icons";
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
   const router = useRouter();
-  const [scroll, scrollTo] = useWindowScroll();
+  const [scrollPosition, scrollTo] = useWindowScroll();
   return (
     <AppShell
       padding={0}
@@ -73,7 +73,7 @@ export const ApplicationContainer = ({ children }) => {
             <ActionIcon
               style={transitionStyles}
               variant="outline"
-              onClick={() => router.back()}
+              onClick={() => router.back(undefined, { scroll: false })}
             >
               <IconArrowLeft size={16} />
             </ActionIcon>
@@ -83,7 +83,7 @@ export const ApplicationContainer = ({ children }) => {
       {children}
 
       <Affix position={{ bottom: 40, right: 20 }}>
-        <Transition transition="slide-up" mounted={scroll.y > 550}>
+        <Transition transition="slide-up" mounted={scrollPosition.y > 550}>
           {(transitionStyles) => (
             <IconArrowUp
               size={16}

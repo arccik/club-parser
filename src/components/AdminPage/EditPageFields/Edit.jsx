@@ -31,10 +31,10 @@ const Edit = ({ data, onSave, onDelete }) => {
   const handleSubmit = async (data) => {
     const { data: response, errors } = await onSave(data);
     if (errors) return <p>Cannot update Item</p>;
-    if (response.status === "OK") return router.back();
+    if (response.status === "OK") return router.back({ scroll: false });
   };
   if (isLoading || isGenresLoading) return <Loading />;
-  if (!data) router.back();
+  if (!data) router.back({ scroll: false });
   return (
     <Container size="sm">
       <Title order={4} ta="center">

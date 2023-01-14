@@ -25,7 +25,7 @@ const EditPage = ({ data, onSave, onDelete }) => {
     onSave(data);
   };
 
-  if (!data) router.back();
+  if (!data) router.back({ scroll: false });
   const fields =
     data &&
     Object.values(data).map((value, i) => {
