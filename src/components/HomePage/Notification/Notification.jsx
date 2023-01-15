@@ -69,7 +69,7 @@ const Notifications = ({ setAgree }) => {
             onClick={() => setShowCookieConsent(false)}
             mr="lg"
           >
-            Fine with me
+            Got it!
           </Button>
         </Group>
       </Dialog>

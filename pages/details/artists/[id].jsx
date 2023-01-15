@@ -1,4 +1,4 @@
-import { createStyles, Image, Text, Card, Badge } from "@mantine/core";
+import { createStyles, Image, Card, Badge } from "@mantine/core";
 
 import dbConnect from "../../../src/utils/dbConnect";
 import Artist from "../../../src/models/artist-model";

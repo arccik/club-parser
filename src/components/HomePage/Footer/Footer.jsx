@@ -1,4 +1,4 @@
-import { Container, Group, ActionIcon } from "@mantine/core";
+import { Container, Group, ActionIcon, Stack } from "@mantine/core";
 import {
   IconBrandTwitter,
   IconBrandYoutube,
@@ -7,20 +7,16 @@ import {
 import Image from "next/image";
 
 import useStyles from "./styles";
+import { useRouter } from "next/router";
 
 const FooterSocial = () => {
-  const { classes, theme } = useStyles();
-
+  const { classes } = useStyles();
+  const router = useRouter();
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
         <Image
           src="/assets/white-logo.png"
-          // {
-          //   theme.colorScheme === "light"
-          //     ? "/assets/logo.png"
-          //     : "/assets/white-logo.png"
-          // }
           width={120}
           height={60}
           alt="StripRadar logo"
@@ -38,6 +34,14 @@ const FooterSocial = () => {
             <IconBrandInstagram size={18} stroke={1.5} />
           </ActionIcon>
         </Group>
+        <Stack spacing={0}>
+          <span onClick={() => router.push("/utils/Privacy-policy")}>
+            Privacy Policy
+          </span>
+          <span onClick={() => router.push("/utils/Terms-and-conditions")}>
+            Terms and Conditions
+          </span>
+        </Stack>
       </Container>
     </div>
   );

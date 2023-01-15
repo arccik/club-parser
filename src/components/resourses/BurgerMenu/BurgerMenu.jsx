@@ -56,7 +56,7 @@ const BurgerMenu = () => {
   ));
 
   return (
-    <Menu transition="pop" withArrow position="bottom-end">
+    <Menu transition="pop" withArrow position="bottom-end" width={200}>
       <Menu.Target>
         <Burger opened={opened} onClick={() => setOpened((o) => !o)} />
       </Menu.Target>
