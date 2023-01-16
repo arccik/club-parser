@@ -1,9 +1,8 @@
 import Head from "next/head";
-import { useLocalStorage } from "@mantine/hooks";
 import { LoadingOverlay, Text } from "@mantine/core";
 import EventsCardsGrid from "../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
-import Search from "../src/components/HomePage/Hero/Search/Search";
+import Search from "../src/components/HomePage/Search/Search";
 import dbConnect from "../src/utils/dbConnect";
 import Hero from "../src/components/HomePage/Hero/Hero";
 import Event from "../src/models/event-model";

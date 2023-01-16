@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
-import { IconMapPin, IconArrowUp, IconArrowLeft } from "@tabler/icons";
+import { IconMap2, IconArrowUp, IconArrowLeft } from "@tabler/icons";
 
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
@@ -41,26 +41,25 @@ export const ApplicationContainer = ({ children }) => {
               justifyContent: "space-between",
             }}
           >
-            <Image
-              onClick={() => router.push("/", undefined, { scroll: false })}
-              src="/assets/white-logo.png"
-              alt="StripRadar logo"
-              width={140}
-              height={60}
-              style={{ cursor: "pointer", padding: "5px 5px 5px 0px" }}
-            />
-
             <Group>
               <ActionIcon
-                style={{ position: "absolute", right: 45 }}
+                // style={{ position: "absolute", right: 45 }}
                 variant="subtle"
                 color="dark"
                 size="xl"
                 onClick={() => router.push("/map")}
               >
-                <IconMapPin />
+                <IconMap2 />
               </ActionIcon>
             </Group>
+            <Image
+              onClick={() => router.push("/", undefined, { scroll: false })}
+              src="/assets/white-logo.png"
+              alt="StripRadar logo"
+              width={130}
+              height={50}
+              style={{ cursor: "pointer" }}
+            />
 
             <BurgerMenu />
           </div>
@@ -88,7 +87,7 @@ export const ApplicationContainer = ({ children }) => {
             <IconArrowUp
               size={16}
               style={transitionStyles}
-              // onClick={() => scrollTo({ y: 0 })}
+              onClick={() => scrollTo({ y: 0 })}
             />
           )}
         </Transition>

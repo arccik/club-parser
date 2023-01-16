@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ActionIcon,
   useMantineTheme,
@@ -5,15 +6,14 @@ import {
   Group,
   Transition,
 } from "@mantine/core";
-import { IconSearch, IconArrowRight, IconCalendar } from "@tabler/icons";
-import useStyles from "../styles";
-
-import { useState } from "react";
-import { Autocomplete } from "@mantine/core";
-import { useSearchEventsQuery } from "../../../../features/event/eventSlice";
-import { useRouter } from "next/router";
-import AutoCompleteItem from "./AutoCompleteItem";
 import { Calendar } from "@mantine/dates";
+import { Autocomplete } from "@mantine/core";
+import { useRouter } from "next/router";
+import { IconSearch, IconArrowRight, IconCalendar } from "@tabler/icons";
+
+import { useSearchEventsQuery } from "../../../features/event/eventSlice";
+import AutoCompleteItem from "./AutoCompleteItem";
+import useStyles from "../Hero/styles";
 
 const Search = () => {
   const { classes } = useStyles();
