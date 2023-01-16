@@ -82,7 +82,7 @@ export const ApplicationContainer = ({ children }) => {
       </Affix>
       {children}
 
-      <Affix position={{ bottom: 40, right: 20 }}>
+      <Affix position={{ bottom: 40, right: 20 }} variant="light">
         <Transition transition="slide-up" mounted={scrollPosition.y > 550}>
           {(transitionStyles) => (
             <IconArrowUp

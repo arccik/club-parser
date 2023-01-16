@@ -44,6 +44,9 @@ const ByDatePage = () => {
         <UniversalCards
           data={otherData?.events}
           cardType="Check upcoming events"
+          page={page}
+          setPage={setPage}
+          numberOfPages={otherData?.numberOfPages}
         />
       </>
     );

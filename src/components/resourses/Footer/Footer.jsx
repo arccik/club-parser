@@ -35,12 +35,12 @@ const FooterSocial = () => {
           </ActionIcon>
         </Group>
         <Group mt="lg" style={{ cursor: "pointer" }}>
-          <Text size="xs" onClick={() => router.push("/utils/privacy-policy")}>
+          <Text size="xs" onClick={() => router.push("/utils/Privacy-policy")}>
             Privacy Policy
           </Text>
           <Text
             size="xs"
-            onClick={() => router.push("/utils/terms-and-conditions")}
+            onClick={() => router.push("/utils/Terms-and-conditions")}
           >
             Terms and Conditions
           </Text>

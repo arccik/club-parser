@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useLocalStorage } from "@mantine/hooks";
 import { LoadingOverlay, Text } from "@mantine/core";
 import EventsCardsGrid from "../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
-import FooterSocial from "../src/components/HomePage/Footer/Footer";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Hero/Search/Search";
 import dbConnect from "../src/utils/dbConnect";
@@ -12,10 +11,11 @@ import OldEvents from "../src/components/HomePage/OldEvents/OldEvents";
 import GenresBox from "../src/components/HomePage/GenresBox/GenresBox";
 import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
-import Notification from "../src/components/HomePage/Notification/Notification";
+import Notification from "../src/components/resourses/Notification/Notification";
 import Loading from "../src/utils/Loading/Loading";
 import Artist from "../src/models/artist-model";
 import Venue from "../src/models/venue-model";
+import FooterSocial from "../src/components/resourses/Footer/Footer";
 
 export async function getStaticProps() {
   await dbConnect();

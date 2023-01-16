@@ -21,13 +21,13 @@ import Stars from "./Stars/Stars";
 import useStyles from "./styles";
 import SmallMap from "../MapPage/SmallMap";
 import relativeTime from "dayjs/plugin/relativeTime";
-import FooterSocial from "../HomePage/Footer/Footer";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import SimilarPlaces from "./SimilarPlaces/SimilarPlaces";
 import VenueCard from "./VenueCard/VanueCard";
 import EventsFeed from "./EventsFeed/EventsFeed";
 import BuyTickets from "./BuyTickets/BuyTickets";
 import ArtistsCards from "../HomePage/EventsCardsGrid/ArtistsCards/ArtistsCards";
+import FooterSocial from "../resourses/Footer/Footer";
 
 const DetailsPage = ({ data }) => {
   const router = useRouter();
@@ -142,6 +142,7 @@ const DetailsPage = ({ data }) => {
           )}
           {data.placeType === "venue" && (
             <Accordion
+              mt="lg"
               mx="auto"
               variant="filled"
               defaultValue="customization"

@@ -17,12 +17,12 @@ const EventsFeed = ({ venueId }) => {
   if (!events.length)
     return (
       <Text size="xs" color="dimmed" m="md">
-        Could not find upcoming events
+        Could not find any events
       </Text>
     );
   return (
     <Stack spacing={0} m="sm">
-      <Title order={4}>Upcoming Events</Title>
+      <Title order={4}>Events</Title>
 
       {events.map((event) => (
         <Group noWrap spacing="xs" key={event._id}>

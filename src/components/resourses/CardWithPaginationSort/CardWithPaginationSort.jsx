@@ -1,6 +1,6 @@
 import { Container, Grid, Pagination, Title, Divider } from "@mantine/core";
 import EventPageCard from "../../EventsPage/EventPageCard";
-import FooterSocial from "../../HomePage/Footer/Footer";
+import FooterSocial from "../resourses/Footer/Footer";
 import SortButtons from "./sortButtons";
 import useStyles from "./styles";
 

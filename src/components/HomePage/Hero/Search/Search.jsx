@@ -27,7 +27,6 @@ const Search = () => {
     skip: !searchValue,
   });
 
-  console.log("SUccess searc ? ", isSuccess);
   const theme = useMantineTheme();
   const handleSearch = (e) => {
     setSearchValue(e);

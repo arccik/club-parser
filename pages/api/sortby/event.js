@@ -30,26 +30,25 @@ export default async function handler(req, res) {
         numberOfPages: Math.ceil(eventTotal / PAGE_LIMIT),
       });
     }
-    console.log("Jaicaaaa", date, fromDate);
-    if (fromDate && sortby == "date") {
-      return res.status(200).json({ message: "ALl OK " });
-      // if (!date) {
-      //   return res.status(404).json({ message: "Date wasnt not provided" });
-      // }
-      // const eventTotal = await Event.countDocuments({
-      //   startdate: { $gte: Date(date) },
-      // });
-      // const events = await Event.find({ startdate: { $gte: Date(date) } }).sort(
-      //   {
-      //     startdate: 1,
-      //   }
-      // );
+    if (fromDate && sortby === "date") {
+      if (!date) {
+        return res.status(404).json({ message: "Date wasnt not provided" });
+      }
+      const eventTotal = await Event.countDocuments({
+        startdate: { $gte: Date(date) },
+      });
+      const events = await Event.find({ startdate: { $gte: Date(date) } })
+        .sort({
+          startdate: 1,
+        })
+        .skip(startIndex)
+        .limit(PAGE_LIMIT);
 
-      // return res.status(200).json({
-      //   events,
-      //   currentPage: Number(page),
-      //   numberOfPages: Math.ceil(eventTotal / PAGE_LIMIT),
-      // });
+      return res.status(200).json({
+        events,
+        currentPage: Number(page),
+        numberOfPages: Math.ceil(eventTotal / PAGE_LIMIT),
+      });
     }
 
     if (sortby === "distance") {

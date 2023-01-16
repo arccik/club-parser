@@ -11,6 +11,7 @@ export default async function handler(req, res) {
       if (!searchString) return res.send("ok");
 
       const eventResponse = await Event.find({
+        startdate: { $gt: new Date() },
         $text: { $search: searchString },
       }).select("name description image _id placeType");
       const venueResponse = await Venue.find({

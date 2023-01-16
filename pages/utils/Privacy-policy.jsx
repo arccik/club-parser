@@ -1,5 +1,5 @@
 import { Container, Text, Title } from "@mantine/core";
-import FooterSocial from "../../src/components/HomePage/Footer/Footer";
+import FooterSocial from "../../src/components/resourses/Footer/Footer";
 
 const PrivacyPolicy = () => {
   return (
