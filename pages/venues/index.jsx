@@ -7,11 +7,13 @@ import {
 } from "../../src/features/venue/venueSlice";
 import CardWithPaginationSort from "../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
+import { useRouter } from "next/router";
 
 const AdminVenuePage = () => {
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
   const { location } = useCurrentLocation();
+  const router = useRouter();
   const { data, isLoading, error } = useGetVenuesQuery(activePage, {
     skip: sortValue,
   });
@@ -24,6 +26,10 @@ const AdminVenuePage = () => {
     { sortValue, activePage, location },
     { skip: !sortValue }
   );
+  useEffect(() => {
+    const { page } = router.query;
+    if (page) setPage(page);
+  }, [router.query]);
   if (error || sortedError) {
     return <Text align="center">Ops. something went wrong </Text>;
   }

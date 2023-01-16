@@ -13,6 +13,7 @@ const CardWithPaginationSort = ({
   numberOfPages,
   type,
 }) => {
+
   const { classes } = useStyles();
 
   const handleSort = (value) => {

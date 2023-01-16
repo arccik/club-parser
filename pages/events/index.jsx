@@ -1,15 +1,17 @@
 import { LoadingOverlay, Text } from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useGetEventsQuery,
   useGetSortedEventsQuery,
 } from "../../src/features/event/eventSlice";
 import CardWithPaginationSort from "../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
+import { useRouter } from "next/router";
 
 const EventsPage = () => {
   const { location } = useCurrentLocation();
+  const router = useRouter();
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
   const { data, isLoading, error } = useGetEventsQuery(activePage, {
@@ -23,6 +25,12 @@ const EventsPage = () => {
     { sortValue, activePage, location },
     { skip: !sortValue }
   );
+
+  useEffect(() => {
+    const { page } = router.query;
+    if (page) setPage(page);
+  }, [router.query]);
+
   if (error || sortedError) {
     return <Text align="center">Ops. something went wrong </Text>;
   }
