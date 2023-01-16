@@ -33,7 +33,8 @@ const DetailsPage = ({ data }) => {
   const router = useRouter();
   const { classes } = useStyles();
   const { user } = useUser();
-
+  
+  if (!data) return null;
   return (
     <>
       <Head>

@@ -23,9 +23,11 @@ const Search = () => {
   const [calendarValue, setCalendarValue] = useState(new Date());
   const [showCalendar, setShowCalendar] = useState(false);
 
-  const { data, isLoading } = useSearchEventsQuery(searchValue, {
+  const { data, isLoading, isSuccess } = useSearchEventsQuery(searchValue, {
     skip: !searchValue,
   });
+
+  console.log("SUccess searc ? ", isSuccess);
   const theme = useMantineTheme();
   const handleSearch = (e) => {
     setSearchValue(e);
@@ -75,6 +77,9 @@ const Search = () => {
           }
           itemComponent={AutoCompleteItem}
           data={data || []}
+          nothingFound={
+            isSuccess ? "Nothing was found" : "Search result will appear here"
+          }
           filter={(value, item) =>
             item.value?.toLowerCase().includes(value.toLowerCase().trim()) ||
             item.description?.toLowerCase().includes(value.toLowerCase().trim())

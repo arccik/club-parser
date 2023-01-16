@@ -67,13 +67,13 @@ export const ApplicationContainer = ({ children }) => {
         </Header>
       }
     >
-      <Affix position={{ top: 70, left: 15 }}>
+      <Affix position={{ top: 80, left: 15 }}>
         <Transition transition="slide-down" mounted={router.route !== "/"}>
           {(transitionStyles) => (
             <ActionIcon
               style={transitionStyles}
-              variant="outline"
-              onClick={() => router.back(undefined, { scroll: false })}
+              variant="light"
+              onClick={() => router.back()}
             >
               <IconArrowLeft size={16} />
             </ActionIcon>
@@ -88,7 +88,7 @@ export const ApplicationContainer = ({ children }) => {
             <IconArrowUp
               size={16}
               style={transitionStyles}
-              onClick={() => scrollTo({ y: 0 })}
+              // onClick={() => scrollTo({ y: 0 })}
             />
           )}
         </Transition>

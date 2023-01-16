@@ -10,29 +10,6 @@ export default async function handler(req, res) {
       const searchString = req.query.search;
       if (!searchString) return res.send("ok");
 
-      // const eventResponse = await Event.find({
-      //   $search: {
-      //     index: "text",
-      //     text: {
-      //       query: searchString,
-      //       path: {
-      //         wildcard: "*",
-      //       },
-      //     },
-      //   },
-      // });
-      // const venueResponse = await Venue.find({
-      //   $search: {
-      //     index: "text",
-      //     text: {
-      //       query: searchString,
-      //       path: {
-      //         wildcard: "*",
-      //       },
-      //     },
-      //   },
-      // });
-
       const eventResponse = await Event.find({
         $text: { $search: searchString },
       }).select("name description image _id placeType");
