@@ -12,14 +12,15 @@ const OnlyMapPage = () => {
     libraries: mapPlugins,
   });
 
-  const { getLocation } = useCurrentLocation();
+  const { location, getLocation } = useCurrentLocation();
 
   useEffect(() => {
     getLocation();
   }, []);
+
   if (!isLoaded) return <Loading />;
 
-  return <Map />;
+  return <Map currentLocation={location} />;
 };
 
 export default OnlyMapPage;

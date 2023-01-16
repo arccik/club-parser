@@ -7,16 +7,18 @@ import styles from "./Map.module.css";
 import Markers from "./Marker/Markes";
 import useCurrentLocaiton from "../../Hooks/useCurrentLocaiton";
 
-const Map = () => {
+const Map = (props) => {
   const [zoom, setZoom] = useState(14);
   const [activeMarker, setActiveMarker] = useState(null);
-  const { location: currentLocation } = useCurrentLocaiton();
 
   const mapRef = useRef();
   const center = useMemo(
     () =>
-      currentLocation || { lat: 51.57937620404864, lng: -0.08660418339429162 },
-    [currentLocation]
+      props.currentLocation || {
+        lat: 51.57937620404864,
+        lng: -0.08660418339429162,
+      },
+    [props.currentLocation]
   );
   // mapId: "216185b90ab09587",
   const options = useMemo(
@@ -51,14 +53,13 @@ const Map = () => {
       <GoogleMap
         zoom={zoom}
         center={center}
-        // onZoomChanged={setZoom}
         options={options}
         onLoad={onLoad}
         onClick={() => setActiveMarker(null)}
         mapContainerClassName={styles.mapContainer}
       >
         <Markers
-          currentLocation={currentLocation}
+          currentLocation={props.currentLocation}
           center={center}
           mapRef={mapRef}
           setZoom={setZoom}

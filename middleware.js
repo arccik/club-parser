@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 export function middleware(request) {
   const cookie = request.cookies.get("appSession");
 
-  // console.log("middlewares:D ", cookie);
   // return NextResponse.redirect(new URL("/about-2", request.url));
 }
 

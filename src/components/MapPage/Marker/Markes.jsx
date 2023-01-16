@@ -30,13 +30,15 @@ const Markes = ({ mapRef, active, setActive, currentLocation }) => {
   };
   return (
     <>
-      <Marker
-        icon={{
-          url: "assets/current-location-icon.png",
-        }}
-        position={currentLocation}
-        onClick={() => mapRef.current.panTo(currentLocation)}
-      ></Marker>
+      {currentLocation && (
+        <Marker
+          icon={{
+            url: "assets/current-location-icon.png",
+          }}
+          position={currentLocation}
+          onClick={() => mapRef.current.panTo(currentLocation)}
+        ></Marker>
+      )}
 
       <MarkerClusterer>
         {(clusterer) =>

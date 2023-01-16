@@ -1,4 +1,4 @@
-import { Container, Group, ActionIcon, Stack } from "@mantine/core";
+import { Container, Group, ActionIcon, Text } from "@mantine/core";
 import {
   IconBrandTwitter,
   IconBrandYoutube,
@@ -34,14 +34,17 @@ const FooterSocial = () => {
             <IconBrandInstagram size={18} stroke={1.5} />
           </ActionIcon>
         </Group>
-        <Stack spacing={0}>
-          <span onClick={() => router.push("/utils/Privacy-policy")}>
+        <Group mt="lg" style={{ cursor: "pointer" }}>
+          <Text size="xs" onClick={() => router.push("/utils/privacy-policy")}>
             Privacy Policy
-          </span>
-          <span onClick={() => router.push("/utils/Terms-and-conditions")}>
+          </Text>
+          <Text
+            size="xs"
+            onClick={() => router.push("/utils/terms-and-conditions")}
+          >
             Terms and Conditions
-          </span>
-        </Stack>
+          </Text>
+        </Group>
       </Container>
     </div>
   );
