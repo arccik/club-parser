@@ -1,4 +1,4 @@
-import ProfileDetails from "../../../src/components/DetailsPage/Details";
+import DetailsPage from "../../../src/components/DetailsPage/Details";
 import Venue from "../../../src/models/venue-model";
 import { useRouter } from "next/router";
 import dbConnect from "../../../src/utils/dbConnect";
@@ -7,7 +7,7 @@ const VenuePage = ({ venue }) => {
   const router = useRouter();
   if (router.isFallback) <div>Loading...</div>;
 
-  return <ProfileDetails data={venue} />;
+  return <DetailsPage data={venue} />;
 };
 
 export async function getStaticProps({ params }) {

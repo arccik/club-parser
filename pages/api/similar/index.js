@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
     if (venueid) {
       const events = await Event.find({ venue: venueid })
-        .sort({ startdate: 1 })
+        .sort({ startdate: -1 })
         .limit(5);
       return res.status(200).json(events);
     }

@@ -85,7 +85,7 @@ export const ApplicationContainer = ({ children }) => {
         <Transition transition="slide-up" mounted={scrollPosition.y > 550}>
           {(transitionStyles) => (
             <IconArrowUp
-              size={16}
+              size={20}
               style={transitionStyles}
               onClick={() => scrollTo({ y: 0 })}
             />

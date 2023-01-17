@@ -9,6 +9,7 @@ const useStyles = createStyles((theme) => {
     heroImage: {
       objectFit: "cover",
       width: "100%",
+      filter: "brightness(70%)",
     },
 
     container: {

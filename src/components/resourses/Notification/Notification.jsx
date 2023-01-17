@@ -1,5 +1,5 @@
 import { Dialog, Group, Button, Text } from "@mantine/core";
-import { useSessionStorage } from "@mantine/hooks";
+import { useSessionStorage, useLocalStorage } from "@mantine/hooks";
 
 const Notifications = ({ setAgree }) => {
   const cookieTitle = "Cookie Consent";
@@ -9,7 +9,7 @@ const Notifications = ({ setAgree }) => {
       key: nearByTitle,
       defaultValue: true,
     });
-  const [showCookieConsent, setShowCookieConsent] = useSessionStorage({
+  const [showCookieConsent, setShowCookieConsent] = useLocalStorage({
     key: cookieTitle,
     defaultValue: true,
   });

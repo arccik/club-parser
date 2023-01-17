@@ -1,7 +1,6 @@
 import { Paper, Text, Title } from "@mantine/core";
 import useStyles from "./styles";
 import Link from "next/link";
-import OpenCloseBadge from "../../../../utils/OpenCloseBadge/OpenCloseBadge";
 
 const SimilarCard = ({ open, title, image, distance, link, close }) => {
   const { classes } = useStyles();
@@ -10,7 +9,7 @@ const SimilarCard = ({ open, title, image, distance, link, close }) => {
     <Paper
       shadow="lg"
       p="md"
-      // radius="md"
+      radius="md"
       sx={{ backgroundImage: `url(${image})` }}
       className={classes.card}
       component={Link}

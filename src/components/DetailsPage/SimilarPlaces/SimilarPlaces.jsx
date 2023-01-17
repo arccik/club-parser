@@ -26,7 +26,7 @@ const SimilarPlaces = ({ coords, id }) => {
   return (
     <>
       <Title order={4}>Places Near By</Title>
-      <Carousel dragFree slideGap="lg" height={200} initialSlide={1}>
+      <Carousel dragFree slideGap="xs" height={200} initialSlide={1}>
         {cards}
       </Carousel>
     </>
