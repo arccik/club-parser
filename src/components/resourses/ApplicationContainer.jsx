@@ -43,7 +43,6 @@ export const ApplicationContainer = ({ children }) => {
           >
             <Group>
               <ActionIcon
-                // style={{ position: "absolute", right: 45 }}
                 variant="subtle"
                 color="dark"
                 size="xl"

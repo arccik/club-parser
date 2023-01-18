@@ -30,6 +30,7 @@ const EventSchema = new Schema(
     minage: { type: Number },
     price: { type: String },
     artists: [{ type: Schema.Types.ObjectId, ref: "Artist" }],
+    recommended: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

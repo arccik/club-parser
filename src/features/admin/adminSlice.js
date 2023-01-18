@@ -64,6 +64,15 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: (result, error, _id) => [{ type: "Message", _id }],
     }),
+    recommendEvent: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/admin/recommend/${id}`,
+          method: "PUT",
+        };
+      },
+      invalidatesTags: (result, error, _id) => [{ type: "Events", _id }],
+    }),
   }),
 });
 
@@ -77,4 +86,5 @@ export const {
   useGetMessagesQuery,
   useSendMessageMutation,
   useReadMessageMutation,
+  useRecommendEventMutation,
 } = extendedApiSlice;

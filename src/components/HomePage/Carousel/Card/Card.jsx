@@ -31,9 +31,10 @@ const Card = ({ image, title, date, id }) => {
         size="xs"
         color="dark"
         className={classes.date}
+        fullWidth
         onClick={() => router.push(`/details/events/${id}`)}
       >
-        Read
+        Open
       </Button>
     </Paper>
   );

@@ -25,16 +25,21 @@ export async function getStaticProps() {
     .limit(10);
   const oldEvents = await Event.find({ startdate: { $lt: today } }).limit(3);
 
+  const recommended = await Event.find({ startdate: { $gte: new Date() } })
+    .sort({ price: -1 })
+    .limit(10);
+
   return {
     props: {
       events: JSON.parse(JSON.stringify(events)),
       oldEvents: JSON.parse(JSON.stringify(oldEvents)),
+      recommended: JSON.parse(JSON.stringify(recommended)),
     },
     revalidate: 30,
   };
 }
 
-const Home = ({ events, oldEvents }) => {
+const Home = ({ events, oldEvents, recommended }) => {
   const { location, getLocation } = useCurrentLocaiton();
 
   const {
@@ -71,16 +76,16 @@ const Home = ({ events, oldEvents }) => {
         ></meta>
       </Head>
       <main style={{ padding: 0, margin: 0 }}>
-        <Hero />
+        {/* <Hero /> */}
         <Search />
-        {events.length ? <Carousel events={events} /> : null}
+        {recommended.length ? <Carousel events={recommended} /> : null}
         <LoadingOverlay visible={isEventsLoading} overlayBlur={2} />
 
         <EventsCardsGrid
           events={eventsByLocation?.length ? eventsByLocation : events}
         />
-
         <GenresBox />
+
         {oldEvents.length ? <OldEvents events={oldEvents} /> : null}
       </main>
       <Notification setAgree={handleLocation} />
