@@ -13,7 +13,7 @@ import { IconSearch, IconArrowRight, IconCalendar } from "@tabler/icons";
 
 import { useSearchEventsQuery } from "../../../features/event/eventSlice";
 import AutoCompleteItem from "./AutoCompleteItem";
-import useStyles from "../Hero/styles";
+import useStyles from "./styles";
 
 const Search = () => {
   const { classes } = useStyles();

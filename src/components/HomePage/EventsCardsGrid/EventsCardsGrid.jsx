@@ -1,5 +1,5 @@
-import { Container, SimpleGrid, Title } from "@mantine/core";
-import useStyles from "./styles";
+import { Button, Container, SimpleGrid, Title } from "@mantine/core";
+import Link from "next/link";
 import EventCard from "./EventCard";
 
 const EventsCardsGrid = ({ events, old }) => {
@@ -28,6 +28,9 @@ const EventsCardsGrid = ({ events, old }) => {
       <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
         <EventCard data={events} />
       </SimpleGrid>
+      <Button fullWidth color="dark" component={Link} href="/events">
+        See All events
+      </Button>
     </Container>
   );
 };

@@ -1,51 +1,32 @@
-import { createStyles } from "@mantine/core";
+import { createStyles, keyframes } from "@mantine/core";
+
+export const bounce = keyframes({
+  "from, 20%, 53%, 80%, to": {
+    filter: "brightness(70%)",
+  },
+  "40%, 43%": {
+    filter: "brightness(60%)",
+  },
+  "70%": { filter: "brightness(50%)" },
+  "90%": { filter: "brightness(70%)" },
+});
+
 const useStyles = createStyles((theme) => {
   return {
-    //   card: {
-    //     backgroundColor:
-    //       theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.colors.white,
-    //   },
-
     heroImage: {
       objectFit: "cover",
       width: "100%",
       filter: "brightness(70%)",
+      animation: `${bounce} 3s ease-in-out infinite`,
     },
 
     container: {
       maxWidth: 1200,
       margin: "auto",
-      zIndex: 200,
       padding: 0,
       borderRadius: 10,
       "@media (max-width: 650px)": {
         width: "100%",
-      },
-    },
-    searchSection: {
-      width: 680,
-      margin: "auto",
-      zIndex: 120,
-      height: 50,
-      // marginTop: -300,
-      "@media (max-width: 650px)": {
-        width: "90%",
-        // marginTop: -120,
-      },
-    },
-    serachField: {
-      width: "90%",
-      "@media (max-width: 650px)": {
-        width: "80%",
-      },
-    },
-    calendar: {
-      margin: "auto",
-      backgroundColor: "black",
-      borderRadius: 20,
-      zIndex: 100,
-      "@media (max-width: 650px)": {
-        marginTop: 40,
       },
     },
   };

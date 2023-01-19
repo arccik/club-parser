@@ -61,6 +61,7 @@ const Home = ({ events, oldEvents, recommended }) => {
   const handleLocation = () => {
     if (!location) getLocation();
   };
+
   return (
     <>
       <Head>
@@ -76,7 +77,7 @@ const Home = ({ events, oldEvents, recommended }) => {
         ></meta>
       </Head>
       <main style={{ padding: 0, margin: 0 }}>
-        {/* <Hero /> */}
+        <Hero />
         <Search />
         {recommended.length ? <Carousel events={recommended} /> : null}
         <LoadingOverlay visible={isEventsLoading} overlayBlur={2} />

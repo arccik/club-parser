@@ -1,29 +1,69 @@
-import { Paper, Text, Title } from "@mantine/core";
-import Link from "next/link";
+import {
+  Paper,
+  Text,
+  Title,
+  Modal,
+  Group,
+  Card,
+  Image,
+  Badge,
+} from "@mantine/core";
+import { useState } from "react";
 
 import useStyles from "./styles";
 
-const Artist = ({ image, name, _id, events }) => {
+const Artist = ({ image, name, _id, spotifymp3url }) => {
   const { classes } = useStyles();
+  const [opened, setOpened] = useState(false);
+
   return (
-    <Paper
-      shadow="md"
-      p="md"
-      // radius="md"
-      sx={{ backgroundImage: `url(${image})` }}
-      className={classes.card}
-      component={Link}
-      href={`/details/artists/${_id}`}
-    >
-      <div>
-        <Text className={classes.category} size="xs">
-          Artist
-        </Text>
-        <Title order={6} className={classes.title}>
-          {name}
-        </Title>
-      </div>
-    </Paper>
+    <>
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        fullScreen
+        title={name}
+      >
+        <Card withBorder radius="md">
+          <Card.Section>
+            <Image src={image} alt={name} height={400} />
+          </Card.Section>
+
+          <Badge
+            className={classes.titleBagde}
+            variant="gradient"
+            gradient={{ from: "yellow", to: "red" }}
+          >
+            {name}
+          </Badge>
+          {spotifymp3url && (
+            <audio controls className={classes.player}>
+              <source src={spotifymp3url} type="audio/mpeg" width="100%" />
+              Your browser does not support the audio element.
+            </audio>
+          )}
+        </Card>
+      </Modal>
+
+      <Group position="center">
+        <Paper
+          shadow="md"
+          p="md"
+          sx={{ backgroundImage: `url(${image})` }}
+          className={classes.card}
+          onClick={() => setOpened(true)}
+        >
+          <div>
+            <Text className={classes.category} size="xs">
+              Artist
+            </Text>
+            <Title order={6} className={classes.title}>
+              {name}
+            </Title>
+          </div>
+        </Paper>
+      </Group>
+    </>
   );
 };
 

@@ -1,9 +1,10 @@
 import { Dialog, Group, Button, Text } from "@mantine/core";
 import { useSessionStorage, useLocalStorage } from "@mantine/hooks";
+import { useEffect } from "react";
 
 const Notifications = ({ setAgree }) => {
   const cookieTitle = "Cookie Consent";
-  const nearByTitle = "Show nearby places";
+  const nearByTitle = "Show nearby places dialog";
   const [showCurrentLocationDialog, setShowCurrentLocationDialog] =
     useSessionStorage({
       key: nearByTitle,
@@ -19,6 +20,9 @@ const Notifications = ({ setAgree }) => {
     setAgree();
   };
 
+  useEffect(() => {
+    if (!showCurrentLocationDialog) setAgree();
+  }, [showCurrentLocationDialog]);
   return (
     <>
       <Dialog

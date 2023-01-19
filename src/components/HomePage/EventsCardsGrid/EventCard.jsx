@@ -4,7 +4,12 @@ import Stars from "../../DetailsPage/Stars/Stars";
 import dayjs from "dayjs";
 import useStyles from "./styles";
 
-import { IconCalendar, IconGps, IconMoneybag } from "@tabler/icons";
+import {
+  IconCalendar,
+  IconGps,
+  IconCash,
+  IconBuildingCommunity,
+} from "@tabler/icons";
 import displayPrice from "../../../utils/displayPrice";
 import { useRouter } from "next/router";
 import ArtistsCards from "./ArtistsCards/ArtistsCards";
@@ -45,29 +50,38 @@ const Cards = ({ data }) => {
         </Text>
         <Stars rating={article.rating} id={article._id} />
       </Group>
-      <Group spacing={0}>
-        <Stack spacing={0} ml="sm">
-          {article.price && (
-            <Text size="xs">
-              <Group spacing={0}>
-                <IconMoneybag size={14} />
-                {displayPrice(article.price)}
-              </Group>
-            </Text>
-          )}
-
+      <Group p="lg">
+        {/* <Stack spacing={0} ml="sm"> */}
+        {article.price && (
           <Text size="xs">
-            <Group spacing={0}>
-              <IconCalendar size={14} />
-              {dayjs(article.startdate).format("DD MMM")}
+            <Group spacing={5}>
+              <IconCash size={14} />
+              {displayPrice(article.price)}
             </Group>
           </Text>
-          {article.distance && (
-            <Text size="xs">
+        )}
+
+        <Text size="xs">
+          <Group spacing={5}>
+            <IconCalendar size={14} />
+            {dayjs(article.startdate).format("DD MMM")}
+          </Group>
+        </Text>
+        {article.distance && (
+          <Text size="xs">
+            <Group spacing={5}>
               <IconGps size={14} /> {article.distance.toPrecision(3)} km
-            </Text>
-          )}
-        </Stack>
+            </Group>
+          </Text>
+        )}
+        {article.venue?.town && (
+          <Text size="xs">
+            <Group spacing={5}>
+              <IconBuildingCommunity size={14} /> {article.venue.town}
+            </Group>
+          </Text>
+        )}
+        {/* </Stack> */}
         <ArtistsCards artists={article.artists} />
       </Group>
       {article.genres && (

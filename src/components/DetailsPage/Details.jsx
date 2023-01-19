@@ -98,7 +98,13 @@ const DetailsPage = ({ data }) => {
           {data.genres && data.placeType === "event" && (
             <>
               <Title mt="lg" mb="sm" size="md">
-                Genres
+                Genres{" "}
+                <ActionIcon
+                  sx={{
+                    "&[data-disabled]": { opacity: 0.4 },
+                    "&[data-loading]": { backgroundColor: "red" },
+                  }}
+                />
               </Title>
               <Group spacing={0} m={0} ml="sm" mt="sm">
                 {data.genres.map((genre) => (

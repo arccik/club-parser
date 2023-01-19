@@ -26,5 +26,16 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     fontWeight: 700,
     textTransform: "uppercase",
   },
+  titleBagde: {
+    position: "absolute",
+    top: theme.spacing.xs,
+    right: theme.spacing.xs + 2,
+    pointerEvents: "none",
+    fontSize: 20,
+  },
+  player: {
+    position: "absolute",
+    bottom: 20,
+  },
 }));
 export default useStyles;

@@ -8,7 +8,7 @@ const useCurrentLocation = () => {
   var inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
   const coords = Cookies.get("location");
 
-  const getLocation = () => {
+  function getLocation() {
     if (!navigator.geolocation) {
       setError("Geolocation is not supported by your browser");
       return;
@@ -33,7 +33,7 @@ const useCurrentLocation = () => {
         }
       );
     }
-  };
+  }
   return { location, error, getLocation };
 };
 

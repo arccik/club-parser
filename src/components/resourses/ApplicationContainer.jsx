@@ -80,14 +80,20 @@ export const ApplicationContainer = ({ children }) => {
       </Affix>
       {children}
 
-      <Affix position={{ bottom: 40, right: 20 }} variant="light">
+      <Affix position={{ bottom: 20, right: 20 }}>
         <Transition transition="slide-up" mounted={scrollPosition.y > 550}>
           {(transitionStyles) => (
-            <IconArrowUp
-              size={20}
+            <ActionIcon
               style={transitionStyles}
-              onClick={() => scrollTo({ y: 0 })}
-            />
+              variant="light"
+              onClick={() => router.back()}
+            >
+              <IconArrowUp
+                size={20}
+                style={transitionStyles}
+                onClick={() => scrollTo({ y: 0 })}
+              />
+            </ActionIcon>
           )}
         </Transition>
       </Affix>
