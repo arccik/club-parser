@@ -1,37 +1,51 @@
-import { Text, Group, Button } from "@mantine/core";
+import { Text, Group, Button, SegmentedControl } from "@mantine/core";
 import useCurrentLocation from "../../../Hooks/useCurrentLocaiton";
+import { useState } from "react";
 
 const SortButtons = ({ placeType, setValue }) => {
-  const { location } = useCurrentLocation();
-  const eventLabels = ["Price", "StartDate", "Distance"];
-  if (!location) eventLabels.filter((v) => v !== "Distance");
-  const eventButtons = eventLabels.map((label) => (
-    <Button
-      key={label}
-      onClick={() => setValue(label.toLocaleLowerCase())}
-      size="xs"
-      variant="light"
-    >
-      {label}
-    </Button>
-  ));
-  const venueButtons = ["Name", "Distance"].map((label) => (
-    <Button
-      key={label}
-      onClick={() => setValue(label.toLocaleLowerCase())}
-      size="xs"
-      variant="light"
-    >
-      {label}
-    </Button>
-  ));
+  const [selectValue, setSelectValue] = useState("");
+  const { location, getLocation } = useCurrentLocation();
+
+  const handleSelect = (event) => {
+    setSelectValue(event);
+    if (event === "distance" && !location) getLocation();
+    setValue(event);
+  };
+
+  const EventButtons = () => (
+    <>
+      <SegmentedControl
+        id="sort"
+        value={selectValue}
+        onChange={handleSelect}
+        data={[
+          { label: "Price", value: "price" },
+          { label: "Start Date", value: "startdate" },
+          { label: "Distance", value: "distance" },
+        ]}
+      />
+    </>
+  );
+  const VenueButtons = () => (
+    <>
+      <SegmentedControl
+        id="sort"
+        value={selectValue}
+        onChange={handleSelect}
+        data={[
+          { label: "Name", value: "name" },
+          { label: "Distance", value: "Distance" },
+        ]}
+      />
+    </>
+  );
 
   return (
     <Group spacing="xs">
-      <Text size="sm" weight="bold">
+      <Text component="label" size="sm" weight={500}>
         Sort By
       </Text>
-      {placeType === "event" ? eventButtons : venueButtons}
+      {placeType === "event" ? <EventButtons /> : <VenueButtons />}
     </Group>
   );
 };

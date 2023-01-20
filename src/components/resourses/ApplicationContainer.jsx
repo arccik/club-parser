@@ -13,7 +13,13 @@ import { useRouter } from "next/router";
 
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
-import { IconMap2, IconArrowUp, IconArrowLeft } from "@tabler/icons";
+import {
+  IconArrowUp,
+  IconArrowLeft,
+  IconSearch,
+  IconMap2,
+} from "@tabler/icons";
+import Search from "../HomePage/Search/Search";
 
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
@@ -41,16 +47,18 @@ export const ApplicationContainer = ({ children }) => {
               justifyContent: "space-between",
             }}
           >
-            <Group>
+            <Group spacing={0}>
               <ActionIcon
                 variant="subtle"
                 color="dark"
-                size="xl"
+                size="md"
+                ml={0}
                 onClick={() => router.push("/map")}
               >
                 <IconMap2 />
               </ActionIcon>
             </Group>
+
             <Image
               onClick={() => router.push("/", undefined, { scroll: false })}
               src="/assets/white-logo.png"
@@ -59,7 +67,6 @@ export const ApplicationContainer = ({ children }) => {
               height={50}
               style={{ cursor: "pointer" }}
             />
-
             <BurgerMenu />
           </div>
         </Header>
