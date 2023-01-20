@@ -24,6 +24,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     color: theme.white,
     opacity: 0.7,
     fontWeight: 700,
+    
     textTransform: "uppercase",
   },
   titleBagde: {

@@ -47,7 +47,8 @@ export default async function handler(req, res) {
                 startdate: { $gt: new Date() },
               },
             },
-          ]).limit(10);
+            { $limit: 10 },
+          ]);
           await Artist.populate(eventsWithDistance, {
             path: "artists",
             model: Artist,
@@ -59,7 +60,7 @@ export default async function handler(req, res) {
 
           return res.status(200).json(eventsWithDistance);
         } else {
-          const events = await Event.find({}).limit(100);
+          const events = await Event.find({}).limit(10);
           return res.status(200).json(events);
         }
 
@@ -80,7 +81,7 @@ export default async function handler(req, res) {
             .status(503)
             .json({ message: "Error during saving, check DB connection" });
       default:
-        return res.status(404).json({ message: "Method not recognised" });
+        return res.status(404).json({ message: "wrong request method!" });
     }
   } catch (error) {
     return res

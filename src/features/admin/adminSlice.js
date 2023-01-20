@@ -9,23 +9,6 @@ const initialState = adminAdapter.getInitialState();
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAdminEvents: builder.query({
-      query: () => {
-        return "/admin/events";
-      },
-      transformFromResponse: (responseData) => {
-        return adminAdapter.setAll(initialState, responseData);
-      },
-      providesTags: (result, error, arg) => [{ type: "Events", id: "LIST" }],
-    }),
-    getAdminVenues: builder.query({
-      query: () => "/admin/venues",
-      transformFromResponse: (responseData) => {
-        return adminAdapter.setAll(initialState, responseData);
-      },
-      providesTags: (result, error, arg) => [{ type: "Venues", id: "LIST" }],
-    }),
-
     getFieldsNames: builder.query({
       query: (type) => `/admin/getfields?type=${type}`,
       transformFromResponse: (responseData) => {
@@ -77,8 +60,6 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetAdminEventsQuery,
-  useGetAdminVenuesQuery,
   useGetFieldsNamesQuery,
   useGetDocumentsCountQuery,
   useGetVenuesForEventsQuery,

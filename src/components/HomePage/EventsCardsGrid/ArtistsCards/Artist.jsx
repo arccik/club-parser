@@ -18,12 +18,7 @@ const Artist = ({ image, name, _id, spotifymp3url }) => {
 
   return (
     <>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        fullScreen
-        title={name}
-      >
+      <Modal opened={opened} onClose={() => setOpened(false)} title={name}>
         <Card withBorder radius="md">
           <Card.Section>
             <Image src={image} alt={name} height={400} />

@@ -4,11 +4,9 @@ export const bounce = keyframes({
   "from, 20%, 53%, 80%, to": {
     filter: "brightness(70%)",
   },
-  "40%, 43%": {
-    filter: "brightness(60%)",
+  "40%, 100%": {
+    filter: "brightness(100%)",
   },
-  "70%": { filter: "brightness(50%)" },
-  "90%": { filter: "brightness(70%)" },
 });
 
 const useStyles = createStyles((theme) => {

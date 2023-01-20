@@ -59,7 +59,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
     getSortedVenues: builder.query({
       query: ({ sortValue, activePage, location }) => {
-        if (!location) return `/sortby/venue?page=${activePage}`;
+        if (!location)
+          return `/sortby/venue?sortby=${sortValue}&page=${activePage}`;
         else
           return `/sortby/venue?sortby=${sortValue}&page=${activePage}&coords=${location.lng},${location.lat}`;
       },

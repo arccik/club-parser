@@ -91,11 +91,14 @@ export default async function handler(req, res) {
       });
     }
 
-    if (sortby === "name" || sortby === "price") {
+    if (sortby === "name" || sortby === "price" || sortby === "startdate") {
       const eventTotal = await Event.countDocuments({
         startdate: { $gte: new Date() },
       });
-      const events = await Event.find({ startdate: { $gte: new Date() } })
+      const events = await Event.find({
+        [sortby]: { $exists: true, $ne: "" },
+        startdate: { $gte: new Date() },
+      })
         .sort({ [sortby]: 1 })
         .limit(PAGE_LIMIT)
         .skip(startIndex);

@@ -10,7 +10,7 @@ import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 import { useRouter } from "next/router";
 
 const EventsPage = () => {
-  const { location } = useCurrentLocation();
+  const { location, getLocation } = useCurrentLocation();
   const router = useRouter();
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
@@ -29,6 +29,7 @@ const EventsPage = () => {
   useEffect(() => {
     const { page } = router.query;
     if (page) setPage(page);
+    if (sortValue === "distance" && !location) getLocation();
   }, [router.query]);
 
   if (error || sortedError) {

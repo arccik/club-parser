@@ -39,7 +39,7 @@ const Cards = ({ data }) => {
         )}
       </AspectRatio>
 
-      <Group position="apart" m="sm">
+      <Group position="apart" pl="xs">
         <Text
           size="sm"
           weight={700}
@@ -50,45 +50,46 @@ const Cards = ({ data }) => {
         </Text>
         <Stars rating={article.rating} id={article._id} />
       </Group>
-      <Group p="lg">
-        {/* <Stack spacing={0} ml="sm"> */}
-        {article.price && (
-          <Text size="xs">
-            <Group spacing={5}>
-              <IconCash size={14} />
-              {displayPrice(article.price)}
-            </Group>
-          </Text>
-        )}
+      <Group pl="xs">
+        <Stack spacing={0}>
+          {article.price && (
+            <Text size="xs">
+              <Group spacing={5}>
+                <IconCash size={14} />
+                {displayPrice(article.price)}
+              </Group>
+            </Text>
+          )}
 
-        <Text size="xs">
-          <Group spacing={5}>
-            <IconCalendar size={14} />
-            {dayjs(article.startdate).format("DD MMM")}
-          </Group>
-        </Text>
-        {article.distance && (
           <Text size="xs">
             <Group spacing={5}>
-              <IconGps size={14} /> {article.distance.toPrecision(3)} km
+              <IconCalendar size={14} />
+              {dayjs(article.startdate).format("DD MMM")}
             </Group>
           </Text>
-        )}
-        {article.venue?.town && (
-          <Text size="xs">
-            <Group spacing={5}>
-              <IconBuildingCommunity size={14} /> {article.venue.town}
-            </Group>
-          </Text>
-        )}
-        {/* </Stack> */}
+          {article.distance && (
+            <Text size="xs">
+              <Group spacing={5}>
+                <IconGps size={14} /> {article.distance.toPrecision(3)} km
+              </Group>
+            </Text>
+          )}
+          {article.venue?.town && (
+            <Text size="xs">
+              <Group spacing={5}>
+                <IconBuildingCommunity size={14} /> {article.venue.town}
+              </Group>
+            </Text>
+          )}
+        </Stack>
         <ArtistsCards artists={article.artists} />
       </Group>
+
       {article.genres && (
-        <Group spacing={0} m={0} ml="sm" mt="sm">
+        <Group>
           {article.genres.map((genre) => (
             <Badge
-              m={0}
+              // m={0}
               key={genre}
               color="light"
               className={classes.link}

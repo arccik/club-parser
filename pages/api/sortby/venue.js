@@ -10,8 +10,17 @@ export default async function handler(req, res) {
 
     await dbConnect();
     if (sortby === "distance") {
-      const venueTotal = await Venue.countDocuments();
+      const venuesTotal = await Venue.countDocuments();
+      if (!coords) {
+        const venues = await Venue.find().limit(20);
+        return res.status(200).json({
+          venues,
+          currentPage: Number(page),
+          numberOfPages: Math.ceil(venuesTotal / PAGE_LIMIT),
+        });
+      }
       const location = coords.split(",").map(Number);
+
       const venues = await Venue.aggregate([
         {
           $geoNear: {
@@ -19,12 +28,12 @@ export default async function handler(req, res) {
               type: "Point",
               coordinates: location,
             },
-            maxDistance: 10000 * 100000,
             spherical: true,
             distanceField: "distance",
             distanceMultiplier: 0.001,
           },
         },
+        { $sort: { distance: -1 } },
         { $skip: startIndex },
         { $limit: PAGE_LIMIT },
       ]);
@@ -32,10 +41,9 @@ export default async function handler(req, res) {
       return res.status(200).json({
         venues,
         currentPage: Number(page),
-        numberOfPages: Math.ceil(venueTotal / PAGE_LIMIT),
+        numberOfPages: Math.ceil(venuesTotal / PAGE_LIMIT),
       });
-    }
-    if (sortby === "name") {
+    } else if (sortby === "name") {
       const venueTotal = await Venue.countDocuments();
       const venues = await Venue.find()
         .sort({ [sortby]: 1 })

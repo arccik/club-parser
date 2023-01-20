@@ -13,7 +13,7 @@ const ArtistsCards = ({ artists }) => {
   return (
     <>
       <Carousel
-        sx={{ maxWidth: 300 }}
+        sx={{ maxWidth: 200 }}
         mx="auto"
         // withIndicators
         dragFree
