@@ -70,11 +70,6 @@ const Home = ({ events, oldEvents, recommended }) => {
           name="description"
           content="Strip Radar - Events all over the globe"
         />
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        ></meta>
       </Head>
       <main style={{ padding: 0, margin: 0 }}>
         <Hero />

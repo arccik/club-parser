@@ -86,7 +86,10 @@ const Cards = ({ data }) => {
       </Group>
 
       {article.genres && (
-        <Group>
+        <Group m="xs">
+          <Text size="xs" weight="bolder">
+            Genres
+          </Text>
           {article.genres.map((genre) => (
             <Badge
               // m={0}

@@ -34,7 +34,9 @@ const AdminVenuePage = () => {
     window.scrollTo(0, 0);
   };
   useEffect(() => {
-    if (router.query.page) setPage(router.query.page);
+    if (router.query.page && router.query.page !== activePage) {
+      setPage(router.query.page);
+    }
     if (sortValue === "distance" && !location) getLocation();
   }, [router.query.page, sortValue]);
 

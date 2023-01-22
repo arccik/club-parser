@@ -13,12 +13,12 @@ const useStyles = createStyles((theme) => {
         marginTop: -120,
       },
     },
-    // serachField: {
-    //   width: "90%",
-    //   "@media (max-width: 650px)": {
-    //     width: "80%",
-    //   },
-    // },
+    serachField: {
+      width: "90%",
+      "@media (max-width: 650px)": {
+        width: "80%",
+      },
+    },
     calendar: {
       margin: "auto",
       backgroundColor: "black",

@@ -1,13 +1,13 @@
 import { createStyles, keyframes } from "@mantine/core";
 
-export const bounce = keyframes({
-  "from, 20%, 53%, 80%, to": {
-    filter: "brightness(70%)",
-  },
-  "40%, 100%": {
-    filter: "brightness(100%)",
-  },
-});
+// export const bounce = keyframes({
+//   "from, 20%, 53%, 80%, to": {
+//     filter: "brightness(70%)",
+//   },
+//   "40%, 100%": {
+//     filter: "brightness(100%)",
+//   },
+// });
 
 const useStyles = createStyles((theme) => {
   return {
@@ -15,7 +15,7 @@ const useStyles = createStyles((theme) => {
       objectFit: "cover",
       width: "100%",
       filter: "brightness(70%)",
-      animation: `${bounce} 3s ease-in-out infinite`,
+      // animation: `${bounce} 3s ease-in-out infinite`,
     },
 
     container: {

@@ -19,7 +19,6 @@ import {
   IconSearch,
   IconMap2,
 } from "@tabler/icons";
-import Search from "../HomePage/Search/Search";
 
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
@@ -48,13 +47,7 @@ export const ApplicationContainer = ({ children }) => {
             }}
           >
             <Group spacing={0}>
-              <ActionIcon
-                variant="subtle"
-                color="dark"
-                size="md"
-                ml={0}
-                onClick={() => router.push("/map")}
-              >
+              <ActionIcon size="md" ml={0} onClick={() => router.push("/map")}>
                 <IconMap2 />
               </ActionIcon>
             </Group>

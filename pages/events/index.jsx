@@ -33,7 +33,8 @@ const EventsPage = () => {
   };
 
   useEffect(() => {
-    if (router.query.page) setPage(router.query.page);
+    if (router.query.page && router.query.page !== activePage)
+      setPage(router.query.page);
     if (sortValue === "distance" && !location) getLocation();
   }, [router.query.page, sortValue]);
 
@@ -64,25 +65,4 @@ const EventsPage = () => {
     </>
   );
 };
-
-// export async function getStaticProps({ params }) {
-//   try {
-//     await dbConnect();
-//     const data = await Venue.findById(params.id);
-//     const venue = JSON.parse(JSON.stringify(data));
-//     return { props: { venue }, revalidate: 30 };
-//   } catch (error) {
-//     console.error("Static Generation Error", error);
-//   }
-// }
-
-// export async function getStaticPaths() {
-//   await dbConnect();
-//   const venues = await Venue.find().distinct("_id");
-//   const paths = venues.map((venue) => ({
-//     params: { id: venue._id.toString() },
-//   }));
-//   return { paths, fallback: false };
-// }
-
 export default EventsPage;

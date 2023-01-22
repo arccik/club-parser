@@ -22,12 +22,14 @@ const EventsFeed = ({ venueId }) => {
     );
   return (
     <Stack spacing={0} m="sm">
-      <Title order={4}>Events</Title>
+      <Title order={4} align="center">
+        EVENTS
+      </Title>
 
       {events.map((event) => (
         <Group noWrap spacing="xs" key={event._id}>
           <Group spacing="xs" noWrap>
-            <Avatar size={20} src={event.image} />
+            <Avatar size={40} src={event.image} />
             <Text
               size="xs"
               component={Link}

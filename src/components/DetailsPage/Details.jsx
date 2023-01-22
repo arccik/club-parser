@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { IconNavigation, IconEdit } from "@tabler/icons";
+import { IconNavigation, IconEdit, IconWorld } from "@tabler/icons";
 import dayjs from "dayjs";
 dayjs.extend(relativeTime);
 
@@ -33,7 +33,7 @@ const DetailsPage = ({ data }) => {
   const router = useRouter();
   const { classes } = useStyles();
   const { user } = useUser();
-  
+
   if (!data) return null;
   return (
     <>
@@ -73,12 +73,29 @@ const DetailsPage = ({ data }) => {
                 </Text>
               </div>
             )}
+            {data.placeType === "venue" && (
+              <div>
+                <Text size="xs" color="dimmed">
+                  Website
+                </Text>
+                <ActionIcon
+                  variant="light"
+                  component="a"
+                  target="_blank"
+                  href={data.link}
+                >
+                  <IconWorld />
+                </ActionIcon>
+              </div>
+            )}
           </Card.Section>
 
           <Group position="apart" mt="sm">
-            <Text size="sm" weight={700} className={classes.title}>
-              {data.name}
-            </Text>
+            <Group spacing={0}>
+              <Text size="sm" weight={700} className={classes.title}>
+                {data.name}
+              </Text>
+            </Group>
 
             <Group>
               <Stars rating={data.rating} id={data._id} type={data.placeType} />
@@ -95,7 +112,7 @@ const DetailsPage = ({ data }) => {
             {data.description || ""}
           </Text>
 
-          {data.genres && data.placeType === "event" && (
+          {data.genres.length > 0 && (
             <>
               <Title size="md" mb="xs">
                 Genres
