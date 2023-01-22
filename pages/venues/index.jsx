@@ -1,4 +1,4 @@
-import { LoadingOverlay, Text } from "@mantine/core";
+import { LoadingOverlay, Text, Pagination } from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
 import { useState, useEffect } from "react";
 import {
@@ -8,11 +8,12 @@ import {
 import CardWithPaginationSort from "../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 import { useRouter } from "next/router";
+import FooterSocial from "../../src/components/resourses/Footer/Footer";
 
 const AdminVenuePage = () => {
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");
-  const { location } = useCurrentLocation();
+  const { location, getLocation } = useCurrentLocation();
   const router = useRouter();
   const { data, isLoading, error } = useGetVenuesQuery(activePage, {
     skip: sortValue,
@@ -26,10 +27,17 @@ const AdminVenuePage = () => {
     { sortValue, activePage, location },
     { skip: !sortValue }
   );
+
+  const handlePagination = (value) => {
+    setPage(Number(value));
+    router.push(`?page=${value}`);
+    window.scrollTo(0, 0);
+  };
   useEffect(() => {
-    const { page } = router.query;
-    if (page) setPage(page);
-  }, [router.query]);
+    if (router.query.page) setPage(router.query.page);
+    if (sortValue === "distance" && !location) getLocation();
+  }, [router.query.page, sortValue]);
+
   if (error || sortedError) {
     return <Text align="center">Ops. something went wrong </Text>;
   }
@@ -40,13 +48,21 @@ const AdminVenuePage = () => {
       <LoadingOverlay visible={isLoading || isSortedLoading} overlayBlur={2} />
       <CardWithPaginationSort
         data={sortedData?.venues || data?.venues}
-        activePage={activePage}
-        setPage={setPage}
+        setPage={handlePagination}
         setSortValue={setSortValue}
         title="Venues"
-        numberOfPages={sortedData?.numberOfPages || data.numberOfPages}
         type="venue"
       />
+      <Pagination
+        position="center"
+        m="lg"
+        noWrap
+        initialPage={activePage}
+        page={Number(activePage)}
+        onChange={handlePagination}
+        total={sortedData?.numberOfPages || data?.numberOfPages}
+      />
+      <FooterSocial />
     </>
   );
 };

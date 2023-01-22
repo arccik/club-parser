@@ -1,9 +1,9 @@
-import { Text, Group, Button, SegmentedControl } from "@mantine/core";
+import { Text, Group, SegmentedControl } from "@mantine/core";
 import useCurrentLocation from "../../../Hooks/useCurrentLocaiton";
 import { useState } from "react";
 
 const SortButtons = ({ placeType, setValue }) => {
-  const [selectValue, setSelectValue] = useState("");
+  const [selectValue, setSelectValue] = useState("startdate");
   const { location, getLocation } = useCurrentLocation();
 
   const handleSelect = (event) => {
@@ -18,6 +18,7 @@ const SortButtons = ({ placeType, setValue }) => {
         id="sort"
         value={selectValue}
         onChange={handleSelect}
+        defaultValue="Start Date"
         data={[
           { label: "Price", value: "price" },
           { label: "Start Date", value: "startdate" },
