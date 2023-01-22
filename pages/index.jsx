@@ -23,7 +23,11 @@ export async function getStaticProps() {
     .populate({ path: "artists", model: Artist })
     .populate({ path: "venue", model: Venue })
     .limit(10);
-  const oldEvents = await Event.find({ startdate: { $lt: today } }).limit(3);
+  const oldEvents = await Event.find({
+    startdate: { $lt: today.setDate(today.getDate() - 1) },
+  })
+    .sort({ startdate: -1 })
+    .limit(3);
 
   const recommended = await Event.find({ startdate: { $gte: new Date() } })
     .sort({ price: -1 })
