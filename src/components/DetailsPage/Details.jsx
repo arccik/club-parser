@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { IconNavigation, IconEdit, IconWorld } from "@tabler/icons";
+import { IconNavigation, IconEdit, IconWorld, IconPhone } from "@tabler/icons";
 import dayjs from "dayjs";
 dayjs.extend(relativeTime);
 
@@ -75,17 +75,38 @@ const DetailsPage = ({ data }) => {
             )}
             {data.placeType === "venue" && (
               <div>
-                <Text size="xs" color="dimmed">
-                  Website
-                </Text>
-                <ActionIcon
-                  variant="light"
-                  component="a"
-                  target="_blank"
-                  href={data.link}
-                >
-                  <IconWorld />
-                </ActionIcon>
+                <Group spacing="xs">
+                  <div>
+                    <Text size="xs" color="dimmed">
+                      Website
+                    </Text>
+                    <ActionIcon
+                      variant="light"
+                      component="a"
+                      target="_blank"
+                      href={data.link}
+                    >
+                      <IconWorld />
+                    </ActionIcon>
+                  </div>
+                  <div>
+                    {data.phone && (
+                      <>
+                        <Text size="xs" color="dimmed">
+                          Phone
+                        </Text>
+                        <ActionIcon
+                          variant="light"
+                          component="a"
+                          target="_blank"
+                          href={data.link}
+                        >
+                          <IconPhone />
+                        </ActionIcon>
+                      </>
+                    )}
+                  </div>
+                </Group>
               </div>
             )}
           </Card.Section>

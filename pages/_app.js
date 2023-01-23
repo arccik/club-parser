@@ -5,11 +5,9 @@ import { ApplicationContainer } from "../src/components/resourses/ApplicationCon
 import { store } from "../store";
 import { Provider } from "react-redux";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { extendedApiSlice } from "../src/features/event/eventSlice";
 import Script from "next/script";
 import Head from "next/head";
 
-store.dispatch(extendedApiSlice.endpoints.getEvents.initiate());
 
 function MyApp({ Component, pageProps }) {
   return (
