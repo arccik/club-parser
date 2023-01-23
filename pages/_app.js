@@ -16,7 +16,11 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="user-scalable=no, width=device-width, initial-scale=1.0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
       </Head>
       <Script
         strategy="afterInteractive"

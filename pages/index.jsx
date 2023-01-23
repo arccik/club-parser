@@ -75,6 +75,7 @@ const Home = ({ events, oldEvents, recommended }) => {
           content="Strip Radar - Events all over the globe"
         />
       </Head>
+
       <main style={{ padding: 0, margin: 0 }}>
         <Hero />
         <Search />
