@@ -28,6 +28,8 @@ const Map = (props) => {
       clickableIcons: false,
       gestureHandling: "greedy",
       panControl: true,
+      minZoom: 4,
+      maxZoom: 18,
     }),
     []
   );

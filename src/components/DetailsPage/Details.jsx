@@ -98,8 +98,7 @@ const DetailsPage = ({ data }) => {
                         <ActionIcon
                           variant="light"
                           component="a"
-                          target="_blank"
-                          href={data.link}
+                          href={`tel:${data.phone}`}
                         >
                           <IconPhone />
                         </ActionIcon>
@@ -216,21 +215,7 @@ const DetailsPage = ({ data }) => {
           >
             Get me there
           </Button>
-          {/* {data.link && (
-            <UnstyledButton component="a" target="_blank" href={data.link}>
-              <Group>
-                <Avatar size={40} color="blue">
-                  <IconWorld size={20} />
-                </Avatar>
-                <div>
-                  <Text>Website</Text>
-                  <Text size="xs" color="dimmed">
-                    {data.link.split("/")[2]}
-                  </Text>
-                </div>
-              </Group>
-            </UnstyledButton>
-          )} */}
+
           {user && user.role === "admin" && (
             <ActionIcon
               variant="light"
