@@ -13,6 +13,7 @@ const useStyles = createStyles((theme) => ({
       fontSize: 18,
       boxShadow: theme.shadows.md,
       transition: "all 0.5s ease;",
+      whiteSpace: "nowrap",
     },
   },
   title: {

@@ -47,7 +47,7 @@ const Cards = ({ data }) => {
         )}
       </AspectRatio>
 
-      <Group position="apart" pl="xs">
+      <Group position="apart" pl="xs" align="right">
         <Text
           size="sm"
           weight={700}
@@ -58,8 +58,8 @@ const Cards = ({ data }) => {
         </Text>
         <Stars rating={article.rating} id={article._id} />
       </Group>
-      <Grid mt="sm">
-        <Grid.Col span={4}>
+      <Grid ml={1}>
+        <Grid.Col span={6}>
           {article.venue?.town && (
             <Text size="xs">
               <Group spacing={5}>
@@ -76,15 +76,6 @@ const Cards = ({ data }) => {
           )}
         </Grid.Col>
         <Grid.Col span={6}>
-          {article.price && (
-            <Text size="xs">
-              <Group spacing={5}>
-                <IconCash size={14} />
-                {displayPrice(article.price)}
-              </Group>
-            </Text>
-          )}
-
           <Text size="xs">
             <Group spacing={5}>
               <IconCalendar size={14} />
@@ -92,28 +83,26 @@ const Cards = ({ data }) => {
             </Group>
           </Text>
         </Grid.Col>
+        {article.price && (
+          <Grid.Col ml={1} span="content">
+            <Text size="xs">
+              <Group spacing={5}>
+                <IconCash size={14} />
+                {displayPrice(article.price)}
+              </Group>
+            </Text>
+          </Grid.Col>
+        )}
       </Grid>
-      {/* <ArtistsCards artists={article.artists} /> */}
-      {article.artists &&
-        article.artists.map((artist) => (
-          <Badge
-            // m={0}
-            key={artist}
-            color="light"
-            // className={classes.link}
-          >
-            {artist}
-          </Badge>
-        ))}
+      <ArtistsCards artists={article.artists} />
 
       {article.genres && (
-        <Group m="xs">
-          <Text size="xs" weight="bolder">
+        <Grid m="xs">
+          <Text size="xs" mr="xs" weight="bolder">
             Genres
           </Text>
           {article.genres.map((genre) => (
             <Badge
-              // m={0}
               key={genre}
               color="light"
               className={classes.link}
@@ -122,7 +111,7 @@ const Cards = ({ data }) => {
               {genre}
             </Badge>
           ))}
-        </Group>
+        </Grid>
       )}
       <Divider mt="md" />
       {article.enddate < new Date() && (

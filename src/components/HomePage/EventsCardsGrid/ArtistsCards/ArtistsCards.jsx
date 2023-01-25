@@ -1,34 +1,29 @@
 import { Carousel } from "@mantine/carousel";
-import { Title, Text } from "@mantine/core";
+import { Title, Text, Group, Badge } from "@mantine/core";
 
 import Artist from "./Artist";
 
 const ArtistsCards = ({ artists }) => {
   if (!artists) return null;
-  const slides = artists.map((item) => (
-    <Carousel.Slide key={item._id} gap="xs">
-      <Artist {...item} />
-    </Carousel.Slide>
+  // const slides = artists.map((item) => (
+  //   <Carousel.Slide key={item._id} gap="xs">
+  //     <Artist {...item} />
+  //   </Carousel.Slide>
+  // ));
+
+  const artistList = artists.map((artist) => (
+    <Badge m={0} key={artist._id} color="indigo">
+      {artist.name}
+    </Badge>
   ));
   return (
     <>
-      <Carousel
-        sx={{ maxWidth: 200 }}
-        mx="auto"
-        // withIndicators
-        dragFree
-        withControls={false}
-        slideSize="25%"
-        breakpoints={[
-          {
-            maxWidth: "100px",
-            slideSize: "100%",
-          },
-        ]}
-        align="start"
-      >
-        {slides}
-      </Carousel>
+      <Group m="xs">
+        <Text size="xs" weight="bolder">
+          Artists
+        </Text>
+        {artistList}
+      </Group>
     </>
   );
 };
