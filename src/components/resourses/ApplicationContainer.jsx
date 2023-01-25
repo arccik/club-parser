@@ -13,12 +13,7 @@ import { useRouter } from "next/router";
 
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
-import {
-  IconArrowUp,
-  IconArrowLeft,
-  IconSearch,
-  IconMap2,
-} from "@tabler/icons";
+import { IconArrowUp, IconArrowLeft, IconMap2 } from "@tabler/icons";
 
 export const ApplicationContainer = ({ children }) => {
   const theme = useMantineTheme();
@@ -83,11 +78,7 @@ export const ApplicationContainer = ({ children }) => {
       <Affix position={{ bottom: 20, right: 20 }}>
         <Transition transition="slide-up" mounted={scrollPosition.y > 550}>
           {(transitionStyles) => (
-            <ActionIcon
-              style={transitionStyles}
-              variant="light"
-              onClick={() => router.back()}
-            >
+            <ActionIcon style={transitionStyles} variant="light">
               <IconArrowUp
                 size={20}
                 style={transitionStyles}

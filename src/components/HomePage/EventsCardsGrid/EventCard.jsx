@@ -1,4 +1,12 @@
-import { Text, AspectRatio, Group, Badge, Stack, Divider } from "@mantine/core";
+import {
+  Text,
+  AspectRatio,
+  Group,
+  Badge,
+  Stack,
+  Divider,
+  Grid,
+} from "@mantine/core";
 import Image from "next/image";
 import Stars from "../../DetailsPage/Stars/Stars";
 import dayjs from "dayjs";
@@ -50,8 +58,24 @@ const Cards = ({ data }) => {
         </Text>
         <Stars rating={article.rating} id={article._id} />
       </Group>
-      <Group pl="xs">
-        <Stack spacing={0}>
+      <Grid mt="sm">
+        <Grid.Col span={4}>
+          {article.venue?.town && (
+            <Text size="xs">
+              <Group spacing={5}>
+                <IconBuildingCommunity size={14} /> {article.venue.town}
+              </Group>
+            </Text>
+          )}
+          {article.distance && (
+            <Text size="xs">
+              <Group spacing={5}>
+                <IconGps size={14} /> {article.distance.toPrecision(3)} km
+              </Group>
+            </Text>
+          )}
+        </Grid.Col>
+        <Grid.Col span={6}>
           {article.price && (
             <Text size="xs">
               <Group spacing={5}>
@@ -67,23 +91,20 @@ const Cards = ({ data }) => {
               {dayjs(article.startdate).format("DD MMM")}
             </Group>
           </Text>
-          {article.distance && (
-            <Text size="xs">
-              <Group spacing={5}>
-                <IconGps size={14} /> {article.distance.toPrecision(3)} km
-              </Group>
-            </Text>
-          )}
-          {article.venue?.town && (
-            <Text size="xs">
-              <Group spacing={5}>
-                <IconBuildingCommunity size={14} /> {article.venue.town}
-              </Group>
-            </Text>
-          )}
-        </Stack>
-        <ArtistsCards artists={article.artists} />
-      </Group>
+        </Grid.Col>
+      </Grid>
+      {/* <ArtistsCards artists={article.artists} /> */}
+      {article.artists &&
+        article.artists.map((artist) => (
+          <Badge
+            // m={0}
+            key={artist}
+            color="light"
+            // className={classes.link}
+          >
+            {artist}
+          </Badge>
+        ))}
 
       {article.genres && (
         <Group m="xs">

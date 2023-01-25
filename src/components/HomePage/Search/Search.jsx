@@ -85,7 +85,7 @@ const Search = () => {
           }
         />
         <ActionIcon onClick={() => setShowCalendar((prev) => !prev)}>
-          <IconCalendar color="gray" />
+          <IconCalendar color="white" />
         </ActionIcon>
       </Group>
 
