@@ -20,7 +20,7 @@ import {
 } from "@tabler/icons";
 import displayPrice from "../../../utils/displayPrice";
 import { useRouter } from "next/router";
-import ArtistsCards from "./ArtistsCards/ArtistsCards";
+import ArtistsBubbles from "./ArtistsCards/ArtistsBubbles";
 
 const Cards = ({ data }) => {
   const { classes } = useStyles();
@@ -94,7 +94,7 @@ const Cards = ({ data }) => {
           </Grid.Col>
         )}
       </Grid>
-      <ArtistsCards artists={article.artists} />
+      <ArtistsBubbles artists={article.artists} />
 
       {article.genres && (
         <Grid m="xs">

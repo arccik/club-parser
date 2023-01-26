@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const Notifications = ({ setAgree }) => {
   const cookieTitle = "Cookie Consent";
-  const nearByTitle = "Show nearby places dialog";
+  const nearByTitle = "Show nearby places";
   const [showCurrentLocationDialog, setShowCurrentLocationDialog] =
     useSessionStorage({
       key: nearByTitle,
@@ -39,7 +39,7 @@ const Notifications = ({ setAgree }) => {
             {nearByTitle}
           </Text>
           <Button
-            color="pink"
+            // color="pink"
             variant="outline"
             radius="md"
             onClick={handleClick}
@@ -61,13 +61,14 @@ const Notifications = ({ setAgree }) => {
             {cookieTitle}
           </Text>
           <Text size="xs">
-            {" "}
             We use cookies to personalise content for you and to analyse our
-            traffic. Also, to keep this button status and not to be anoying you
-            with this question next time
+            traffic. By accessing and using StripRadar you agree to our Cookies
+            Policy. StripRadar uses cookies and other tracking technologies to
+            customise your experience including map navigation and other
+            services.
           </Text>
           <Button
-            color="pink"
+            // color="pink"
             variant="outline"
             radius="md"
             onClick={() => setShowCookieConsent(false)}

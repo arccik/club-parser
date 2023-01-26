@@ -26,7 +26,7 @@ import SimilarPlaces from "./SimilarPlaces/SimilarPlaces";
 import VenueCard from "./VenueCard/VanueCard";
 import EventsFeed from "./EventsFeed/EventsFeed";
 import BuyTickets from "./BuyTickets/BuyTickets";
-import ArtistsCards from "../HomePage/EventsCardsGrid/ArtistsCards/ArtistsCards";
+import ArtistsCarousel from "../HomePage/EventsCardsGrid/ArtistsCards/ArtistsCarousel";
 import FooterSocial from "../resourses/Footer/Footer";
 
 const DetailsPage = ({ data }) => {
@@ -158,7 +158,7 @@ const DetailsPage = ({ data }) => {
               <Title mt="lg" mb="sm" size="md">
                 Artists
               </Title>
-              <ArtistsCards artists={data.artists} />
+              <ArtistsCarousel artists={data.artists} />
             </>
           )}
 
