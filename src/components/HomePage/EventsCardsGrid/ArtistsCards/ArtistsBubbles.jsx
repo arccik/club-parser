@@ -1,9 +1,9 @@
 import { Carousel } from "@mantine/carousel";
-import { Title, Text, Group, Badge } from "@mantine/core";
-
-import Artist from "./Artist";
+import { Text, Group, Badge } from "@mantine/core";
+import useStyles from "./styles";
 
 const ArtistsBubbles = ({ artists }) => {
+  const { classes } = useStyles();
   if (!artists) return null;
 
   const artistList = artists.map((artist) => (
@@ -20,7 +20,8 @@ const ArtistsBubbles = ({ artists }) => {
           Artists
         </Text>
         <Carousel
-          sx={{ maxWidth: 270 }}
+          //   sx={{ maxWidth: 270 }}
+          className={classes.badgeCarousel}
           dragFree
           withControls={false}
           slideSize="10%"

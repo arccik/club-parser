@@ -38,5 +38,11 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     position: "absolute",
     bottom: 20,
   },
+  badgeCarousel: {
+    maxWidth: 270,
+    "@media (min-width: 520px)": {
+      maxWidth: "85%",
+    },
+  },
 }));
 export default useStyles;

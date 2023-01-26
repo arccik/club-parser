@@ -202,9 +202,9 @@ const DetailsPage = ({ data }) => {
           <SmallMap center={data.location.coordinates} />
 
           <Button
-            color="dark"
+            // color="dark"
             fullWidth
-            variant="light"
+            variant="outline"
             mt="md"
             radius="md"
             mb="lg"
