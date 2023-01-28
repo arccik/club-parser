@@ -5,7 +5,7 @@ import Venue from "../../../../src/models/venue-model";
 
 export default async function handler(req, res) {
   const { page, coords } = req.query;
-  const PAGE_LIMIT = 12;
+  const PAGE_LIMIT = 21;
   const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
   try {
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
                 distanceMultiplier: 0.001,
               },
             },
-          ]).limit(10);
+          ]).limit(15);
           return res.status(200).json(venues);
         } else {
           const venues = await Venue.find({});
