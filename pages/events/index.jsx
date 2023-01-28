@@ -1,14 +1,14 @@
-import { LoadingOverlay, Text, Pagination } from "@mantine/core";
+import { LoadingOverlay, Text } from "@mantine/core";
 import Loading from "../../src/utils/Loading/Loading";
 import { useState, useEffect } from "react";
 import {
   useGetEventsQuery,
   useGetSortedEventsQuery,
 } from "../../src/features/event/eventSlice";
-import CardWithPaginationSort from "../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 import { useRouter } from "next/router";
 import FooterSocial from "../../src/components/resourses/Footer/Footer";
+import UniversalCards from "../../src/components/resourses/UniversalCards/UniversalCards";
 
 const EventsPage = () => {
   const { location, getLocation } = useCurrentLocation();
@@ -41,25 +41,16 @@ const EventsPage = () => {
   if (error || sortedError) {
     return <Text align="center">Ops. something went wrong </Text>;
   }
-  if (isLoading || isSortedLoading || sortedError) return <Loading />;
+  if (isLoading || isSortedLoading) return <Loading />;
   return (
     <>
       <LoadingOverlay visible={isLoading} overlayBlur={2} />
-      <CardWithPaginationSort
+      <UniversalCards
+        numberOfPages={data?.numberOfPages}
         data={sortedData?.events || data?.events}
-        setSortValue={setSortValue}
-        title="Event"
-        type="event"
-        setPage={setPage}
-      />
-      <Pagination
-        position="center"
-        m="lg"
-        noWrap
-        initialPage={activePage}
+        cardType="Events"
         page={Number(activePage)}
-        onChange={handlePagination}
-        total={sortedData?.numberOfPages || data?.numberOfPages}
+        setPage={handlePagination}
       />
       <FooterSocial />
     </>

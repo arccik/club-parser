@@ -1,4 +1,12 @@
-import { Text, Group, Avatar, Title, Loader, Stack } from "@mantine/core";
+import {
+  Text,
+  Group,
+  Avatar,
+  Title,
+  Loader,
+  Stack,
+  Paper,
+} from "@mantine/core";
 import { useGetUpcomingEventsForVenueQuery } from "../../../features/both/bothSlice";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -21,32 +29,32 @@ const EventsFeed = ({ venueId }) => {
       </Text>
     );
   return (
-    <Stack spacing={0} m="sm">
-      <Title order={4} align="center">
-        EVENTS
-      </Title>
+    <Paper withBorder mt="xs">
+      <Stack m="sm">
+        <Title order={4} align="center">
+          EVENTS
+        </Title>
 
-      {events.map((event) => (
-        <Group noWrap spacing="xs" key={event._id}>
-          <Group spacing="xs" noWrap>
-            <Avatar size={40} src={event.image} />
-            <Text
-              size="xs"
-              component={Link}
-              href={`/details/events/${event._id}`}
-            >
-              {event.name.slice(0, 20)}
+        {events.map((event) => (
+          <Group noWrap spacing="xs" key={event._id}>
+            <Group spacing="xs" noWrap>
+              <Avatar size={40} src={event.image} />
+              <Text
+                size="md"
+                component={Link}
+                href={`/details/events/${event._id}`}
+              >
+                {event.name.slice(0, 20)}
+              </Text>
+            </Group>
+
+            <Text size="xs" color="dimmed">
+              • {dayjs(event.startdate).fromNow()}
             </Text>
           </Group>
-          <Text size="xs" color="dimmed">
-            •
-          </Text>
-          <Text size="xs" color="dimmed">
-            {dayjs(event.startdate).fromNow()}
-          </Text>
-        </Group>
-      ))}
-    </Stack>
+        ))}
+      </Stack>
+    </Paper>
   );
 };
 

@@ -4,97 +4,113 @@ import {
   Text,
   Badge,
   Button,
-  Group,
-  Blockquote,
-  ActionIcon,
+  Grid,
   Stack,
   Image,
   Pagination,
   Title,
+  Center,
 } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useStyles from "./styles";
+import Stars from "../../DetailsPage/Stars/Stars";
 
 const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
   const { classes } = useStyles();
   const router = useRouter();
 
   return (
-    <Container size="sm">
+    <Container size="lg">
       <Title className={classes.title} p={0} m={0} align="center">
         {cardType || router.query.genre || "Event"}
       </Title>
-      {data?.map((place) => (
-        <Card key={place._id} shadow="sm" p="lg" mt="lg" radius="md" withBorder>
-          <Card.Section
-            component={Link}
-            href={`/details/${place.placeType}s/${place._id}`}
-          >
-            {place.image && (
-              <Image
-                src={place.image}
-                height={160}
-                alt={place.name}
-                placeholder="blur"
-              />
-            )}
-          </Card.Section>
-
-          <Stack mt="sm" mb="xs" spacing={0}>
-            <Text weight={500} m={0} p={0}>
-              {place.placeType.toUpperCase()}: {place.name}
-            </Text>
-            <Text size="sm" color="dimmed">
-              {place.formatted_address || place.address}
-            </Text>
-          </Stack>
-
-          <Card.Section align="center">
-            {place.startdate && (
-              <Group>
-                <Badge size="lg" color="gray">
-                  {new Date(place.startdate).toUTCString().split("GMT")}
-                </Badge>
-                {place.price && (
-                  <Badge>
-                    <span>Price: </span>
-                    {place.price.includes("£")
-                      ? place.price
-                      : " £ " + place.price}
-                  </Badge>
+      <Grid>
+        {data?.map((place) => (
+          <Grid.Col span={12} key={place._id} xs={4}>
+            <Card shadow="sm" p="lg" mt="lg" radius="md" withBorder>
+              <Card.Section
+                component={Link}
+                href={`/details/${place.placeType}s/${place._id}`}
+              >
+                {place.image && (
+                  <Image
+                    src={place.image}
+                    height={160}
+                    alt={place.name}
+                    placeholder="blur"
+                  />
                 )}
-              </Group>
-            )}
-          </Card.Section>
-          <Text size="sm" m="md" color="dimmed">
-            {place.description}
-          </Text>
-          {place.genres?.map((genre) => (
-            <Badge
-              key={genre}
-              color="orange"
-              variant="light"
-              style={{ cursor: "pointer" }}
-              onClick={() => router.push(`/details/genres/${genre}`)}
-            >
-              {genre}
-            </Badge>
-          ))}
+              </Card.Section>
+              <Stack mt="sm" mb="xs" spacing={0}>
+                <Text weight={500} m={0} p={0}>
+                  {place.placeType.toUpperCase()}: {place.name}
+                </Text>
+                <Text size="sm" color="dimmed">
+                  {place.formatted_address || place.address}
+                </Text>
+              </Stack>
+              <Card.Section align="center">
+                {place.startdate && (
+                  <Stack>
+                    <Title order={5} align="center">
+                      {new Date(place.startdate).toUTCString().split("GMT")}
+                    </Title>
+                    {place.price && (
+                      <Badge>
+                        <span>Price: </span>
+                        {place.price.includes("£")
+                          ? place.price
+                          : " £ " + place.price}
+                      </Badge>
+                    )}
+                  </Stack>
+                )}
+              </Card.Section>
+              {place.placeType === "venue" && (
+                <Center>
+                  <Stars />
+                </Center>
+              )}
+              <Text
+                size="sm"
+                mt="xs"
+                color="dimmed"
+                className={classes.description}
+              >
+                {place.description}
+              </Text>
 
-          <Button
-            variant="light"
-            color="blue"
-            fullWidth
-            mt="md"
-            radius="md"
-            component={Link}
-            href={`/details/${place.placeType}s/${place._id}`}
-          >
-            Check this out
-          </Button>
-        </Card>
-      ))}
+              {place.genres?.length > 0 && (
+                <>
+                  <span>Genres: </span>
+                  {place.genres?.map((genre) => (
+                    <Badge
+                      key={genre}
+                      color="orange"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => router.push(`/details/genres/${genre}`)}
+                    >
+                      {genre}
+                    </Badge>
+                  ))}
+                </>
+              )}
+              <Button
+                variant="light"
+                color="blue"
+                fullWidth
+                mt="md"
+                radius="md"
+                component={Link}
+                href={`/details/${place.placeType}s/${place._id}`}
+              >
+                Check this out
+              </Button>
+            </Card>
+          </Grid.Col>
+        ))}
+      </Grid>
       {numberOfPages > 1 && (
         <Pagination
           position="center"

@@ -6,9 +6,9 @@ import {
   Button,
   ActionIcon,
   Badge,
-  Accordion,
   Title,
   Container,
+  Paper,
 } from "@mantine/core";
 import Link from "next/link";
 import Head from "next/head";
@@ -178,25 +178,14 @@ const DetailsPage = ({ data }) => {
             <BuyTickets eventId={data.eventId} title={data.name} />
           )}
           {data.placeType === "venue" && (
-            <Accordion
-              mt="lg"
-              mx="auto"
-              variant="filled"
-              defaultValue="customization"
-              classNames={classes}
-              className={classes.venueRoot}
-            >
-              <Accordion.Item value="photos" variant="filled" mb="lg">
-                <Accordion.Control>Address</Accordion.Control>
-                <Accordion.Panel>
-                  <Text size="sm">
-                    {data.formatted_address || data.address}
-                  </Text>
-                  <Text size="sm">{data.postcode}</Text>
-                  <Text size="sm">{data.country}</Text>
-                </Accordion.Panel>
-              </Accordion.Item>
-            </Accordion>
+            <>
+              <Paper shadow="xs" p="md" mb="xs">
+                <Title size="xs">Address</Title>
+                <Text size="sm">{data.formatted_address || data.address}</Text>
+                <Text size="sm">{data.postcode}</Text>
+                <Text size="sm">{data.country}</Text>
+              </Paper>
+            </>
           )}
 
           <SmallMap center={data.location.coordinates} />
