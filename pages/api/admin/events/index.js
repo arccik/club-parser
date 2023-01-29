@@ -49,7 +49,7 @@ export default async function handler(req, res) {
                 startdate: { $gte: new Date() },
               },
             },
-            { $limit: 15 },
+            { $limit: 16 },
           ]);
           await Artist.populate(eventsWithDistance, {
             path: "artists",

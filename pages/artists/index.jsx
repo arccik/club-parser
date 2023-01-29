@@ -10,6 +10,26 @@ import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 import { useRouter } from "next/router";
 import FooterSocial from "../../src/components/resourses/Footer/Footer";
 
+// export async function getStaticProps({ params }) {
+//   try {
+//     await dbConnect();
+//     const data = await Venue.findById(params.id);
+//     const venue = JSON.parse(JSON.stringify(data));
+//     return { props: { venue }, revalidate: 30 };
+//   } catch (error) {
+//     console.error("Static Generation Error", error);
+//   }
+// }
+
+// export async function getStaticPaths() {
+//   await dbConnect();
+//   const venues = await Venue.find().distinct("_id");
+//   const paths = venues.map((venue) => ({
+//     params: { id: venue._id.toString() },
+//   }));
+//   return { paths, fallback: false };
+// }
+
 const AdminVenuePage = () => {
   const [activePage, setPage] = useState(1);
   const [sortValue, setSortValue] = useState("");

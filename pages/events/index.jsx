@@ -9,6 +9,7 @@ import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 import { useRouter } from "next/router";
 import FooterSocial from "../../src/components/resourses/Footer/Footer";
 import UniversalCards from "../../src/components/resourses/UniversalCards/UniversalCards";
+import SortButtons from "../../src/components/resourses/CardWithPaginationSort/sortButtons";
 
 const EventsPage = () => {
   const { location, getLocation } = useCurrentLocation();
@@ -45,7 +46,9 @@ const EventsPage = () => {
   return (
     <>
       <LoadingOverlay visible={isLoading} overlayBlur={2} />
+      {/* <SortButtons placeType="event" setValue={setSortValue} /> */}
       <UniversalCards
+        setSortValue={setSortValue}
         numberOfPages={data?.numberOfPages}
         data={sortedData?.events || data?.events}
         cardType="Events"

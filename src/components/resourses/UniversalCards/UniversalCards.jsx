@@ -15,8 +15,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useStyles from "./styles";
 import Stars from "../../DetailsPage/Stars/Stars";
+import SortButtons from "../CardWithPaginationSort/sortButtons";
 
-const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
+const UniversalCards = ({
+  data,
+  cardType,
+  page,
+  setPage,
+  numberOfPages,
+  setSortValue,
+}) => {
   const { classes } = useStyles();
   const router = useRouter();
 
@@ -25,6 +33,9 @@ const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
       <Title className={classes.title} p={0} m={0} align="center">
         {cardType || router.query.genre || "Event"}
       </Title>
+      {setSortValue && (
+        <SortButtons placeType={cardType} setValue={setSortValue} />
+      )}
       <Grid>
         {data?.map((place) => (
           <Grid.Col span={12} key={place._id} xs={4}>
@@ -43,7 +54,14 @@ const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
                 )}
               </Card.Section>
               <Stack mt="sm" mb="xs" spacing={0}>
-                <Title order={4} weight={700} m={0} p={0}>
+                <Title
+                  order={4}
+                  weight={700}
+                  m={0}
+                  p={0}
+                  component={Link}
+                  href={`/details/${place.placeType}s/${place._id}`}
+                >
                   {place.name}
                 </Title>
                 <Text size="sm" color="dimmed">
