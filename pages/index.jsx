@@ -29,8 +29,13 @@ export async function getStaticProps() {
     .sort({ startdate: -1 })
     .limit(3);
 
-  const recommended = await Event.find({ startdate: { $gte: new Date() } })
-    .sort({ price: -1 })
+
+  const recommended = await Event.find({
+    startdate: { $gte: new Date() },
+    price: { $exists: true, $nin: ["", "-"] },
+    "artists.0": { $exists: true },
+  })
+    .sort({ startdate: 1 })
     .limit(10);
 
   return {

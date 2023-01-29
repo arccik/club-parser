@@ -43,28 +43,28 @@ const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
                 )}
               </Card.Section>
               <Stack mt="sm" mb="xs" spacing={0}>
-                <Text weight={500} m={0} p={0}>
-                  {place.placeType.toUpperCase()}: {place.name}
-                </Text>
+                <Title order={4} weight={700} m={0} p={0}>
+                  {place.name}
+                </Title>
                 <Text size="sm" color="dimmed">
                   {place.formatted_address || place.address}
                 </Text>
               </Stack>
               <Card.Section align="center">
                 {place.startdate && (
-                  <Stack>
+                  <>
                     <Title order={5} align="center">
                       {new Date(place.startdate).toUTCString().split("GMT")}
                     </Title>
                     {place.price && (
-                      <Badge>
+                      <Badge color="red" variant="outline">
                         <span>Price: </span>
                         {place.price.includes("£")
                           ? place.price
                           : " £ " + place.price}
                       </Badge>
                     )}
-                  </Stack>
+                  </>
                 )}
               </Card.Section>
               {place.placeType === "venue" && (

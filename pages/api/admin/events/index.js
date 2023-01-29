@@ -15,9 +15,11 @@ export default async function handler(req, res) {
     switch (req.method) {
       case "GET":
         if (page) {
-          const eventTotal = await Event.countDocuments({});
-          const events = await Event.find({})
-            .sort({ startdate: -1 })
+          const eventTotal = await Event.countDocuments({
+            startdate: { $gt: new Date() },
+          });
+          const events = await Event.find({ startdate: { $gte: new Date() } })
+            .sort({ startdate: 1 })
             .limit(PAGE_LIMIT)
             .skip(startIndex);
           return res.status(200).json({
@@ -44,10 +46,10 @@ export default async function handler(req, res) {
             },
             {
               $match: {
-                startdate: { $gt: new Date() },
+                startdate: { $gte: new Date() },
               },
             },
-            { $limit: 10 },
+            { $limit: 15 },
           ]);
           await Artist.populate(eventsWithDistance, {
             path: "artists",
@@ -60,7 +62,7 @@ export default async function handler(req, res) {
 
           return res.status(200).json(eventsWithDistance);
         } else {
-          const events = await Event.find({}).limit(10);
+          const events = await Event.find({}).limit(15);
           return res.status(200).json(events);
         }
 

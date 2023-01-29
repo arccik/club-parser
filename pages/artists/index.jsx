@@ -5,10 +5,10 @@ import {
   useGetVenuesQuery,
   useGetSortedVenuesQuery,
 } from "../../src/features/venue/venueSlice";
+import CardWithPaginationSort from "../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 import { useRouter } from "next/router";
 import FooterSocial from "../../src/components/resourses/Footer/Footer";
-import UniversalCards from "../../src/components/resourses/UniversalCards/UniversalCards";
 
 const AdminVenuePage = () => {
   const [activePage, setPage] = useState(1);
@@ -48,15 +48,23 @@ const AdminVenuePage = () => {
   return (
     <>
       <LoadingOverlay visible={isLoading || isSortedLoading} overlayBlur={2} />
-      <UniversalCards
-        numberOfPages={data?.numberOfPages}
+
+      <CardWithPaginationSort
         data={sortedData?.venues || data?.venues}
-        cardType="Venues"
-        page={Number(activePage)}
         setPage={handlePagination}
         setSortValue={setSortValue}
+        title="Artists"
+        type="venue"
       />
-
+      <Pagination
+        position="center"
+        m="lg"
+        noWrap
+        initialPage={activePage}
+        page={Number(activePage)}
+        onChange={handlePagination}
+        total={sortedData?.numberOfPages || data?.numberOfPages}
+      />
       <FooterSocial />
     </>
   );
