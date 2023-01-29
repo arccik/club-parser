@@ -10,6 +10,7 @@ export const apiSlice = createApi({
     "VenueMarkers",
     "Events",
     "Message",
+    "Artists",
   ],
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   endpoints: (builder) => ({}),

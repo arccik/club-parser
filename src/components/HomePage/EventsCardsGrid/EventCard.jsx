@@ -1,24 +1,10 @@
-import {
-  Text,
-  AspectRatio,
-  Group,
-  Badge,
-  Stack,
-  Divider,
-  Grid,
-} from "@mantine/core";
+import { Text, AspectRatio, Group, Divider, Grid } from "@mantine/core";
 import Image from "next/image";
 import Stars from "../../DetailsPage/Stars/Stars";
 import dayjs from "dayjs";
 import useStyles from "./styles";
 
-import {
-  IconCalendar,
-  IconGps,
-  IconCash,
-  IconBuildingCommunity,
-} from "@tabler/icons";
-import displayPrice from "../../../utils/displayPrice";
+import { IconCalendar, IconGps, IconBuildingCommunity } from "@tabler/icons";
 import { useRouter } from "next/router";
 import ArtistsBubbles from "./ArtistsCards/ArtistsBubbles";
 import GenresSlider from "./GenresSlider";

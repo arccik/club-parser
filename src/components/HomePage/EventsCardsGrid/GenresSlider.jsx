@@ -7,14 +7,15 @@ const GenresSlider = ({ genres, classes }) => {
   if (!genres) return null;
 
   const genresList = genres.map((genre) => (
-    <Badge
-      key={genre}
-      color="light"
-      className={classes.link}
-      onClick={() => router.push(`/details/genres/${genre}`)}
-    >
-      {genre}
-    </Badge>
+    <Carousel.Slide key={genre}>
+      <Badge
+        color="light"
+        className={classes.link}
+        onClick={() => router.push(`/details/genres/${genre}`)}
+      >
+        {genre}
+      </Badge>
+    </Carousel.Slide>
   ));
 
   return (
