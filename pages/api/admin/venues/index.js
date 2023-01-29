@@ -39,7 +39,7 @@ export default async function handler(req, res) {
                 distanceMultiplier: 0.001,
               },
             },
-          ]).limit(15);
+          ]).limit(16);
           return res.status(200).json(venues);
         } else {
           const venues = await Venue.find({});

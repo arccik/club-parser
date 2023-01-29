@@ -28,16 +28,18 @@ const EventsCardsGrid = ({ events, old }) => {
       <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
         <EventCard data={events} />
       </SimpleGrid>
-      <Button
-        fullWidth
-        mt="lg"
-        variant="outline"
-        // color="dark"
-        component={Link}
-        href="/events"
-      >
-        See All events
-      </Button>
+      {!old && (
+        <Button
+          fullWidth
+          mt="lg"
+          variant="outline"
+          // color="dark"
+          component={Link}
+          href="/events"
+        >
+          See All events
+        </Button>
+      )}
       <Divider mt="md" />
     </Container>
   );
