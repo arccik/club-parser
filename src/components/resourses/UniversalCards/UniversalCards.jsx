@@ -57,11 +57,11 @@ const UniversalCards = ({ data, cardType, page, setPage, numberOfPages }) => {
                       {new Date(place.startdate).toUTCString().split("GMT")}
                     </Title>
                     {place.price && (
-                      <Badge color="red" variant="outline">
+                      <Badge color="blue">
                         <span>Price: </span>
                         {place.price.includes("£")
                           ? place.price
-                          : " £ " + place.price}
+                          : " £" + place.price}
                       </Badge>
                     )}
                   </>

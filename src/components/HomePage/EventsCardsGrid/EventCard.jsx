@@ -21,6 +21,9 @@ import {
 import displayPrice from "../../../utils/displayPrice";
 import { useRouter } from "next/router";
 import ArtistsBubbles from "./ArtistsCards/ArtistsBubbles";
+import GenresSlider from "./GenresSlider";
+import DisplayEndDate from "./DisplayEndDate";
+import Price from "./Price";
 
 const Cards = ({ data }) => {
   const { classes } = useStyles();
@@ -83,47 +86,12 @@ const Cards = ({ data }) => {
             </Group>
           </Text>
         </Grid.Col>
-        {article.price && (
-          <Grid.Col ml={1} span="content">
-            <Text size="xs">
-              <Group spacing={5}>
-                <IconCash size={14} />
-                {displayPrice(article.price)}
-              </Group>
-            </Text>
-          </Grid.Col>
-        )}
+        <Price price={article.price} />
       </Grid>
       <ArtistsBubbles artists={article.artists} />
-
-      {article.genres && (
-        <Grid m="xs">
-          <Text size="xs" mr="xs" weight="bolder">
-            Genres
-          </Text>
-          {article.genres.map((genre) => (
-            <Badge
-              key={genre}
-              color="light"
-              className={classes.link}
-              onClick={() => router.push(`/details/genres/${genre}`)}
-            >
-              {genre}
-            </Badge>
-          ))}
-        </Grid>
-      )}
+      <GenresSlider genres={article.genres} classes={classes} />
       <Divider mt="md" />
-      {article.enddate < new Date() && (
-        <Group position="apart" mt="md">
-          <Badge color="pink">
-            <Text size="xs" color="dimmed">
-              Ended on
-              <b> {dayjs(article.enddate).format("DD MMM YYYY")}</b>
-            </Text>
-          </Badge>
-        </Group>
-      )}
+      <DisplayEndDate enddate={article.enddate} />
     </div>
   ));
 };
