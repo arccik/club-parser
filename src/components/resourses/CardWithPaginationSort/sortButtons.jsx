@@ -1,13 +1,37 @@
 import { Text, Group, SegmentedControl } from "@mantine/core";
 import useCurrentLocation from "../../../Hooks/useCurrentLocaiton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const SortButtons = ({ placeType, setValue }) => {
+  const eventSortOptions = [
+    { label: "Price", value: "price" },
+    { label: "Start Date", value: "startdate" },
+    { label: "Distance", value: "distance" },
+  ];
+
+  const router = useRouter();
   const [selectValue, setSelectValue] = useState("startdate");
   const { location, getLocation } = useCurrentLocation();
 
+  useEffect(() => {
+    const { sort } = router.query;
+
+    if (sort) setSelectValue(String(sort));
+    if (sort === "distance" && !location) getLocation();
+    setValue(sort);
+  }, [router.query]);
+
   const handleSelect = (event) => {
     setSelectValue(event);
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        sort: event.toLowerCase(),
+      },
+    });
+    // router.push(`?sort=${event.toLowerCase()}`);
     if (event === "distance" && !location) getLocation();
     setValue(event);
   };
@@ -19,11 +43,7 @@ const SortButtons = ({ placeType, setValue }) => {
         value={selectValue}
         onChange={handleSelect}
         defaultValue="Start Date"
-        data={[
-          { label: "Price", value: "price" },
-          { label: "Start Date", value: "startdate" },
-          { label: "Distance", value: "distance" },
-        ]}
+        data={eventSortOptions}
       />
     </>
   );
@@ -35,7 +55,7 @@ const SortButtons = ({ placeType, setValue }) => {
         onChange={handleSelect}
         data={[
           { label: "Name", value: "name" },
-          { label: "Distance", value: "Distance" },
+          { label: "Distance", value: "distance" },
         ]}
       />
     </>

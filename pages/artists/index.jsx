@@ -50,7 +50,13 @@ const AdminVenuePage = () => {
 
   const handlePagination = (value) => {
     setPage(Number(value));
-    router.push(`?page=${value}`);
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        page: value,
+      },
+    });
     window.scrollTo(0, 0);
   };
   useEffect(() => {

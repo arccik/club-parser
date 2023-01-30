@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             distanceMultiplier: 0.001,
           },
         },
-        { $sort: { distance: -1 } },
+        { $sort: { distance: 1 } },
         { $skip: startIndex },
         { $limit: PAGE_LIMIT },
       ]);

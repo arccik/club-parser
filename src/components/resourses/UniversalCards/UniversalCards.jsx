@@ -17,14 +17,8 @@ import useStyles from "./styles";
 import Stars from "../../DetailsPage/Stars/Stars";
 import SortButtons from "../CardWithPaginationSort/sortButtons";
 
-const UniversalCards = ({
-  data,
-  cardType,
-  page,
-  setPage,
-  numberOfPages,
-  setSortValue,
-}) => {
+const UniversalCards = (props) => {
+  const { data, cardType, page, setPage, numberOfPages, setSortValue } = props;
   const { classes } = useStyles();
   const router = useRouter();
 
@@ -37,97 +31,98 @@ const UniversalCards = ({
         <SortButtons placeType={cardType} setValue={setSortValue} />
       )}
       <Grid>
-        {data?.map((place) => (
-          <Grid.Col span={12} key={place._id} xs={4}>
-            <Card shadow="sm" p="lg" mt="lg" radius="md" withBorder>
-              <Card.Section
-                component={Link}
-                href={`/details/${place.placeType}s/${place._id}`}
-              >
-                {place.image && (
-                  <Image
-                    src={place.image}
-                    height={160}
-                    alt={place.name}
-                    placeholder="blur"
-                  />
-                )}
-              </Card.Section>
-              <Stack mt="sm" mb="xs" spacing={0}>
-                <Title
-                  order={4}
-                  weight={700}
-                  m={0}
-                  p={0}
+        {data &&
+          data.map((place) => (
+            <Grid.Col span={12} key={place._id} xs={4}>
+              <Card shadow="sm" p="lg" mt="lg" radius="md" withBorder>
+                <Card.Section
                   component={Link}
                   href={`/details/${place.placeType}s/${place._id}`}
                 >
-                  {place.name}
-                </Title>
-                <Text size="sm" color="dimmed">
-                  {place.formatted_address || place.address}
+                  {place.image && (
+                    <Image
+                      src={place.image}
+                      height={160}
+                      alt={place.name}
+                      placeholder="blur"
+                    />
+                  )}
+                </Card.Section>
+                <Stack mt="sm" mb="xs" spacing={0}>
+                  <Title
+                    order={4}
+                    weight={700}
+                    m={0}
+                    p={0}
+                    component={Link}
+                    href={`/details/${place.placeType}s/${place._id}`}
+                  >
+                    {place.name}
+                  </Title>
+                  <Text size="sm" color="dimmed">
+                    {place.formatted_address || place.address}
+                  </Text>
+                </Stack>
+                <Card.Section align="center">
+                  {place.startdate && (
+                    <>
+                      <Title order={5} align="center">
+                        {new Date(place.startdate).toUTCString().split("GMT")}
+                      </Title>
+                      {place.price && (
+                        <Badge color="blue">
+                          <span>Price: </span>
+                          {place.price.includes("£")
+                            ? place.price
+                            : " £" + place.price}
+                        </Badge>
+                      )}
+                    </>
+                  )}
+                </Card.Section>
+                {place.placeType === "venue" && (
+                  <Center>
+                    <Stars />
+                  </Center>
+                )}
+                <Text
+                  size="sm"
+                  mt="xs"
+                  color="dimmed"
+                  className={classes.description}
+                >
+                  {place.description}
                 </Text>
-              </Stack>
-              <Card.Section align="center">
-                {place.startdate && (
+
+                {place.genres?.length > 0 && (
                   <>
-                    <Title order={5} align="center">
-                      {new Date(place.startdate).toUTCString().split("GMT")}
-                    </Title>
-                    {place.price && (
-                      <Badge color="blue">
-                        <span>Price: </span>
-                        {place.price.includes("£")
-                          ? place.price
-                          : " £" + place.price}
+                    <span>Genres: </span>
+                    {place.genres?.map((genre) => (
+                      <Badge
+                        key={genre}
+                        color="orange"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => router.push(`/details/genres/${genre}`)}
+                      >
+                        {genre}
                       </Badge>
-                    )}
+                    ))}
                   </>
                 )}
-              </Card.Section>
-              {place.placeType === "venue" && (
-                <Center>
-                  <Stars />
-                </Center>
-              )}
-              <Text
-                size="sm"
-                mt="xs"
-                color="dimmed"
-                className={classes.description}
-              >
-                {place.description}
-              </Text>
-
-              {place.genres?.length > 0 && (
-                <>
-                  <span>Genres: </span>
-                  {place.genres?.map((genre) => (
-                    <Badge
-                      key={genre}
-                      color="orange"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => router.push(`/details/genres/${genre}`)}
-                    >
-                      {genre}
-                    </Badge>
-                  ))}
-                </>
-              )}
-              <Button
-                variant="light"
-                color="blue"
-                fullWidth
-                mt="md"
-                radius="md"
-                component={Link}
-                href={`/details/${place.placeType}s/${place._id}`}
-              >
-                Check this out
-              </Button>
-            </Card>
-          </Grid.Col>
-        ))}
+                <Button
+                  variant="light"
+                  color="blue"
+                  fullWidth
+                  mt="md"
+                  radius="md"
+                  component={Link}
+                  href={`/details/${place.placeType}s/${place._id}`}
+                >
+                  Check this out
+                </Button>
+              </Card>
+            </Grid.Col>
+          ))}
       </Grid>
       {numberOfPages > 1 && (
         <Pagination

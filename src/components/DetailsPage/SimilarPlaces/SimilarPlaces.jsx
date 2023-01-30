@@ -3,13 +3,13 @@ import { useGetNearByPlacesQuery } from "../../../features/both/bothSlice";
 import SimilarCard from "./Card/Card";
 import { Carousel } from "@mantine/carousel";
 
-const SimilarPlaces = ({ coords, id }) => {
+const SimilarPlaces = ({ coords, currentPlace }) => {
   const { data, isLoading, error } = useGetNearByPlacesQuery(coords);
   if (isLoading) return <Loader />;
   if (error) return <p>No Similar Found</p>;
 
   const cards = data?.map((place) => {
-    if (place._id === id) return null;
+    if (place._id === currentPlace) return null;
     if (!place.open) return null;
     return (
       <SimilarCard
@@ -30,7 +30,7 @@ const SimilarPlaces = ({ coords, id }) => {
         dragFree
         slideGap="xs"
         height={200}
-        initialSlide={1}
+        // initialSlide={1}
         align="start"
       >
         {cards}

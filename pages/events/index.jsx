@@ -9,7 +9,6 @@ import useCurrentLocation from "../../src/Hooks/useCurrentLocaiton";
 import { useRouter } from "next/router";
 import FooterSocial from "../../src/components/resourses/Footer/Footer";
 import UniversalCards from "../../src/components/resourses/UniversalCards/UniversalCards";
-import SortButtons from "../../src/components/resourses/CardWithPaginationSort/sortButtons";
 
 const EventsPage = () => {
   const { location, getLocation } = useCurrentLocation();
@@ -27,9 +26,23 @@ const EventsPage = () => {
     { sortValue, activePage, location },
     { skip: !sortValue }
   );
+  useEffect(() => {
+    if (!sortValue && location) {
+      setSortValue("distance");
+    }
+  }, []);
   const handlePagination = (value) => {
     setPage(Number(value));
-    router.push(`?page=${value}`);
+
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        page: value,
+      },
+    });
+
+    // router.push(`?page=${value}`);
     window.scrollTo(0, 0);
   };
 
@@ -46,10 +59,9 @@ const EventsPage = () => {
   return (
     <>
       <LoadingOverlay visible={isLoading} overlayBlur={2} />
-      {/* <SortButtons placeType="event" setValue={setSortValue} /> */}
       <UniversalCards
         setSortValue={setSortValue}
-        numberOfPages={data?.numberOfPages}
+        numberOfPages={sortedData?.numberOfPages || data?.numberOfPages}
         data={sortedData?.events || data?.events}
         cardType="Events"
         page={Number(activePage)}

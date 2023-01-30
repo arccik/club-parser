@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       });
     }
 
-    if (sortby === "distance") {
+    if (sortby?.toLowerCase() === "distance") {
       const eventTotal = await Event.countDocuments({
         startdate: { $gte: new Date() },
       });

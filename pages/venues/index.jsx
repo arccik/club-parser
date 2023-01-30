@@ -19,6 +19,7 @@ const AdminVenuePage = () => {
     skip: sortValue,
   });
 
+
   const {
     data: sortedData,
     isLoading: isSortedLoading,
@@ -28,14 +29,25 @@ const AdminVenuePage = () => {
     { skip: !sortValue }
   );
 
+  useEffect(() => {
+    if (!sortValue && location) {
+      setSortValue("distance");
+    }
+  }, []);
   const handlePagination = (value) => {
     setPage(Number(value));
-    router.push(`?page=${value}`);
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        page: value,
+      },
+    });
     window.scrollTo(0, 0);
   };
   useEffect(() => {
     if (router.query.page && router.query.page !== activePage) {
-      setPage(router.query.page);
+      handlePagination(router.query.page);
     }
     if (sortValue === "distance" && !location) getLocation();
   }, [router.query.page, sortValue]);
@@ -49,7 +61,7 @@ const AdminVenuePage = () => {
     <>
       <LoadingOverlay visible={isLoading || isSortedLoading} overlayBlur={2} />
       <UniversalCards
-        numberOfPages={data?.numberOfPages}
+        numberOfPages={sortedData?.numberOfPages || data?.numberOfPages}
         data={sortedData?.venues || data?.venues}
         cardType="Venues"
         page={Number(activePage)}

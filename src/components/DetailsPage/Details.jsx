@@ -217,7 +217,7 @@ const DetailsPage = ({ data }) => {
           )}
 
           <SimilarPlaces
-            id={data._id}
+            currentPlace={data._id}
             coords={{
               lat: data.location.coordinates[0],
               lng: data.location.coordinates[1],
