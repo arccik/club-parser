@@ -57,7 +57,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return eventAdapter.setAll(initialState, responseData);
       },
       providesTags: (result, error, arg) => {
-        if (!result.events) return [{ type: "Events", _id: "LIST" }];
+        if (!result?.events) return [{ type: "Events", _id: "LIST" }];
         return [
           { type: "Events", id: "LIST" },
           ...result.events.map(({ _id }) => ({ type: "Events", _id: _id })),
