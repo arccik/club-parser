@@ -18,7 +18,16 @@ import Stars from "../../DetailsPage/Stars/Stars";
 import SortButtons from "../CardWithPaginationSort/sortButtons";
 
 const UniversalCards = (props) => {
-  const { data, cardType, page, setPage, numberOfPages, setSortValue } = props;
+  const {
+    data,
+    cardType,
+    page,
+    setPage,
+    numberOfPages,
+    withOutSort,
+    setSortValue,
+  } = props;
+
   const { classes } = useStyles();
   const router = useRouter();
 
@@ -27,7 +36,9 @@ const UniversalCards = (props) => {
       <Title className={classes.title} p={0} m={0} align="center">
         {cardType || router.query.genre || "Event"}
       </Title>
-      <SortButtons placeType={cardType} setValue={setSortValue} />
+      {!withOutSort && (
+        <SortButtons placeType={cardType} setValue={setSortValue} />
+      )}
       <Grid>
         {data &&
           data.map((place) => (

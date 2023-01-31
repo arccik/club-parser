@@ -23,6 +23,7 @@ const GenresPage = () => {
       data={data.places}
       page={page}
       setPage={setPage}
+      withOutSort
       numberOfPages={data.numberOfPages}
     />
   );

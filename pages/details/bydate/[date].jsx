@@ -47,6 +47,7 @@ const ByDatePage = () => {
           page={page}
           setPage={setPage}
           numberOfPages={otherData?.numberOfPages}
+          withOutSort
         />
       </>
     );
@@ -58,6 +59,7 @@ const ByDatePage = () => {
       cardType={dayjs(date).format("D MMM YYYY")}
       page={page}
       setPage={setPage}
+      withOutSort
     />
   );
 };
