@@ -1,4 +1,11 @@
-import { Container, Grid, SimpleGrid, Title, Text } from "@mantine/core";
+import {
+  Container,
+  Grid,
+  SimpleGrid,
+  Title,
+  Text,
+  Button,
+} from "@mantine/core";
 import OldCard from "./OldEventsCard";
 import Link from "next/link";
 
@@ -24,7 +31,7 @@ const OldEvents = ({ events }) => {
         </Grid>
       </SimpleGrid>
       <Text fw={700} size="md" component={Link} href="/details/oldevents">
-        See More...
+        <Button variant="default">See More...</Button>
       </Text>
     </Container>
   );

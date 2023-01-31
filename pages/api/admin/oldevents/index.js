@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       });
       const events = await Event.find({ startdate: { $lt: new Date() } })
 
-        .sort({ startdate: 1 })
+        .sort({ startdate: -1 })
         .skip(startIndex)
         .limit(PAGE_LIMIT);
       return res.status(200).json({
