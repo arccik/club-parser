@@ -16,7 +16,6 @@ const useStyles = createStyles((theme) => {
       width: "100%",
       filter: "brightness(70%)",
       // animation: `${bounce} 3s ease-in-out infinite`,
-      borderRadius: 30,
     },
 
     container: {
