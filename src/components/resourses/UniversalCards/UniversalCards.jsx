@@ -27,9 +27,7 @@ const UniversalCards = (props) => {
       <Title className={classes.title} p={0} m={0} align="center">
         {cardType || router.query.genre || "Event"}
       </Title>
-      {setSortValue && (
-        <SortButtons placeType={cardType} setValue={setSortValue} />
-      )}
+      <SortButtons placeType={cardType} setValue={setSortValue} />
       <Grid>
         {data &&
           data.map((place) => (

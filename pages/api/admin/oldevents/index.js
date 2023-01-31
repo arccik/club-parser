@@ -13,8 +13,7 @@ export default async function handler(req, res) {
         startdate: { $lt: new Date() },
       });
       const events = await Event.find({ startdate: { $lt: new Date() } })
-        .populate("artists")
-        .populate("venue")
+
         .sort({ startdate: 1 })
         .skip(startIndex)
         .limit(PAGE_LIMIT);

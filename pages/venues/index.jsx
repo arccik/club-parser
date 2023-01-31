@@ -18,8 +18,6 @@ const AdminVenuePage = () => {
   const { data, isLoading, error } = useGetVenuesQuery(activePage, {
     skip: sortValue,
   });
-
-
   const {
     data: sortedData,
     isLoading: isSortedLoading,
@@ -30,10 +28,12 @@ const AdminVenuePage = () => {
   );
 
   useEffect(() => {
-    if (!sortValue && location) {
-      setSortValue("distance");
+    if (router.query.page && router.query.page !== activePage) {
+      setPage(Number(router.query.page));
     }
-  }, []);
+    if (sortValue === "distance" && !location) getLocation();
+  }, [router.query.page, sortValue]);
+
   const handlePagination = (value) => {
     setPage(Number(value));
     router.push({
@@ -45,12 +45,6 @@ const AdminVenuePage = () => {
     });
     window.scrollTo(0, 0);
   };
-  useEffect(() => {
-    if (router.query.page && router.query.page !== activePage) {
-      handlePagination(router.query.page);
-    }
-    if (sortValue === "distance" && !location) getLocation();
-  }, [router.query.page, sortValue]);
 
   if (error || sortedError) {
     return <Text align="center">Ops. something went wrong </Text>;

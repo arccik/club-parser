@@ -5,6 +5,7 @@ import PlacesCardsGrid from "../../../src/components/HomePage/EventsCardsGrid/Ev
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import FooterSocial from "../../../src/components/resourses/Footer/Footer";
+import CardWithPaginationSort from "../../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
 
 const OldEventsPage = () => {
   const [activePage, setPage] = useState(1);
@@ -24,7 +25,6 @@ const OldEventsPage = () => {
     window.scrollTo(0, 0);
   };
   useEffect(() => {
-
     if (router.query.page && router.query.page !== activePage) {
       handlePagination(router.query.page);
     }
@@ -43,7 +43,13 @@ const OldEventsPage = () => {
       <Title align="center" style={titleStyle}>
         Events Recently Ended
       </Title>
-      <PlacesCardsGrid events={data.events} type="events" old={true} />;
+      <CardWithPaginationSort
+        data={data?.events}
+        setPage={handlePagination}
+        setSortValue={(e) => console.log("Sort ", e)}
+        type="venue"
+      />
+      {/* <PlacesCardsGrid events={data.events} type="events" old={true} />; */}
       {/* <Center> */}
       <Pagination
         page={activePage}
