@@ -25,7 +25,13 @@ const Stars = ({ rating, id, type }) => {
     await rate({ _id: id, score, type });
   };
   return (
-    <Rating onChange={handleClick} value={result} readOnly={fromStorage} />
+    <Rating
+      mt="xs"
+      mr="xs"
+      onChange={handleClick}
+      value={result}
+      readOnly={fromStorage}
+    />
   );
 };
 

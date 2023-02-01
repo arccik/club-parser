@@ -39,6 +39,7 @@ const Cards = ({ data }) => {
       <Group position="apart" pl="xs" align="right">
         <Text
           size="sm"
+          mt={2}
           weight={700}
           className={classes.title}
           onClick={() => handleClick(article._id)}
@@ -47,15 +48,14 @@ const Cards = ({ data }) => {
         </Text>
         <Stars rating={article.rating} id={article._id} />
       </Group>
-      <Grid ml={1}>
+      <Grid ml={1} mt={2}>
         <Grid.Col span={6}>
-          {article.venue?.town && (
-            <Text size="xs">
-              <Group spacing={5}>
-                <IconBuildingCommunity size={14} /> {article.venue.town}
-              </Group>
-            </Text>
-          )}
+          <Text size="xs">
+            <Group spacing={5}>
+              <IconCalendar size={14} />
+              {dayjs(article.startdate).format("DD MMM")}
+            </Group>
+          </Text>
           {article.distance && (
             <Text size="xs">
               <Group spacing={5}>
@@ -64,15 +64,17 @@ const Cards = ({ data }) => {
             </Text>
           )}
         </Grid.Col>
-        <Grid.Col span={6}>
-          <Text size="xs">
-            <Group spacing={5}>
-              <IconCalendar size={14} />
-              {dayjs(article.startdate).format("DD MMM")}
-            </Group>
-          </Text>
+
+        <Grid.Col span={4} offset={2}>
+          {article.venue?.town && (
+            <Text size="xs">
+              <Group spacing={5}>
+                <IconBuildingCommunity size={14} /> {article.venue.town}
+              </Group>
+            </Text>
+          )}
+          <Price price={article.price} />
         </Grid.Col>
-        <Price price={article.price} />
       </Grid>
       <ArtistsBubbles artists={article.artists} />
       <GenresSlider genres={article.genres} classes={classes} />

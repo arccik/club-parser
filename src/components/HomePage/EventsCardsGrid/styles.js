@@ -2,6 +2,7 @@ import { createStyles } from "@mantine/core";
 const useStyles = createStyles((theme) => ({
   card: {
     transition: "transform 150ms ease, box-shadow 150ms ease",
+    marginBottom: 20,
     "&:hover": {
       transform: "scale(1.01)",
       boxShadow: theme.shadows.md,
