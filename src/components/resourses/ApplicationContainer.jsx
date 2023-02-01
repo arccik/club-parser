@@ -16,9 +16,9 @@ import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import { IconArrowUp, IconArrowLeft, IconMap2 } from "@tabler/icons";
 
 export const ApplicationContainer = ({ children }) => {
+  const [scrollPosition, scrollTo] = useWindowScroll();
   const theme = useMantineTheme();
   const router = useRouter();
-  const [scrollPosition, scrollTo] = useWindowScroll();
   return (
     <AppShell
       padding={0}

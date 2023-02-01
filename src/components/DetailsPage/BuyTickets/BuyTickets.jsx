@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal, Button, Group } from "@mantine/core";
+import { IconTicket } from "@tabler/icons";
 
 const BuyTickets = ({ eventId, title }) => {
   const [opened, setOpened] = useState(false);
@@ -30,7 +31,8 @@ const BuyTickets = ({ eventId, title }) => {
       <Group position="center">
         <Button
           onClick={() => setOpened(true)}
-          color="dark"
+          variant="outline"
+          leftIcon={<IconTicket />}
           fullWidth
           mt="md"
           radius="md"
