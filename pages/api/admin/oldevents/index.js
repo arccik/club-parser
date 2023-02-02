@@ -8,11 +8,15 @@ export default async function handler(req, res) {
     const PAGE_LIMIT = 22;
     const startIndex = (Number(page) - 1) * PAGE_LIMIT;
 
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
     if (req.method === "GET") {
       const eventsTotal = await Event.countDocuments({
-        startdate: { $lt: new Date() },
+        startdate: { $lt: tomorrow },
       });
-      const events = await Event.find({ startdate: { $lt: new Date() } })
+      const events = await Event.find({ startdate: { $lt: tomorrow } })
 
         .sort({ startdate: -1 })
         .skip(startIndex)

@@ -24,11 +24,10 @@ export async function getStaticProps() {
     .populate({ path: "venue", model: Venue })
     .limit(10);
   const oldEvents = await Event.find({
-    startdate: { $lt: today.setDate(today.getDate() - 1) },
+    startdate: { $lt: today.setDate(today.getDate()) },
   })
     .sort({ startdate: -1 })
     .limit(3);
-
 
   const recommended = await Event.find({
     startdate: { $gte: new Date() },

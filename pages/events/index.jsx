@@ -30,7 +30,7 @@ const EventsPage = () => {
     if (!sortValue && location) {
       setSortValue("distance");
     }
-  }, []);
+  }, [sortValue, location]);
   const handlePagination = (value) => {
     setPage(Number(value));
 

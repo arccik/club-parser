@@ -2,7 +2,6 @@ import { Rating } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { useRateMutation } from "../../../features/both/bothSlice";
 import { useMemo } from "react";
-import { IconBolt } from "@tabler/icons";
 
 const Stars = ({ rating, id, type }) => {
   const [localStorage, setLocalStorage] = useLocalStorage({

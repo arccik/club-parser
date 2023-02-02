@@ -48,8 +48,8 @@ const Cards = ({ data }) => {
         </Text>
         <Stars rating={article.rating} id={article._id} />
       </Group>
-      <Grid ml={1} mt={2}>
-        <Grid.Col span={6}>
+      <Grid ml={1} mt={2} span={5}>
+        <Grid.Col span={3}>
           <Text size="xs">
             <Group spacing={5}>
               <IconCalendar size={14} />
@@ -65,7 +65,7 @@ const Cards = ({ data }) => {
           )}
         </Grid.Col>
 
-        <Grid.Col span={4} offset={2}>
+        <Grid.Col span={7} offset={2}>
           {article.venue?.town && (
             <Text size="xs">
               <Group spacing={5}>
