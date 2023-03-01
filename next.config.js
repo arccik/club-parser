@@ -3,6 +3,14 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   staticPageGenerationTimeout: 100,
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://clubchaser.com/:path*",
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
