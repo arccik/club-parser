@@ -49,10 +49,11 @@ export const ApplicationContainer = ({ children }) => {
 
             <Image
               onClick={() => router.push("/", undefined, { scroll: false })}
-              src="/assets/white-logo.png"
+              src="/assets/logo.png"
               alt="StripRadar logo"
               width={130}
               height={50}
+              fit="contain"
               style={{ cursor: "pointer" }}
             />
             <BurgerMenu />

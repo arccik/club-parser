@@ -20,7 +20,7 @@ const FooterSocial = () => {
     <div className={classes.footer}>
       <Container className={classes.inner}>
         <Image
-          src="/assets/white-logo.png"
+          src="/assets/logo.png"
           width={120}
           height={60}
           alt="StripRadar logo"

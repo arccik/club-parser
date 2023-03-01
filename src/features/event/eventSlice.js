@@ -123,7 +123,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
             {
               placeType: "event",
               id: "1",
-              image: "/assets/white-logo.png",
+              image: "/assets/logo.png",
               description: "Not Found",
               name: "Nothing was found",
             },
