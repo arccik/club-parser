@@ -62,8 +62,8 @@ const Notifications = ({ setAgree }) => {
           </Text>
           <Text size="xs">
             We use cookies to personalise content for you and to analyse our
-            traffic. By accessing and using StripRadar you agree to our Cookies
-            Policy. StripRadar uses cookies and other tracking technologies to
+            traffic. By accessing and using ClubChaser you agree to our Cookies
+            Policy. ClubChaser uses cookies and other tracking technologies to
             customise your experience including map navigation and other
             services.
           </Text>

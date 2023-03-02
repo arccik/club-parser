@@ -23,7 +23,7 @@ const FooterSocial = () => {
           src="/assets/logo.png"
           width={120}
           height={60}
-          alt="StripRadar logo"
+          alt="ClubChaser logo"
           blurDataURL="/assets/blur.jpg"
           placeholder="blur"
         />

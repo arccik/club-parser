@@ -50,7 +50,7 @@ export const ApplicationContainer = ({ children }) => {
             <Image
               onClick={() => router.push("/", undefined, { scroll: false })}
               src="/assets/logo.png"
-              alt="StripRadar logo"
+              alt="ClubChaser logo"
               width={200}
               // height={50}
               fit="contain"

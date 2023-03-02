@@ -8,7 +8,7 @@ const PrivacyPolicy = () => {
         <Title align="center">PRIVACY POLICY </Title>
 
         <p>
-          After a hugely successful first year, StripRadar is back! Back to the
+          After a hugely successful first year, ClubChaser is back! Back to the
           night life of celebrity !
         </p>
 
@@ -73,7 +73,7 @@ const PrivacyPolicy = () => {
           <br />
           &quot;Venue&quot;
           <br />
-          Person(s) signing up to StripRadar in order to use extended features
+          Person(s) signing up to ClubChaser in order to use extended features
           to advertise a specific venue for which &nbsp;booking may be made
           <br />
           Depending on the particular functionality of our Site at any time, you
@@ -122,7 +122,7 @@ const PrivacyPolicy = () => {
         </p>
 
         <p>
-          When you buy an Activity on the StripRadar Platform, you &nbsp;are not
+          When you buy an Activity on the ClubChaser Platform, you &nbsp;are not
           buying anything from us, but directly from the Supplier. We receive a
           commission from the Supplier for brokering the Service Agreement.
         </p>
@@ -145,7 +145,7 @@ const PrivacyPolicy = () => {
           information in accordance with this policy. Unless otherwise defined
           in this Privacy Policy, terms used in this Privacy Policy have the
           same meanings as in our Terms and Conditions, accessible from
-          StripRadar
+          ClubChaser
         </p>
 
         <p>

@@ -23,18 +23,18 @@ const TermsAndConditions = () => {
         <p>TICKET SALES</p>
 
         <p>
-          StripRadar is the agent of the Promoter of the Event to conclude
+          ClubChaser is the agent of the Promoter of the Event to conclude
           Ticket transactions between the User and the CustomerPromoter on
           payment of the relevant tTicketing fee.
           <br />
           Where the User wishes to make a booking at a Venue for which the
-          payment of a deposit is required, StripRadar is the agent of the Venue
+          payment of a deposit is required, ClubChaser is the agent of the Venue
           to conclude such bookings between the User and the Venue on payment of
           the relevant deposit sums;
           <br />
-          StripRadar has no control over the Venue&rsquo;s refund policy
+          ClubChaser has no control over the Venue&rsquo;s refund policy
           <br />
-          StripRadar is in no way responsible for Tickets or bookings for Venues
+          ClubChaser is in no way responsible for Tickets or bookings for Venues
           sold through the direct pay method and has no authority to issue
           refunds. Users must contact the relevant Promoter or Venue regarding
           any refund and the Promoter or Venue (as applicable) hereby expressly

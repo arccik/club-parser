@@ -73,10 +73,10 @@ const Home = ({ events, oldEvents, recommended }) => {
   return (
     <>
       <Head>
-        <title>Strip Radar - Events all over the globe</title>
+        <title>Club Chaser - Will help you to find your next event</title>
         <meta
           name="description"
-          content="Strip Radar - Events all over the globe"
+          content="Club Chaser - Events all over the globe"
         />
       </Head>
 

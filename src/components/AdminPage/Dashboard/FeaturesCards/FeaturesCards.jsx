@@ -23,7 +23,7 @@ const FeaturesCards = ({ totalVenues, totalEvents }) => {
       </Group>
 
       <Title order={2} className={classes.title} align="center" mt="sm">
-        StripRadar - Best happiness
+        ClubChaser - Best happiness
       </Title>
 
       <Text
