@@ -51,8 +51,8 @@ export const ApplicationContainer = ({ children }) => {
               onClick={() => router.push("/", undefined, { scroll: false })}
               src="/assets/logo.png"
               alt="StripRadar logo"
-              width={130}
-              height={50}
+              width={200}
+              // height={50}
               fit="contain"
               style={{ cursor: "pointer" }}
             />
