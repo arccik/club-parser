@@ -21,8 +21,6 @@ const FooterSocial = () => {
           //     ? "/assets/logo.png"
           //     : "/assets/white-logo.png"
           // }
-          width={120}
-          height={60}
           alt="ClubChaser logo"
           blurDataURL="/assets/blur.jpg"
           placeholder="blur"

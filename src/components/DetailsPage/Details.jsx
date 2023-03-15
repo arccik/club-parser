@@ -28,6 +28,7 @@ import EventsFeed from "./EventsFeed/EventsFeed";
 import BuyTickets from "./BuyTickets/BuyTickets";
 import ArtistsCarousel from "../HomePage/EventsCardsGrid/ArtistsCards/ArtistsCarousel";
 import FooterSocial from "../resourses/Footer/Footer";
+import ShareButton from "../../utils/ShareButton/ShareButton";
 
 const DetailsPage = ({ data }) => {
   const router = useRouter();
@@ -224,6 +225,7 @@ const DetailsPage = ({ data }) => {
             }}
           />
         </Card>
+        <ShareButton />
         <FooterSocial />
       </Container>
     </>

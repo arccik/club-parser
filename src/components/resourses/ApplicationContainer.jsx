@@ -51,10 +51,10 @@ export const ApplicationContainer = ({ children }) => {
               onClick={() => router.push("/", undefined, { scroll: false })}
               src="/assets/logo.png"
               alt="ClubChaser logo"
-              width={200}
+              width={180}
               // height={50}
               fit="contain"
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", padding: 10 }}
             />
             <BurgerMenu />
           </div>

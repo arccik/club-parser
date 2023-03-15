@@ -19,10 +19,9 @@ const FooterSocial = () => {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <Image
+        <img
           src="/assets/logo.png"
           width={120}
-          height={60}
           alt="ClubChaser logo"
           blurDataURL="/assets/blur.jpg"
           placeholder="blur"

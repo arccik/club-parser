@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico?v=2" />
         <meta
           name="viewport"
           content="user-scalable=no, width=device-width, initial-scale=1.0"

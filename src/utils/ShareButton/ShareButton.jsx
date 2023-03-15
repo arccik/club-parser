@@ -1,4 +1,5 @@
 import { Button } from "@mantine/core";
+import { IconShare } from "@tabler/icons";
 
 const ShareButton = ({ title, url }) => {
   const handleClick = () => {
@@ -13,8 +14,19 @@ const ShareButton = ({ title, url }) => {
         });
     }
   };
+  if (!navigator.share) return null;
 
-  return <Button onClick={handleClick}>Share</Button>;
+  return (
+    <Button
+      mt="md"
+      variant="default"
+      fullWidth
+      leftIcon={<IconShare />}
+      onClick={handleClick}
+    >
+      Share
+    </Button>
+  );
 };
 
 export default ShareButton;
