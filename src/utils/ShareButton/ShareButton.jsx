@@ -14,7 +14,7 @@ const ShareButton = ({ title, url }) => {
         });
     }
   };
-  if (!navigator.share) return null;
+  if (typeof window !== "undefined" && !navigator.share) return null;
 
   return (
     <Button

@@ -9,14 +9,14 @@ const useCurrentLocation = () => {
   const coords = Cookies.get("location");
 
   function getLocation() {
-    if (!navigator.geolocation) {
+    if (!navigator?.geolocation) {
       setError("Geolocation is not supported by your browser");
       return;
     }
     if (coords) {
       setLocation(JSON.parse(coords));
     } else {
-      navigator.geolocation.getCurrentPosition(
+      navigator?.geolocation.getCurrentPosition(
         (position) => {
           const coordinates = {
             lat: position.coords.latitude,

@@ -19,13 +19,7 @@ const FooterSocial = () => {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <img
-          src="/assets/logo.png"
-          width={120}
-          alt="ClubChaser logo"
-          blurDataURL="/assets/blur.jpg"
-          placeholder="blur"
-        />
+        <img src="/assets/logo.png" width={120} alt="ClubChaser logo" />
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon
             size="lg"
