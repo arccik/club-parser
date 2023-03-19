@@ -19,7 +19,16 @@ import FooterSocial from "../src/components/resourses/Footer/Footer";
 export async function getStaticProps() {
   await dbConnect();
   const today = new Date();
-  const events = await Event.find({ startdate: { $gte: today } })
+  const endDate = new Date();
+  const numberOfDaysToAdd = 7;
+  const end = endDate.setDate(endDate.getDate() + numberOfDaysToAdd);
+
+  const events = await Event.find({
+    startdate: {
+      $gte: today,
+      $lt: end,
+    },
+  })
     .populate({ path: "artists", model: Artist })
     .populate({ path: "venue", model: Venue })
     .limit(10);

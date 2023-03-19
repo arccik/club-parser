@@ -225,7 +225,10 @@ const DetailsPage = ({ data }) => {
             }}
           />
         </Card>
-        <ShareButton />
+        <ShareButton
+          title={data.title}
+          url={`${process.env.HOST}/details/${data.placeType}/${data._id}`}
+        />
         <FooterSocial />
       </Container>
     </>

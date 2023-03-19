@@ -21,7 +21,7 @@ const FooterSocial = () => {
       <Container className={classes.inner}>
         <img src="/assets/logo.png" width={120} alt="ClubChaser logo" />
         <Group spacing={0} className={classes.links} position="right" noWrap>
-          <ActionIcon
+          {/* <ActionIcon
             size="lg"
             component="a"
             href="https://twitter.com/StripRadar"
@@ -44,7 +44,7 @@ const FooterSocial = () => {
             target="_blank"
           >
             <IconBrandFacebook size={18} stroke={1.5} />
-          </ActionIcon>
+          </ActionIcon> */}
         </Group>
         <Group mt="lg" style={{ cursor: "pointer" }}>
           <Text size="xs" onClick={() => router.push("/utils/Privacy-policy")}>

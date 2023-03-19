@@ -20,9 +20,9 @@ const Notifications = ({ setAgree }) => {
     setAgree();
   };
 
-  useEffect(() => {
-    if (!showCurrentLocationDialog) setAgree();
-  }, [showCurrentLocationDialog]);
+  // useEffect(() => {
+  //   if (!showCurrentLocationDialog) setAgree();
+  // }, [showCurrentLocationDialog]);
   return (
     <>
       <Dialog
@@ -38,13 +38,7 @@ const Notifications = ({ setAgree }) => {
           <Text size="sm" weight={500}>
             {nearByTitle}
           </Text>
-          <Button
-            // color="pink"
-            variant="outline"
-            radius="md"
-            onClick={handleClick}
-            mr="lg"
-          >
+          <Button variant="outline" radius="md" onClick={handleClick} mr="lg">
             Load
           </Button>
         </Group>

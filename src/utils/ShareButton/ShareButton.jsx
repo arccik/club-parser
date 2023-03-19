@@ -6,8 +6,8 @@ const ShareButton = ({ title, url }) => {
     if (navigator.share) {
       navigator
         .share({
-          title: title || "WebShare API Demo",
-          url: url || "https://codepen.io/ayoisaiah/pen/YbNazJ",
+          title: title || "Club Chaser",
+          url: url || "https://clubchaser.com",
         })
         .then(() => {
           console.log("Thanks for sharing!");

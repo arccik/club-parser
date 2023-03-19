@@ -2,6 +2,7 @@ import dbConnect from "../../../../src/utils/dbConnect";
 import Event from "../../../../src/models/event-model";
 import Venue from "../../../../src/models/venue-model";
 import Artist from "../../../../src/models/artist-model";
+import dayjs from "dayjs";
 
 export default async function handler(req, res) {
   try {
@@ -30,6 +31,9 @@ export default async function handler(req, res) {
         }
         if (coords) {
           const location = coords.split(",").map(Number);
+          const today = new Date();
+          const sevenDays = new Date(today);
+          sevenDays.setDate(sevenDays.getDate() + 7);
 
           const eventsWithDistance = await Event.aggregate([
             {
@@ -46,7 +50,10 @@ export default async function handler(req, res) {
             },
             {
               $match: {
-                startdate: { $gte: new Date() },
+                startdate: {
+                  $gte: dayjs(today).startOf("date").toDate(),
+                  $lte: dayjs(sevenDays).endOf("date").toDate(),
+                },
               },
             },
             { $limit: 16 },
