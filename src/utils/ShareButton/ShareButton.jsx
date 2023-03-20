@@ -7,7 +7,7 @@ const ShareButton = ({ title, url }) => {
       navigator
         .share({
           title: title || "Club Chaser",
-          url: url || "https://clubchaser.com",
+          url: "https://clubchaser.com" + url,
         })
         .then(() => {
           console.log("Thanks for sharing!");

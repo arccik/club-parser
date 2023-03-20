@@ -3,17 +3,8 @@ import { Card, Image, Text, Group, Badge, Button } from "@mantine/core";
 import OpenCloseBadge from "../../../utils/OpenCloseBadge/OpenCloseBadge";
 
 const MapPopUp = (props) => {
-  const {
-    image,
-    name,
-    description,
-    _id,
-    open,
-    close,
-    placeType,
-    startdate,
-    price,
-  } = props.data;
+  const { image, name, description, _id, open, close, placeType, price } =
+    props.data;
   const router = useRouter();
   return (
     <Card shadow="sm" withBorder p="xs">

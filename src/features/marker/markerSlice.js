@@ -16,7 +16,8 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return markerAdapter.setAll(initialState, responseData);
       },
       providesTags: (result, error, arg) => {
-        return [...result.map(({ _id }) => ({ type: "Markers", _id }))];
+        if (error) return [{ type: "Markers", id: "LIST" }];
+        else return [...result.map(({ _id }) => ({ type: "Markers", _id }))];
       },
     }),
     getEventMarkers: builder.query({
