@@ -39,7 +39,7 @@ const Markes = ({ mapRef, active, setActive, currentLocation }) => {
           onClick={() => mapRef.current.panTo(currentLocation)}
         ></Marker>
       )}
-      <MarkerClusterer>
+      <MarkerClusterer minimumClusterSize={4}>
         {(clusterer) =>
           markers &&
           markers.map((house) => (
