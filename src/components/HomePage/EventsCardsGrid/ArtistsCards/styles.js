@@ -16,7 +16,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     color: theme.white,
     lineHeight: 1.2,
     // fontSize: 32,
-    marginTop: theme.spacing.xs,
+    marginTop: theme.spacing.lg,
     textShadow: "1px 1px black",
   },
 

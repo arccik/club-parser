@@ -8,6 +8,7 @@ import {
   Image,
   Badge,
 } from "@mantine/core";
+import { IconPlayerPlay } from "@tabler/icons";
 import { useState } from "react";
 
 import useStyles from "./styles";
@@ -49,12 +50,19 @@ const Artist = ({ image, name, _id, spotifymp3url }) => {
           onClick={() => setOpened(true)}
         >
           <div>
-            <Text className={classes.category} size="xs">
+            {/* <Text className={classes.category} size="xs">
               Artist
-            </Text>
+            </Text> */}
             <Title order={6} className={classes.title}>
               {name}
             </Title>
+            <IconPlayerPlay
+              style={{
+                marginTop: 40,
+                marginLeft: -8,
+                color: "white",
+              }}
+            />
           </div>
         </Paper>
       </Group>

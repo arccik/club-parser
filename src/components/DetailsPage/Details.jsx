@@ -128,7 +128,11 @@ const DetailsPage = ({ data }) => {
             mb="md"
             color="dimmed"
             size="xs"
-            style={{ whiteSpace: "pre-line" }}
+            style={{
+              whiteSpace: "pre-line",
+              fontSize: 14,
+              fontFamily: "Verdana (sans-serif)",
+            }}
           >
             {data.description || ""}
           </Text>

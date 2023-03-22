@@ -85,7 +85,8 @@ const Home = ({ events, oldEvents, recommended }) => {
         <title>Club Chaser - Will help you to find your next event</title>
         <meta
           name="description"
-          content="Club Chaser - Events all over the globe"
+          content="Club Chaser your ultimate guide to the best nightlife and events in the United Kingdom. 
+          Whether you're a local or a tourist, our website is the perfect resource for discovering the most exciting bars and clubs across the country."
         />
       </Head>
 

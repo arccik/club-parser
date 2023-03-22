@@ -5,7 +5,7 @@ import Artist from "./Artist";
 const ArtistsCards = ({ artists }) => {
   if (!artists) return null;
   const slides = artists.map((item) => (
-    <Carousel.Slide key={item._id} gap="xs">
+    <Carousel.Slide key={item._id} gap="xs" style={{ cursor: "pointer" }}>
       <Artist {...item} />
     </Carousel.Slide>
   ));
