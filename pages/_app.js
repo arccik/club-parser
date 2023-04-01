@@ -2,11 +2,11 @@ import "../src/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
 import { ApplicationContainer } from "../src/components/resourses/ApplicationContainer";
 
-import { store } from "../store";
 import { Provider } from "react-redux";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Script from "next/script";
 import Head from "next/head";
+import { store } from "../src/features/store";
 
 
 function MyApp({ Component, pageProps }) {

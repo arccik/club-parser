@@ -11,6 +11,7 @@ export default async function saveVenue(data) {
           type: "Point",
           coordinates: [data.longitude, data.latitude],
         },
+        image: data?.image || '/assets/sixteen-venue-cover.png',
         ...data,
       });
       return savedVenue;

@@ -40,7 +40,11 @@ const DetailsPage = ({ data }) => {
     <>
       <Head>
         <title>{data.name}</title>
-        <meta property="og:title" content={data.name} key="Event title" />
+        <meta property="og:title" content={data.name} key={data.name} />
+        <meta property="og:image" content={data.image} />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="1024" />
       </Head>
       <Container px={0}>
         <Card withBorder className={classes.card}>
