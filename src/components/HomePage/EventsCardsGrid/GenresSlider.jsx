@@ -1,8 +1,10 @@
 import { Group, Text, Badge } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import { useRouter } from "next/router";
+import useStyles from "./styles";
 
-const GenresSlider = ({ genres, classes }) => {
+const GenresSlider = ({ genres }) => {
+  const { classes } = useStyles();
   const router = useRouter();
   if (!genres) return null;
 

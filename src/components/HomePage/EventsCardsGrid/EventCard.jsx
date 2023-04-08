@@ -77,7 +77,7 @@ const Cards = ({ data }) => {
         </Grid.Col>
       </Grid>
       <ArtistsBubbles artists={article.artists} />
-      <GenresSlider genres={article.genres} classes={classes} />
+      <GenresSlider genres={article.genres} />
       <Divider mt="md" />
       <DisplayEndDate enddate={article.enddate} />
     </div>

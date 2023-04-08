@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import useStyles from "./styles";
 import Stars from "../../DetailsPage/Stars/Stars";
 import SortButtons from "../CardWithPaginationSort/sortButtons";
+import GenresSlider from "../../HomePage/EventsCardsGrid/GenresSlider";
 
 const UniversalCards = (props) => {
   const {
@@ -104,19 +105,7 @@ const UniversalCards = (props) => {
                 </Text>
 
                 {place.genres?.length > 0 && (
-                  <>
-                    <span>Genres: </span>
-                    {place.genres?.map((genre) => (
-                      <Badge
-                        key={genre}
-                        color="orange"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => router.push(`/details/genres/${genre}`)}
-                      >
-                        {genre}
-                      </Badge>
-                    ))}
-                  </>
+                  <GenresSlider genres={place.genres} />
                 )}
                 <Button
                   variant="light"

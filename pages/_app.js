@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Script
         strategy="afterInteractive"
-        src="https://www.googletagmanager.com/gtag/js?id=G-ZF6QWP4051"
+        src="https://www.googletagmanager.com/gtag/js?id=G-LT4MRNRTLQ"
       />
 
       <Script id="google-analytics" strategy="afterInteractive">
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
           dataLayer.push(arguments);
         }
         gtag("js", new Date());
-        gtag("config", "G-ZF6QWP4051");
+        gtag("config", "G-LT4MRNRTLQ");
         `}
       </Script>
       <UserProvider>

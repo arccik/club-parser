@@ -12,7 +12,6 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { IconNavigation, IconEdit, IconWorld, IconPhone } from "@tabler/icons";
 import dayjs from "dayjs";
 dayjs.extend(relativeTime);
@@ -29,9 +28,9 @@ import BuyTickets from "./BuyTickets/BuyTickets";
 import ArtistsCarousel from "../HomePage/EventsCardsGrid/ArtistsCards/ArtistsCarousel";
 import FooterSocial from "../resourses/Footer/Footer";
 import ShareButton from "../../utils/ShareButton/ShareButton";
+import GenresSlider from "../HomePage/EventsCardsGrid/GenresSlider";
 
 const DetailsPage = ({ data }) => {
-  const router = useRouter();
   const { classes } = useStyles();
   const { user } = useUser();
 
@@ -126,7 +125,6 @@ const DetailsPage = ({ data }) => {
               <Stars rating={data.rating} id={data._id} type={data.placeType} />
             </Group>
           </Group>
-
           <Text
             mt="sm"
             mb="md"
@@ -141,27 +139,6 @@ const DetailsPage = ({ data }) => {
             {data.description || ""}
           </Text>
 
-          {data.genres.length > 0 && (
-            <>
-              <Title size="md" mb="xs">
-                Genres
-              </Title>
-              <Group spacing={0}>
-                {data.genres.map((genre) => (
-                  <Badge
-                    m={0}
-                    key={genre}
-                    color="light"
-                    className={classes.badgeLink}
-                    onClick={() => router.push(`/details/genres/${genre}`)}
-                  >
-                    {genre}
-                  </Badge>
-                ))}
-              </Group>
-            </>
-          )}
-
           {data.artists && (
             <>
               <Title mt="lg" mb="sm" size="md">
@@ -170,6 +147,10 @@ const DetailsPage = ({ data }) => {
               <ArtistsCarousel artists={data.artists} />
             </>
           )}
+          {data.placeType === "event" && (
+            <BuyTickets eventId={data.eventId} title={data.name} />
+          )}
+          {data.genres.length > 0 && <GenresSlider genres={data.genres} />}
 
           {data.placeType === "event" ? (
             <VenueCard venue={data.venue} />
@@ -182,9 +163,6 @@ const DetailsPage = ({ data }) => {
                 {!data.price.includes("£") && "£"} {data.price}
               </Text>
             </Badge>
-          )}
-          {data.placeType === "event" && (
-            <BuyTickets eventId={data.eventId} title={data.name} />
           )}
           {data.placeType === "venue" && (
             <>
@@ -200,11 +178,10 @@ const DetailsPage = ({ data }) => {
           <SmallMap center={data.location.coordinates} />
 
           <Button
-            // color="dark"
             fullWidth
-            variant="outline"
+            variant="default"
+            radius="lg"
             mt="md"
-            radius="md"
             mb="lg"
             component="a"
             leftIcon={<IconNavigation />}
