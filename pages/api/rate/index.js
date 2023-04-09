@@ -11,23 +11,20 @@ export default async function handler(req, res) {
         ? forwarded.split(/, /)[0]
         : req.connection.remoteAddress;
 
-      const { type, id, score } = req.query;
-      if (type === "event") {
-        const event = await Event.findById(id);
-        event.rating.push(score);
-        event.ratedIPs.push(ip);
-        await event.save();
-        return res.status(200).json({ message: `${type} rated ${score}` });
-      } else if (type === "venue") {
-        const venue = await Venue.findById(id);
-        venue.rating.push(score);
-        venue.ratedIPs.push(ip);
-        await venue.save();
-        return res.status(200).json(venue);
+      const { id, score } = req.query;
+      const event = await Event.findById(id);
+      const venue = await Venue.findById(id);
+      const place = event || venue
+      if (place && !place.ratedIPs.includes(ip)) {
+        place.rating.push(score);
+        place.ratedIPs.push(ip);
+        await place.save();
+        return res.json({ message: `Place Type ${place.placeType} with id ${place._id} updated! ` })
       }
-      return res.status(200).json({ message: "all OK" });
+      return res.json({ message: `This ${place.placeType} was rated from your computer` })
+
     }
-    return res.status(404).json({ message: "Cannot find the Place to vote" });
+    return res.status(404).json({ message: "Wrong Request method" });
   } catch (error) {
     return res.status(503).json({ message: "Issue with server" });
   }

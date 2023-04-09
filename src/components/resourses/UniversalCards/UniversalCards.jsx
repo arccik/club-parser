@@ -10,6 +10,7 @@ import {
   Pagination,
   Title,
   Center,
+  Chip,
 } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -58,12 +59,14 @@ const UniversalCards = (props) => {
                     />
                   )}
                 </Card.Section>
+
                 <Stack mt="sm" mb="xs" spacing={0}>
                   <Title
                     order={4}
                     weight={700}
                     m={0}
                     p={0}
+                    color="white"
                     component={Link}
                     href={`/details/${place.placeType}s/${place._id}`}
                   >
@@ -80,19 +83,19 @@ const UniversalCards = (props) => {
                         {new Date(place.startdate).toUTCString().split("GMT")}
                       </Title>
                       {place.price && (
-                        <Badge color="blue">
+                        <Chip value="1">
                           <span>Price: </span>
                           {place.price.includes("£")
                             ? place.price
                             : " £" + place.price}
-                        </Badge>
+                        </Chip>
                       )}
                     </>
                   )}
                 </Card.Section>
                 {place.placeType === "venue" && (
                   <Center>
-                    <Stars />
+                    <Stars rating={place.rating} id={place._id} />
                   </Center>
                 )}
                 <Text

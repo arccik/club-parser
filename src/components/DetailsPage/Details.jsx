@@ -122,7 +122,7 @@ const DetailsPage = ({ data }) => {
             </Group>
 
             <Group>
-              <Stars rating={data.rating} id={data._id} type={data.placeType} />
+              <Stars rating={data.rating} id={data._id} />
             </Group>
           </Group>
           <Text

@@ -61,9 +61,9 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         `/sortby/event?sortby=date&fromDate=true&date=${date}&page=${page}`,
     }),
     rate: builder.mutation({
-      query: ({ _id, score, type }) => {
+      query: ({ _id, score }) => {
         return {
-          url: `/rate?type=${type}&id=${_id}&score=${score}`,
+          url: `/rate?id=${_id}&score=${score}`,
           method: "PUT",
         };
       },

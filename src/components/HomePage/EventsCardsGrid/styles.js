@@ -36,7 +36,12 @@ const useStyles = createStyles((theme) => ({
       width: "70%",
     },
   },
-  badgeCarousel: { width: 280 },
+  badgeCarousel: {
+    width: 280,
+    "@media (min-width: 520px)": {
+      width: "70%",
+    },
+  },
   placesNearBy: {
     color: theme.black,
     marginBottom: 8,
