@@ -68,17 +68,14 @@ const DetailsPage = ({ data }) => {
             )}
             <div>
               <Button
-                fullWidth
                 variant="default"
-                radius="lg"
-                mt="md"
-                mb="lg"
+                radius="md"
                 component="a"
                 leftIcon={<IconNavigation />}
                 target="_blank"
                 href={`https://www.google.com/maps?q=${data.location.coordinates[1]}, ${data.location.coordinates[0]}`}
               >
-                Get me there
+                {data?.venue?.town}
               </Button>
             </div>
             {data.open && (
@@ -167,7 +164,7 @@ const DetailsPage = ({ data }) => {
           )}
           {data.genres.length > 0 && <GenresSlider genres={data.genres} />}
 
-          {data.placeType === "event" ? (
+          {data.placeType === "event" && data.venue ? (
             <VenueCard venue={data.venue} />
           ) : (
             <EventsFeed venueId={data._id} />
