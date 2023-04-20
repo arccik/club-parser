@@ -66,18 +66,7 @@ const DetailsPage = ({ data }) => {
                 </Badge>
               </div>
             )}
-            <div>
-              <Button
-                variant="default"
-                radius="md"
-                component="a"
-                leftIcon={<IconNavigation />}
-                target="_blank"
-                href={`https://www.google.com/maps?q=${data.location.coordinates[1]}, ${data.location.coordinates[0]}`}
-              >
-                {data?.venue?.town}
-              </Button>
-            </div>
+
             {data.open && (
               <div>
                 <Text size="xs" color="dimmed">
@@ -89,6 +78,7 @@ const DetailsPage = ({ data }) => {
                 </Text>
               </div>
             )}
+
             {data.placeType === "venue" && (
               <div>
                 <Group spacing="xs">
@@ -132,7 +122,21 @@ const DetailsPage = ({ data }) => {
                 {data.name}
               </Text>
             </Group>
-
+            {
+              <div>
+                <Button
+                  variant="default"
+                  radius="md"
+                  component="a"
+                  size="xs"
+                  leftIcon={<IconNavigation style={{ margin: 0 }} />}
+                  target="_blank"
+                  href={`https://www.google.com/maps?q=${data.location.coordinates[1]}, ${data.location.coordinates[0]}`}
+                >
+                  {data?.venue?.town || data.town}
+                </Button>
+              </div>
+            }
             <Group>
               <Stars rating={data.rating} id={data._id} />
             </Group>
