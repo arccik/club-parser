@@ -66,6 +66,21 @@ const DetailsPage = ({ data }) => {
                 </Badge>
               </div>
             )}
+            <div>
+              <Button
+                fullWidth
+                variant="default"
+                radius="lg"
+                mt="md"
+                mb="lg"
+                component="a"
+                leftIcon={<IconNavigation />}
+                target="_blank"
+                href={`https://www.google.com/maps?q=${data.location.coordinates[1]}, ${data.location.coordinates[0]}`}
+              >
+                Get me there
+              </Button>
+            </div>
             {data.open && (
               <div>
                 <Text size="xs" color="dimmed">
@@ -179,7 +194,8 @@ const DetailsPage = ({ data }) => {
 
           <Button
             fullWidth
-            variant="default"
+            // variant="default"
+            style={{ backgroundColor: "rgb(60 184 176)", opacity: 0.7 }}
             radius="lg"
             mt="md"
             mb="lg"
