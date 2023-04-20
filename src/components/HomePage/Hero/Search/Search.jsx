@@ -76,8 +76,10 @@ const Search = () => {
           itemComponent={AutoCompleteItem}
           data={data || []}
           filter={(value, item) =>
-            item.value?.toLowerCase().includes(value.toLowerCase().trim()) ||
-            item.description?.toLowerCase().includes(value.toLowerCase().trim())
+            item.value?.toLowerCase().includes(value?.toLowerCase()?.trim()) ||
+            item.description
+              ?.toLowerCase()
+              ?.includes(value?.toLowerCase()?.trim())
           }
         />
         <ActionIcon onClick={() => setShowCalendar((prev) => !prev)}>

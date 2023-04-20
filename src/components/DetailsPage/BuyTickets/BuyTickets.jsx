@@ -31,8 +31,10 @@ const BuyTickets = ({ eventId, title }) => {
       <Group position="center">
         <Button
           onClick={() => setOpened(true)}
-          variant="outline"
+          // variant="outline"
           leftIcon={<IconTicket />}
+          color="rgb(60 184 176)"
+          style={{ backgroundColor: "rgb(60 184 176)" }}
           fullWidth
           mt="md"
           radius="md"

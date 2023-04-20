@@ -80,8 +80,10 @@ const Search = () => {
             isSuccess ? "Nothing was found" : "Search result will appear here"
           }
           filter={(value, item) =>
-            item.value?.toLowerCase().includes(value.toLowerCase().trim()) ||
-            item.description?.toLowerCase().includes(value.toLowerCase().trim())
+            item.value?.toLowerCase().includes(value?.toLowerCase()?.trim()) ||
+            item.description
+              ?.toLowerCase()
+              .includes(value?.toLowerCase()?.trim())
           }
         />
         <ActionIcon onClick={() => setShowCalendar((prev) => !prev)}>

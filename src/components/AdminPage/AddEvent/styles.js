@@ -7,10 +7,15 @@ const useStyles = createStyles((theme) => ({
     borderRadius: 5,
     border: "1px solid lightgrey",
     padding: 10,
+
+
+
+    boxShadow: "2px 2px 2px red",
+
     "&:hover, &:focus": {
-      backgroundColor: "lightblue",
-      opacity: 0.4,
-      boxShadow: "2px 2px 2px red",
+      border: "1px solid lightgrey",
+      backgroundColor: "#add8e696",
+
     },
   },
   fieldLabel: {

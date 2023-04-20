@@ -80,7 +80,10 @@ export default async function handler(req, res) {
             .status(200)
             .json({ message: "Please provide Event Details" });
         }
-        const created = await Event.create(body);
+        const venue = await Venue.findById(body?.venue)
+        const eventToDB = { ...body, location: venue?.location }
+
+        const created = await Event.create(eventToDB);
         if (created)
           return res
             .status(200)

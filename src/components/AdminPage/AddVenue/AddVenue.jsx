@@ -27,7 +27,7 @@ const AddVenue = () => {
         onSubmit={async (values, { setSubmitting }) => {
           const location = {
             type: "Point",
-            coordinates: values.location.trim().split(","),
+            coordinates: values.location?.trim().split(","),
           };
           const valuesToSend = { ...values, location };
           const response = await addVenue(valuesToSend).unwrap();
