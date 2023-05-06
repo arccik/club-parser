@@ -50,7 +50,7 @@ const EventsPage = () => {
     if (router.query.page && router.query.page !== activePage)
       setPage(router.query.page);
     if (sortValue === "distance" && !location) getLocation();
-  }, [router.query.page, sortValue]);
+  }, [router.query.page, sortValue, activePage]);
 
   if (error || sortedError) {
     return <Text align="center">Ops. something went wrong </Text>;

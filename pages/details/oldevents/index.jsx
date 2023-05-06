@@ -28,7 +28,7 @@ const OldEventsPage = () => {
     if (router.query.page && router.query.page !== activePage) {
       handlePagination(router.query.page);
     }
-  }, [router.query.page]);
+  }, [router.query.page, activePage]);
 
   if (isLoading) return <Loading />;
   if (isError)

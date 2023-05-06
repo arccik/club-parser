@@ -195,8 +195,8 @@ const DetailsPage = ({ data }) => {
 
           <Button
             fullWidth
-            // variant="default"
-            style={{ backgroundColor: "rgb(60 184 176)", opacity: 0.7 }}
+            variant="default"
+            // style={{ backgroundColor: "rgb(60 184 176)", opacity: 0.7 }}
             radius="lg"
             mt="md"
             mb="lg"
