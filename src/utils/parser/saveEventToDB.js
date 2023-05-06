@@ -25,7 +25,7 @@ export default async function saveEventToDB(data) {
         address: data?.venue.address,
         link: data?.link,
         formatted_address: data?.venue.address,
-        town: data?.venue.towm,
+        town: data?.venue.town,
         postcode: data?.venue.postcode,
         country: data?.venue.country,
         location: {

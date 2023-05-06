@@ -32,6 +32,7 @@ export async function getStaticProps() {
     .populate({ path: "artists", model: Artist })
     .populate({ path: "venue", model: Venue })
     .limit(10);
+
   const oldEvents = await Event.find({
     startdate: { $lt: today.setDate(today.getDate()) },
   })
@@ -91,7 +92,7 @@ const Home = ({ events, oldEvents, recommended }) => {
       </Head>
 
       <main style={{ padding: 0, margin: 0 }}>
-        <Hero />
+        {/* <Hero /> */}
         <Search />
         {recommended.length ? <Carousel events={recommended} /> : null}
         <LoadingOverlay visible={isEventsLoading} overlayBlur={2} />

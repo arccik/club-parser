@@ -7,10 +7,11 @@ const useStyles = createStyles((theme) => {
       zIndex: 120,
       padding: 20,
       height: 50,
-      marginTop: -300,
+      marginTop: 10,
+      // marginTop: -300,
       "@media (max-width: 650px)": {
         width: "100%",
-        marginTop: -120,
+        // marginTop: -120,
       },
     },
     serachField: {
@@ -24,9 +25,9 @@ const useStyles = createStyles((theme) => {
       backgroundColor: "black",
       borderRadius: 20,
       zIndex: 100,
-      "@media (max-width: 650px)": {
-        marginTop: 40,
-      },
+      // "@media (max-width: 650px)": {
+      //   marginTop: 40,
+      // },
     },
   };
 });
