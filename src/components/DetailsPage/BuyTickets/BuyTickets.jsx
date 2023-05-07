@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Modal, Button, Group } from "@mantine/core";
 import { IconTicket } from "@tabler/icons";
+import Image from "next/image";
 
 const BuyTickets = ({ eventId, title }) => {
   const [opened, setOpened] = useState(false);
@@ -33,6 +34,14 @@ const BuyTickets = ({ eventId, title }) => {
           onClick={() => setOpened(true)}
           // variant="outline"
           leftIcon={<IconTicket />}
+          rightIcon={
+            <Image
+              src="/assets/skiddle-logo.png"
+              alt="me"
+              width="40"
+              height="20"
+            />
+          }
           color="rgb(60 184 176)"
           style={{ backgroundColor: "rgb(60 184 176)" }}
           fullWidth
