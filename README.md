@@ -1,4 +1,4 @@
-# Project Name: UK Venues and Events Web App
+# Project Name: Club Chaser
 
 ## Description:
 This project is a web application that allows users to search and discover venues and events all over the United Kingdom. Users can browse through various categories of events, view detailed information about each event or venue, and purchase tickets through Skiddle. The app also requires the user to provide credentials for essential APIs, including a mapping API and Auth0 for authentication.
