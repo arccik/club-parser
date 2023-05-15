@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Name: UK Venues and Events Web App
 
-## Getting Started
+## Description:
+This project is a web application that allows users to search and discover venues and events all over the United Kingdom. Users can browse through various categories of events, view detailed information about each event or venue, and purchase tickets through Skiddle. The app also requires the user to provide credentials for essential APIs, including a mapping API and Auth0 for authentication.
 
-First, run the development server:
+## Installation:
+1. Clone the repository from GitHub:
+   ```
+   git clone https://github.com/your-username/uk-venues-events-webapp.git
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+2. Navigate to the project directory:
+   ```
+   cd uk-venues-events-webapp
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Install the project dependencies:
+   ```
+   npm install
+   ```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+4. Create a `.env` file in the root directory and provide the following credentials:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+   ```
+   MAP_API_KEY=your_map_api_key
+   AUTH0_DOMAIN=your_auth0_domain
+   AUTH0_CLIENT_ID=your_auth0_client_id
+   AUTH0_CLIENT_SECRET=your_auth0_client_secret
+   ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   Note: Replace `your_map_api_key`, `your_auth0_domain`, `your_auth0_client_id`, and `your_auth0_client_secret` with your actual credentials.
 
-## Learn More
+## Usage:
+1. Run the development server:
+   ```
+   npm start
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Open a web browser and navigate to `http://localhost:3000` to access the web application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Use the search bar or browse the categories to find venues and events throughout the United Kingdom.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. Click on a venue or event to view detailed information, including date, time, location, and ticket availability.
 
-## Deploy on Vercel
+5. To purchase tickets, click on the "Buy Tickets" button, which will redirect you to the Skiddle ticketing platform.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing:
+Contributions to this project are welcome. If you find any issues or have any suggestions for improvement, please submit them through the project's GitHub issue tracker. Before making any changes, please discuss your ideas with the project maintainers to ensure they align with the project's goals.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License:
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to use, modify, and distribute the code as per the terms of this license.
+
+## Acknowledgments:
+- [Skiddle](https://www.skiddle.com/) for providing the ticketing integration.
+- [Auth0](https://auth0.com/) for authentication and user management.
+- [Your Map API Provider] for the mapping API used in the project.
+
+## Contact:
+If you have any questions or inquiries related to this project, you can contact the project maintainers at [email@example.com].
