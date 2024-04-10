@@ -8,7 +8,7 @@ import {
   Anchor,
   Loader,
 } from "@mantine/core";
-import { IconVinyl, IconMusic } from "@tabler/icons";
+import { IconMusic } from "@tabler/icons";
 import Link from "next/link";
 import { useGetGenresQuery } from "../../../../src/features/event/eventSlice";
 
@@ -24,7 +24,9 @@ const GenresBox = () => {
   if (isLoading) return <Loader />;
   if (error)
     return (
-      <Text>Problem getting genres from server, please check connections</Text>
+      <div className="mx-auto">
+        <Text>No genres</Text>
+      </div>
     );
   const slicer = expanded ? genres.length : 9;
   const items = genres.slice(0, slicer).map((item, i) => (
