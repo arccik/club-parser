@@ -20,13 +20,13 @@ import StatCard from "../src/components/resourses/Layout/StatCard";
 import dynamic from "next/dynamic";
 
 const HeroFallback = () => (
-  <section className="relative overflow-hidden border-b border-white/10 bg-[#05070d] hero-height flex flex-col items-center justify-center">
+  <section className="relative overflow-hidden border-b border-white/10 bg-[#05070d] min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh] flex flex-col items-center justify-center py-16 md:py-0">
     <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 flex flex-col items-center text-center">
-      <div className="h-6 w-44 animate-pulse rounded-full bg-white/10" />
-      <div className="mt-8 h-14 w-full max-w-4xl animate-pulse rounded-2xl bg-white/10" />
-      <div className="mt-4 h-14 w-4/5 max-w-3xl animate-pulse rounded-2xl bg-white/10" />
-      <div className="mt-8 h-5 w-full max-w-2xl animate-pulse rounded-lg bg-white/10" />
-      <div className="mt-3 h-5 w-2/3 max-w-xl animate-pulse rounded-lg bg-white/10" />
+      <div className="h-6 w-32 md:w-44 animate-pulse rounded-full bg-white/10" />
+      <div className="mt-6 md:mt-8 h-10 w-full max-w-xs md:max-w-4xl animate-pulse rounded-2xl bg-white/10" />
+      <div className="mt-3 md:mt-4 h-10 w-4/5 max-w-xs md:max-w-3xl animate-pulse rounded-2xl bg-white/10" />
+      <div className="mt-6 md:mt-8 h-4 w-full max-w-sm md:max-w-2xl animate-pulse rounded-lg bg-white/10" />
+      <div className="mt-2 md:mt-3 h-4 w-3/5 max-w-xs md:max-w-xl animate-pulse rounded-lg bg-white/10" />
     </div>
   </section>
 );
@@ -111,7 +111,7 @@ const Home = ({ events, oldEvents, recommended }) => {
         <title>Club Chaser - Will help you to find your next event</title>
         <meta
           name="description"
-          content="Club Chaser your ultimate guide to the best nightlife and events in the United Kingdom. 
+          content="Club Chaser your ultimate guide to the best nightlife and events in the United Kingdom.
           Whether you're a local or a tourist, our website is the perfect resource for discovering the most exciting bars and clubs across the country."
         />
       </Head>
@@ -122,50 +122,49 @@ const Home = ({ events, oldEvents, recommended }) => {
         <div className="section-divider" />
 
         <div id="content-start">
-        <PageShell wide>
-          <SectionHeader
-            eyebrow="Discover nightlife"
-            title="Find your next event in seconds"
-            description="Browse events, venues, and artists across the UK. Use smart search, location-aware sorting, and curated picks to plan your next night."
-          />
-          <SimpleGrid
-            cols={3}
-            spacing="md"
-            breakpoints={[
-              { maxWidth: "md", cols: 1 },
-              { maxWidth: "lg", cols: 2 },
-            ]}
-          >
-            <StatCard
-              label="Edge coverage"
-              value="150+ venues"
-              hint="Across major UK cities"
-              icon={<IconWorld size={18} />}
-              color="cyan"
+          <PageShell wide>
+            <SectionHeader
+              eyebrow="Discover nightlife"
+              title="Find your next event in seconds"
+              description="Browse events, venues, and artists across the UK. Use smart search, location-aware sorting, and curated picks to plan your next night."
             />
-            <StatCard
-              label="Fresh updates"
-              value="Daily"
-              hint="Latest upcoming events"
-              icon={<IconClock size={18} />}
-              color="grape"
-            />
-            <StatCard
-              label="Quick discovery"
-              value="<50s"
-              hint="From search to shortlist"
-              icon={<IconBolt size={18} />}
-              color="yellow"
-            />
-          </SimpleGrid>
-        </PageShell>
+            <SimpleGrid
+              cols={{ base: 1, sm: 2, lg: 3 }}
+              spacing={{ base: "md", md: "lg", xl: "xl" }}
+              verticalSpacing={{ base: "md", md: "lg" }}
+            >
+              <StatCard
+                label="Edge coverage"
+                value="150+ venues"
+                hint="Across major UK cities"
+                icon={<IconWorld size={18} />}
+                color="cyan"
+              />
+              <StatCard
+                label="Fresh updates"
+                value="Daily"
+                hint="Latest upcoming events"
+                icon={<IconClock size={18} />}
+                color="grape"
+              />
+              <StatCard
+                label="Quick discovery"
+                value="<50s"
+                hint="From search to shortlist"
+                icon={<IconBolt size={18} />}
+                color="yellow"
+              />
+            </SimpleGrid>
+          </PageShell>
         </div>
 
-        <div className="mx-auto w-full max-w-2xl px-4 sm:px-6 glow-border-cyan">
-          <Search />
+        <div className="w-full px-4 md:px-6 flex justify-center">
+          <div className="w-full max-w-2xl glow-border-cyan">
+            <Search />
+          </div>
         </div>
         {eventError ? (
-          <Text align="center" color="red.3" mt="sm">
+          <Text align="center" color="red.3" mt="sm" px-4>
             Could not load location-based events. Showing featured results.
           </Text>
         ) : null}
