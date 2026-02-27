@@ -20,8 +20,8 @@ import StatCard from "../src/components/resourses/Layout/StatCard";
 import dynamic from "next/dynamic";
 
 const HeroFallback = () => (
-  <section className="relative overflow-hidden border-b border-white/10 bg-[#05070d]">
-    <div className="mx-auto min-h-[58vh] w-full max-w-6xl px-4 pb-16 pt-20 sm:px-8 md:min-h-[68vh] md:pt-24">
+  <section className="relative overflow-hidden border-b border-white/10 bg-[#05070d] hero-height flex flex-col items-center justify-center">
+    <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 flex flex-col items-center text-center">
       <div className="h-6 w-44 animate-pulse rounded-full bg-white/10" />
       <div className="mt-8 h-14 w-full max-w-4xl animate-pulse rounded-2xl bg-white/10" />
       <div className="mt-4 h-14 w-4/5 max-w-3xl animate-pulse rounded-2xl bg-white/10" />
@@ -116,8 +116,10 @@ const Home = ({ events, oldEvents, recommended }) => {
         />
       </Head>
 
-      <main className="section-stack">
+      <main className="section-stack overflow-x-hidden">
         <LivingFluidHero />
+
+        <div className="section-divider" />
 
         <div id="content-start">
         <PageShell wide>
@@ -159,7 +161,9 @@ const Home = ({ events, oldEvents, recommended }) => {
         </PageShell>
         </div>
 
-        <Search />
+        <div className="mx-auto w-full max-w-2xl px-4 sm:px-6 glow-border-cyan">
+          <Search />
+        </div>
         {eventError ? (
           <Text align="center" color="red.3" mt="sm">
             Could not load location-based events. Showing featured results.

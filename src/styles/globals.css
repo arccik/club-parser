@@ -138,3 +138,121 @@ a {
     background: var(--surface-bg);
   }
 }
+
+/* ── Hero height: fills viewport on mobile respecting browser chrome ── */
+.hero-height {
+  min-height: 100svh;
+  min-height: -webkit-fill-available;
+}
+
+/* ── Aurora animated gradient background ── */
+.aurora-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(78, 161, 255, 0.25) 0%,
+    rgba(168, 85, 247, 0.2) 30%,
+    rgba(116, 242, 206, 0.18) 65%,
+    rgba(236, 72, 153, 0.15) 100%
+  );
+  background-size: 400% 400%;
+  animation: aurora 8s ease infinite;
+}
+
+/* ── Gradient border via mask technique ── */
+.stat-card-gradient {
+  position: relative;
+}
+.stat-card-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(78, 161, 255, 0.4), rgba(116, 242, 206, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Social proof pill ── */
+.social-proof-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(116, 242, 206, 0.08);
+  border: 1px solid rgba(116, 242, 206, 0.25);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #74f2ce;
+}
+.social-proof-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #74f2ce;
+  box-shadow: 0 0 6px #74f2ce;
+  flex-shrink: 0;
+}
+
+/* ── Scroll indicator: 3 animated dots ── */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+.scroll-indicator span {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  animation: scroll-hint 2s ease-in-out infinite;
+}
+.scroll-indicator span:nth-child(2) { animation-delay: 0.25s; }
+.scroll-indicator span:nth-child(3) { animation-delay: 0.5s; }
+
+/* ── Search wrapper glow ── */
+.glow-border-cyan:focus-within {
+  box-shadow: 0 0 0 2px rgba(78, 161, 255, 0.35), 0 0 24px rgba(78, 161, 255, 0.15);
+  border-radius: 12px;
+}
+
+/* ── Section divider ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(78, 161, 255, 0.25) 30%,
+    rgba(116, 242, 206, 0.2) 70%,
+    transparent 100%
+  );
+  margin: 0;
+}
+
+/* ── Touch target safety ── */
+.tap-target {
+  min-height: 44px;
+}
+
+/* ── Floating glassmorphism card ── */
+.float-card {
+  background: rgba(18, 20, 29, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(78, 161, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+

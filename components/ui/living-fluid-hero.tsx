@@ -1,103 +1,216 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { useRef } from "react";
 
+// ── Animated background blob ─────────────────────────────────────────────────
+interface BlobProps {
+  className: string;
+  animateX: number[];
+  animateY: number[];
+  duration: number;
+  color: string;
+}
+
+const Blob = ({ className, animateX, animateY, duration, color }: BlobProps) => (
+  <motion.div
+    className={`pointer-events-none absolute rounded-full blur-3xl ${className}`}
+    style={{ background: color }}
+    animate={{ x: animateX, y: animateY }}
+    transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
+  />
+);
+
+// ── Decorative floating card (desktop only) ──────────────────────────────────
+interface FloatingCardProps {
+  title: string;
+  venue: string;
+  date: string;
+  style?: React.CSSProperties;
+  delay?: number;
+}
+
+const FloatingCard = ({ title, venue, date, style, delay = 0 }: FloatingCardProps) => (
+  <motion.div
+    className="float-card hidden md:flex flex-col gap-1.5 p-4 w-52"
+    style={style}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: [0, -6, 0] }}
+    transition={{
+      opacity: { delay, duration: 0.7 },
+      y: { delay, duration: 4, repeat: Infinity, ease: "easeInOut" },
+    }}
+  >
+    <div className="text-xs font-semibold text-brand-teal uppercase tracking-wide">{date}</div>
+    <div className="text-sm font-bold text-white leading-tight">{title}</div>
+    <div className="text-xs text-white/50">{venue}</div>
+    <div className="mt-1 h-0.5 w-8 rounded-full bg-brand-cyan/40" />
+  </motion.div>
+);
+
+// ── Single animated headline word ────────────────────────────────────────────
+const HeadlineWord = ({ word, i }: { word: string; i: number }) => (
+  <motion.span
+    className="inline-block"
+    initial={{ opacity: 0, y: 28, rotateX: -40 }}
+    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+    transition={{
+      delay: 0.15 + i * 0.1,
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+  >
+    {word}
+  </motion.span>
+);
+
+// ── Scroll indicator ─────────────────────────────────────────────────────────
+const ScrollIndicator = () => (
+  <motion.div
+    className="scroll-indicator"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.4, duration: 0.8 }}
+  >
+    <span />
+    <span />
+    <span />
+    <div>Scroll</div>
+  </motion.div>
+);
+
+// ── Main hero ────────────────────────────────────────────────────────────────
 const headline = "Find the Night Before It Finds You";
-
-const Wave = ({ delay = 0, opacity = 0.3, duration = 18, reverse = false }) => {
-  return (
-    <motion.svg
-      viewBox="0 0 1440 320"
-      preserveAspectRatio="none"
-      className="pointer-events-none absolute bottom-0 left-0 h-[24%] w-[165%] md:h-[34%] md:w-[205%]"
-      initial={{ x: reverse ? "-50%" : "0%" }}
-      animate={{ x: reverse ? "0%" : "-50%" }}
-      transition={{ repeat: Infinity, ease: "linear", duration, delay }}
-      style={{ opacity }}
-    >
-      <path
-        fill="url(#waveGradient)"
-        d="M0,160L48,176C96,192,192,224,288,229.3C384,235,480,213,576,197.3C672,181,768,171,864,181.3C960,192,1056,224,1152,234.7C1248,245,1344,235,1392,229.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-      />
-      <defs>
-        <linearGradient id="waveGradient" x1="0%" x2="100%" y1="0%" y2="0%">
-          <stop offset="0%" stopColor="rgba(144, 157, 181, 0.4)" />
-          <stop offset="50%" stopColor="rgba(72, 84, 110, 0.55)" />
-          <stop offset="100%" stopColor="rgba(36, 45, 67, 0.65)" />
-        </linearGradient>
-      </defs>
-    </motion.svg>
-  );
-};
+const words = headline.split(" ");
 
 export const LivingFluidHero = () => {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section className="relative isolate overflow-x-clip overflow-y-hidden border-b border-white/10 bg-[#05070d]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(107,114,128,0.18),transparent_42%),radial-gradient(circle_at_85%_10%,rgba(71,85,105,0.16),transparent_38%),linear-gradient(180deg,#05070d_0%,#0b1120_56%,#0d1323_100%)]" />
-
+    <section
+      ref={ref}
+      className="relative isolate overflow-hidden flex flex-col hero-height border-b border-white/10 bg-brand-navy"
+    >
+      {/* Aurora animated gradient */}
       <motion.div
-        className="pointer-events-none absolute -left-16 top-16 h-44 w-44 rounded-full bg-slate-300/10 blur-3xl md:h-60 md:w-60"
-        animate={{ x: [0, 20, -10, 0], y: [0, -12, 8, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="pointer-events-none absolute right-0 top-28 h-56 w-56 rounded-full bg-indigo-500/15 blur-3xl md:h-72 md:w-72"
-        animate={{ x: [0, -18, 10, 0], y: [0, 14, -6, 0] }}
-        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        className="aurora-bg pointer-events-none absolute inset-0"
+        style={{ y: bgY, opacity: 0.6 }}
       />
 
-      <div className="relative mx-auto flex min-h-[66vh] w-full max-w-6xl flex-col items-center justify-center px-4 pb-20 pt-16 text-center sm:px-6 md:min-h-[78vh] md:pb-28 md:pt-20">
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
+      {/* Dark vignette overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,#05070d_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-navy/60 via-transparent to-brand-navy/80" />
+
+      {/* Animated blobs */}
+      <Blob
+        className="left-[-8%] top-[10%] h-72 w-72 md:h-96 md:w-96"
+        color="rgba(78,161,255,0.18)"
+        animateX={[0, 24, -12, 0]}
+        animateY={[0, -16, 10, 0]}
+        duration={14}
+      />
+      <Blob
+        className="right-[-5%] top-[20%] h-64 w-64 md:h-80 md:w-80"
+        color="rgba(168,85,247,0.15)"
+        animateX={[0, -20, 12, 0]}
+        animateY={[0, 18, -8, 0]}
+        duration={17}
+      />
+      <Blob
+        className="left-[40%] bottom-[15%] h-48 w-48 md:h-64 md:w-64"
+        color="rgba(236,72,153,0.12)"
+        animateX={[0, 16, -8, 0]}
+        animateY={[0, -12, 6, 0]}
+        duration={20}
+      />
+
+      {/* Decorative floating cards — desktop only */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="relative h-full max-w-6xl mx-auto px-4">
+          <FloatingCard
+            title="Warehouse Project"
+            venue="Mayfield Depot, Manchester"
+            date="Sat 1 Mar"
+            style={{ position: "absolute", left: "-1rem", top: "22%" }}
+            delay={0.8}
+          />
+          <FloatingCard
+            title="fabric presents"
+            venue="fabric, London EC1A"
+            date="Fri 28 Feb"
+            style={{ position: "absolute", right: "-1rem", top: "30%" }}
+            delay={1.0}
+          />
+        </div>
+      </div>
+
+      {/* ── Centred content ── */}
+      <div className="relative flex flex-1 flex-col items-center justify-center px-4 sm:px-6 text-center">
+        {/* Social proof pill */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="mx-auto mb-5 w-fit rounded-full border border-slate-400/30 bg-slate-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-200"
+          transition={{ duration: 0.6 }}
+          className="mb-6"
         >
-          Live Event Discovery
-        </motion.p>
+          <span className="social-proof-pill">Join 10,000+ night owls</span>
+        </motion.div>
 
-        <h1 className="mx-auto w-full max-w-4xl break-words text-[clamp(1.95rem,9vw,4.8rem)] font-black leading-[1.06] text-white">
-          {headline}
+        {/* Staggered headline */}
+        <h1
+          className="mx-auto mb-5 w-full max-w-4xl text-[clamp(2rem,8.5vw,5rem)] font-black leading-[1.06] text-white"
+          style={{ perspective: "600px" }}
+        >
+          {words.map((word, i) => (
+            <span key={i} className="mr-[0.25em] last:mr-0">
+              <HeadlineWord word={word} i={i} />
+            </span>
+          ))}
         </h1>
 
+        {/* Sub-headline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="mx-auto mt-5 max-w-2xl text-[clamp(0.95rem,3.8vw,1.15rem)] leading-relaxed text-slate-300/90"
-        >
-          Explore venues, artists, and events with a fast, fluid experience.
-          Scroll down to dive into curated recommendations and location-based
-          picks.
-        </motion.p>
-
-        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.8 }}
-          className="mt-7 flex w-full max-w-md flex-col items-center justify-center gap-3 md:max-w-none md:flex-row"
+          transition={{ delay: 0.9, duration: 0.7 }}
+          className="mx-auto mb-8 max-w-xl text-[clamp(0.9rem,3.5vw,1.1rem)] leading-relaxed text-white/60"
+        >
+          Explore venues, artists, and events across the UK — with location-aware
+          search and curated recommendations.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.05, duration: 0.7 }}
+          className="flex w-full max-w-sm flex-col items-center gap-3 sm:max-w-none sm:flex-row sm:justify-center"
         >
           <a
             href="#content-start"
-            className="w-full rounded-full bg-slate-200 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-white sm:text-base md:w-auto"
+            className="tap-target flex w-full items-center justify-center rounded-full bg-brand-cyan px-7 py-3 text-sm font-bold text-brand-navy shadow-[0_0_24px_rgba(78,161,255,0.4)] transition hover:bg-white hover:shadow-[0_0_32px_rgba(78,161,255,0.55)] sm:w-auto"
           >
-            Start Exploring
+            Find Events Tonight
           </a>
           <Link
             href="/events"
-            className="w-full rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15 sm:text-base md:w-auto"
+            className="tap-target flex w-full items-center justify-center rounded-full border border-white/20 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/12 hover:border-white/35 sm:w-auto"
           >
-            Browse Events
+            Browse All Events
           </Link>
         </motion.div>
       </div>
 
-      <Wave opacity={0.22} duration={20} />
-      <Wave opacity={0.3} duration={15} delay={1.2} reverse />
-      <div className="hidden md:block">
-        <Wave opacity={0.16} duration={24} delay={0.8} />
+      {/* Scroll indicator */}
+      <div className="relative pb-6 flex justify-center">
+        <ScrollIndicator />
       </div>
+
+      {/* Bottom fade — replaces the wave SVGs, zero overflow risk */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-surface to-transparent" />
     </section>
   );
 };
