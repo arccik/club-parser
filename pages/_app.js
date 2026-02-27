@@ -3,7 +3,7 @@ import { MantineProvider } from "@mantine/core";
 import { ApplicationContainer } from "../src/components/resourses/ApplicationContainer";
 
 import { Provider } from "react-redux";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { Auth0Provider } from "@auth0/nextjs-auth0/client";
 import Script from "next/script";
 import Head from "next/head";
 import { store } from "../src/features/store";
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
         gtag("config", "G-LT4MRNRTLQ");
         `}
       </Script>
-      <UserProvider>
+      <Auth0Provider>
         <Provider store={store}>
           <MantineProvider
             theme={{ colorScheme: "dark" }}
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
             </ApplicationContainer>
           </MantineProvider>
         </Provider>
-      </UserProvider>
+      </Auth0Provider>
     </>
   );
 }

@@ -80,12 +80,17 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  await dbConnect();
-  const artists = await Artist.find().lean();
-  const paths = artists.map((artist) => ({
-    params: { id: artist._id.toString() },
-  }));
-  return { paths, fallback: false };
+  try {
+    await dbConnect();
+    const artists = await Artist.find().lean();
+    const paths = artists.map((artist) => ({
+      params: { id: artist._id.toString() },
+    }));
+    return { paths, fallback: "blocking" };
+  } catch (error) {
+    console.error("Artist paths generation error:", error);
+    return { paths: [], fallback: "blocking" };
+  }
 }
 
 export default ArtistPage;

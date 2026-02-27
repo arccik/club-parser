@@ -4,6 +4,11 @@
 This project is a web application that allows users to search and discover venues and events all over the United Kingdom. Users can browse through various categories of events, view detailed information about each event or venue, and purchase tickets through Skiddle. The app also requires the user to provide credentials for essential APIs, including a mapping API and Auth0 for authentication.
 
 ## Installation:
+0. Use Node.js 20 LTS:
+   ```
+   nvm use
+   ```
+
 1. Clone the repository from GitHub:
    ```
    git clone https://github.com/your-username/uk-venues-events-webapp.git
@@ -33,7 +38,7 @@ This project is a web application that allows users to search and discover venue
 ## Usage:
 1. Run the development server:
    ```
-   npm start
+   npm run dev
    ```
 
 2. Open a web browser and navigate to `http://localhost:3000` to access the web application.

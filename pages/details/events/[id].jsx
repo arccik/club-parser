@@ -41,12 +41,17 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  await dbConnect();
-  const events = await Event.find().lean();
-  const paths = events.map((event) => ({
-    params: { id: event._id.toString() },
-  }));
-  return { paths, fallback: false };
+  try {
+    await dbConnect();
+    const events = await Event.find().lean();
+    const paths = events.map((event) => ({
+      params: { id: event._id.toString() },
+    }));
+    return { paths, fallback: "blocking" };
+  } catch (error) {
+    console.error("Event paths generation error:", error);
+    return { paths: [], fallback: "blocking" };
+  }
 }
 
 export default EventById;

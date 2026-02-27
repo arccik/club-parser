@@ -17,44 +17,56 @@ import Venue from "../src/models/venue-model";
 import FooterSocial from "../src/components/resourses/Footer/Footer";
 
 export async function getStaticProps() {
-  await dbConnect();
-  const today = new Date();
-  const endDate = new Date();
-  const numberOfDaysToAdd = 7;
-  const end = endDate.setDate(endDate.getDate() + numberOfDaysToAdd);
+  try {
+    await dbConnect();
+    const today = new Date();
+    const endDate = new Date();
+    const numberOfDaysToAdd = 7;
+    const end = endDate.setDate(endDate.getDate() + numberOfDaysToAdd);
 
-  const events = await Event.find({
-    startdate: {
-      $gte: today,
-      $lt: end,
-    },
-  })
-    .populate({ path: "artists", model: Artist })
-    .populate({ path: "venue", model: Venue })
-    .limit(10);
+    const events = await Event.find({
+      startdate: {
+        $gte: today,
+        $lt: end,
+      },
+    })
+      .populate({ path: "artists", model: Artist })
+      .populate({ path: "venue", model: Venue })
+      .limit(10);
 
-  const oldEvents = await Event.find({
-    startdate: { $lt: today.setDate(today.getDate()) },
-  })
-    .sort({ startdate: -1 })
-    .limit(3);
+    const oldEvents = await Event.find({
+      startdate: { $lt: today.setDate(today.getDate()) },
+    })
+      .sort({ startdate: -1 })
+      .limit(3);
 
-  const recommended = await Event.find({
-    startdate: { $gte: new Date() },
-    price: { $exists: true, $nin: ["", "-"] },
-    "artists.0": { $exists: true },
-  })
-    .sort({ startdate: 1 })
-    .limit(10);
+    const recommended = await Event.find({
+      startdate: { $gte: new Date() },
+      price: { $exists: true, $nin: ["", "-"] },
+      "artists.0": { $exists: true },
+    })
+      .sort({ startdate: 1 })
+      .limit(10);
 
-  return {
-    props: {
-      events: JSON.parse(JSON.stringify(events)),
-      oldEvents: JSON.parse(JSON.stringify(oldEvents)),
-      recommended: JSON.parse(JSON.stringify(recommended)),
-    },
-    revalidate: 30,
-  };
+    return {
+      props: {
+        events: JSON.parse(JSON.stringify(events)),
+        oldEvents: JSON.parse(JSON.stringify(oldEvents)),
+        recommended: JSON.parse(JSON.stringify(recommended)),
+      },
+      revalidate: 30,
+    };
+  } catch (error) {
+    console.error("Home page static generation error:", error);
+    return {
+      props: {
+        events: [],
+        oldEvents: [],
+        recommended: [],
+      },
+      revalidate: 30,
+    };
+  }
 }
 
 const Home = ({ events, oldEvents, recommended }) => {
