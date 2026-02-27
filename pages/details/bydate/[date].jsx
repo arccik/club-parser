@@ -8,6 +8,8 @@ import Loading from "../../../src/utils/Loading/Loading";
 import UniversalCards from "../../../src/components/resourses/UniversalCards/UniversalCards";
 import dayjs from "dayjs";
 import { useState } from "react";
+import PageShell from "../../../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../../../src/components/resourses/Layout/SectionHeader";
 
 const ByDatePage = () => {
   const [page, setPage] = useState(1);
@@ -37,10 +39,12 @@ const ByDatePage = () => {
 
   if (isSuccess && !data?.events.length) {
     return (
-      <>
-        <Title order={3} mt="md" align="center">
-          Nothing found on selected date
-        </Title>
+      <PageShell>
+        <SectionHeader
+          eyebrow="Date results"
+          title={`Events on ${dayjs(date).format("D MMM YYYY")}`}
+          description="No events found for the selected date. Showing upcoming alternatives."
+        />
         <UniversalCards
           data={otherData?.events}
           cardType="Check upcoming events"
@@ -49,18 +53,25 @@ const ByDatePage = () => {
           numberOfPages={otherData?.numberOfPages}
           withOutSort
         />
-      </>
+      </PageShell>
     );
   }
   return (
-    <UniversalCards
-      numberOfPages={data?.numberOfPages}
-      data={data?.events}
-      cardType={dayjs(date).format("D MMM YYYY")}
-      page={page}
-      setPage={setPage}
-      withOutSort
-    />
+    <PageShell>
+      <SectionHeader
+        eyebrow="Date results"
+        title={dayjs(date).format("D MMM YYYY")}
+        description="Browse events scheduled for this date."
+      />
+      <UniversalCards
+        numberOfPages={data?.numberOfPages}
+        data={data?.events}
+        cardType={dayjs(date).format("D MMM YYYY")}
+        page={page}
+        setPage={setPage}
+        withOutSort
+      />
+    </PageShell>
   );
 };
   

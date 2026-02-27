@@ -2,7 +2,6 @@ import {
   Container,
   Card,
   Text,
-  Badge,
   Button,
   Grid,
   Stack,
@@ -18,6 +17,8 @@ import useStyles from "./styles";
 import Stars from "../../DetailsPage/Stars/Stars";
 import SortButtons from "../CardWithPaginationSort/sortButtons";
 import GenresSlider from "../../HomePage/EventsCardsGrid/GenresSlider";
+import SectionHeader from "../Layout/SectionHeader";
+import EmptyState from "../Layout/EmptyState";
 
 const UniversalCards = (props) => {
   const {
@@ -34,33 +35,46 @@ const UniversalCards = (props) => {
   const router = useRouter();
 
   return (
-    <Container size="lg">
-      <Title className={classes.title} p={0} m={0} align="center">
-        {cardType || router.query.genre || "Event"}
-      </Title>
+    <Container size="xl" sx={{ paddingTop: 12, paddingBottom: 36 }}>
+      <SectionHeader
+        eyebrow="Explore"
+        title={cardType || router.query.genre || "Events"}
+        description="Browse and refine listings by relevance, rating, and distance."
+        align="left"
+      />
       {!withOutSort && (
         <SortButtons placeType={cardType} setValue={setSortValue} />
       )}
-      <Grid>
-        {data &&
-          data.map((place) => (
-            <Grid.Col span={12} key={place._id} xs={4}>
-              <Card shadow="sm" p="lg" mt="lg" radius="md" withBorder>
+      {data?.length ? (
+        <Grid mt="xs">
+          {data.map((place) => (
+            <Grid.Col span={12} key={place._id} sm={6} lg={4}>
+              <Card
+                p="md"
+                radius="lg"
+                withBorder
+                sx={{
+                  height: "100%",
+                  background: "linear-gradient(180deg, #121722, #0f131d)",
+                  borderColor: "#2b3244",
+                }}
+              >
                 <Card.Section
                   component={Link}
                   href={`/details/${place.placeType}s/${place._id}`}
                 >
-                  {place.image && (
-                    <Image
-                      src={place.image}
-                      height={160}
-                      alt={place.name}
-                      placeholder="blur"
-                    />
+                  {place.image ? (
+                    <Image src={place.image} height={180} alt={place.name} />
+                  ) : (
+                    <Center h={180} sx={{ background: "#1a2233" }}>
+                      <Text size="sm" color="dimmed">
+                        No image available
+                      </Text>
+                    </Center>
                   )}
                 </Card.Section>
 
-                <Stack mt="sm" mb="xs" spacing={0}>
+                <Stack mt="sm" mb="xs" spacing={4}>
                   <Title
                     order={4}
                     weight={700}
@@ -69,62 +83,61 @@ const UniversalCards = (props) => {
                     color="white"
                     component={Link}
                     href={`/details/${place.placeType}s/${place._id}`}
+                    sx={{ textDecoration: "none", lineHeight: 1.2 }}
                   >
                     {place.name}
                   </Title>
-                  <Text size="sm" color="dimmed">
+                  <Text size="sm" color="dimmed" lineClamp={1}>
                     {place.formatted_address || place.address}
                   </Text>
                 </Stack>
-                <Card.Section align="center">
-                  {place.startdate && (
-                    <>
-                      <Title order={5} align="center">
-                        {new Date(place.startdate).toUTCString().split("GMT")}
-                      </Title>
-                      {place.price && (
-                        <Chip value="1">
-                          <span>Price: </span>
-                          {place.price.includes("£")
-                            ? place.price
-                            : " £" + place.price}
-                        </Chip>
-                      )}
-                    </>
-                  )}
-                </Card.Section>
-                {place.placeType === "venue" && (
-                  <Center>
+                {place.startdate ? (
+                  <Text size="xs" color="dimmed" mt={2}>
+                    {new Date(place.startdate).toUTCString().split("GMT")[0]}
+                  </Text>
+                ) : null}
+                {place.price ? (
+                  <Chip mt="xs" value="1">
+                    Price: {place.price.includes("£") ? place.price : `£${place.price}`}
+                  </Chip>
+                ) : null}
+                {place.placeType === "venue" ? (
+                  <Center mt="sm">
                     <Stars rating={place.rating} id={place._id} />
                   </Center>
-                )}
+                ) : null}
                 <Text
                   size="sm"
                   mt="xs"
                   color="dimmed"
                   className={classes.description}
+                  lineClamp={3}
                 >
                   {place.description}
                 </Text>
 
-                {place.genres?.length > 0 && (
-                  <GenresSlider genres={place.genres} />
-                )}
+                {place.genres?.length > 0 ? <GenresSlider genres={place.genres} /> : null}
                 <Button
-                  variant="light"
-                  color="blue"
+                  variant="white"
+                  color="dark"
                   fullWidth
                   mt="md"
                   radius="md"
                   component={Link}
                   href={`/details/${place.placeType}s/${place._id}`}
                 >
-                  Check this out
+                  Open details
                 </Button>
               </Card>
             </Grid.Col>
           ))}
-      </Grid>
+        </Grid>
+      ) : (
+        <EmptyState
+          title="No results found"
+          description="Try changing the sort order or browsing another category."
+        />
+      )}
       {numberOfPages > 1 && (
         <Pagination
           position="center"

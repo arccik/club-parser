@@ -1,92 +1,62 @@
 import {
-  Container,
-  Group,
-  Badge,
-  Title,
-  Text,
   SimpleGrid,
-  Card,
+  Button,
+  Group,
 } from "@mantine/core";
-import { IconGauge, IconUser, IconCookie } from "@tabler/icons";
-import useStyles from "./styles";
+import {
+  IconBuildingStore,
+  IconCalendarStats,
+  IconChecklist,
+} from "@tabler/icons";
 import Link from "next/link";
+import StatCard from "../../../resourses/Layout/StatCard";
+import SectionHeader from "../../../resourses/Layout/SectionHeader";
 
 const FeaturesCards = ({ totalVenues, totalEvents }) => {
-  const { classes, theme } = useStyles();
+  const totalPosts = totalVenues + totalEvents;
 
   return (
-    <Container size="lg" py="xl">
-      <Group position="center">
-        <Badge variant="filled" size="lg">
-          Best company ever
-        </Badge>
-      </Group>
+    <>
+      <SectionHeader
+        eyebrow="Admin overview"
+        title="Control panel and content health"
+        description="Track inventory, review the latest messages, and jump directly into content maintenance."
+        action={
+          <Group spacing="xs">
+            <Button component={Link} href="/admin/events" variant="default">
+              Manage events
+            </Button>
+            <Button component={Link} href="/admin/venues">
+              Manage venues
+            </Button>
+          </Group>
+        }
+      />
 
-      <Title order={2} className={classes.title} align="center" mt="sm">
-        ClubChaser - Best happiness
-      </Title>
-
-      <Text
-        color="dimmed"
-        className={classes.description}
-        align="center"
-        mt="md"
-      >
-        As the administrator of your website, you have the power to make
-        important decisions and optimizations that can greatly impact the
-        overall success and functionality of your online presence.
-      </Text>
-
-      <SimpleGrid
-        cols={3}
-        spacing="xl"
-        mt={50}
-        breakpoints={[{ maxWidth: "md", cols: 1 }]}
-      >
-        <Card shadow="md" radius="md" className={classes.card} p="xl">
-          <IconGauge size={50} stroke={2} color={theme.fn.primaryColor()} />
-          <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
-            All Posts: {totalVenues + totalEvents}
-          </Text>
-          <Text size="sm" color="dimmed" mt="sm">
-            Stay motivated to keep your website running smooth, and your users
-            satisfied.
-          </Text>
-        </Card>
-        <Card
-          component={Link}
-          href="/admin/events"
-          shadow="md"
-          radius="md"
-          className={classes.card}
-          p="xl"
-        >
-          <IconUser size={50} stroke={2} color={theme.fn.primaryColor()} />
-          <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
-            Events: {totalEvents}
-          </Text>
-          <Text size="sm" color="dimmed" mt="sm">
-            Events updating automaticlly
-          </Text>
-        </Card>
-        <Card
-          component={Link}
-          href="/admin/venues"
-          shadow="md"
-          radius="md"
-          className={classes.card}
-          p="xl"
-        >
-          <IconCookie size={50} stroke={2} color={theme.fn.primaryColor()} />
-          <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
-            Venues: {totalVenues}
-          </Text>
-          <Text size="sm" color="dimmed" mt="sm">
-            These babies we need to push on
-          </Text>
-        </Card>
+      <SimpleGrid cols={3} spacing="md" breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
+        <StatCard
+          label="Total posts"
+          value={totalPosts}
+          hint="All indexed content in platform"
+          icon={<IconChecklist size={18} />}
+          color="grape"
+        />
+        <StatCard
+          label="Events"
+          value={totalEvents}
+          hint="Upcoming and historical event entries"
+          icon={<IconCalendarStats size={18} />}
+          color="blue"
+        />
+        <StatCard
+          label="Venues"
+          value={totalVenues}
+          hint="Published venue profiles"
+          icon={<IconBuildingStore size={18} />}
+          color="teal"
+        />
       </SimpleGrid>
-    </Container>
+    </>
   );
 };
 

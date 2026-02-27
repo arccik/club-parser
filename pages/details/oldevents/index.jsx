@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import FooterSocial from "../../../src/components/resourses/Footer/Footer";
 import CardWithPaginationSort from "../../../src/components/resourses/CardWithPaginationSort/CardWithPaginationSort";
+import PageShell from "../../../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../../../src/components/resourses/Layout/SectionHeader";
 
 const OldEventsPage = () => {
   const [activePage, setPage] = useState(1);
@@ -34,32 +36,30 @@ const OldEventsPage = () => {
   if (isError)
     return <p>Error with this service. Check console {console.log(error)}</p>;
 
-  const titleStyle = {
-    WebkitTextStroke: "3px black",
-    color: "white",
-  };
   return (
     <>
-      <Title align="center" style={titleStyle}>
-        Events Recently Ended
-      </Title>
-      <CardWithPaginationSort
-        data={data?.events}
-        setPage={handlePagination}
-        setSortValue={(e) => console.log("Sort ", e)}
-        type="venue"
-      />
-      {/* <PlacesCardsGrid events={data.events} type="events" old={true} />; */}
-      {/* <Center> */}
-      <Pagination
-        page={activePage}
-        onChange={handlePagination}
-        total={data.numberOfPages}
-        position="center"
-        noWrap
-      />
+      <PageShell>
+        <SectionHeader
+          eyebrow="Archive"
+          title="Events recently ended"
+          description="Look back at recently finished events and discover related listings."
+        />
+        <CardWithPaginationSort
+          data={data?.events}
+          setPage={handlePagination}
+          setSortValue={(e) => console.log("Sort ", e)}
+          type="venue"
+          title="Ended events"
+        />
+        <Pagination
+          page={activePage}
+          onChange={handlePagination}
+          total={data.numberOfPages}
+          position="center"
+          noWrap
+        />
+      </PageShell>
       <FooterSocial />
-      {/* </Center> */};
     </>
   );
 };

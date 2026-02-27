@@ -1,13 +1,16 @@
 import TableScrollArea from "../../../src/components/AdminPage/TableScrollArea/TableScrollArea";
 import { useGetEventsQuery } from "../../../src/features/event/eventSlice";
-import { Container, ActionIcon, Pagination } from "@mantine/core";
+import { Button, Pagination } from "@mantine/core";
 import { IconPlus } from "@tabler/icons";
-import styles from "../../../src/styles/Home.module.css";
 import Link from "next/link";
 import Loading from "../../../src/utils/Loading/Loading";
 import { useState } from "react";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import ErrorPage from "next/error";
+import PageShell from "../../../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../../../src/components/resourses/Layout/SectionHeader";
+import MobileActionBar from "../../../src/components/resourses/Layout/MobileActionBar";
+import EmptyState from "../../../src/components/resourses/Layout/EmptyState";
 
 const AdminEventsPage = () => {
   const [activePage, setPage] = useState(1);
@@ -19,35 +22,44 @@ const AdminEventsPage = () => {
   if (error) return <p>Problem to getting data from server</p>;
   if (!user) return <ErrorPage statusCode={404} />;
   return (
-    <Container size={"100%"} px={0}>
-      <ActionIcon
-        component={Link}
-        title="Add new Event"
-        href="/admin/events/add"
-        className={styles.floationAddItemButton}
-      >
-        <IconPlus />
-      </ActionIcon>
-      <TableScrollArea data={data.events} />
+    <PageShell wide>
+      <SectionHeader
+        eyebrow="Admin events"
+        title="Manage events"
+        description="Search, edit, and remove event records. The table adapts to cards on small screens."
+        action={
+          <Button component={Link} href="/admin/events/add" leftIcon={<IconPlus size={16} />}>
+            Add Event
+          </Button>
+        }
+      />
+      {data?.events?.length ? (
+        <TableScrollArea data={data.events} />
+      ) : (
+        <EmptyState
+          title="No events available"
+          description="Create your first event to start populating the catalog."
+          action={
+            <Button component={Link} href="/admin/events/add">
+              Add Event
+            </Button>
+          }
+        />
+      )}
       <Pagination
         position="center"
-        m="lg"
+        m="sm"
         noWrap
-        styles={(theme) => ({
-          item: {
-            "&[data-active]": {
-              backgroundImage: theme.fn.gradient({
-                from: "red",
-                to: "yellow",
-              }),
-            },
-          },
-        })}
         page={activePage}
         onChange={setPage}
-        total={data.numberOfPages}
+        total={data?.numberOfPages || 1}
       />
-    </Container>
+      <MobileActionBar>
+        <Button component={Link} href="/admin/events/add" leftIcon={<IconPlus size={14} />}>
+          Add Event
+        </Button>
+      </MobileActionBar>
+    </PageShell>
   );
 };
 

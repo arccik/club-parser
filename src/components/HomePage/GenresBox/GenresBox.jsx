@@ -34,7 +34,7 @@ const GenresBox = () => {
       key={item}
       className={classes.item}
       component={Link}
-      href={`/details/genres/${item.split("/")}`}
+      href={`/details/genres/${item?.split("/")}`}
     >
       <IconMusic color={theme.colors.blue[7]} size={32} />
       <Text size="xs" mt={7}>

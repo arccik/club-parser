@@ -1,7 +1,7 @@
-import { Container, Grid, Pagination, Title, Divider } from "@mantine/core";
+import { Container, Grid, Divider } from "@mantine/core";
 import ItemCard from "./ItemCard/ItemCard";
-import SortButtons from "./sortButtons";
-import useStyles from "./styles";
+import SectionHeader from "../Layout/SectionHeader";
+import EmptyState from "../Layout/EmptyState";
 
 const CardWithPaginationSort = ({
   data,
@@ -10,27 +10,28 @@ const CardWithPaginationSort = ({
   type,
   setPage,
 }) => {
-  const { classes } = useStyles();
-
-  // const handleSort = (value) => {
-  //   setSortValue(value);
-  //   setPage(1);
-  // };
-
   return (
-    <Container size="md">
-      {/* <Title align="center" className={classes.title}>
-        {title}
-      </Title> */}
-      {/* <SortButtons setValue={handleSort} placeType={type} /> */}
+    <Container size="xl" sx={{ paddingTop: 12, paddingBottom: 36 }}>
+      <SectionHeader
+        eyebrow="Collection"
+        title={title || "Browse listings"}
+        description="Explore cards with improved readability on both mobile and desktop."
+      />
       <Divider mt="sm" />
-      <Grid mt="lg">
-        {data?.map((item) => (
-          <Grid.Col key={item._id} lg={4} xs={6}>
-            <ItemCard data={item} />
-          </Grid.Col>
-        ))}
-      </Grid>
+      {data?.length ? (
+        <Grid mt="lg">
+          {data.map((item) => (
+            <Grid.Col key={item._id} lg={4} sm={6} xs={12}>
+              <ItemCard data={item} />
+            </Grid.Col>
+          ))}
+        </Grid>
+      ) : (
+        <EmptyState
+          title="Nothing to display"
+          description="Try a different filter or come back later for new content."
+        />
+      )}
     </Container>
   );
 };

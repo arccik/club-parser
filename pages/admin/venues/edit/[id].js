@@ -8,6 +8,10 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Loading from "../../../../src/utils/Loading/Loading";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
+import PageShell from "../../../../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../../../../src/components/resourses/Layout/SectionHeader";
+import { Button } from "@mantine/core";
+import Link from "next/link";
 
 const EditEventPage = () => {
   const { user } = useUser();
@@ -34,7 +38,21 @@ const EditEventPage = () => {
       </p>
     );
 
-  return <Edit data={venue} onDelete={removeItem} onSave={updateVenue} />;
+  return (
+    <PageShell wide>
+      <SectionHeader
+        eyebrow="Admin venues"
+        title="Edit venue"
+        description="Update venue details, location metadata, and publication fields."
+        action={
+          <Button component={Link} href="/admin/venues" variant="default">
+            Back to venues
+          </Button>
+        }
+      />
+      <Edit data={venue} onDelete={removeItem} onSave={updateVenue} />
+    </PageShell>
+  );
 };
 
 export default withPageAuthRequired(EditEventPage);

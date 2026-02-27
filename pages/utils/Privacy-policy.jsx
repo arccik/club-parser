@@ -1,11 +1,17 @@
-import { Container, Text, Title } from "@mantine/core";
+import { Text, Title } from "@mantine/core";
 import FooterSocial from "../../src/components/resourses/Footer/Footer";
+import PageShell from "../../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../../src/components/resourses/Layout/SectionHeader";
 
 const PrivacyPolicy = () => {
   return (
     <>
-      <Container size="sm" mt="lg">
-        <Title align="center">PRIVACY POLICY </Title>
+      <PageShell>
+        <SectionHeader
+          eyebrow="Legal"
+          title="Privacy policy"
+          description="How ClubChaser collects, uses, and protects your personal information."
+        />
 
         <p>
           After a hugely successful first year, ClubChaser is back! Back to the
@@ -189,7 +195,7 @@ const PrivacyPolicy = () => {
           would like to exercise your rights, please feel free to contact us at
           the following link
         </p>
-      </Container>
+      </PageShell>
       <FooterSocial />
     </>
   );

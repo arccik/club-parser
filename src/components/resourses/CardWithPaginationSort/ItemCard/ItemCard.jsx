@@ -6,8 +6,10 @@ dayjs.extend(relativeTime);
 import useStyles from "./styles";
 import Link from "next/link";
 import { IconHome2, IconClockHour7, IconCalendar } from "@tabler/icons";
+import { useMediaQuery } from "@mantine/hooks";
 const ItemCard = ({ data }) => {
   const { classes } = useStyles();
+  const isMobile = useMediaQuery("(max-width: 36em)");
   return (
     <Card
       withBorder
@@ -17,15 +19,21 @@ const ItemCard = ({ data }) => {
       component={Link}
       href={`/details/${data.placeType}s/${data._id}`}
     >
-      <Group noWrap spacing={0}>
+      <Group noWrap={!isMobile} spacing={0} align="stretch">
         {data.image && (
           <Image
             src={data?.image}
-            height={140}
-            width={140}
+            height={isMobile ? 180 : 140}
+            width={isMobile ? 600 : 140}
             alt={data.name}
             blurDataURL="/assets/blur.jpg"
             placeholder="blur"
+            style={{
+              width: isMobile ? "100%" : 140,
+              height: isMobile ? 180 : 140,
+              objectFit: "cover",
+              flexShrink: 0,
+            }}
           />
         )}
         <div className={classes.body}>
@@ -61,7 +69,9 @@ const ItemCard = ({ data }) => {
           </Text>
           <Group spacing={2} noWrap>
             <IconHome2 size={15} />
-            <Text size="xs">{data.address}</Text>
+            <Text size="xs" lineClamp={2}>
+              {data.address}
+            </Text>
           </Group>
         </div>
       </Group>

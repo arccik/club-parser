@@ -1,11 +1,16 @@
-import { Container, Title } from "@mantine/core";
 import FooterSocial from "../../src/components/resourses/Footer/Footer";
+import PageShell from "../../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../../src/components/resourses/Layout/SectionHeader";
 
 const TermsAndConditions = () => {
   return (
     <>
-      <Container size="sm" mt="lg">
-        <Title>General terms and conditions&nbsp;</Title>
+      <PageShell>
+        <SectionHeader
+          eyebrow="Legal"
+          title="Terms and conditions"
+          description="Rules and conditions for using ClubChaser services and purchasing related products."
+        />
 
         <p>
           These terms and conditions cover our activities, packages and event
@@ -130,7 +135,7 @@ const TermsAndConditions = () => {
           is caused by events outside our reasonable control (Force Majeure
           Event).
         </p>
-      </Container>
+      </PageShell>
       <FooterSocial />
     </>
   );

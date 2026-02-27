@@ -14,6 +14,8 @@ import { useForm } from "@mantine/form";
 import { useSendMessageMutation } from "../../src/features/admin/adminSlice";
 import { useSessionStorage } from "@mantine/hooks";
 import Link from "next/link";
+import PageShell from "../../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../../src/components/resourses/Layout/SectionHeader";
 
 const GetInTouch = () => {
   const [messageSent, setMessageSent] = useSessionStorage({
@@ -82,24 +84,17 @@ const GetInTouch = () => {
   const { classes } = useStyles();
 
   return (
-    <Container size="sm" mt="lg">
+    <PageShell>
+      <SectionHeader
+        eyebrow="Contact"
+        title="Get in touch"
+        description="Have a question, partnership request, or feedback? Send us a message and we will get back to you."
+      />
       {!messageSent ? (
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          <Title
-            order={2}
-            size="h1"
-            sx={(theme) => ({
-              fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-            })}
-            weight={900}
-            align="center"
-          >
-            Get in touch
-          </Title>
-
           <SimpleGrid
             cols={2}
-            mt="xl"
+            mt="md"
             breakpoints={[{ maxWidth: "sm", cols: 1 }]}
           >
             <TextInput
@@ -163,7 +158,7 @@ const GetInTouch = () => {
           </Group>
         </Card>
       )}
-    </Container>
+    </PageShell>
   );
 };
 export default GetInTouch;

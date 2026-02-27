@@ -1,20 +1,40 @@
 import Head from "next/head";
-import { LoadingOverlay, Text } from "@mantine/core";
+import { LoadingOverlay, Text, SimpleGrid } from "@mantine/core";
 import EventsCardsGrid from "../src/components/HomePage/EventsCardsGrid/EventsCardsGrid";
 import Carousel from "../src/components/HomePage/Carousel/Carousel";
 import Search from "../src/components/HomePage/Search/Search";
 import dbConnect from "../src/utils/dbConnect";
-import Hero from "../src/components/HomePage/Hero/Hero";
 import Event from "../src/models/event-model";
 import OldEvents from "../src/components/HomePage/OldEvents/OldEvents";
 import GenresBox from "../src/components/HomePage/GenresBox/GenresBox";
 import useCurrentLocaiton from "../src/Hooks/useCurrentLocaiton";
 import { useGetEventsByLocationQuery } from "../src/features/event/eventSlice";
 import Notification from "../src/components/resourses/Notification/Notification";
-import Loading from "../src/utils/Loading/Loading";
 import Artist from "../src/models/artist-model";
 import Venue from "../src/models/venue-model";
 import FooterSocial from "../src/components/resourses/Footer/Footer";
+import PageShell from "../src/components/resourses/Layout/PageShell";
+import SectionHeader from "../src/components/resourses/Layout/SectionHeader";
+import { IconBolt, IconClock, IconWorld } from "@tabler/icons";
+import StatCard from "../src/components/resourses/Layout/StatCard";
+import dynamic from "next/dynamic";
+
+const HeroFallback = () => (
+  <section className="relative overflow-hidden border-b border-white/10 bg-[#05070d]">
+    <div className="mx-auto min-h-[58vh] w-full max-w-6xl px-4 pb-16 pt-20 sm:px-8 md:min-h-[68vh] md:pt-24">
+      <div className="h-6 w-44 animate-pulse rounded-full bg-white/10" />
+      <div className="mt-8 h-14 w-full max-w-4xl animate-pulse rounded-2xl bg-white/10" />
+      <div className="mt-4 h-14 w-4/5 max-w-3xl animate-pulse rounded-2xl bg-white/10" />
+      <div className="mt-8 h-5 w-full max-w-2xl animate-pulse rounded-lg bg-white/10" />
+      <div className="mt-3 h-5 w-2/3 max-w-xl animate-pulse rounded-lg bg-white/10" />
+    </div>
+  </section>
+);
+
+const LivingFluidHero = dynamic(
+  () => import("../components/ui/living-fluid-hero").then((mod) => mod.LivingFluidHero),
+  { ssr: false, loading: () => <HeroFallback /> }
+);
 
 export async function getStaticProps() {
   try {
@@ -80,17 +100,10 @@ const Home = ({ events, oldEvents, recommended }) => {
     skip: !location,
   });
 
-  if (isEventsLoading) return <Loading />;
-  if (eventError)
-    return (
-      <Text align="center" m="lg">
-        Problem on the server
-      </Text>
-    );
-
   const handleLocation = () => {
     if (!location) getLocation();
   };
+  const resolvedEvents = eventsByLocation?.length ? eventsByLocation : events;
 
   return (
     <>
@@ -103,15 +116,59 @@ const Home = ({ events, oldEvents, recommended }) => {
         />
       </Head>
 
-      <main style={{ padding: 0, margin: 0 }}>
-        {/* <Hero /> */}
+      <main className="section-stack">
+        <LivingFluidHero />
+
+        <div id="content-start">
+        <PageShell wide>
+          <SectionHeader
+            eyebrow="Discover nightlife"
+            title="Find your next event in seconds"
+            description="Browse events, venues, and artists across the UK. Use smart search, location-aware sorting, and curated picks to plan your next night."
+          />
+          <SimpleGrid
+            cols={3}
+            spacing="md"
+            breakpoints={[
+              { maxWidth: "md", cols: 1 },
+              { maxWidth: "lg", cols: 2 },
+            ]}
+          >
+            <StatCard
+              label="Edge coverage"
+              value="150+ venues"
+              hint="Across major UK cities"
+              icon={<IconWorld size={18} />}
+              color="cyan"
+            />
+            <StatCard
+              label="Fresh updates"
+              value="Daily"
+              hint="Latest upcoming events"
+              icon={<IconClock size={18} />}
+              color="grape"
+            />
+            <StatCard
+              label="Quick discovery"
+              value="<50s"
+              hint="From search to shortlist"
+              icon={<IconBolt size={18} />}
+              color="yellow"
+            />
+          </SimpleGrid>
+        </PageShell>
+        </div>
+
         <Search />
+        {eventError ? (
+          <Text align="center" color="red.3" mt="sm">
+            Could not load location-based events. Showing featured results.
+          </Text>
+        ) : null}
         {recommended.length ? <Carousel events={recommended} /> : null}
         <LoadingOverlay visible={isEventsLoading} overlayBlur={2} />
 
-        <EventsCardsGrid
-          events={eventsByLocation?.length ? eventsByLocation : events}
-        />
+        <EventsCardsGrid events={resolvedEvents} />
         <GenresBox />
 
         {oldEvents.length ? <OldEvents events={oldEvents} /> : null}

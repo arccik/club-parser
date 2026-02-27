@@ -3,11 +3,10 @@ import { MantineProvider } from "@mantine/core";
 import { ApplicationContainer } from "../src/components/resourses/ApplicationContainer";
 
 import { Provider } from "react-redux";
-import { Auth0Provider } from "@auth0/nextjs-auth0/client";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Script from "next/script";
 import Head from "next/head";
 import { store } from "../src/features/store";
-
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -35,10 +34,53 @@ function MyApp({ Component, pageProps }) {
         gtag("config", "G-LT4MRNRTLQ");
         `}
       </Script>
-      <Auth0Provider>
+      <UserProvider>
         <Provider store={store}>
           <MantineProvider
-            theme={{ colorScheme: "dark" }}
+            theme={{
+              colorScheme: "dark",
+              primaryColor: "blue",
+              defaultRadius: "md",
+              fontFamily: "Segoe UI, Avenir Next, Nunito Sans, sans-serif",
+              headings: {
+                fontFamily: "Segoe UI, Avenir Next, Nunito Sans, sans-serif",
+                fontWeight: 700,
+              },
+              components: {
+                Button: {
+                  defaultProps: {
+                    radius: "md",
+                  },
+                },
+                Card: {
+                  defaultProps: {
+                    radius: "lg",
+                    withBorder: true,
+                  },
+                },
+                Input: {
+                  styles: () => ({
+                    input: {
+                      borderRadius: 12,
+                    },
+                  }),
+                },
+                TextInput: {
+                  styles: () => ({
+                    input: {
+                      borderRadius: 12,
+                    },
+                  }),
+                },
+                Textarea: {
+                  styles: () => ({
+                    input: {
+                      borderRadius: 12,
+                    },
+                  }),
+                },
+              },
+            }}
             withGlobalStyles
             withNormalizeCSS
           >
@@ -47,7 +89,7 @@ function MyApp({ Component, pageProps }) {
             </ApplicationContainer>
           </MantineProvider>
         </Provider>
-      </Auth0Provider>
+      </UserProvider>
     </>
   );
 }
